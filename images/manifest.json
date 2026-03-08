@@ -1,0 +1,169 @@
+{
+  "summary": {
+    "n_studies": 5,
+    "n_ready": 5,
+    "n_with_full": 4,
+    "n_panel_jobs": 10
+  },
+  "studies": [
+    {
+      "study_id": "study01",
+      "citation": "Qin S, Kudo M, Meyer T, et al. Tislelizumab vs Sorafenib as First-Line Treatment for Unresectable Hepatocellular Carcinoma: A Phase 3 Randomized Clinical Trial. JAMA Oncol. 2023;9(12):1651–1659. doi:10.1001/jamaoncol.2023.4003",
+      "full": "images/study01_full.png",
+      "panels": {
+        "os": "images/study01_os.png",
+        "pfs": "images/study01_pfs.png"
+      },
+      "endpoints": [
+        "os",
+        "pfs"
+      ],
+      "warnings": [],
+      "status": "ready"
+    },
+    {
+      "study_id": "study02",
+      "citation": "Yang Y, Yen C, Pan J, et al. First-Line Tislelizumab Plus Chemotherapy for Recurrent or Metastatic Nasopharyngeal Cancer: Three-Year Follow-Up of the Phase 3 RATIONALE-309 Randomized Clinical Trial. JAMA Oncol. Published online February 26, 2026. doi:10.1001/jamaoncol.2026.0020",
+      "full": null,
+      "panels": {
+        "os": "images/study02_os.png",
+        "pfs": "images/study02_pfs.png"
+      },
+      "endpoints": [
+        "os",
+        "pfs"
+      ],
+      "warnings": [
+        "missing_full_image"
+      ],
+      "status": "ready"
+    },
+    {
+      "study_id": "study03",
+      "citation": "Liu G, Li W, Wang D, et al. Effect of Capecitabine Maintenance Therapy Plus Best Supportive Care vs Best Supportive Care Alone on Progression-Free Survival Among Patients With Newly Diagnosed Metastatic Nasopharyngeal Carcinoma Who Had Received Induction Chemotherapy: A Phase 3 Randomized Clinical Trial. JAMA Oncol. 2022;8(4):553–561. doi:10.1001/jamaoncol.2021.7366",
+      "full": "images/study03_full.png",
+      "panels": {
+        "os": "images/study03_os.png",
+        "pfs": "images/study03_pfs.png"
+      },
+      "endpoints": [
+        "os",
+        "pfs"
+      ],
+      "warnings": [],
+      "status": "ready"
+    },
+    {
+      "study_id": "study04",
+      "citation": "Reardon DA, Brandes AA, Omuro A, et al. Effect of Nivolumab vs Bevacizumab in Patients With Recurrent Glioblastoma: The CheckMate 143 Phase 3 Randomized Clinical Trial. JAMA Oncol. 2020;6(7):1003–1010. doi:10.1001/jamaoncol.2020.1024",
+      "full": "images/study04_full.png",
+      "panels": {
+        "os": "images/study04_os.png",
+        "pfs": "images/study04_pfs.png"
+      },
+      "endpoints": [
+        "os",
+        "pfs"
+      ],
+      "warnings": [],
+      "status": "ready"
+    },
+    {
+      "study_id": "study05",
+      "citation": "McCormack M, Eminowicz G, Gallardo D, Diez P, Farrelly L, Kent C, Hudson E, Panades M, Mathew T, Anand A, Persic M, Forrest J, Bhana R, Reed N, Drake A, Adusumalli M, Mukhopadhyay A, King M, Whitmarsh K, McGrane J, Colombo N, Mak C, Mandal R, Chowdhury RR, Alamilla-Garcia G, Chávez-Blanco A, Stobart H, Feeney A, Vaja S, Hacker AM, Hackshaw A, Ledermann JA; INTERLACE investigators. Induction chemotherapy followed by standard chemoradiotherapy versus standard chemoradiotherapy alone in patients with locally advanced cervical cancer (GCIG INTERLACE): an international, multicentre, randomised phase 3 trial. Lancet. 2024 Oct 19;404(10462):1525-1535.",
+      "full": "images/study05_full.png",
+      "panels": {
+        "os": "images/study05_os.png",
+        "pfs": "images/study05_pfs.png"
+      },
+      "endpoints": [
+        "os",
+        "pfs"
+      ],
+      "warnings": [],
+      "status": "ready"
+    }
+  ],
+  "plan": [
+    {
+      "study_id": "study01",
+      "endpoint": "os",
+      "image": "images/study01_os.png",
+      "semantic_context_image": "images/study01_full.png",
+      "inherit_legend_from_full": true,
+      "citation": "Qin S, Kudo M, Meyer T, et al. Tislelizumab vs Sorafenib as First-Line Treatment for Unresectable Hepatocellular Carcinoma: A Phase 3 Randomized Clinical Trial. JAMA Oncol. 2023;9(12):1651–1659. doi:10.1001/jamaoncol.2023.4003"
+    },
+    {
+      "study_id": "study01",
+      "endpoint": "pfs",
+      "image": "images/study01_pfs.png",
+      "semantic_context_image": "images/study01_full.png",
+      "inherit_legend_from_full": true,
+      "citation": "Qin S, Kudo M, Meyer T, et al. Tislelizumab vs Sorafenib as First-Line Treatment for Unresectable Hepatocellular Carcinoma: A Phase 3 Randomized Clinical Trial. JAMA Oncol. 2023;9(12):1651–1659. doi:10.1001/jamaoncol.2023.4003"
+    },
+    {
+      "study_id": "study02",
+      "endpoint": "os",
+      "image": "images/study02_os.png",
+      "semantic_context_image": "images/study02_os.png",
+      "inherit_legend_from_full": false,
+      "citation": "Yang Y, Yen C, Pan J, et al. First-Line Tislelizumab Plus Chemotherapy for Recurrent or Metastatic Nasopharyngeal Cancer: Three-Year Follow-Up of the Phase 3 RATIONALE-309 Randomized Clinical Trial. JAMA Oncol. Published online February 26, 2026. doi:10.1001/jamaoncol.2026.0020"
+    },
+    {
+      "study_id": "study02",
+      "endpoint": "pfs",
+      "image": "images/study02_pfs.png",
+      "semantic_context_image": "images/study02_pfs.png",
+      "inherit_legend_from_full": false,
+      "citation": "Yang Y, Yen C, Pan J, et al. First-Line Tislelizumab Plus Chemotherapy for Recurrent or Metastatic Nasopharyngeal Cancer: Three-Year Follow-Up of the Phase 3 RATIONALE-309 Randomized Clinical Trial. JAMA Oncol. Published online February 26, 2026. doi:10.1001/jamaoncol.2026.0020"
+    },
+    {
+      "study_id": "study03",
+      "endpoint": "os",
+      "image": "images/study03_os.png",
+      "semantic_context_image": "images/study03_full.png",
+      "inherit_legend_from_full": true,
+      "citation": "Liu G, Li W, Wang D, et al. Effect of Capecitabine Maintenance Therapy Plus Best Supportive Care vs Best Supportive Care Alone on Progression-Free Survival Among Patients With Newly Diagnosed Metastatic Nasopharyngeal Carcinoma Who Had Received Induction Chemotherapy: A Phase 3 Randomized Clinical Trial. JAMA Oncol. 2022;8(4):553–561. doi:10.1001/jamaoncol.2021.7366"
+    },
+    {
+      "study_id": "study03",
+      "endpoint": "pfs",
+      "image": "images/study03_pfs.png",
+      "semantic_context_image": "images/study03_full.png",
+      "inherit_legend_from_full": true,
+      "citation": "Liu G, Li W, Wang D, et al. Effect of Capecitabine Maintenance Therapy Plus Best Supportive Care vs Best Supportive Care Alone on Progression-Free Survival Among Patients With Newly Diagnosed Metastatic Nasopharyngeal Carcinoma Who Had Received Induction Chemotherapy: A Phase 3 Randomized Clinical Trial. JAMA Oncol. 2022;8(4):553–561. doi:10.1001/jamaoncol.2021.7366"
+    },
+    {
+      "study_id": "study04",
+      "endpoint": "os",
+      "image": "images/study04_os.png",
+      "semantic_context_image": "images/study04_full.png",
+      "inherit_legend_from_full": true,
+      "citation": "Reardon DA, Brandes AA, Omuro A, et al. Effect of Nivolumab vs Bevacizumab in Patients With Recurrent Glioblastoma: The CheckMate 143 Phase 3 Randomized Clinical Trial. JAMA Oncol. 2020;6(7):1003–1010. doi:10.1001/jamaoncol.2020.1024"
+    },
+    {
+      "study_id": "study04",
+      "endpoint": "pfs",
+      "image": "images/study04_pfs.png",
+      "semantic_context_image": "images/study04_full.png",
+      "inherit_legend_from_full": true,
+      "citation": "Reardon DA, Brandes AA, Omuro A, et al. Effect of Nivolumab vs Bevacizumab in Patients With Recurrent Glioblastoma: The CheckMate 143 Phase 3 Randomized Clinical Trial. JAMA Oncol. 2020;6(7):1003–1010. doi:10.1001/jamaoncol.2020.1024"
+    },
+    {
+      "study_id": "study05",
+      "endpoint": "os",
+      "image": "images/study05_os.png",
+      "semantic_context_image": "images/study05_full.png",
+      "inherit_legend_from_full": true,
+      "citation": "McCormack M, Eminowicz G, Gallardo D, Diez P, Farrelly L, Kent C, Hudson E, Panades M, Mathew T, Anand A, Persic M, Forrest J, Bhana R, Reed N, Drake A, Adusumalli M, Mukhopadhyay A, King M, Whitmarsh K, McGrane J, Colombo N, Mak C, Mandal R, Chowdhury RR, Alamilla-Garcia G, Chávez-Blanco A, Stobart H, Feeney A, Vaja S, Hacker AM, Hackshaw A, Ledermann JA; INTERLACE investigators. Induction chemotherapy followed by standard chemoradiotherapy versus standard chemoradiotherapy alone in patients with locally advanced cervical cancer (GCIG INTERLACE): an international, multicentre, randomised phase 3 trial. Lancet. 2024 Oct 19;404(10462):1525-1535."
+    },
+    {
+      "study_id": "study05",
+      "endpoint": "pfs",
+      "image": "images/study05_pfs.png",
+      "semantic_context_image": "images/study05_full.png",
+      "inherit_legend_from_full": true,
+      "citation": "McCormack M, Eminowicz G, Gallardo D, Diez P, Farrelly L, Kent C, Hudson E, Panades M, Mathew T, Anand A, Persic M, Forrest J, Bhana R, Reed N, Drake A, Adusumalli M, Mukhopadhyay A, King M, Whitmarsh K, McGrane J, Colombo N, Mak C, Mandal R, Chowdhury RR, Alamilla-Garcia G, Chávez-Blanco A, Stobart H, Feeney A, Vaja S, Hacker AM, Hackshaw A, Ledermann JA; INTERLACE investigators. Induction chemotherapy followed by standard chemoradiotherapy versus standard chemoradiotherapy alone in patients with locally advanced cervical cancer (GCIG INTERLACE): an international, multicentre, randomised phase 3 trial. Lancet. 2024 Oct 19;404(10462):1525-1535."
+    }
+  ]
+}
