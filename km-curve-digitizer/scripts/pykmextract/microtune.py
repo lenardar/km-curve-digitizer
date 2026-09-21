@@ -344,7 +344,7 @@ class SegmentMicroTuner:
         )
 
         if review_image_path is None:
-            temp_dir = Path(tempfile.mkdtemp(prefix="pykmextract-microtune-"))
+            temp_dir = Path(tempfile.mkdtemp(prefix="km-curve-digitizer-microtune-"))
             board_path = temp_dir / "micro_tune_review.png"
         else:
             board_path = Path(review_image_path)

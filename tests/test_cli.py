@@ -25,14 +25,13 @@ class CLITests(unittest.TestCase):
             semantic_path.write_text(json.dumps(semantic), encoding="utf-8")
 
             env = os.environ.copy()
-            env["PYTHONPATH"] = str(Path(__file__).resolve().parents[1] / "src")
             env.setdefault("MPLCONFIGDIR", str(Path(tmpdir) / ".mplconfig"))
+            script = Path(__file__).resolve().parents[1] / "km-curve-digitizer" / "scripts" / "extract_km.py"
 
             completed = subprocess.run(
                 [
                     sys.executable,
-                    "-m",
-                    "pykmextract.cli",
+                    str(script),
                     str(image_path),
                     "--semantic-json",
                     str(semantic_path),
@@ -66,14 +65,13 @@ class CLITests(unittest.TestCase):
             semantic_path.write_text(json.dumps(semantic), encoding="utf-8")
 
             env = os.environ.copy()
-            env["PYTHONPATH"] = str(Path(__file__).resolve().parents[1] / "src")
             env.setdefault("MPLCONFIGDIR", str(Path(tmpdir) / ".mplconfig"))
+            script = Path(__file__).resolve().parents[1] / "km-curve-digitizer" / "scripts" / "extract_km.py"
 
             completed = subprocess.run(
                 [
                     sys.executable,
-                    "-m",
-                    "pykmextract.cli",
+                    str(script),
                     str(image_path),
                     "--semantic-json",
                     str(semantic_path),
@@ -104,14 +102,13 @@ class CLITests(unittest.TestCase):
             semantic_path.write_text(json.dumps(semantic), encoding="utf-8")
 
             env = os.environ.copy()
-            env["PYTHONPATH"] = str(Path(__file__).resolve().parents[1] / "src")
             env.setdefault("MPLCONFIGDIR", str(Path(tmpdir) / ".mplconfig"))
+            script = Path(__file__).resolve().parents[1] / "km-curve-digitizer" / "scripts" / "extract_km.py"
 
             completed = subprocess.run(
                 [
                     sys.executable,
-                    "-m",
-                    "pykmextract.cli",
+                    str(script),
                     str(image_path),
                     "--semantic-json",
                     str(semantic_path),
@@ -159,14 +156,13 @@ class CLITests(unittest.TestCase):
             )
 
             env = os.environ.copy()
-            env["PYTHONPATH"] = str(Path(__file__).resolve().parents[1] / "src")
             env.setdefault("MPLCONFIGDIR", str(Path(tmpdir) / ".mplconfig"))
+            script = Path(__file__).resolve().parents[1] / "km-curve-digitizer" / "scripts" / "extract_km.py"
 
             completed = subprocess.run(
                 [
                     sys.executable,
-                    "-m",
-                    "pykmextract.cli",
+                    str(script),
                     str(image_path),
                     "--semantic-json",
                     str(semantic_path),

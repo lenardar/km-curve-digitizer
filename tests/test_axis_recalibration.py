@@ -6,8 +6,6 @@ import unittest
 
 import numpy as np
 
-from tests import ROOT, SRC
-
 from pykmextract.contracts import AxisBounds
 from pykmextract.extractor.coord import recalibrate_axis_bounds_from_curves
 

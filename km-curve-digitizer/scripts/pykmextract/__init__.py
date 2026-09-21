@@ -1,4 +1,4 @@
-"""PyKMExtract public API."""
+"""Internal implementation used by the KM Curve Digitizer skill scripts."""
 
 from .contracts import (
     AtRiskTable,

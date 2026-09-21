@@ -9,8 +9,6 @@ from tempfile import TemporaryDirectory
 import numpy as np
 from PIL import Image, ImageDraw
 
-from tests import ROOT, SRC
-
 import pykmextract as pkm
 from pykmextract.providers import StaticVisionProvider
 

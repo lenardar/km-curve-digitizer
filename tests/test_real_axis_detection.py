@@ -5,7 +5,7 @@ from __future__ import annotations
 import unittest
 from pathlib import Path
 
-from tests import ROOT, SRC
+from tests import ROOT
 
 from pykmextract.extractor.coord import detect_axis_bounds
 

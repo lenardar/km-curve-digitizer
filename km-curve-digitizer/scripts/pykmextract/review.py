@@ -47,7 +47,7 @@ def save_overlay(result: ExtractionResult, output_path: str) -> str:
         facecolor="none",
     )
     ax.add_patch(rect)
-    ax.set_title(f"PyKMExtract review overlay | score={result.validation.score}")
+    ax.set_title(f"KM Curve Digitizer review | score={result.validation.score}")
     ax.legend(loc="upper right")
     ax.set_axis_off()
     fig.tight_layout()

@@ -53,11 +53,11 @@ class AxisRefiner:
         cleanup_review = False
         review_image_path, cleanup_review = _ensure_temp_path(
             review_image_path,
-            prefix="pykmextract-axis-review-",
+            prefix="km-curve-digitizer-axis-review-",
         )
         evidence_image_path, cleanup_evidence = _ensure_temp_path(
             None,
-            prefix="pykmextract-axis-evidence-",
+            prefix="km-curve-digitizer-axis-evidence-",
         )
 
         try:

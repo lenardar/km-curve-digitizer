@@ -4,8 +4,6 @@ from __future__ import annotations
 
 import unittest
 
-from tests import ROOT, SRC
-
 from pykmextract.contracts import (
     AtRiskTable,
     AxisAnchors,
