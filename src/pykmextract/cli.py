@@ -35,7 +35,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--review-dir",
-        help="Optional directory to save a full review bundle with markdown, digitized curves, and reconstructed KM",
+        help="Optional directory to save a review bundle with markdown, overlay, and CSV outputs",
     )
     parser.add_argument(
         "--review-title",

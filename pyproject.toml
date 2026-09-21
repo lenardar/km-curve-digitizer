@@ -1,7 +1,7 @@
 [project]
 name = "pykmextract"
 version = "0.1.0"
-description = "Vision-assisted Kaplan-Meier curve extraction for PyHEOR workflows"
+description = "Vision-assisted Kaplan-Meier curve digitization and review"
 readme = "README.md"
 requires-python = ">=3.9"
 license = {text = "MIT"}

@@ -2,7 +2,7 @@
 
 [English](README.md) | **中文** | [Français](README_fr.md)
 
-PyKMExtract 是一个面向研究场景的 Kaplan-Meier 曲线数字化工具。它从论文图中提取结构化 `time / survival` 曲线，做基础验证，并把结果桥接到 [PyHEOR](src/pykmextract/bridge/pyheor.py) 进行 Guyot 重建和后续生存建模。
+PyKMExtract 是一个面向研究场景的 Kaplan-Meier 曲线数字化工具。它从论文图中提取结构化 `time / survival` 曲线，完成基础验证，并输出便于复核的表格与可视化叠加图。
 
 ## 项目简介
 
@@ -27,7 +27,7 @@ PyKMExtract 是一个面向研究场景的 Kaplan-Meier 曲线数字化工具。
 - 对 1-2 条高对比彩色曲线做颜色提取
 - 使用 KM 风格的阶梯采样，而不是简单线性插值
 - 输出验证分数、问题清单和人工 review bundle
-- 对接 PyHEOR 做 Guyot 重建和 KM 重绘
+- 导出通用 CSV，便于接入任意生存分析工具
 
 当前仍然保守的部分：
 
@@ -43,7 +43,7 @@ PyKMExtract 是一个面向研究场景的 Kaplan-Meier 曲线数字化工具。
 - 坐标轴边界检测与可选四点校轴
 - KM 专用阶梯采样
 - 验证信号：单调性、范围、coverage、`at-risk`、重合歧义
-- 人工核查 bundle：`overlay.png`、`review.md`、digitized CSV、可选 IPD 重绘
+- 人工核查 bundle：`overlay.png`、`review.md`、数字化曲线 CSV 和验证问题 CSV
 - 支持 `study01_full.png / study01_pfs.png / study01_os.png` 这类 grouped study 批处理
 
 ## 安装
@@ -109,7 +109,6 @@ curve_df = result.curve_frame()
 validation_df = result.validation_frame()
 
 result.save_review_bundle("runs/example")
-ipd = result.to_pyheor_ipd()
 ```
 
 ## 批处理流程
@@ -169,8 +168,7 @@ review bundle 主要包含：
 - `overlay.png`
 - `digitized_curves.csv`
 - `review.md`
-- `reconstructed_km.png`，当 IPD 重建成功时
-- `ipd_<curve>.csv`，当 IPD 重建成功时
+- `validation_issues.csv`
 
 ## 当前真实图结果
 
@@ -204,18 +202,6 @@ review bundle 主要包含：
 - `study02 / pfs`、`study03 / os`、`study03 / pfs` 仍然属于偏弱样本
 - `study04 / pfs` 被主动压到 `medium`，是因为 `overlap_ambiguity`，不是算分错误
 
-## 已知限制：重绘 KM 尾部
-
-当前 `reconstructed_km.png` 可能在视觉上丢失最后一段水平尾巴，即使 digitized curve 和重建 IPD 仍然保留了后期随访。
-
-这主要是当前 PyHEOR 下游显示层的限制：
-
-- 重建 IPD 仍然保留晚期删失时间
-- KM 表目前只在事件时间点输出
-- 因此最后一个事件之后的水平平台可能没有被画出来
-
-所以如果重绘 KM 尾部比原图短，不要立刻把问题归因到前端数字化。
-
 ## 仓库结构
 
 关键模块：
@@ -233,7 +219,6 @@ review bundle 主要包含：
 - [`src/pykmextract/enhancements.py`](src/pykmextract/enhancements.py)：可选 AI 增强模块
 - [`src/pykmextract/microtune.py`](src/pykmextract/microtune.py)：受限后处理微调工具
 - [`src/pykmextract/review.py`](src/pykmextract/review.py)：overlay 与 review bundle 导出
-- [`src/pykmextract/bridge/pyheor.py`](src/pykmextract/bridge/pyheor.py)：PyHEOR bridge
 
 ## 开发
 
@@ -251,7 +236,6 @@ python3 -m unittest discover -s tests -v
 - pixel sampling 行为
 - review bundle 导出
 - provider 响应解析
-- PyHEOR bridge smoke path
 
 项目附加文件：
 

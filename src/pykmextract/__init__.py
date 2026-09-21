@@ -22,7 +22,7 @@ from .enhancements import AIEnhancementOptions, apply_ai_enhancements
 from .extractor import AxisRefiner, generate_axis_anchor_candidates, render_axis_review_board
 from .microtune import CurveMicroTuneToolkit, OverlapWindow, SegmentSample
 from .pipeline import ExtractionPipeline, extract
-from .review import ReviewBundleOptions, save_overlay
+from .review import save_overlay
 
 __all__ = [
     "AtRiskTable",
@@ -40,7 +40,6 @@ __all__ = [
     "ExtractionResult",
     "PixelPoint",
     "OverlapWindow",
-    "ReviewBundleOptions",
     "SemanticExtraction",
     "SegmentSample",
     "ValidationIssue",

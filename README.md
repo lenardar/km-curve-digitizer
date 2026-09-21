@@ -2,7 +2,7 @@
 
 **English** | [中文](README_zh.md) | [Français](README_fr.md)
 
-PyKMExtract is a research-oriented Kaplan-Meier digitization toolkit. It extracts structured `time / survival` curves from published KM figures, validates the result, and bridges the output into [PyHEOR](src/pykmextract/bridge/pyheor.py) for Guyot reconstruction and downstream survival modeling.
+PyKMExtract is a research-oriented Kaplan-Meier digitization toolkit. It extracts structured `time / survival` curves from published KM figures, validates the result, and exports reviewable tables and visual overlays.
 
 ## Overview
 
@@ -27,7 +27,7 @@ What already works well:
 - color-based curve extraction for 1-2 high-contrast curves
 - KM-style step-preserving sampling instead of naive linear interpolation
 - validation, scoring, and review bundle export
-- PyHEOR bridge for Guyot reconstruction and KM redraw
+- CSV exports for downstream analysis in any survival-modeling toolkit
 
 What is still intentionally conservative:
 
@@ -43,7 +43,7 @@ What is still intentionally conservative:
 - Axis bounds and optional four-point axis-anchor refinement
 - KM-specific step sampling
 - Validation signals for monotonicity, range, coverage, `at-risk`, and overlap ambiguity
-- Human review bundle with `overlay.png`, `review.md`, digitized CSV, and optional IPD redraw
+- Human review bundle with `overlay.png`, `review.md`, digitized curves, and validation CSV files
 - Batch workflow for grouped studies such as `study01_full.png`, `study01_pfs.png`, `study01_os.png`
 
 ## Installation
@@ -109,7 +109,6 @@ curve_df = result.curve_frame()
 validation_df = result.validation_frame()
 
 result.save_review_bundle("runs/example")
-ipd = result.to_pyheor_ipd()
 ```
 
 ## Batch Workflow
@@ -169,8 +168,7 @@ Review bundle outputs:
 - `overlay.png`
 - `digitized_curves.csv`
 - `review.md`
-- `reconstructed_km.png` when IPD reconstruction succeeds
-- `ipd_<curve>.csv` when IPD reconstruction succeeds
+- `validation_issues.csv`
 
 ## Current Real-Figure Results
 
@@ -204,18 +202,6 @@ Most realistic takeaway:
 - `study02 / pfs`, `study03 / os`, and `study03 / pfs` remain weak cases
 - `study04 / pfs` is intentionally downgraded because of `overlap_ambiguity`
 
-## Known Limitation: Reconstructed KM Tail
-
-At the moment, `reconstructed_km.png` may visually lose the final flat tail segment even when the digitized curve and reconstructed IPD still contain late follow-up.
-
-This is currently a downstream PyHEOR display limitation:
-
-- reconstructed IPD still keeps late censoring times
-- KM tables are currently reported only at event times
-- the last horizontal plateau after the final event may therefore not be drawn
-
-So if the redrawn KM tail looks shorter than the original figure, do not immediately assume digitization failed.
-
 ## Repository Layout
 
 Key modules:
@@ -233,7 +219,6 @@ Key modules:
 - [`src/pykmextract/enhancements.py`](src/pykmextract/enhancements.py): optional AI enhancement orchestration
 - [`src/pykmextract/microtune.py`](src/pykmextract/microtune.py): bounded post-extraction micro-tuning tools
 - [`src/pykmextract/review.py`](src/pykmextract/review.py): overlay export and review bundle generation
-- [`src/pykmextract/bridge/pyheor.py`](src/pykmextract/bridge/pyheor.py): PyHEOR bridge
 
 ## Development
 
@@ -251,7 +236,6 @@ Current tests cover:
 - pixel sampling behavior
 - review bundle export
 - provider response parsing
-- PyHEOR bridge smoke path
 
 Project files:
 

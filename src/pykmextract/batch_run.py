@@ -158,6 +158,8 @@ def main() -> int:
                 "validation_level": result.validation.level,
                 "result_json": str(result_path),
                 "overlay": review_bundle["overlay"],
+                "digitized_csv": review_bundle["digitized_csv"],
+                "validation_csv": review_bundle["validation_csv"],
                 "review_md": review_bundle["review_md"],
             }
         )
@@ -165,11 +167,6 @@ def main() -> int:
             summary[-1]["axis_review_image"] = axis_review_image
         if micro_tune_review_image:
             summary[-1]["micro_tune_review_image"] = micro_tune_review_image
-        if "reconstructed_km" in review_bundle:
-            summary[-1]["reconstructed_km"] = review_bundle["reconstructed_km"]
-        if "reconstruction_error" in review_bundle:
-            summary[-1]["reconstruction_error"] = review_bundle["reconstruction_error"]
-
     (output_dir / "summary.json").write_text(
         json.dumps({"jobs": summary}, indent=2, ensure_ascii=False),
         encoding="utf-8",

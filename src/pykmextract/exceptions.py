@@ -11,7 +11,3 @@ class SemanticExtractionError(PyKMExtractError):
 
 class PixelExtractionError(PyKMExtractError):
     """Pixel extraction failed for one or more curves."""
-
-
-class BridgeImportError(PyKMExtractError):
-    """PyHEOR bridge could not import pyheor."""

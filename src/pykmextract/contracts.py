@@ -3,14 +3,10 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import TYPE_CHECKING, Any, Dict, List, Optional, Sequence, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
 import pandas as pd
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
-
-if TYPE_CHECKING:
-    from .review import ReviewBundleOptions
-
 
 class ConfidenceLevel(str, Enum):
     """Confidence levels shared by semantic and validation outputs."""
@@ -318,18 +314,6 @@ class ExtractionResult(BaseModel):
             columns=["code", "message", "curve_id"],
         )
 
-    def to_pyheor_ipd(self) -> Dict[str, Dict[str, Sequence[float]]]:
-        """Reconstruct IPD via the PyHEOR bridge."""
-        from .bridge.pyheor import PyHEORBridge
-
-        return PyHEORBridge().extracted_to_ipd(self)
-
-    def to_pyheor_distributions(self) -> Dict[str, Any]:
-        """Fit and return PyHEOR survival distributions."""
-        from .bridge.pyheor import PyHEORBridge
-
-        return PyHEORBridge().to_distributions(self)
-
     def save_overlay(self, output_path: str) -> str:
         """Save an extraction review overlay image."""
         from .review import save_overlay
@@ -343,9 +327,8 @@ class ExtractionResult(BaseModel):
         semantic_context_image: Optional[str] = None,
         citation: Optional[str] = None,
         title: Optional[str] = None,
-        options: Optional["ReviewBundleOptions"] = None,
     ) -> Dict[str, str]:
-        """Save a review bundle with plots, IPD exports, and Markdown."""
+        """Save a review bundle with plots, tables, and Markdown."""
         from .review import save_review_bundle
 
         return save_review_bundle(
@@ -354,5 +337,4 @@ class ExtractionResult(BaseModel):
             semantic_context_image=semantic_context_image,
             citation=citation,
             title=title,
-            options=options,
         )

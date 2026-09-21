@@ -6,9 +6,14 @@ The format is based on Keep a Changelog, adapted for a research codebase.
 
 ## [Unreleased]
 
+### Removed
+
+- Removed the PyHEOR bridge and IPD reconstruction APIs. PyKMExtract now focuses on curve digitization, validation, and review artifacts.
+
 ### Changed
 
 - README files were rewritten into GitHub-style project homepages in English, Chinese, and French.
+- Review bundles now export `validation_issues.csv` and compare the source panel directly with the digitization overlay.
 
 ## [0.1.0] - 2026-03-08
 

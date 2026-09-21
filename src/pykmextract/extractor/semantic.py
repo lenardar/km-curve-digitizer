@@ -9,7 +9,7 @@ from ..exceptions import SemanticExtractionError
 from ..providers.vision import VisionProvider
 
 SYSTEM_PROMPT = """
-You are a Kaplan-Meier chart extraction assistant for downstream IPD reconstruction.
+You are a Kaplan-Meier chart digitization assistant.
 Return exactly one JSON object and nothing else.
 Do not return markdown, code fences, prose, or any extra top-level keys.
 Do not invent values. If information is truly absent, use null or [] as required.

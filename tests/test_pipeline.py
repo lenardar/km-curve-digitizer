@@ -193,33 +193,5 @@ class ExtractionPipelineTests(unittest.TestCase):
             self.assertTrue(overlay_path.exists())
             self.assertGreater(overlay_path.stat().st_size, 0)
 
-    def test_pyheor_bridge_smoke(self):
-        with TemporaryDirectory() as tmpdir:
-            image_path = Path(tmpdir) / "km.png"
-            semantic, bounds = make_synthetic_km_image(image_path)
-
-            result = pkm.extract(
-                str(image_path),
-                semantic=semantic,
-                axis_bounds={
-                    "left": bounds[0],
-                    "right": bounds[1],
-                    "top": bounds[2],
-                    "bottom": bounds[3],
-                },
-                min_curve_pixels=20,
-            )
-
-            try:
-                ipd = result.to_pyheor_ipd()
-            except Exception as exc:
-                self.skipTest(f"PyHEOR bridge unavailable in this environment: {exc}")
-                return
-
-            self.assertIn("Treatment", ipd)
-            self.assertIn("Control", ipd)
-            self.assertGreater(len(ipd["Treatment"]["time"]), 0)
-
-
 if __name__ == "__main__":
     unittest.main()

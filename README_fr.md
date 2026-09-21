@@ -2,7 +2,7 @@
 
 [English](README.md) | [中文](README_zh.md) | **Français**
 
-PyKMExtract est un outil de numérisation de courbes Kaplan-Meier orienté recherche. Il extrait des courbes structurées `time / survival` à partir de figures publiées, valide le résultat, puis transmet la sortie à [PyHEOR](src/pykmextract/bridge/pyheor.py) pour la reconstruction de Guyot et la modélisation de survie.
+PyKMExtract est un outil de numérisation de courbes Kaplan-Meier orienté recherche. Il extrait des courbes structurées `time / survival` à partir de figures publiées, valide le résultat et exporte des tableaux et superpositions visuelles faciles à vérifier.
 
 ## Vue d’ensemble
 
@@ -27,7 +27,7 @@ Fonctionnalités déjà solides :
 - extraction par couleur pour 1-2 courbes à fort contraste
 - échantillonnage en marches adapté aux KM, plutôt qu’une interpolation linéaire naïve
 - validation, score de confiance et export d’un bundle de revue
-- pont vers PyHEOR pour la reconstruction de Guyot et le redraw KM
+- exports CSV génériques pour les outils d’analyse de survie en aval
 
 Cas encore traités de façon prudente :
 
@@ -43,7 +43,7 @@ Cas encore traités de façon prudente :
 - détection des axes et raffinement optionnel par quatre ancres
 - échantillonnage en marches spécifique aux courbes KM
 - validation via monotonie, plage, couverture, `at-risk` et ambiguïté de chevauchement
-- bundle de revue humaine avec `overlay.png`, `review.md`, CSV numérisé et redraw IPD optionnel
+- bundle de revue humaine avec `overlay.png`, `review.md`, courbes numérisées et CSV de validation
 - workflow batch pour des études groupées du type `study01_full.png`, `study01_pfs.png`, `study01_os.png`
 
 ## Installation
@@ -109,7 +109,6 @@ curve_df = result.curve_frame()
 validation_df = result.validation_frame()
 
 result.save_review_bundle("runs/example")
-ipd = result.to_pyheor_ipd()
 ```
 
 ## Workflow batch
@@ -169,8 +168,7 @@ Bundle de revue :
 - `overlay.png`
 - `digitized_curves.csv`
 - `review.md`
-- `reconstructed_km.png` si la reconstruction IPD réussit
-- `ipd_<curve>.csv` si la reconstruction IPD réussit
+- `validation_issues.csv`
 
 ## Résultats actuels sur figures réelles
 
@@ -204,16 +202,6 @@ Conclusion réaliste :
 - `study02 / pfs`, `study03 / os` et `study03 / pfs` restent des cas faibles
 - `study04 / pfs` est abaissé volontairement à cause de `overlap_ambiguity`
 
-## Limitation connue : queue finale du KM reconstruit
-
-`reconstructed_km.png` peut perdre visuellement la dernière portion horizontale, même lorsque la courbe numérisée et l’IPD reconstruit conservent bien le suivi tardif.
-
-Cette limite vient actuellement de l’affichage aval côté PyHEOR :
-
-- l’IPD reconstruit garde les temps de censure tardifs
-- la table KM est rapportée seulement aux temps d’événement
-- le plateau horizontal après le dernier événement peut donc ne pas être dessiné
-
 ## Structure du dépôt
 
 Modules clés :
@@ -231,7 +219,6 @@ Modules clés :
 - [`src/pykmextract/enhancements.py`](src/pykmextract/enhancements.py) : modules IA optionnels
 - [`src/pykmextract/microtune.py`](src/pykmextract/microtune.py) : micro-ajustements bornés après extraction
 - [`src/pykmextract/review.py`](src/pykmextract/review.py) : export overlay et bundles de revue
-- [`src/pykmextract/bridge/pyheor.py`](src/pykmextract/bridge/pyheor.py) : pont vers PyHEOR
 
 ## Développement
 
@@ -249,7 +236,6 @@ Couverture actuelle :
 - comportement de l’échantillonnage pixel
 - export des bundles de revue
 - parsing des réponses provider
-- smoke tests du bridge PyHEOR
 
 Fichiers du projet :
 
