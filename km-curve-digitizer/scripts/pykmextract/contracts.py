@@ -238,6 +238,7 @@ class CurveData(BaseModel):
     y_pixels: List[float]
     time: List[float]
     survival: List[float]
+    point_ids: List[str] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def validate_lengths(self) -> "CurveData":
@@ -248,6 +249,14 @@ class CurveData(BaseModel):
             raise ValueError("time and survival lengths must match")
         if len(self.x_pixels) != len(self.y_pixels):
             raise ValueError("x_pixels and y_pixels lengths must match")
+        if len(self.x_pixels) != expected:
+            raise ValueError("pixel and data point lengths must match")
+        if not self.point_ids:
+            self.point_ids = [f"c{self.id}-p{index:04d}" for index in range(expected)]
+        if len(self.point_ids) != expected:
+            raise ValueError("point_ids and curve point lengths must match")
+        if len(set(self.point_ids)) != expected:
+            raise ValueError("point_ids must be unique within a curve")
         return self
 
     def to_frame(self) -> pd.DataFrame:
@@ -256,6 +265,7 @@ class CurveData(BaseModel):
             {
                 "curve_id": self.id,
                 "curve_name": self.name,
+                "point_id": self.point_ids,
                 "time": self.time,
                 "survival": self.survival,
                 "x_pixel": self.x_pixels,
@@ -283,6 +293,15 @@ class ValidationReport(BaseModel):
     issues: List[ValidationIssue] = Field(default_factory=list)
 
 
+class CurveRevision(BaseModel):
+    """Auditable record of one model- or user-directed curve edit."""
+
+    revision_id: str
+    created_at: str
+    reason: str = ""
+    actions: List[Dict[str, Any]] = Field(default_factory=list)
+
+
 class ExtractionResult(BaseModel):
     """Full pipeline output."""
 
@@ -294,12 +313,21 @@ class ExtractionResult(BaseModel):
     axis_anchors: AxisAnchors
     curves: List[CurveData]
     validation: ValidationReport
+    revisions: List[CurveRevision] = Field(default_factory=list)
 
     def curve_frame(self) -> pd.DataFrame:
         """Flatten all curve outputs into a single dataframe."""
         if not self.curves:
             return pd.DataFrame(
-                columns=["curve_id", "curve_name", "time", "survival", "x_pixel", "y_pixel"]
+                columns=[
+                    "curve_id",
+                    "curve_name",
+                    "point_id",
+                    "time",
+                    "survival",
+                    "x_pixel",
+                    "y_pixel",
+                ]
             )
         return pd.concat([curve.to_frame() for curve in self.curves], ignore_index=True)
 

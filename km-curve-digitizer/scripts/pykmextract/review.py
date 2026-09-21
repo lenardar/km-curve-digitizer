@@ -59,6 +59,117 @@ def save_overlay(result: ExtractionResult, output_path: str) -> str:
     return str(output)
 
 
+def save_point_review(
+    result: ExtractionResult,
+    output_path: str,
+    *,
+    curve_name: str,
+    time_range: tuple[float, float] | None = None,
+    pixel_region: tuple[float, float, float, float] | None = None,
+    max_labels: int = 60,
+) -> tuple[str, list[dict[str, float | str]]]:
+    """Render a local review board with stable point identifiers."""
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    curve = next((item for item in result.curves if item.name == curve_name), None)
+    if curve is None:
+        raise ValueError(f"Curve not found: {curve_name}")
+
+    x_pixels = np.asarray(curve.x_pixels, dtype=float)
+    y_pixels = np.asarray(curve.y_pixels, dtype=float)
+    times = np.asarray(curve.time, dtype=float)
+    survival = np.asarray(curve.survival, dtype=float)
+    selected = np.ones(len(times), dtype=bool)
+    if time_range is not None:
+        start, end = time_range
+        selected &= (times >= start) & (times <= end)
+    if pixel_region is not None:
+        left, top, right, bottom = pixel_region
+        selected &= (
+            (x_pixels >= left)
+            & (x_pixels <= right)
+            & (y_pixels >= top)
+            & (y_pixels <= bottom)
+        )
+
+    selected_indices = np.where(selected)[0]
+    if len(selected_indices) == 0:
+        raise ValueError("The requested inspection region contains no curve points")
+
+    points = [
+        {
+            "point_id": curve.point_ids[index],
+            "x_pixel": float(x_pixels[index]),
+            "y_pixel": float(y_pixels[index]),
+            "time": float(times[index]),
+            "survival": float(survival[index]),
+        }
+        for index in selected_indices
+    ]
+
+    label_count = min(max(1, int(max_labels)), len(selected_indices))
+    label_positions = np.linspace(0, len(selected_indices) - 1, label_count, dtype=int)
+    label_indices = selected_indices[np.unique(label_positions)]
+
+    image = np.array(Image.open(result.image_path).convert("RGB"))
+    fig, ax = plt.subplots(figsize=(12, 8))
+    ax.imshow(image)
+    for other in result.curves:
+        color = "#777777" if other.name != curve_name else "#0066cc"
+        width = 1.0 if other.name != curve_name else 1.8
+        alpha = 0.45 if other.name != curve_name else 0.9
+        if other.name == curve_name:
+            plot_x = x_pixels[selected_indices]
+            plot_y = y_pixels[selected_indices]
+        else:
+            plot_x = other.x_pixels
+            plot_y = other.y_pixels
+        ax.plot(plot_x, plot_y, color=color, linewidth=width, alpha=alpha)
+
+    ax.scatter(
+        x_pixels[selected_indices],
+        y_pixels[selected_indices],
+        s=22,
+        facecolors="none",
+        edgecolors="#ff3300",
+        linewidths=0.9,
+        zorder=4,
+    )
+    for index in label_indices:
+        ax.annotate(
+            curve.point_ids[index],
+            (x_pixels[index], y_pixels[index]),
+            xytext=(3, -6),
+            textcoords="offset points",
+            fontsize=6,
+            color="#aa0000",
+            zorder=5,
+        )
+
+    if pixel_region is not None:
+        left, top, right, bottom = pixel_region
+    else:
+        margin = 20.0
+        left = max(0.0, float(x_pixels[selected_indices].min() - margin))
+        right = min(float(image.shape[1]), float(x_pixels[selected_indices].max() + margin))
+        top = max(0.0, float(y_pixels[selected_indices].min() - margin))
+        bottom = min(float(image.shape[0]), float(y_pixels[selected_indices].max() + margin))
+    ax.set_xlim(left, right)
+    ax.set_ylim(bottom, top)
+    ax.set_title(f"Point review: {curve.name} | {len(points)} selected")
+    ax.set_axis_off()
+    fig.tight_layout()
+
+    output = Path(output_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+    return str(output), points
+
+
 def _curve_data_to_pixel_trace(result: ExtractionResult, curve) -> tuple[np.ndarray, np.ndarray]:
     """Project cleaned time/survival back into pixel space for review plotting."""
     anchors = result.axis_anchors

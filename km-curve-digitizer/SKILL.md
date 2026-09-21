@@ -1,6 +1,6 @@
 ---
 name: km-curve-digitizer
-description: Digitize Kaplan-Meier survival curves from figure images into time-survival CSV and JSON outputs, with axis calibration, validation signals, and visual review overlays. Use when extracting or reviewing KM curves from papers or screenshots; do not use for fitting survival models or reconstructing individual patient data.
+description: Digitize and visually refine Kaplan-Meier survival curves from figure images into time-survival CSV and JSON outputs, with controlled point editing, axis calibration, validation signals, and review overlays. Use when extracting or correcting KM curves from papers or screenshots; do not use for fitting survival models or reconstructing individual patient data.
 ---
 
 # KM Curve Digitizer
@@ -27,6 +27,12 @@ Turn one or more Kaplan-Meier figure images into inspectable curve data. Keep me
 5. Inspect `review/overlay.png`, `result.json`, and `review/validation_issues.csv`. A high score is a heuristic signal, not proof that the curve is scientifically accurate.
 6. If the overlay shows incorrect plot bounds, provide a reviewed `--axis-json`, rerun, and inspect the new overlay. Use `--axis-export-json` to preserve accepted calibration.
 7. Report the output paths, validation findings, and any visible uncertainty. Explicitly flag weak cases rather than forcing a clean-looking result.
+
+## Visual Point Editing
+
+When the overlay contains missing, misplaced, or extraneous points, read [references/correction-schema.md](references/correction-schema.md). Inspect the affected segment to obtain stable point IDs, then let the model apply narrow add, delete, move, or replace actions through `scripts/refine_km.py`.
+
+Always compare the generated before/after overlays. Accept an edit only when it follows visible source evidence and does not damage neighboring segments. The editor preserves the parent result and records every action in the new result's `revisions` list.
 
 ## Multiple Studies
 

@@ -13,6 +13,7 @@ km-curve-digitizer/
 ├── references/semantic-schema.md
 └── scripts/
     ├── extract_km.py
+    ├── refine_km.py
     ├── build_manifest.py
     ├── run_batch.py
     ├── requirements.txt
