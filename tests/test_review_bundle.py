@@ -39,10 +39,14 @@ class ReviewBundleTests(unittest.TestCase):
             self.assertTrue(Path(bundle["overlay"]).exists())
             self.assertTrue(Path(bundle["digitized_csv"]).exists())
             self.assertTrue(Path(bundle["validation_csv"]).exists())
+            self.assertTrue(Path(bundle["risk_table_csv"]).exists())
+            self.assertTrue(Path(bundle["risk_table_json"]).exists())
+            self.assertTrue(Path(bundle["risk_table_review"]).exists())
             markdown = Path(bundle["review_md"]).read_text(encoding="utf-8")
             self.assertIn("Original panel", markdown)
             self.assertIn("Digitization overlay", markdown)
             self.assertIn("digitized_curves.csv", markdown)
+            self.assertIn("risk_table.csv", markdown)
 
 
 if __name__ == "__main__":

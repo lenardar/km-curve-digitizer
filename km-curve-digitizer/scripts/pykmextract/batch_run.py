@@ -160,6 +160,8 @@ def main() -> int:
                 "overlay": review_bundle["overlay"],
                 "digitized_csv": review_bundle["digitized_csv"],
                 "validation_csv": review_bundle["validation_csv"],
+                "risk_table_csv": review_bundle["risk_table_csv"],
+                "risk_table_json": review_bundle["risk_table_json"],
                 "review_md": review_bundle["review_md"],
             }
         )

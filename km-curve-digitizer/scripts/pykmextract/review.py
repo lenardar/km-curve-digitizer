@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from pathlib import Path
 import shutil
 from typing import Dict, Optional
@@ -170,6 +171,65 @@ def save_point_review(
     return str(output), points
 
 
+def save_risk_table_review(result: ExtractionResult, output_path: str) -> str:
+    """Render source-table context beside stable risk-cell identifiers."""
+    import matplotlib
+
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+
+    table = result.semantic.at_risk_table
+    records = result.risk_table_records()
+    if not records:
+        raise ValueError("No number-at-risk table is available for review")
+
+    image = np.array(Image.open(result.image_path).convert("RGB"))
+    crop_top = max(0, result.axis_bounds.bottom - 15)
+    source_crop = image[crop_top:, :]
+
+    figure_width = max(12.0, 1.25 * (len(table.time_points) + 1))
+    fig, axes = plt.subplots(
+        2,
+        1,
+        figsize=(figure_width, 7.5),
+        gridspec_kw={"height_ratios": [1.3, 1.0]},
+    )
+    axes[0].imshow(source_crop)
+    axes[0].set_title("Source context below the plotting area")
+    axes[0].set_axis_off()
+
+    cell_text = []
+    for curve_index, curve_spec in enumerate(result.semantic.curves):
+        row = []
+        for time_index, count in enumerate(table.counts_by_curve[curve_index]):
+            cell_id = f"risk-c{curve_spec.id}-t{time_index:03d}"
+            value = "?" if count is None else str(count)
+            row.append(f"{value}\n{cell_id}")
+        cell_text.append(row)
+
+    display = axes[1].table(
+        cellText=cell_text,
+        rowLabels=[curve.legend_name for curve in result.semantic.curves],
+        colLabels=[str(value) for value in table.time_points],
+        loc="center",
+        cellLoc="center",
+    )
+    display.auto_set_font_size(False)
+    display.set_fontsize(7)
+    display.scale(1.0, 1.8)
+    axes[1].set_title(
+        f"Extracted number-at-risk cells | confidence={result.semantic.confidence.at_risk_table}"
+    )
+    axes[1].set_axis_off()
+    fig.tight_layout()
+
+    output = Path(output_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    fig.savefig(output, dpi=180, bbox_inches="tight")
+    plt.close(fig)
+    return str(output)
+
+
 def _curve_data_to_pixel_trace(result: ExtractionResult, curve) -> tuple[np.ndarray, np.ndarray]:
     """Project cleaned time/survival back into pixel space for review plotting."""
     anchors = result.axis_anchors
@@ -224,6 +284,27 @@ def save_review_bundle(
     validation_csv = output_root / "validation_issues.csv"
     result.validation_frame().to_csv(validation_csv, index=False)
 
+    risk_table_csv = output_root / "risk_table.csv"
+    result.risk_table_frame().to_csv(risk_table_csv, index=False)
+    risk_table_json = output_root / "risk_table.json"
+    risk_records = result.risk_table_records()
+    risk_table_json.write_text(
+        json.dumps(
+            {
+                "time_points": result.semantic.at_risk_table.time_points,
+                "cells": risk_records,
+            },
+            indent=2,
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    risk_table_review = None
+    if risk_records:
+        risk_table_review = Path(
+            save_risk_table_review(result, str(output_root / "risk_table_review.png"))
+        )
+
     review_md = output_root / "review.md"
     review_md.write_text(
         _build_review_markdown(
@@ -234,6 +315,9 @@ def save_review_bundle(
             overlay_image=overlay_path,
             digitized_csv=digitized_csv,
             validation_csv=validation_csv,
+            risk_table_csv=risk_table_csv,
+            risk_table_json=risk_table_json,
+            risk_table_review=risk_table_review,
             semantic_context_image=context_copy,
         ),
         encoding="utf-8",
@@ -244,8 +328,12 @@ def save_review_bundle(
         "overlay": str(overlay_path),
         "digitized_csv": str(digitized_csv),
         "validation_csv": str(validation_csv),
+        "risk_table_csv": str(risk_table_csv),
+        "risk_table_json": str(risk_table_json),
         "review_md": str(review_md),
     }
+    if risk_table_review:
+        bundle["risk_table_review"] = str(risk_table_review)
     if context_copy:
         bundle["semantic_context_image"] = str(context_copy)
     return bundle
@@ -260,6 +348,9 @@ def _build_review_markdown(
     overlay_image: Path,
     digitized_csv: Path,
     validation_csv: Path,
+    risk_table_csv: Path,
+    risk_table_json: Path,
+    risk_table_review: Optional[Path],
     semantic_context_image: Optional[Path],
 ) -> str:
     curve_lines = "\n".join(
@@ -276,6 +367,12 @@ def _build_review_markdown(
             "\n## Semantic Context Figure\n\n"
             f"![semantic-context]({semantic_context_image.name})\n"
         )
+
+    risk_block = "\n## Number at Risk\n\n"
+    if risk_table_review:
+        risk_block += f"![number-at-risk review]({risk_table_review.name})\n"
+    else:
+        risk_block += "No number-at-risk table was extracted.\n"
 
     review_block = (
         "## Side-by-Side Review\n\n"
@@ -301,6 +398,8 @@ def _build_review_markdown(
 
 {context_block}
 
+{risk_block}
+
 ## Curves
 
 {curve_lines}
@@ -313,4 +412,6 @@ def _build_review_markdown(
 
 - [digitized_curves.csv]({digitized_csv.name})
 - [validation_issues.csv]({validation_csv.name})
+- [risk_table.csv]({risk_table_csv.name})
+- [risk_table.json]({risk_table_json.name})
 """

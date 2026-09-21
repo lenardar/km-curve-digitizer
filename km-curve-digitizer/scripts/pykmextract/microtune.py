@@ -382,7 +382,7 @@ class SegmentMicroTuner:
         coverage_curves = {
             issue.curve_id
             for issue in result.validation.issues
-            if issue.code in {"coverage", "atrisk"}
+            if issue.code == "coverage"
         }
         if coverage_curves:
             curve = max(

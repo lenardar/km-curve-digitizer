@@ -105,7 +105,7 @@ class SemanticNormalizationTests(unittest.TestCase):
         self.assertEqual(normalized["at_risk_table"]["time_points"], [0, 3, 6, 9])
         self.assertEqual(normalized["at_risk_table"]["counts_by_curve"][1], [100, 75, 50, 25])
 
-    def test_direct_counts_by_curve_is_coerced_to_non_increasing(self):
+    def test_direct_counts_by_curve_preserves_observed_values(self):
         raw = {
             "n_curves": 2,
             "x_axis": {"min": 0, "max": 12, "unit": "months", "label": "Time"},
@@ -142,8 +142,8 @@ class SemanticNormalizationTests(unittest.TestCase):
 
         normalized = normalize_semantic_payload(raw)
 
-        self.assertEqual(normalized["at_risk_table"]["counts_by_curve"][0], [100, 80, 80, 60, 40])
-        self.assertEqual(normalized["at_risk_table"]["counts_by_curve"][1], [95, 70, 65, 65, 10])
+        self.assertEqual(normalized["at_risk_table"]["counts_by_curve"][0], [100, 80, 82, 60, 40])
+        self.assertEqual(normalized["at_risk_table"]["counts_by_curve"][1], [95, 70, 65, 66, 10])
 
 
 if __name__ == "__main__":

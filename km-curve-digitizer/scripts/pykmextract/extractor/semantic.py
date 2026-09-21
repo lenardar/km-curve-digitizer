@@ -44,7 +44,7 @@ Extract semantic metadata from a Kaplan-Meier survival plot into exactly this sc
   ],
   "at_risk_table": {
     "time_points": [float],
-    "counts_by_curve": [[int]]
+    "counts_by_curve": [[int or null]]
   },
   "total_events_by_curve": [int or null],
   "has_confidence_interval": bool,
@@ -64,9 +64,10 @@ Rules:
 - `legend_name` must be the treatment/group name, not a generic color name.
 - `rgb_approx` must always be a 3-integer array.
 - If a number-at-risk table exists, every row in `counts_by_curve` must have exactly the same length as `time_points`.
+- Use null for a number-at-risk cell that is present but genuinely unreadable; never guess a count.
 - `confidence` fields must be strings: high, medium, or low.
 - `notes` must be a single string, not a list.
-- If you are unsure but the field is visually present, make the best estimate and lower the confidence.
+- For non-count metadata that is visually present but uncertain, make the best estimate and lower the confidence.
 
 Valid example response:
 {
@@ -135,8 +136,9 @@ Mandatory requirements:
   1. `n_curves == len(curves)`
   2. every curve has `legend_name`, `color_description`, and `rgb_approx`
   3. if `at_risk_table.counts_by_curve` is not empty, every row length equals `len(at_risk_table.time_points)`
-  4. `notes` is a string
-  5. `confidence` values are only `high`, `medium`, or `low`
+  4. unreadable at-risk cells are null rather than guessed
+  5. `notes` is a string
+  6. `confidence` values are only `high`, `medium`, or `low`
 - Return JSON only.
 """.strip()
 
@@ -166,9 +168,6 @@ def validate_semantic_output(result: SemanticExtraction) -> Tuple[bool, List[str
         issues.append("y_axis range is invalid")
 
     if result.at_risk_table.counts_by_curve:
-        for index, row in enumerate(result.at_risk_table.counts_by_curve):
-            if any(a < b for a, b in zip(row, row[1:])):
-                issues.append(f"at-risk row {index} is not monotonically non-increasing")
         if len(result.at_risk_table.counts_by_curve) != len(result.curves):
             issues.append("curve count does not match at-risk row count")
 
@@ -314,7 +313,7 @@ def _normalize_at_risk_table(
     if "time_points" in raw and "counts_by_curve" in raw:
         time_points = list(raw.get("time_points") or [])
         counts_by_curve = [
-            _coerce_non_increasing_counts(list(values))
+            _coerce_at_risk_counts(list(values))
             for values in (raw.get("counts_by_curve") or [])
         ]
         if not time_points or not counts_by_curve:
@@ -350,7 +349,7 @@ def _normalize_at_risk_table(
         common_len = min([len(time_points)] + non_empty_lengths) if time_points else min(non_empty_lengths)
         time_points = time_points[:common_len]
         counts_by_curve = [
-            _coerce_non_increasing_counts(values[:common_len]) if values else []
+            _coerce_at_risk_counts(values[:common_len]) if values else []
             for values in counts_by_curve
         ]
 
@@ -360,18 +359,9 @@ def _normalize_at_risk_table(
     return {"time_points": time_points, "counts_by_curve": counts_by_curve}
 
 
-def _coerce_non_increasing_counts(values: List[Any]) -> List[int]:
-    """Repair minor OCR reversals in at-risk counts by enforcing a running minimum."""
-    repaired: List[int] = []
-    running = None
-    for value in values:
-        current = int(value)
-        if running is None:
-            running = current
-        else:
-            running = min(running, current)
-        repaired.append(running)
-    return repaired
+def _coerce_at_risk_counts(values: List[Any]) -> List[Optional[int]]:
+    """Preserve observed at-risk values without silently repairing OCR reversals."""
+    return [None if value is None or value == "" else int(value) for value in values]
 
 
 def _normalize_total_events(raw: Any, curve_labels: List[str]) -> List[Optional[int]]:

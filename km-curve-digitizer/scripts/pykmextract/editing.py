@@ -32,9 +32,20 @@ class CurveEditor:
         edited = result.model_copy(deep=True)
         revision_id = f"r{len(edited.revisions) + 1:04d}"
         touched: dict[int, CurveData] = {}
+        recorded_actions: list[dict[str, Any]] = []
 
         for action_index, action in enumerate(actions):
             action_type = str(action.get("type", "")).strip().lower()
+            if action_type == "set_risk_cell":
+                recorded_actions.append(self._set_risk_cell(edited, action))
+                continue
+            if action_type == "delete_risk_cell":
+                recorded_actions.append(self._delete_risk_cell(edited, action))
+                continue
+            if action_type == "set_risk_time":
+                recorded_actions.append(self._set_risk_time(edited, action))
+                continue
+
             curve = self._find_curve(edited, action.get("curve"))
             touched[curve.id] = curve
 
@@ -48,6 +59,7 @@ class CurveEditor:
                 self._replace_segment(edited, curve, action, revision_id, action_index)
             else:
                 raise ValueError(f"Unsupported edit action type: {action_type or '<missing>'}")
+            recorded_actions.append(action)
 
         for curve in touched.values():
             self._normalize_curve(edited, curve, revision_id)
@@ -58,10 +70,89 @@ class CurveEditor:
                 revision_id=revision_id,
                 created_at=datetime.now(timezone.utc).isoformat(),
                 reason=reason,
-                actions=actions,
+                actions=recorded_actions,
             )
         )
         return ExtractionResult.model_validate(edited.model_dump())
+
+    @staticmethod
+    def _find_risk_cell(result: ExtractionResult, cell_id: Any) -> dict[str, Any]:
+        target = str(cell_id or "")
+        for record in result.risk_table_records():
+            if record["cell_id"] == target:
+                return record
+        raise ValueError(f"Risk-table cell not found: {target or '<missing>'}")
+
+    def _set_risk_cell(
+        self,
+        result: ExtractionResult,
+        action: dict[str, Any],
+    ) -> dict[str, Any]:
+        record = self._find_risk_cell(result, action.get("cell_id"))
+        if "count" not in action:
+            raise ValueError("set_risk_cell requires count")
+        raw_count = action["count"]
+        if isinstance(raw_count, bool):
+            raise ValueError("Risk-table counts must be whole numbers")
+        try:
+            count = int(raw_count)
+            numeric_count = float(raw_count)
+        except (TypeError, ValueError) as exc:
+            raise ValueError("Risk-table counts must be whole numbers") from exc
+        if not numeric_count.is_integer():
+            raise ValueError("Risk-table counts must be whole numbers")
+        if count < 0:
+            raise ValueError("Risk-table counts must be non-negative")
+        row_index = int(record["row_index"])
+        time_index = int(record["time_index"])
+        previous = result.semantic.at_risk_table.counts_by_curve[row_index][time_index]
+        result.semantic.at_risk_table.counts_by_curve[row_index][time_index] = count
+        enriched = dict(action)
+        enriched["previous_count"] = previous
+        enriched["count"] = count
+        return enriched
+
+    def _delete_risk_cell(
+        self,
+        result: ExtractionResult,
+        action: dict[str, Any],
+    ) -> dict[str, Any]:
+        record = self._find_risk_cell(result, action.get("cell_id"))
+        row_index = int(record["row_index"])
+        time_index = int(record["time_index"])
+        previous = result.semantic.at_risk_table.counts_by_curve[row_index][time_index]
+        result.semantic.at_risk_table.counts_by_curve[row_index][time_index] = None
+        enriched = dict(action)
+        enriched["previous_count"] = previous
+        return enriched
+
+    def _set_risk_time(
+        self,
+        result: ExtractionResult,
+        action: dict[str, Any],
+    ) -> dict[str, Any]:
+        table = result.semantic.at_risk_table
+        if "time_index" in action:
+            time_index = int(action["time_index"])
+        else:
+            record = self._find_risk_cell(result, action.get("cell_id"))
+            time_index = int(record["time_index"])
+        if not 0 <= time_index < len(table.time_points):
+            raise ValueError(f"Risk-table time index out of range: {time_index}")
+        if "time" not in action:
+            raise ValueError("set_risk_time requires time")
+        new_time = float(action["time"])
+        updated_times = list(table.time_points)
+        previous = updated_times[time_index]
+        updated_times[time_index] = new_time
+        if any(left >= right for left, right in zip(updated_times, updated_times[1:])):
+            raise ValueError("Risk-table time points must remain strictly increasing")
+        table.time_points = updated_times
+        enriched = dict(action)
+        enriched["time_index"] = time_index
+        enriched["previous_time"] = previous
+        enriched["time"] = new_time
+        return enriched
 
     @staticmethod
     def _find_curve(result: ExtractionResult, curve_selector: Any) -> CurveData:

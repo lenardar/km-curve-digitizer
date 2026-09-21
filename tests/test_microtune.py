@@ -87,9 +87,15 @@ def _build_result() -> ExtractionResult:
         axis_anchors=AxisAnchors.from_bounds(AxisBounds(left=0, right=240, top=0, bottom=100)),
         curves=[curve_a, curve_b],
         validation=ValidationReport(
-            score=80,
+            score=100,
             level="high",
-            checks={"monotonicity": True, "range": True, "start": True, "coverage": True, "atrisk": True},
+            checks={
+                "monotonicity": True,
+                "range": True,
+                "start": True,
+                "coverage": True,
+                "risk_table": True,
+            },
             issues=[],
         ),
     )
@@ -200,7 +206,7 @@ class MicroTuneTests(unittest.TestCase):
                 "range": True,
                 "start": True,
                 "coverage": False,
-                "atrisk": True,
+                "risk_table": True,
             },
             issues=[ValidationIssue(code="coverage", curve_id=2, message="tail too short")],
         )

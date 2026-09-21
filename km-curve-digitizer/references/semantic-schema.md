@@ -37,7 +37,7 @@ Use this schema to describe what is printed in the Kaplan-Meier figure before pi
     "time_points": [0, 6, 12, 18, 24],
     "counts_by_curve": [
       [120, 95, 70, 48, 30],
-      [118, 90, 66, 41, 22]
+      [118, 90, null, 41, 22]
     ]
   },
   "total_events_by_curve": [null, null],
@@ -58,8 +58,9 @@ Requirements:
 - Axis maxima and minima describe the focused plot panel, not a neighboring panel.
 - Use the treatment or group name for `legend_name`.
 - `rgb_approx` is always three integers from 0 to 255. Sample the visible curve color, not the legend text or confidence ribbon.
-- Every at-risk row must correspond to the curves in the same order and contain one count per time point.
-- Use empty arrays when no at-risk table is visible. Do not invent missing counts.
+- Every at-risk row must correspond to the curves in the same order and contain one cell per time point.
+- Use `null` for an unreadable cell. Use empty arrays when no at-risk table is visible. Do not invent missing counts.
+- Preserve the value as printed or observed, even when a row is unexpectedly non-monotonic. Validation will flag the sequence for visual review instead of silently changing it.
 - Confidence values are `high`, `medium`, or `low`.
 
 An axis override file may contain:

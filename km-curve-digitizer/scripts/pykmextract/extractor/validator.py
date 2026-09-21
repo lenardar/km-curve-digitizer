@@ -27,32 +27,15 @@ class ExtractionValidator:
         x_max = semantic.x_axis.max
         return bool(curve.time and curve.time[-1] >= 0.75 * x_max)
 
-    def validate_against_atrisk(
-        self,
-        curve: CurveData,
-        semantic: SemanticExtraction,
-        curve_index: int,
-    ) -> bool:
+    def validate_risk_table(self, semantic: SemanticExtraction, curve_index: int) -> bool:
+        """Check observed risk counts without treating count ratios as survival."""
         at_risk = semantic.at_risk_table
         if not at_risk.time_points or not at_risk.counts_by_curve:
             return True
 
         counts = at_risk.counts_by_curve[curve_index]
-        total = counts[0]
-        if total <= 0:
-            return True
-
-        time = np.asarray(curve.time, dtype=float)
-        survival = np.asarray(curve.survival, dtype=float)
-
-        for risk_time, count in zip(at_risk.time_points, counts):
-            idx = int(np.searchsorted(time, risk_time, side="left"))
-            idx = min(idx, len(survival) - 1)
-            actual = survival[idx]
-            expected = count / total
-            if abs(actual - expected) > 0.2:
-                return False
-        return True
+        observed = [count for count in counts if count is not None]
+        return not any(left < right for left, right in zip(observed, observed[1:]))
 
     def detect_overlap_ambiguity(self, curves: List[CurveData]) -> List[tuple[CurveData, CurveData]]:
         """Flag long nearly coincident segments between different extracted curves."""
@@ -111,7 +94,7 @@ class ExtractionValidator:
                     "range": False,
                     "start": False,
                     "coverage": False,
-                    "atrisk": False,
+                    "risk_table": False,
                     "overlap_ambiguity": False,
                 },
                 issues=[
@@ -127,7 +110,7 @@ class ExtractionValidator:
             "range": 20,
             "start": 15,
             "coverage": 15,
-            "atrisk": 20,
+            "risk_table": 20,
         }
         checks: Dict[str, bool] = {}
         issues: List[ValidationIssue] = []
@@ -166,19 +149,22 @@ class ExtractionValidator:
                         )
                     )
 
-        atrisk_values = [
-            self.validate_against_atrisk(curve, semantic, index)
-            for index, curve in enumerate(curves)
+        risk_table_values = [
+            self.validate_risk_table(semantic, index)
+            for index, _curve in enumerate(curves)
         ]
-        checks["atrisk"] = all(atrisk_values)
-        if not checks["atrisk"]:
-            for curve, curve_passed in zip(curves, atrisk_values):
+        checks["risk_table"] = all(risk_table_values)
+        if not checks["risk_table"]:
+            for curve, curve_passed in zip(curves, risk_table_values):
                 if not curve_passed:
                     issues.append(
                         ValidationIssue(
-                            code="atrisk",
+                            code="risk_table_non_monotonic",
                             curve_id=curve.id,
-                            message=f"curve '{curve.name}' diverges from at-risk implied survival",
+                            message=(
+                                f"at-risk counts for curve '{curve.name}' increase at a later time; "
+                                "review the source table instead of silently repairing the value"
+                            ),
                         )
                     )
 

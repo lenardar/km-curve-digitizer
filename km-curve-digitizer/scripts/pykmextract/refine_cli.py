@@ -10,7 +10,7 @@ from typing import Any
 
 from .contracts import ExtractionResult
 from .editing import CurveEditor
-from .review import save_point_review
+from .review import save_point_review, save_risk_table_review
 from .runtime import save_result_json
 
 
@@ -39,6 +39,13 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_parser.add_argument("--time-range", help="Optional start,end data range")
     inspect_parser.add_argument("--pixel-region", help="Optional left,top,right,bottom pixel box")
     inspect_parser.add_argument("--max-labels", type=int, default=60)
+
+    risk_parser = subparsers.add_parser(
+        "inspect-risk",
+        help="Render and export stable number-at-risk cells for model inspection",
+    )
+    risk_parser.add_argument("result", help="Existing extraction result JSON")
+    risk_parser.add_argument("--output-dir", required=True, help="New directory for risk-table outputs")
     return parser
 
 
@@ -147,6 +154,37 @@ def _run_inspect(args: argparse.Namespace) -> int:
     return 0
 
 
+def _run_inspect_risk(args: argparse.Namespace) -> int:
+    result = ExtractionResult.model_validate(_load_json(args.result))
+    output_dir = _prepare_output_dir(args.output_dir)
+    records = result.risk_table_records()
+    if not records:
+        raise ValueError("No number-at-risk table is available for inspection")
+
+    review_path = save_risk_table_review(result, str(output_dir / "risk_table_review.png"))
+    csv_path = output_dir / "risk_table.csv"
+    result.risk_table_frame().to_csv(csv_path, index=False)
+    json_path = output_dir / "risk_table.json"
+    json_path.write_text(
+        json.dumps(
+            {
+                "time_points": result.semantic.at_risk_table.time_points,
+                "cells": records,
+            },
+            indent=2,
+            ensure_ascii=False,
+        ),
+        encoding="utf-8",
+    )
+    summary = {
+        "review_image": review_path,
+        "risk_table_csv": str(csv_path),
+        "risk_table_json": str(json_path),
+    }
+    print(json.dumps(summary, indent=2, ensure_ascii=False))
+    return 0
+
+
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
@@ -155,6 +193,8 @@ def main() -> int:
             return _run_apply(args)
         if args.command == "inspect":
             return _run_inspect(args)
+        if args.command == "inspect-risk":
+            return _run_inspect_risk(args)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         parser.error(str(exc))
     parser.error(f"Unsupported command: {args.command}")

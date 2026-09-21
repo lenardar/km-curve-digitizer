@@ -10,7 +10,10 @@ The skill digitizes Kaplan-Meier figure images into structured time-survival dat
 km-curve-digitizer/
 ├── SKILL.md
 ├── agents/openai.yaml
-├── references/semantic-schema.md
+├── references/
+│   ├── correction-schema.md
+│   ├── risk-table.md
+│   └── semantic-schema.md
 └── scripts/
     ├── extract_km.py
     ├── refine_km.py
@@ -20,7 +23,7 @@ km-curve-digitizer/
     └── pykmextract/          # internal implementation, not a public package
 ```
 
-The repository-level `tests/`, `images/`, and `runs/` directories are development fixtures and historical review outputs. They are not required when installing the skill folder.
+The repository-level `tests/`, `images/`, and `runs/` directories are development fixtures and historical review outputs. They are not required when installing the skill folder. The installed skill can extract both curve coordinates and long-format number-at-risk tables, with auditable edits for either output.
 
 ## Development checks
 

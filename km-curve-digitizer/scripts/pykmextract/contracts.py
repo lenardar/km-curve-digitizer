@@ -76,7 +76,7 @@ class AtRiskTable(BaseModel):
     """Structured number-at-risk table."""
 
     time_points: List[float] = Field(default_factory=list)
-    counts_by_curve: List[List[int]] = Field(default_factory=list)
+    counts_by_curve: List[List[Optional[int]]] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def validate_rows(self) -> "AtRiskTable":
@@ -85,8 +85,8 @@ class AtRiskTable(BaseModel):
             for row in self.counts_by_curve:
                 if len(row) != expected:
                     raise ValueError("Each at-risk row must match time_points length")
-                if any(a < b for a, b in zip(row, row[1:])):
-                    raise ValueError("At-risk counts must be monotonically non-increasing")
+                if any(value is not None and value < 0 for value in row):
+                    raise ValueError("At-risk counts must be non-negative")
         return self
 
 
@@ -340,6 +340,56 @@ class ExtractionResult(BaseModel):
         return pd.DataFrame(
             [issue.model_dump() for issue in self.validation.issues],
             columns=["code", "message", "curve_id"],
+        )
+
+    def risk_table_records(self) -> List[Dict[str, Any]]:
+        """Return stable, editable records for the number-at-risk table."""
+        table = self.semantic.at_risk_table
+        if not table.time_points or not table.counts_by_curve:
+            return []
+
+        confidence_value = self.semantic.confidence.at_risk_table
+        confidence = (
+            confidence_value.value
+            if isinstance(confidence_value, ConfidenceLevel)
+            else str(confidence_value)
+        )
+        records: List[Dict[str, Any]] = []
+        for curve_index, (curve_spec, counts) in enumerate(
+            zip(self.semantic.curves, table.counts_by_curve)
+        ):
+            for time_index, (time_value, count) in enumerate(zip(table.time_points, counts)):
+                records.append(
+                    {
+                        "cell_id": f"risk-c{curve_spec.id}-t{time_index:03d}",
+                        "curve_id": curve_spec.id,
+                        "curve_name": curve_spec.legend_name,
+                        "time_index": time_index,
+                        "time": time_value,
+                        "n_risk": count,
+                        "raw_text": "" if count is None else str(count),
+                        "confidence": confidence,
+                        "pixel_region": None,
+                        "row_index": curve_index,
+                    }
+                )
+        return records
+
+    def risk_table_frame(self) -> pd.DataFrame:
+        """Return the number-at-risk table in downstream-friendly long format."""
+        columns = [
+            "cell_id",
+            "curve_id",
+            "curve_name",
+            "time_index",
+            "time",
+            "n_risk",
+            "confidence",
+        ]
+        records = self.risk_table_records()
+        return pd.DataFrame(
+            [{key: record[key] for key in columns} for record in records],
+            columns=columns,
         )
 
     def save_overlay(self, output_path: str) -> str:

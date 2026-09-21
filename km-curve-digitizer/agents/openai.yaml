@@ -1,7 +1,7 @@
 interface:
   display_name: "KM Curve Digitizer"
-  short_description: "Digitize and review Kaplan-Meier survival curves"
-  default_prompt: "Use $km-curve-digitizer to extract reviewable time-survival data from this Kaplan-Meier figure."
+  short_description: "Digitize KM curves and number-at-risk tables"
+  default_prompt: "Use $km-curve-digitizer to extract and visually review the curves and number-at-risk table in this Kaplan-Meier figure."
 
 policy:
   allow_implicit_invocation: true
