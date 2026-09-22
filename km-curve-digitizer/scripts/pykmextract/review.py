@@ -2,15 +2,36 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 import shutil
-from typing import Dict, Optional
+from typing import Any, Dict, Optional
 
 import numpy as np
 from PIL import Image, ImageDraw
 
 from .contracts import ExtractionResult
+
+
+def result_review_signature(result: ExtractionResult) -> str:
+    """Return a stable signature tying visual-review evidence to exact curve data."""
+    payload = {
+        "image_path": str(Path(result.image_path).resolve()),
+        "axis_bounds": result.axis_bounds.model_dump(mode="json"),
+        "axis_anchors": result.axis_anchors.model_dump(mode="json"),
+        "curves": [
+            {
+                "id": curve.id,
+                "name": curve.name,
+                "time": curve.time,
+                "survival": curve.survival,
+            }
+            for curve in result.curves
+        ],
+    }
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def save_overlay(result: ExtractionResult, output_path: str) -> str:
@@ -335,6 +356,11 @@ def save_review_bundle(
         encoding="utf-8",
     )
 
+    scan_bundle = save_scan_windows(
+        result,
+        str(output_root / "scan_windows"),
+    )
+
     from .extractor.risk_table import ensure_risk_table_cell_regions
 
     ensure_risk_table_cell_regions(result)
@@ -371,6 +397,8 @@ def save_review_bundle(
             validation_csv=validation_csv,
             quality_hotspots=quality_hotspots,
             quality_hotspots_json=quality_hotspots_json,
+            scan_manifest=Path(scan_bundle["manifest"]),
+            scan_review=Path(scan_bundle["review"]),
             risk_table_csv=risk_table_csv,
             risk_table_json=risk_table_json,
             risk_table_review=risk_table_review,
@@ -385,6 +413,8 @@ def save_review_bundle(
         "digitized_csv": str(digitized_csv),
         "validation_csv": str(validation_csv),
         "quality_hotspots_json": str(quality_hotspots_json),
+        "scan_windows_json": scan_bundle["manifest"],
+        "scan_review_json": scan_bundle["review"],
         "risk_table_csv": str(risk_table_csv),
         "risk_table_json": str(risk_table_json),
         "review_md": str(review_md),
@@ -394,6 +424,223 @@ def save_review_bundle(
     if context_copy:
         bundle["semantic_context_image"] = str(context_copy)
     return bundle
+
+
+def _draw_pixel_trace(
+    draw: ImageDraw.ImageDraw,
+    x_pixels: np.ndarray,
+    y_pixels: np.ndarray,
+    *,
+    fill: str,
+    width: int,
+) -> None:
+    for index in range(1, len(x_pixels)):
+        previous = (float(x_pixels[index - 1]), float(y_pixels[index - 1]))
+        corner = (float(x_pixels[index]), float(y_pixels[index - 1]))
+        current = (float(x_pixels[index]), float(y_pixels[index]))
+        draw.line([previous, corner, current], fill=fill, width=width)
+
+
+def _scan_window_records(
+    result: ExtractionResult,
+    *,
+    window_width: int,
+    overlap: int,
+    padding: int,
+) -> list[dict[str, Any]]:
+    bounds = result.axis_bounds
+    plot_width = max(1, int(round(bounds.right - bounds.left)))
+    width = min(plot_width, max(32, int(window_width)))
+    overlap = max(0, min(int(overlap), width - 1))
+    stride = max(1, width - overlap)
+    starts = list(range(int(bounds.left), int(bounds.right) - width + 1, stride))
+    final_start = max(int(bounds.left), int(bounds.right) - width)
+    if not starts or starts[-1] != final_start:
+        starts.append(final_start)
+
+    anchor_left = float(result.axis_anchors.x_min_point.x)
+    anchor_right = float(result.axis_anchors.x_max_point.x)
+    pixel_span = max(1.0, anchor_right - anchor_left)
+    data_min = float(result.semantic.x_axis.min)
+    data_span = float(result.semantic.x_axis.max - result.semantic.x_axis.min)
+    records: list[dict[str, Any]] = []
+    for index, left in enumerate(starts, start=1):
+        right = min(int(bounds.right), left + width)
+        crop_left = max(0, left - padding)
+        crop_right = right + padding
+        crop_top = max(0, int(bounds.top) - padding)
+        crop_bottom = int(bounds.bottom) + padding
+        time_start = data_min + ((left - anchor_left) / pixel_span) * data_span
+        time_end = data_min + ((right - anchor_left) / pixel_span) * data_span
+        records.append(
+            {
+                "window_id": f"w{index:03d}",
+                "time_range": [round(time_start, 6), round(time_end, 6)],
+                "pixel_region": [crop_left, crop_top, crop_right, crop_bottom],
+            }
+        )
+    return records
+
+
+def save_scan_windows(
+    result: ExtractionResult,
+    output_dir: str,
+    *,
+    window_width: int = 160,
+    overlap: int = 48,
+    padding: int = 6,
+    scale: int = 3,
+) -> dict[str, str]:
+    """Export an overlapping left-to-right visual scan and an evidence template."""
+    if window_width < 32:
+        raise ValueError("window_width must be at least 32 pixels")
+    if overlap < 0 or overlap >= window_width:
+        raise ValueError("overlap must be non-negative and smaller than window_width")
+    if scale < 1 or scale > 8:
+        raise ValueError("scale must be between 1 and 8")
+
+    output_root = Path(output_dir)
+    output_root.mkdir(parents=True, exist_ok=True)
+    source = Image.open(result.image_path).convert("RGB")
+    palette = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00"]
+    traces = [_curve_data_to_pixel_trace(result, curve) for curve in result.curves]
+    records = _scan_window_records(
+        result,
+        window_width=window_width,
+        overlap=overlap,
+        padding=padding,
+    )
+
+    for record in records:
+        left, top, right, bottom = record["pixel_region"]
+        right = min(source.width, right)
+        bottom = min(source.height, bottom)
+        crop_box = (left, top, right, bottom)
+        source_crop = source.crop(crop_box)
+        enlarged_size = (source_crop.width * scale, source_crop.height * scale)
+        source_name = f"{record['window_id']}_source.png"
+        source_crop.resize(enlarged_size, Image.Resampling.NEAREST).save(output_root / source_name)
+
+        combined = source.copy()
+        combined_draw = ImageDraw.Draw(combined)
+        for curve_index, (x_pixels, y_pixels) in enumerate(traces):
+            _draw_pixel_trace(
+                combined_draw,
+                x_pixels,
+                y_pixels,
+                fill=palette[curve_index % len(palette)],
+                width=1,
+            )
+        combined_name = f"{record['window_id']}_all_curves.png"
+        combined.crop(crop_box).resize(enlarged_size, Image.Resampling.NEAREST).save(
+            output_root / combined_name
+        )
+
+        curve_images: dict[str, str] = {}
+        for target_index, curve in enumerate(result.curves):
+            focused = source.copy()
+            focused_draw = ImageDraw.Draw(focused)
+            for curve_index, (x_pixels, y_pixels) in enumerate(traces):
+                is_target = curve_index == target_index
+                _draw_pixel_trace(
+                    focused_draw,
+                    x_pixels,
+                    y_pixels,
+                    fill=palette[target_index % len(palette)] if is_target else "#A8A8A8",
+                    width=2 if is_target else 1,
+                )
+            filename = f"{record['window_id']}_curve_{curve.id}.png"
+            focused.crop(crop_box).resize(enlarged_size, Image.Resampling.NEAREST).save(
+                output_root / filename
+            )
+            curve_images[str(curve.id)] = filename
+
+        record["source_image"] = source_name
+        record["all_curves_image"] = combined_name
+        record["curve_images"] = curve_images
+
+    signature = result_review_signature(result)
+    manifest_payload = {
+        "schema_version": 1,
+        "result_signature": signature,
+        "direction": "left_to_right",
+        "window_width": window_width,
+        "overlap": overlap,
+        "curves": [{"id": curve.id, "name": curve.name} for curve in result.curves],
+        "windows": records,
+    }
+    manifest_path = output_root / "scan_windows.json"
+    manifest_path.write_text(
+        json.dumps(manifest_payload, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+
+    issue_windows: list[dict[str, Any]] = []
+    for issue in result.validation.issues:
+        if not issue.requires_visual_review:
+            continue
+        overlapping = []
+        if issue.pixel_region is not None:
+            issue_left, _, issue_right, _ = issue.pixel_region
+            overlapping = [
+                record["window_id"]
+                for record in records
+                if record["pixel_region"][0] <= issue_right
+                and record["pixel_region"][2] >= issue_left
+            ]
+        else:
+            overlapping = [record["window_id"] for record in records]
+        issue_windows.append(
+            {
+                "issue_id": issue.issue_id,
+                "status": "unreviewed",
+                "observation": "",
+                "window_ids": overlapping,
+            }
+        )
+
+    review_payload = {
+        "schema_version": 1,
+        "result_signature": signature,
+        "allowed_statuses": {
+            "window_and_curve": [
+                "clear",
+                "confirmed_defect",
+                "resolved",
+                "ambiguous",
+            ],
+            "diagnostic_issue": [
+                "false_positive",
+                "confirmed_defect",
+                "resolved",
+                "ambiguous",
+            ],
+        },
+        "window_reviews": [
+            {
+                "window_id": record["window_id"],
+                "pixel_region": record["pixel_region"],
+                "time_range": record["time_range"],
+                "status": "unreviewed",
+                "observation": "",
+                "curve_reviews": [
+                    {
+                        "curve_id": curve.id,
+                        "curve_name": curve.name,
+                        "status": "unreviewed",
+                        "observation": "",
+                    }
+                    for curve in result.curves
+                ],
+            }
+            for record in records
+        ],
+        "issue_reviews": issue_windows,
+    }
+    review_path = output_root / "scan_review.json"
+    review_path.write_text(
+        json.dumps(review_payload, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    return {"manifest": str(manifest_path), "review": str(review_path)}
 
 
 def save_quality_hotspots(
@@ -482,6 +729,8 @@ def _build_review_markdown(
     validation_csv: Path,
     quality_hotspots: list[dict],
     quality_hotspots_json: Path,
+    scan_manifest: Path,
+    scan_review: Path,
     risk_table_csv: Path,
     risk_table_json: Path,
     risk_table_review: Optional[Path],
@@ -526,6 +775,12 @@ def _build_review_markdown(
     else:
         hotspot_block += "No automatically localized high-risk regions.\n"
 
+    scan_block = (
+        "\n## Required Left-to-Right Scan\n\n"
+        "Inspect every overlapping window, source first, then each curve-focused overlay. "
+        "Complete `scan_review.json`; acceptance is blocked by unreviewed, defective, or ambiguous windows.\n"
+    )
+
     return f"""# Review Bundle: {title}
 
 ## Summary
@@ -544,6 +799,8 @@ def _build_review_markdown(
 
 {hotspot_block}
 
+{scan_block}
+
 {context_block}
 
 {risk_block}
@@ -561,6 +818,8 @@ def _build_review_markdown(
 - [digitized_curves.csv]({digitized_csv.name})
 - [validation_issues.csv]({validation_csv.name})
 - [quality_hotspots.json]({quality_hotspots_json.name})
+- [scan_windows.json]({scan_manifest.relative_to(scan_manifest.parents[1])})
+- [scan_review.json]({scan_review.relative_to(scan_review.parents[1])})
 - [risk_table.csv]({risk_table_csv.name})
 - [risk_table.json]({risk_table_json.name})
 """

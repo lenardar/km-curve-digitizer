@@ -37,6 +37,7 @@ The applied result is a candidate, not an accepted result. After viewing both ov
 python3 <skill-dir>/scripts/refine_km.py verify refined/result.json \
   --decision accept \
   --verification "The replacement follows the visible step and preserves both neighbors" \
+  --scan-review refined/review/scan_windows/scan_review.json \
   --output-dir accepted
 ```
 
@@ -133,3 +134,4 @@ Replacement removes the existing points in the inclusive time range and inserts 
 - Unedited curves retain their point IDs and values.
 - Every applied action is stored in `revisions` in the edited result.
 - Every candidate must be visually accepted or rejected; diagnostic checks do not make that decision.
+- Acceptance requires a complete overlapping-window scan tied to the exact candidate signature; parent or pre-edit evidence cannot be reused.

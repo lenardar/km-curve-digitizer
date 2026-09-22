@@ -13,6 +13,7 @@ from tempfile import TemporaryDirectory
 import pykmextract as pkm
 from pykmextract.contracts import ValidationIssue, ValidationReport
 from pykmextract.editing import CurveEditor
+from pykmextract.review import save_scan_windows
 from tests.test_pipeline import make_synthetic_km_image
 
 
@@ -30,6 +31,23 @@ def make_result(tmpdir: str):
         },
         min_curve_pixels=20,
     )
+
+
+def make_completed_scan_review(result, tmpdir: str, name: str = "scan") -> Path:
+    bundle = save_scan_windows(result, str(Path(tmpdir) / name))
+    review_path = Path(bundle["review"])
+    payload = json.loads(review_path.read_text(encoding="utf-8"))
+    for window in payload["window_reviews"]:
+        window["status"] = "clear"
+        window["observation"] = "Source and overlays agree throughout this window"
+        for curve in window["curve_reviews"]:
+            curve["status"] = "clear"
+            curve["observation"] = "The extracted steps follow the visible source trace"
+    for issue in payload["issue_reviews"]:
+        issue["status"] = "false_positive"
+        issue["observation"] = "The localized source pixels show continuous curve identity"
+    review_path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    return review_path
 
 
 class CurveEditorTests(unittest.TestCase):
@@ -279,6 +297,7 @@ class CurveEditorTests(unittest.TestCase):
             candidate_path = Path(tmpdir) / "candidate.json"
             output_dir = Path(tmpdir) / "accepted"
             candidate_path.write_text(json.dumps(candidate.to_jsonable()), encoding="utf-8")
+            scan_review = make_completed_scan_review(candidate, tmpdir, "candidate-scan")
             script = (
                 Path(__file__).resolve().parents[1]
                 / "km-curve-digitizer"
@@ -298,6 +317,8 @@ class CurveEditorTests(unittest.TestCase):
                     "accept",
                     "--verification",
                     "The edited overlay follows the source and its neighbors",
+                    "--scan-review",
+                    str(scan_review),
                     "--output-dir",
                     str(output_dir),
                 ],
@@ -316,12 +337,59 @@ class CurveEditorTests(unittest.TestCase):
             )
             self.assertTrue((output_dir / "review_decision.json").exists())
 
+    def test_refine_cli_rejects_scan_evidence_from_parent_after_edit(self):
+        with TemporaryDirectory() as tmpdir:
+            result = make_result(tmpdir)
+            parent_scan = make_completed_scan_review(result, tmpdir, "parent-scan")
+            candidate = CurveEditor().apply(
+                result,
+                [
+                    {
+                        "type": "delete_points",
+                        "curve": "Treatment",
+                        "point_ids": [result.curves[0].point_ids[20]],
+                    }
+                ],
+                observation="Visible outlier",
+            )
+            candidate_path = Path(tmpdir) / "candidate.json"
+            candidate_path.write_text(json.dumps(candidate.to_jsonable()), encoding="utf-8")
+            script = (
+                Path(__file__).resolve().parents[1]
+                / "km-curve-digitizer"
+                / "scripts"
+                / "refine_km.py"
+            )
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "verify",
+                    str(candidate_path),
+                    "--decision",
+                    "accept",
+                    "--verification",
+                    "Reused parent evidence",
+                    "--scan-review",
+                    str(parent_scan),
+                    "--output-dir",
+                    str(Path(tmpdir) / "invalid-acceptance"),
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertNotEqual(completed.returncode, 0)
+            self.assertIn("different curve data", completed.stderr)
+
     def test_refine_cli_accepts_unedited_base_after_visual_verification(self):
         with TemporaryDirectory() as tmpdir:
             result = make_result(tmpdir)
             result_path = Path(tmpdir) / "result.json"
             output_dir = Path(tmpdir) / "accepted-base"
             result_path.write_text(json.dumps(result.to_jsonable()), encoding="utf-8")
+            scan_review = make_completed_scan_review(result, tmpdir, "base-scan")
             script = (
                 Path(__file__).resolve().parents[1]
                 / "km-curve-digitizer"
@@ -341,6 +409,8 @@ class CurveEditorTests(unittest.TestCase):
                     "accept",
                     "--verification",
                     "Local review boards follow both visible source traces",
+                    "--scan-review",
+                    str(scan_review),
                     "--output-dir",
                     str(output_dir),
                 ],
@@ -357,7 +427,7 @@ class CurveEditorTests(unittest.TestCase):
             self.assertEqual(decision["review_kind"], "base_extraction")
             self.assertIsNone(decision["revision"])
 
-    def test_refine_cli_requires_acknowledgement_of_local_review_issue(self):
+    def test_refine_cli_requires_resolved_local_review_issue_in_scan_evidence(self):
         with TemporaryDirectory() as tmpdir:
             result = make_result(tmpdir)
             issue = ValidationIssue(
@@ -375,6 +445,11 @@ class CurveEditorTests(unittest.TestCase):
             )
             result_path = Path(tmpdir) / "result.json"
             result_path.write_text(json.dumps(result.to_jsonable()), encoding="utf-8")
+            scan_review = make_completed_scan_review(result, tmpdir, "issue-scan")
+            scan_payload = json.loads(scan_review.read_text(encoding="utf-8"))
+            scan_payload["issue_reviews"][0]["status"] = "unreviewed"
+            scan_payload["issue_reviews"][0]["observation"] = ""
+            scan_review.write_text(json.dumps(scan_payload, indent=2), encoding="utf-8")
             script = (
                 Path(__file__).resolve().parents[1]
                 / "km-curve-digitizer"
@@ -394,6 +469,8 @@ class CurveEditorTests(unittest.TestCase):
                     "accept",
                     "--verification",
                     "The local crop follows the source",
+                    "--scan-review",
+                    str(scan_review),
                     "--output-dir",
                     str(Path(tmpdir) / "missing"),
                 ],
@@ -404,6 +481,15 @@ class CurveEditorTests(unittest.TestCase):
             )
             self.assertNotEqual(missing.returncode, 0)
             self.assertIn(issue.issue_id, missing.stderr)
+
+            scan_payload["issue_reviews"][0]["status"] = "false_positive"
+            scan_payload["issue_reviews"][0]["observation"] = (
+                "Both traces remain visually identifiable through the close region"
+            )
+            scan_payload["issue_reviews"][0]["window_ids"] = [
+                scan_payload["window_reviews"][0]["window_id"]
+            ]
+            scan_review.write_text(json.dumps(scan_payload, indent=2), encoding="utf-8")
 
             accepted = subprocess.run(
                 [
@@ -417,6 +503,8 @@ class CurveEditorTests(unittest.TestCase):
                     "The local crop follows the source",
                     "--reviewed-issue",
                     issue.issue_id,
+                    "--scan-review",
+                    str(scan_review),
                     "--output-dir",
                     str(Path(tmpdir) / "accepted-with-review"),
                 ],

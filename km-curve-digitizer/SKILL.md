@@ -24,18 +24,20 @@ Turn one or more Kaplan-Meier figure images into inspectable curve and number-at
      --review-dir output/review
    ```
 
-5. Read [references/agent-loop.md](references/agent-loop.md), then personally inspect `review/overlay.png`, `result.json`, `review/validation_issues.csv`, both panes of every local comparison listed in `review/quality_hotspots.json`, and—when present—`review/risk_table_review.png`. Treat validation as a navigation hint, never as edit authority.
-6. Use the inspection tools to gather focused evidence, record the visible observation, decide the edit, and apply it as a candidate revision.
-7. Compare the before/after artifacts, then run `refine_km.py verify` to explicitly accept or reject the candidate. Pass one `--reviewed-issue <issue-id>` for every required local crop you inspected; acceptance is refused while any high-risk issue is unacknowledged. If no edit was needed, run `verify` on the base extraction so the visual acceptance is still recorded. Continue from an accepted result only when the visible source supports it; rejection restores the parent data while preserving the rejected revision in the audit trail.
-8. Repeat until no visible defect remains that the available evidence can resolve. Do not stop at recommending that a human perform an edit the skill already exposes.
-9. If the overlay shows incorrect plot bounds, write a reviewed `--axis-json`, rerun, and inspect the new overlay. Use `--axis-export-json` to preserve accepted calibration.
-10. Report the accepted output paths, revisions, unresolved ambiguity, and diagnostic findings. The Skill intentionally has no aggregate quality score; visual agreement with the source is the acceptance criterion.
+5. Read [references/agent-loop.md](references/agent-loop.md), then personally scan every entry in `review/scan_windows/scan_windows.json` from left to right. Inspect the source-only window first, then the combined and per-curve overlays. Adjacent windows overlap so curve identity and step continuity can be checked across boundaries. Also inspect `review/overlay.png`, `review/validation_issues.csv`, localized comparisons in `review/quality_hotspots.json`, and—when present—`review/risk_table_review.png`. Treat validation as a navigation hint, never as edit authority.
+6. Fill the generated `review/scan_windows/scan_review.json` with visible observations for every window and every curve. Use `clear` only when source and trace agree, `confirmed_defect` when they visibly disagree, `resolved` only after an edit has been checked in the regenerated after-window, and `ambiguous` when the pixels cannot decide. Resolve each diagnostic issue as `false_positive`, `confirmed_defect`, `resolved`, or `ambiguous`, linking it to inspected windows.
+7. Use the inspection tools to gather focused evidence, decide the smallest pixel-backed edit, and apply it as a candidate revision. Every edit invalidates the previous scan signature: scan the candidate again rather than reusing old evidence.
+8. Compare the before/after artifacts, then run `refine_km.py verify --scan-review <completed-scan-review.json>` to explicitly accept or reject the candidate. Acceptance is refused while any window, curve, or diagnostic issue remains unreviewed, defective, or ambiguous. If no edit was needed, verify the base extraction with its completed scan review. Rejection restores the parent data while preserving the rejected revision in the audit trail.
+9. Repeat until no visible defect remains that the available evidence can resolve. Do not stop at recommending that a human perform an edit the skill already exposes.
+10. If the overlay shows incorrect plot bounds, write a reviewed `--axis-json`, rerun, and inspect the new overlay. Use `--axis-export-json` to preserve accepted calibration.
+11. Report the accepted output paths, revisions, unresolved ambiguity, and diagnostic findings. The Skill intentionally has no aggregate quality score; visual agreement with the source is the acceptance criterion.
 
 ## Agent Authority
 
 - The calling model chooses what to inspect and whether to add, delete, move, replace, correct, clear, accept, or reject.
 - Geometry detection and diagnostic checks may direct attention but must not autonomously change extracted evidence.
 - Keep edits narrow and evidence-backed. A related cluster may be edited together, but do not bundle unrelated guesses into one revision.
+- Scan coverage is mandatory evidence, not a detector-selected checklist. A clean diagnostic report never permits skipping windows.
 - Do not delegate semantic reading, axis choice, point correction, or acceptance to an internal or external model. Use the deterministic tools directly.
 
 ## Visual Point Editing
@@ -43,6 +45,13 @@ Turn one or more Kaplan-Meier figure images into inspectable curve and number-at
 When the overlay contains missing, misplaced, or extraneous points, read [references/correction-schema.md](references/correction-schema.md). Inspect the affected segment to obtain stable point IDs, then apply the model's narrow add, delete, move, or replace decision through `scripts/refine_km.py`.
 
 Always compare the generated before/after overlays. Accept an edit only when it follows visible source evidence and does not damage neighboring segments. The editor preserves the parent result and records observation, actions, status, and verification in the new result's `revisions` list.
+
+For a narrower or wider pass, regenerate the scan without changing the data:
+
+```bash
+python3 <skill-dir>/scripts/refine_km.py scan result.json \
+  --window-width 140 --overlap 48 --output-dir scan
+```
 
 ## Number-at-Risk Table Editing
 

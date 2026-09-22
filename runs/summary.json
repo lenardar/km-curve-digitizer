@@ -1,19 +1,18 @@
 {
   "workflow": "Codex visual operator + deterministic KM inspection/editing tools",
   "panels_total": 10,
-  "panels_accepted": 10,
+  "panels_accepted": 0,
+  "panels_pending_scan_review": 10,
   "notes": [
-    "Every curve was inspected on a local enlarged review board, not only on the contact sheet.",
-    "Per-curve pixel tolerances were selected by visual comparison to avoid both sparse false plateaus and cross-curve contamination.",
-    "study01/pfs, study03/pfs, and study04/os contain accepted model-authored point revisions; study04/os was rebuilt with localized QC after a cross-curve identity failure was found.",
-    "All number-at-risk review boards were checked against their printed source rows.",
-    "The strengthened QC workflow now localizes close-curve identity regions and refuses acceptance until every required issue ID is acknowledged."
+    "Previous acceptance decisions are retained in each panel directory as historical audit records but are superseded by the overlapping-window review requirement.",
+    "No panel is currently accepted under the new workflow; each must be scanned left-to-right and re-verified with result-bound scan evidence.",
+    "A real scan of study04/os exposed visible trace mismatches missed by the former issue-acknowledgement workflow."
   ],
   "panels": [
     {
       "study": "study01",
       "endpoint": "os",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "pending_overlapping_window_review",
       "review_kind": "base_extraction",
       "verification": "Both curves were inspected in 0-15 and 15-54 month local boards; sampled traces follow their orange and dark source lines through crossings and tails. Risk cells match the printed table.",
       "axis_bounds": {
@@ -36,7 +35,7 @@
     {
       "study": "study01",
       "endpoint": "pfs",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "pending_overlapping_window_review",
       "review_kind": "edited_candidate",
       "verification": "Early orange and dark staircases now follow their separate source traces; false shared 100% plateau removed, later auto-extracted segments unchanged.",
       "axis_bounds": {
@@ -65,7 +64,7 @@
     {
       "study": "study02",
       "endpoint": "os",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "pending_overlapping_window_review",
       "review_kind": "base_extraction",
       "verification": "Full local boards for both arms follow the dark-teal and taupe source staircases from origin to 54 months, including late plateaus. Risk cells match the source rows.",
       "axis_bounds": {
@@ -88,7 +87,7 @@
     {
       "study": "study02",
       "endpoint": "pfs",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "pending_overlapping_window_review",
       "review_kind": "base_extraction",
       "verification": "Full local boards for both arms follow the source drops and long late plateaus without cross-curve switching. Risk cells match the source rows.",
       "axis_bounds": {
@@ -111,7 +110,7 @@
     {
       "study": "study03",
       "endpoint": "os",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "pending_overlapping_window_review",
       "review_kind": "base_extraction",
       "verification": "Full local boards show the maintenance trace following the orange staircase and the BSC trace following the dark staircase, including distinct late plateaus. Risk cells match all six time columns.",
       "axis_bounds": {
@@ -134,7 +133,7 @@
     {
       "study": "study03",
       "endpoint": "pfs",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "pending_overlapping_window_review",
       "review_kind": "edited_candidate",
       "verification": "Both model-authored breakpoint sequences follow the visible orange and dark source staircases across the full axis; sparse false plateaus removed.",
       "axis_bounds": {
@@ -157,7 +156,7 @@
     {
       "study": "study04",
       "endpoint": "os",
-      "status": "accepted_after_required_local_reviews",
+      "status": "pending_overlapping_window_review",
       "review_kind": "edited_candidate",
       "verification": "Compared all ten required local source/overlay boards after the three segment replacements. Blue remains on the dark Nivolumab staircase, orange remains on the light Bevacizumab staircase, unsupported plateaus were removed, and both terminal traces follow the visible source.",
       "axis_bounds": {
@@ -187,7 +186,7 @@
     {
       "study": "study04",
       "endpoint": "pfs",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "pending_overlapping_window_review",
       "review_kind": "base_extraction",
       "verification": "The 32/24px model-selected tolerances follow both dense antialiased staircases through the early drops and late tail; values align with printed 6, 12, and 18 month PFS landmarks. Risk cells match the source.",
       "axis_bounds": {
@@ -210,7 +209,7 @@
     {
       "study": "study05",
       "endpoint": "os",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "pending_overlapping_window_review",
       "review_kind": "base_extraction",
       "verification": "Full local boards show both colored traces following the source through dense censor marks and the late blue drop, with no switch to the other arm. Risk counts and censor counts match the printed rows.",
       "axis_bounds": {
@@ -233,7 +232,7 @@
     {
       "study": "study05",
       "endpoint": "pfs",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "pending_overlapping_window_review",
       "review_kind": "base_extraction",
       "verification": "Full local boards show both colored traces following the source from origin through late plateaus and the late blue drop. Risk counts and censor counts match the printed rows.",
       "axis_bounds": {

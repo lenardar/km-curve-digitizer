@@ -44,11 +44,25 @@ class ReviewBundleTests(unittest.TestCase):
             self.assertTrue(Path(bundle["risk_table_csv"]).exists())
             self.assertTrue(Path(bundle["risk_table_json"]).exists())
             self.assertTrue(Path(bundle["risk_table_review"]).exists())
+            self.assertTrue(Path(bundle["scan_windows_json"]).exists())
+            self.assertTrue(Path(bundle["scan_review_json"]).exists())
+            scan_manifest = json.loads(
+                Path(bundle["scan_windows_json"]).read_text(encoding="utf-8")
+            )
+            self.assertGreaterEqual(len(scan_manifest["windows"]), 2)
+            first = scan_manifest["windows"][0]
+            second = scan_manifest["windows"][1]
+            self.assertGreater(first["pixel_region"][2], second["pixel_region"][0])
+            self.assertTrue(
+                (Path(bundle["scan_windows_json"]).parent / first["source_image"]).exists()
+            )
+            self.assertEqual(set(first["curve_images"]), {"1", "2"})
             markdown = Path(bundle["review_md"]).read_text(encoding="utf-8")
             self.assertIn("Original panel", markdown)
             self.assertIn("Digitization overlay", markdown)
             self.assertIn("digitized_curves.csv", markdown)
             self.assertIn("risk_table.csv", markdown)
+            self.assertIn("Required Left-to-Right Scan", markdown)
 
     def test_review_bundle_exports_required_source_only_hotspot(self):
         with TemporaryDirectory() as tmpdir:

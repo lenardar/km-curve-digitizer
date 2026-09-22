@@ -12,7 +12,12 @@ from PIL import Image, ImageDraw
 
 from .contracts import ExtractionResult
 from .editing import CurveEditor
-from .review import save_point_review, save_risk_table_review
+from .review import (
+    result_review_signature,
+    save_point_review,
+    save_risk_table_review,
+    save_scan_windows,
+)
 from .runtime import save_result_json
 
 
@@ -61,9 +66,13 @@ def build_parser() -> argparse.ArgumentParser:
         action="append",
         default=[],
         help=(
-            "Issue ID from quality_hotspots.json that the model inspected; repeat for every "
-            "required local review before acceptance"
+            "Deprecated issue acknowledgement retained for audit compatibility; it does not "
+            "replace the required scan-review evidence"
         ),
+    )
+    verify_parser.add_argument(
+        "--scan-review",
+        help="Completed scan_review.json tied to this exact result; required for acceptance",
     )
     verify_parser.add_argument(
         "--output-dir",
@@ -86,6 +95,17 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Show an enlarged source crop without overlays or point labels",
     )
+
+    scan_parser = subparsers.add_parser(
+        "scan",
+        help="Render overlapping left-to-right source and curve-focused review windows",
+    )
+    scan_parser.add_argument("result", help="Existing extraction result JSON")
+    scan_parser.add_argument("--output-dir", required=True, help="New directory for scan outputs")
+    scan_parser.add_argument("--window-width", type=int, default=160, help="Window width in source pixels")
+    scan_parser.add_argument("--overlap", type=int, default=48, help="Horizontal overlap in source pixels")
+    scan_parser.add_argument("--padding", type=int, default=6, help="Context padding in source pixels")
+    scan_parser.add_argument("--scale", type=int, default=3, help="Integer nearest-neighbor enlargement")
 
     risk_parser = subparsers.add_parser(
         "inspect-risk",
@@ -188,11 +208,6 @@ def _run_apply(args: argparse.Namespace) -> int:
 def _run_verify(args: argparse.Namespace) -> int:
     candidate_path = Path(args.result)
     candidate = ExtractionResult.model_validate(_load_json(str(candidate_path)))
-    required_issue_ids = {
-        issue.issue_id
-        for issue in candidate.validation.issues
-        if issue.requires_visual_review
-    }
     reviewed_issue_ids = set(args.reviewed_issue)
     unknown_issue_ids = reviewed_issue_ids - {
         issue.issue_id for issue in candidate.validation.issues
@@ -201,12 +216,14 @@ def _run_verify(args: argparse.Namespace) -> int:
         raise ValueError(
             "Unknown reviewed issue IDs: " + ", ".join(sorted(unknown_issue_ids))
         )
-    missing_issue_ids = required_issue_ids - reviewed_issue_ids
-    if args.decision == "accept" and missing_issue_ids:
-        raise ValueError(
-            "Acceptance requires local visual review of issue IDs: "
-            + ", ".join(sorted(missing_issue_ids))
-        )
+    scan_review_payload = None
+    if args.decision == "accept":
+        if not args.scan_review:
+            raise ValueError(
+                "Acceptance requires --scan-review with completed left-to-right evidence"
+            )
+        scan_review_payload = _load_json(args.scan_review)
+        _validate_scan_review(candidate, scan_review_payload)
     output_dir = _prepare_output_dir(args.output_dir)
     reviewed_revision = None
     if not candidate.revisions:
@@ -245,6 +262,7 @@ def _run_verify(args: argparse.Namespace) -> int:
         "verification": args.verification,
         "review_kind": "edited_candidate" if reviewed_revision else "base_extraction",
         "reviewed_issue_ids": sorted(reviewed_issue_ids),
+        "scan_review": "scan_review.json" if scan_review_payload is not None else None,
         "revision": reviewed_revision.model_dump(mode="json") if reviewed_revision else None,
         "result": str(output_result),
         "overlay": overlay_path,
@@ -254,7 +272,125 @@ def _run_verify(args: argparse.Namespace) -> int:
         json.dumps(decision_payload, indent=2, ensure_ascii=False),
         encoding="utf-8",
     )
+    if scan_review_payload is not None:
+        (output_dir / "scan_review.json").write_text(
+            json.dumps(scan_review_payload, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
     print(json.dumps(decision_payload, indent=2, ensure_ascii=False))
+    return 0
+
+
+def _validate_scan_review(result: ExtractionResult, payload: Any) -> None:
+    if not isinstance(payload, dict):
+        raise ValueError("scan-review must be a JSON object")
+    expected_signature = result_review_signature(result)
+    if payload.get("result_signature") != expected_signature:
+        raise ValueError(
+            "scan-review belongs to different curve data; regenerate it for this exact result"
+        )
+
+    window_reviews = payload.get("window_reviews")
+    if not isinstance(window_reviews, list) or not window_reviews:
+        raise ValueError("scan-review contains no window reviews")
+    window_ids = [item.get("window_id") for item in window_reviews if isinstance(item, dict)]
+    if len(set(window_ids)) != len(window_reviews) or any(not value for value in window_ids):
+        raise ValueError("scan-review window IDs must be present and unique")
+
+    regions: list[tuple[float, float, float, float]] = []
+    for window in window_reviews:
+        region = window.get("pixel_region") if isinstance(window, dict) else None
+        if not isinstance(region, list) or len(region) != 4:
+            raise ValueError("Every scan window must preserve its four-value pixel_region")
+        left, top, right, bottom = (float(value) for value in region)
+        if right <= left or bottom <= top or right - left > 220:
+            raise ValueError("Scan windows must be valid and no wider than 220 source pixels")
+        if top > result.axis_bounds.top or bottom < result.axis_bounds.bottom:
+            raise ValueError("Every scan window must cover the full plot height")
+        regions.append((left, top, right, bottom))
+    regions.sort(key=lambda item: item[0])
+    if regions[0][0] > result.axis_bounds.left or regions[-1][2] < result.axis_bounds.right:
+        raise ValueError("Scan windows must cover the complete plot width")
+    for previous, current in zip(regions, regions[1:]):
+        if current[0] >= previous[2]:
+            raise ValueError("Adjacent scan windows must overlap")
+
+    expected_curve_ids = {curve.id for curve in result.curves}
+    incomplete: list[str] = []
+    for window in window_reviews:
+        if not isinstance(window, dict):
+            incomplete.append("invalid-window")
+            continue
+        window_id = str(window.get("window_id", "unknown"))
+        if window.get("status") not in {"clear", "resolved"}:
+            incomplete.append(window_id)
+        if not str(window.get("observation", "")).strip():
+            incomplete.append(f"{window_id}:observation")
+        curve_reviews = window.get("curve_reviews")
+        if not isinstance(curve_reviews, list):
+            incomplete.append(f"{window_id}:curves")
+            continue
+        actual_curve_ids = {
+            item.get("curve_id") for item in curve_reviews if isinstance(item, dict)
+        }
+        if actual_curve_ids != expected_curve_ids:
+            incomplete.append(f"{window_id}:curves")
+        for curve_review in curve_reviews:
+            if not isinstance(curve_review, dict):
+                continue
+            curve_key = f"{window_id}:curve-{curve_review.get('curve_id', '?')}"
+            if curve_review.get("status") not in {"clear", "resolved"}:
+                incomplete.append(curve_key)
+            if not str(curve_review.get("observation", "")).strip():
+                incomplete.append(f"{curve_key}:observation")
+
+    required_issue_ids = {
+        issue.issue_id for issue in result.validation.issues if issue.requires_visual_review
+    }
+    issue_reviews = payload.get("issue_reviews")
+    if not isinstance(issue_reviews, list):
+        issue_reviews = []
+    actual_issue_ids = {
+        item.get("issue_id") for item in issue_reviews if isinstance(item, dict)
+    }
+    if actual_issue_ids != required_issue_ids:
+        incomplete.append("issue-review-set")
+    known_window_ids = set(window_ids)
+    for issue_review in issue_reviews:
+        if not isinstance(issue_review, dict):
+            continue
+        issue_id = str(issue_review.get("issue_id", "unknown"))
+        if issue_review.get("status") not in {"false_positive", "resolved"}:
+            incomplete.append(issue_id)
+        if not str(issue_review.get("observation", "")).strip():
+            incomplete.append(f"{issue_id}:observation")
+        linked_windows = issue_review.get("window_ids")
+        if (
+            not isinstance(linked_windows, list)
+            or not linked_windows
+            or not set(linked_windows).issubset(known_window_ids)
+        ):
+            incomplete.append(f"{issue_id}:windows")
+
+    if incomplete:
+        raise ValueError(
+            "Acceptance requires completed scan evidence for: "
+            + ", ".join(sorted(set(incomplete)))
+        )
+
+
+def _run_scan(args: argparse.Namespace) -> int:
+    result = ExtractionResult.model_validate(_load_json(args.result))
+    output_dir = _prepare_output_dir(args.output_dir)
+    bundle = save_scan_windows(
+        result,
+        str(output_dir),
+        window_width=args.window_width,
+        overlap=args.overlap,
+        padding=args.padding,
+        scale=args.scale,
+    )
+    print(json.dumps(bundle, indent=2, ensure_ascii=False))
     return 0
 
 
@@ -404,6 +540,8 @@ def main() -> int:
             return _run_verify(args)
         if args.command == "inspect":
             return _run_inspect(args)
+        if args.command == "scan":
+            return _run_scan(args)
         if args.command == "inspect-risk":
             return _run_inspect_risk(args)
         if args.command == "inspect-risk-cell":
