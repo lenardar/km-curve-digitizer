@@ -1,0 +1,367 @@
+{
+  "revision": {
+    "revision_id": "r0002",
+    "created_at": "2026-09-22T14:22:17.263486+00:00",
+    "observation": "Overlapping source-first windows show four Nivolumab segments that leave the dark trace: two missed early drops, a text-contaminated 16-21 month plateau, and a terminal point pulled toward the light curve.",
+    "reason": "Pixel-coordinate replacements read from the dark source trace in the 100px overlapping scan windows.",
+    "actions": [
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          6.0,
+          7.6
+        ],
+        "points": [
+          {
+            "x_pixel": 145,
+            "y_pixel": 164
+          },
+          {
+            "x_pixel": 149,
+            "y_pixel": 171
+          },
+          {
+            "x_pixel": 154,
+            "y_pixel": 176
+          },
+          {
+            "x_pixel": 158,
+            "y_pixel": 181
+          },
+          {
+            "x_pixel": 162,
+            "y_pixel": 184
+          }
+        ]
+      },
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          7.9,
+          9.1
+        ],
+        "points": [
+          {
+            "x_pixel": 168,
+            "y_pixel": 191
+          },
+          {
+            "x_pixel": 170,
+            "y_pixel": 194
+          },
+          {
+            "x_pixel": 175,
+            "y_pixel": 202
+          },
+          {
+            "x_pixel": 180,
+            "y_pixel": 206
+          }
+        ]
+      },
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          16.2,
+          21.2
+        ],
+        "points": [
+          {
+            "x_pixel": 265,
+            "y_pixel": 257
+          },
+          {
+            "x_pixel": 270,
+            "y_pixel": 263
+          },
+          {
+            "x_pixel": 275,
+            "y_pixel": 266
+          },
+          {
+            "x_pixel": 280,
+            "y_pixel": 269
+          },
+          {
+            "x_pixel": 285,
+            "y_pixel": 272
+          },
+          {
+            "x_pixel": 290,
+            "y_pixel": 273
+          },
+          {
+            "x_pixel": 295,
+            "y_pixel": 275
+          },
+          {
+            "x_pixel": 300,
+            "y_pixel": 276
+          },
+          {
+            "x_pixel": 305,
+            "y_pixel": 276
+          },
+          {
+            "x_pixel": 310,
+            "y_pixel": 277
+          },
+          {
+            "x_pixel": 315,
+            "y_pixel": 279
+          },
+          {
+            "x_pixel": 321,
+            "y_pixel": 280
+          }
+        ]
+      },
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          23.2,
+          27.0
+        ],
+        "points": [
+          {
+            "x_pixel": 347,
+            "y_pixel": 280
+          },
+          {
+            "x_pixel": 352,
+            "y_pixel": 283
+          },
+          {
+            "x_pixel": 357,
+            "y_pixel": 287
+          },
+          {
+            "x_pixel": 391,
+            "y_pixel": 287
+          }
+        ]
+      }
+    ],
+    "status": "candidate",
+    "verification": ""
+  },
+  "parent_result": "runs/trials/study04-os-scan/candidate/parent_result.json",
+  "result": "runs/trials/study04-os-scan/candidate/result.json",
+  "before_overlay": "runs/trials/study04-os-scan/candidate/before_overlay.png",
+  "after_overlay": "runs/trials/study04-os-scan/candidate/review/overlay.png",
+  "review": {
+    "original_image": "runs/trials/study04-os-scan/candidate/review/original.png",
+    "overlay": "runs/trials/study04-os-scan/candidate/review/overlay.png",
+    "digitized_csv": "runs/trials/study04-os-scan/candidate/review/digitized_curves.csv",
+    "validation_csv": "runs/trials/study04-os-scan/candidate/review/validation_issues.csv",
+    "quality_hotspots_json": "runs/trials/study04-os-scan/candidate/review/quality_hotspots.json",
+    "scan_windows_json": "runs/trials/study04-os-scan/candidate/review/scan_windows/scan_windows.json",
+    "scan_review_json": "runs/trials/study04-os-scan/candidate/review/scan_windows/scan_review.json",
+    "risk_table_csv": "runs/trials/study04-os-scan/candidate/review/risk_table.csv",
+    "risk_table_json": "runs/trials/study04-os-scan/candidate/review/risk_table.json",
+    "review_md": "runs/trials/study04-os-scan/candidate/review/review.md",
+    "risk_table_review": "runs/trials/study04-os-scan/candidate/review/risk_table_review.png"
+  },
+  "validation": {
+    "checks": {
+      "monotonicity": true,
+      "range": true,
+      "start": true,
+      "coverage": true,
+      "risk_table": true,
+      "source_gap_review": false,
+      "overlap_ambiguity": true,
+      "curve_identity_review": false
+    },
+    "issues": [
+      {
+        "issue_id": "q001-source_gap_review",
+        "code": "source_gap_review",
+        "message": "curve 'Nivolumab' is forward-filled across 10 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+        "curve_id": 1,
+        "curve_ids": [
+          1
+        ],
+        "time_range": [
+          4.443037974683544,
+          5.382911392405063
+        ],
+        "pixel_region": [
+          119,
+          126,
+          146,
+          165
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q002-source_gap_review",
+        "code": "source_gap_review",
+        "message": "curve 'Nivolumab' is forward-filled across 14 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+        "curve_id": 1,
+        "curve_ids": [
+          1
+        ],
+        "time_range": [
+          6.151898734177215,
+          7.433544303797469
+        ],
+        "pixel_region": [
+          139,
+          151,
+          170,
+          200
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q003-source_gap_review",
+        "code": "source_gap_review",
+        "message": "curve 'Bevacizumab' is forward-filled across 19 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+        "curve_id": 2,
+        "curve_ids": [
+          2
+        ],
+        "time_range": [
+          0.34177215189873417,
+          2.0506329113924053
+        ],
+        "pixel_region": [
+          71,
+          92,
+          107,
+          129
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q004-source_gap_review",
+        "code": "source_gap_review",
+        "message": "curve 'Bevacizumab' is forward-filled across 10 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+        "curve_id": 2,
+        "curve_ids": [
+          2
+        ],
+        "time_range": [
+          13.670886075949369,
+          14.610759493670885
+        ],
+        "pixel_region": [
+          227,
+          235,
+          254,
+          269
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q005-source_gap_review",
+        "code": "source_gap_review",
+        "message": "curve 'Bevacizumab' is forward-filled across 15 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+        "curve_id": 2,
+        "curve_ids": [
+          2
+        ],
+        "time_range": [
+          17.344936708860757,
+          18.712025316455698
+        ],
+        "pixel_region": [
+          270,
+          248,
+          302,
+          290
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q006-curve_identity_review",
+        "code": "curve_identity_review",
+        "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 13 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+        "curve_id": null,
+        "curve_ids": [
+          1,
+          2
+        ],
+        "time_range": [
+          1.7943037974683542,
+          2.819620253164557
+        ],
+        "pixel_region": [
+          86,
+          94,
+          118,
+          131
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q007-curve_identity_review",
+        "code": "curve_identity_review",
+        "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 14 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+        "curve_id": null,
+        "curve_ids": [
+          1,
+          2
+        ],
+        "time_range": [
+          9.825949367088608,
+          10.936708860759493
+        ],
+        "pixel_region": [
+          180,
+          196,
+          213,
+          235
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q008-curve_identity_review",
+        "code": "curve_identity_review",
+        "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 13 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+        "curve_id": null,
+        "curve_ids": [
+          1,
+          2
+        ],
+        "time_range": [
+          12.218354430379748,
+          13.24367088607595
+        ],
+        "pixel_region": [
+          208,
+          218,
+          240,
+          253
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q009-curve_identity_review",
+        "code": "curve_identity_review",
+        "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 7 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+        "curve_id": null,
+        "curve_ids": [
+          1,
+          2
+        ],
+        "time_range": [
+          15.721518987341772,
+          16.234177215189874
+        ],
+        "pixel_region": [
+          249,
+          240,
+          275,
+          272
+        ],
+        "requires_visual_review": true
+      }
+    ]
+  }
+}

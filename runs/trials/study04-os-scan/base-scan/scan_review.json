@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "result_signature": "3c298476b1031619c15c1687be7d7e9bff0a6516b8f90dc2fa731ffa5639e69c",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        69,
+        102,
+        181,
+        321
+      ],
+      "time_range": [
+        0.0,
+        8.544304
+      ],
+      "status": "confirmed_defect",
+      "observation": "The source-first view shows the dark overlay missing visible early drops while the light overlay remains on its source trace.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "confirmed_defect",
+          "observation": "Nivolumab leaves the dark staircase near 6-7.5 months and ends the segment below the visible trace."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "Bevacizumab follows the light staircase throughout the first window."
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        129,
+        102,
+        241,
+        321
+      ],
+      "time_range": [
+        5.126582,
+        13.670886
+      ],
+      "status": "confirmed_defect",
+      "observation": "The dark curve misses a visible drop near 8-9 months; the light curve remains correctly separated.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "confirmed_defect",
+          "observation": "The Nivolumab overlay contains a forward-filled plateau where the source descends."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "The Bevacizumab overlay follows the light source trace through the close region."
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        189,
+        102,
+        301,
+        321
+      ],
+      "time_range": [
+        10.253165,
+        18.797468
+      ],
+      "status": "confirmed_defect",
+      "observation": "The dark overlay begins a text-contaminated long plateau rather than following the visible descending Nivolumab trace.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "confirmed_defect",
+          "observation": "Nivolumab diverges from the dark source after the annotation area."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "Bevacizumab remains centered on the light source staircase."
+        }
+      ]
+    },
+    {
+      "window_id": "w004",
+      "pixel_region": [
+        249,
+        102,
+        361,
+        321
+      ],
+      "time_range": [
+        15.379747,
+        23.924051
+      ],
+      "status": "confirmed_defect",
+      "observation": "The dark curve is held on an incorrect long plateau and does not follow the visible late descent.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "confirmed_defect",
+          "observation": "Nivolumab is visibly offset through the late descending segment."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "Bevacizumab follows the lower light trace and plateau."
+        }
+      ]
+    },
+    {
+      "window_id": "w005",
+      "pixel_region": [
+        285,
+        102,
+        397,
+        321
+      ],
+      "time_range": [
+        18.455696,
+        27.0
+      ],
+      "status": "confirmed_defect",
+      "observation": "The final Nivolumab point is pulled toward the light terminal level instead of the dark plateau.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "confirmed_defect",
+          "observation": "The dark terminal segment needs a separate final plateau from Bevacizumab."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "The light terminal plateau matches the Bevacizumab source pixels."
+        }
+      ]
+    }
+  ],
+  "issue_reviews": [
+    {
+      "issue_id": "q001-source_gap_review",
+      "status": "false_positive",
+      "observation": "The source-only view shows continuous dark trace evidence across the exact-color gap.",
+      "window_ids": [
+        "w001",
+        "w002"
+      ]
+    },
+    {
+      "issue_id": "q002-source_gap_review",
+      "status": "confirmed_defect",
+      "observation": "The localized source shows a real missed Nivolumab descent in w001-w002.",
+      "window_ids": [
+        "w001",
+        "w002"
+      ]
+    },
+    {
+      "issue_id": "q003-source_gap_review",
+      "status": "false_positive",
+      "observation": "The visible early Bevacizumab plateau confirms the forward fill is real.",
+      "window_ids": [
+        "w001"
+      ]
+    },
+    {
+      "issue_id": "q004-source_gap_review",
+      "status": "false_positive",
+      "observation": "The light source trace is visible and continuous through this sparse-color interval.",
+      "window_ids": [
+        "w002",
+        "w003",
+        "w004"
+      ]
+    },
+    {
+      "issue_id": "q005-source_gap_review",
+      "status": "false_positive",
+      "observation": "Censor marks reduce exact-color coverage, but the light curve remains visibly continuous.",
+      "window_ids": [
+        "w003",
+        "w004",
+        "w005"
+      ]
+    },
+    {
+      "issue_id": "q006-curve_identity_review",
+      "status": "false_positive",
+      "observation": "Both curve colors remain identifiable in the early close region.",
+      "window_ids": [
+        "w001"
+      ]
+    },
+    {
+      "issue_id": "q007-curve_identity_review",
+      "status": "false_positive",
+      "observation": "The focused overlays preserve identity through the close interval near 10 months.",
+      "window_ids": [
+        "w001",
+        "w002",
+        "w003"
+      ]
+    },
+    {
+      "issue_id": "q008-curve_identity_review",
+      "status": "false_positive",
+      "observation": "Both source traces can be followed through the 12-13 month approach without switching.",
+      "window_ids": [
+        "w002",
+        "w003"
+      ]
+    },
+    {
+      "issue_id": "q009-curve_identity_review",
+      "status": "false_positive",
+      "observation": "The two curves remain distinguishable at the start of the annotation-affected region.",
+      "window_ids": [
+        "w003",
+        "w004"
+      ]
+    },
+    {
+      "issue_id": "q010-curve_identity_review",
+      "status": "false_positive",
+      "observation": "The source colors remain separate near 19-20 months; the broader dark-path defect is recorded at window level.",
+      "window_ids": [
+        "w003",
+        "w004",
+        "w005"
+      ]
+    }
+  ]
+}

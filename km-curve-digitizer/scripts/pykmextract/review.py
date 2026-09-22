@@ -643,6 +643,137 @@ def save_scan_windows(
     return {"manifest": str(manifest_path), "review": str(review_path)}
 
 
+def _focused_overlay_image(
+    result: ExtractionResult,
+    source: Image.Image,
+    *,
+    target_curve_id: int,
+) -> Image.Image:
+    palette = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00"]
+    overlay = source.copy()
+    draw = ImageDraw.Draw(overlay)
+    target_index = next(
+        (index for index, curve in enumerate(result.curves) if curve.id == target_curve_id),
+        None,
+    )
+    if target_index is None:
+        raise ValueError(f"Curve ID not found: {target_curve_id}")
+    for curve_index, curve in enumerate(result.curves):
+        x_pixels, y_pixels = _curve_data_to_pixel_trace(result, curve)
+        is_target = curve.id == target_curve_id
+        _draw_pixel_trace(
+            draw,
+            x_pixels,
+            y_pixels,
+            fill=palette[target_index % len(palette)] if is_target else "#A8A8A8",
+            width=2 if is_target else 1,
+        )
+    return overlay
+
+
+def save_scan_comparison(
+    before: ExtractionResult,
+    after: ExtractionResult,
+    output_dir: str,
+    *,
+    window_width: int = 160,
+    overlap: int = 48,
+    padding: int = 6,
+    scale: int = 3,
+) -> dict[str, str]:
+    """Export source/before/after triptychs over overlapping plot windows."""
+    if window_width < 32:
+        raise ValueError("window_width must be at least 32 pixels")
+    if overlap < 0 or overlap >= window_width:
+        raise ValueError("overlap must be non-negative and smaller than window_width")
+    if Path(before.image_path).resolve() != Path(after.image_path).resolve():
+        raise ValueError("Scan comparison requires results from the same source image")
+    if before.axis_bounds != after.axis_bounds or before.axis_anchors != after.axis_anchors:
+        raise ValueError("Scan comparison requires identical axis calibration")
+    before_curves = {(curve.id, curve.name) for curve in before.curves}
+    after_curves = {(curve.id, curve.name) for curve in after.curves}
+    if before_curves != after_curves:
+        raise ValueError("Scan comparison requires matching curve IDs and names")
+    if scale < 1 or scale > 8:
+        raise ValueError("scale must be between 1 and 8")
+
+    output_root = Path(output_dir)
+    output_root.mkdir(parents=True, exist_ok=True)
+    source = Image.open(after.image_path).convert("RGB")
+    records = _scan_window_records(
+        after,
+        window_width=window_width,
+        overlap=overlap,
+        padding=padding,
+    )
+    gap = 12
+    label_height = 34
+
+    before_overlays = {
+        curve.id: _focused_overlay_image(before, source, target_curve_id=curve.id)
+        for curve in before.curves
+    }
+    after_overlays = {
+        curve.id: _focused_overlay_image(after, source, target_curve_id=curve.id)
+        for curve in after.curves
+    }
+    for record in records:
+        left, top, right, bottom = record["pixel_region"]
+        crop_box = (
+            left,
+            top,
+            min(source.width, right),
+            min(source.height, bottom),
+        )
+        source_crop = source.crop(crop_box)
+        enlarged_size = (source_crop.width * scale, source_crop.height * scale)
+        source_crop = source_crop.resize(enlarged_size, Image.Resampling.NEAREST)
+        boards: dict[str, str] = {}
+        for curve in after.curves:
+            before_crop = before_overlays[curve.id].crop(crop_box).resize(
+                enlarged_size, Image.Resampling.NEAREST
+            )
+            after_crop = after_overlays[curve.id].crop(crop_box).resize(
+                enlarged_size, Image.Resampling.NEAREST
+            )
+            board = Image.new(
+                "RGB",
+                (source_crop.width * 3 + gap * 2, source_crop.height + label_height),
+                "white",
+            )
+            board.paste(source_crop, (0, label_height))
+            board.paste(before_crop, (source_crop.width + gap, label_height))
+            board.paste(after_crop, (source_crop.width * 2 + gap * 2, label_height))
+            board_draw = ImageDraw.Draw(board)
+            board_draw.text((8, 8), "source", fill="black")
+            board_draw.text((source_crop.width + gap + 8, 8), "before", fill="black")
+            board_draw.text(
+                (source_crop.width * 2 + gap * 2 + 8, 8),
+                f"after: {curve.name}",
+                fill="black",
+            )
+            filename = f"{record['window_id']}_curve_{curve.id}_comparison.png"
+            board.save(output_root / filename)
+            boards[str(curve.id)] = filename
+        record["comparison_boards"] = boards
+
+    manifest = {
+        "schema_version": 1,
+        "before_signature": result_review_signature(before),
+        "after_signature": result_review_signature(after),
+        "direction": "left_to_right",
+        "window_width": window_width,
+        "overlap": overlap,
+        "curves": [{"id": curve.id, "name": curve.name} for curve in after.curves],
+        "windows": records,
+    }
+    manifest_path = output_root / "scan_comparison.json"
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    return {"manifest": str(manifest_path)}
+
+
 def save_quality_hotspots(
     result: ExtractionResult,
     output_dir: str,

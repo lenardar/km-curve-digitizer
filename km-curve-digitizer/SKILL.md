@@ -46,6 +46,15 @@ When the overlay contains missing, misplaced, or extraneous points, read [refere
 
 Always compare the generated before/after overlays. Accept an edit only when it follows visible source evidence and does not damage neighboring segments. The editor preserves the parent result and records observation, actions, status, and verification in the new result's `revisions` list.
 
+For edited candidates, generate source/before/after triptychs when a full-panel overlay is too dense to judge:
+
+```bash
+python3 <skill-dir>/scripts/refine_km.py compare-scan parent_result.json result.json \
+  --window-width 140 --overlap 48 --output-dir comparison
+```
+
+Read [references/worked-example.md](references/worked-example.md) when handling similarly colored curves, annotation contamination, or failed tolerance-only retries.
+
 For a narrower or wider pass, regenerate the scan without changing the data:
 
 ```bash

@@ -1,0 +1,159 @@
+{
+  "decision": "accept",
+  "verification": "Five overlapping source-first windows confirm the repaired Nivolumab trace follows the dark staircase through early drops, annotation interference, crossings, and the terminal plateau; the unchanged Bevacizumab trace and all risk-table cells remain aligned with the source.",
+  "review_kind": "edited_candidate",
+  "reviewed_issue_ids": [],
+  "scan_review": "scan_review.json",
+  "revision": {
+    "revision_id": "r0002",
+    "created_at": "2026-09-22T14:22:17.263486+00:00",
+    "observation": "Overlapping source-first windows show four Nivolumab segments that leave the dark trace: two missed early drops, a text-contaminated 16-21 month plateau, and a terminal point pulled toward the light curve.",
+    "reason": "Pixel-coordinate replacements read from the dark source trace in the 100px overlapping scan windows.",
+    "actions": [
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          6.0,
+          7.6
+        ],
+        "points": [
+          {
+            "x_pixel": 145,
+            "y_pixel": 164
+          },
+          {
+            "x_pixel": 149,
+            "y_pixel": 171
+          },
+          {
+            "x_pixel": 154,
+            "y_pixel": 176
+          },
+          {
+            "x_pixel": 158,
+            "y_pixel": 181
+          },
+          {
+            "x_pixel": 162,
+            "y_pixel": 184
+          }
+        ]
+      },
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          7.9,
+          9.1
+        ],
+        "points": [
+          {
+            "x_pixel": 168,
+            "y_pixel": 191
+          },
+          {
+            "x_pixel": 170,
+            "y_pixel": 194
+          },
+          {
+            "x_pixel": 175,
+            "y_pixel": 202
+          },
+          {
+            "x_pixel": 180,
+            "y_pixel": 206
+          }
+        ]
+      },
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          16.2,
+          21.2
+        ],
+        "points": [
+          {
+            "x_pixel": 265,
+            "y_pixel": 257
+          },
+          {
+            "x_pixel": 270,
+            "y_pixel": 263
+          },
+          {
+            "x_pixel": 275,
+            "y_pixel": 266
+          },
+          {
+            "x_pixel": 280,
+            "y_pixel": 269
+          },
+          {
+            "x_pixel": 285,
+            "y_pixel": 272
+          },
+          {
+            "x_pixel": 290,
+            "y_pixel": 273
+          },
+          {
+            "x_pixel": 295,
+            "y_pixel": 275
+          },
+          {
+            "x_pixel": 300,
+            "y_pixel": 276
+          },
+          {
+            "x_pixel": 305,
+            "y_pixel": 276
+          },
+          {
+            "x_pixel": 310,
+            "y_pixel": 277
+          },
+          {
+            "x_pixel": 315,
+            "y_pixel": 279
+          },
+          {
+            "x_pixel": 321,
+            "y_pixel": 280
+          }
+        ]
+      },
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          23.2,
+          27.0
+        ],
+        "points": [
+          {
+            "x_pixel": 347,
+            "y_pixel": 280
+          },
+          {
+            "x_pixel": 352,
+            "y_pixel": 283
+          },
+          {
+            "x_pixel": 357,
+            "y_pixel": 287
+          },
+          {
+            "x_pixel": 391,
+            "y_pixel": 287
+          }
+        ]
+      }
+    ],
+    "status": "accepted",
+    "verification": "Five overlapping source-first windows confirm the repaired Nivolumab trace follows the dark staircase through early drops, annotation interference, crossings, and the terminal plateau; the unchanged Bevacizumab trace and all risk-table cells remain aligned with the source."
+  },
+  "result": "runs/trials/study04-os-scan/accepted/result.json",
+  "overlay": "runs/trials/study04-os-scan/accepted/overlay.png"
+}

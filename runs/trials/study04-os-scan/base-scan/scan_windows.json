@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "result_signature": "3c298476b1031619c15c1687be7d7e9bff0a6516b8f90dc2fa731ffa5639e69c",
+  "direction": "left_to_right",
+  "window_width": 100,
+  "overlap": 40,
+  "curves": [
+    {
+      "id": 1,
+      "name": "Nivolumab"
+    },
+    {
+      "id": 2,
+      "name": "Bevacizumab"
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "w001",
+      "time_range": [
+        0.0,
+        8.544304
+      ],
+      "pixel_region": [
+        69,
+        102,
+        181,
+        321
+      ],
+      "source_image": "w001_source.png",
+      "all_curves_image": "w001_all_curves.png",
+      "curve_images": {
+        "1": "w001_curve_1.png",
+        "2": "w001_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w002",
+      "time_range": [
+        5.126582,
+        13.670886
+      ],
+      "pixel_region": [
+        129,
+        102,
+        241,
+        321
+      ],
+      "source_image": "w002_source.png",
+      "all_curves_image": "w002_all_curves.png",
+      "curve_images": {
+        "1": "w002_curve_1.png",
+        "2": "w002_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w003",
+      "time_range": [
+        10.253165,
+        18.797468
+      ],
+      "pixel_region": [
+        189,
+        102,
+        301,
+        321
+      ],
+      "source_image": "w003_source.png",
+      "all_curves_image": "w003_all_curves.png",
+      "curve_images": {
+        "1": "w003_curve_1.png",
+        "2": "w003_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w004",
+      "time_range": [
+        15.379747,
+        23.924051
+      ],
+      "pixel_region": [
+        249,
+        102,
+        361,
+        321
+      ],
+      "source_image": "w004_source.png",
+      "all_curves_image": "w004_all_curves.png",
+      "curve_images": {
+        "1": "w004_curve_1.png",
+        "2": "w004_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w005",
+      "time_range": [
+        18.455696,
+        27.0
+      ],
+      "pixel_region": [
+        285,
+        102,
+        397,
+        321
+      ],
+      "source_image": "w005_source.png",
+      "all_curves_image": "w005_all_curves.png",
+      "curve_images": {
+        "1": "w005_curve_1.png",
+        "2": "w005_curve_2.png"
+      }
+    }
+  ]
+}

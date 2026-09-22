@@ -1,0 +1,177 @@
+[
+  {
+    "issue_id": "q001-source_gap_review",
+    "code": "source_gap_review",
+    "message": "curve 'Nivolumab' is forward-filled across 10 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+    "curve_ids": [
+      1
+    ],
+    "time_range": [
+      4.443037974683544,
+      5.382911392405063
+    ],
+    "pixel_region": [
+      113,
+      120,
+      152,
+      171
+    ],
+    "image": "quality_hotspots/q001-source_gap_review.png"
+  },
+  {
+    "issue_id": "q002-source_gap_review",
+    "code": "source_gap_review",
+    "message": "curve 'Nivolumab' is forward-filled across 14 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+    "curve_ids": [
+      1
+    ],
+    "time_range": [
+      6.151898734177215,
+      7.433544303797469
+    ],
+    "pixel_region": [
+      133,
+      145,
+      176,
+      206
+    ],
+    "image": "quality_hotspots/q002-source_gap_review.png"
+  },
+  {
+    "issue_id": "q003-source_gap_review",
+    "code": "source_gap_review",
+    "message": "curve 'Bevacizumab' is forward-filled across 19 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+    "curve_ids": [
+      2
+    ],
+    "time_range": [
+      0.34177215189873417,
+      2.0506329113924053
+    ],
+    "pixel_region": [
+      65,
+      86,
+      113,
+      135
+    ],
+    "image": "quality_hotspots/q003-source_gap_review.png"
+  },
+  {
+    "issue_id": "q004-source_gap_review",
+    "code": "source_gap_review",
+    "message": "curve 'Bevacizumab' is forward-filled across 10 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+    "curve_ids": [
+      2
+    ],
+    "time_range": [
+      13.670886075949369,
+      14.610759493670885
+    ],
+    "pixel_region": [
+      221,
+      229,
+      260,
+      275
+    ],
+    "image": "quality_hotspots/q004-source_gap_review.png"
+  },
+  {
+    "issue_id": "q005-source_gap_review",
+    "code": "source_gap_review",
+    "message": "curve 'Bevacizumab' is forward-filled across 15 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+    "curve_ids": [
+      2
+    ],
+    "time_range": [
+      17.344936708860757,
+      18.712025316455698
+    ],
+    "pixel_region": [
+      264,
+      242,
+      308,
+      296
+    ],
+    "image": "quality_hotspots/q005-source_gap_review.png"
+  },
+  {
+    "issue_id": "q006-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 13 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      1.7943037974683542,
+      2.819620253164557
+    ],
+    "pixel_region": [
+      80,
+      88,
+      124,
+      137
+    ],
+    "image": "quality_hotspots/q006-curve_identity_review.png"
+  },
+  {
+    "issue_id": "q007-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 14 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      9.825949367088608,
+      10.936708860759493
+    ],
+    "pixel_region": [
+      174,
+      190,
+      219,
+      241
+    ],
+    "image": "quality_hotspots/q007-curve_identity_review.png"
+  },
+  {
+    "issue_id": "q008-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 13 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      12.218354430379748,
+      13.24367088607595
+    ],
+    "pixel_region": [
+      202,
+      212,
+      246,
+      259
+    ],
+    "image": "quality_hotspots/q008-curve_identity_review.png"
+  },
+  {
+    "issue_id": "q009-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 7 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      15.721518987341772,
+      16.234177215189874
+    ],
+    "pixel_region": [
+      243,
+      234,
+      281,
+      278
+    ],
+    "image": "quality_hotspots/q009-curve_identity_review.png"
+  }
+]

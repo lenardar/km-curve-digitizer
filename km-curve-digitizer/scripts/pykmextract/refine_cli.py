@@ -16,6 +16,7 @@ from .review import (
     result_review_signature,
     save_point_review,
     save_risk_table_review,
+    save_scan_comparison,
     save_scan_windows,
 )
 from .runtime import save_result_json
@@ -106,6 +107,18 @@ def build_parser() -> argparse.ArgumentParser:
     scan_parser.add_argument("--overlap", type=int, default=48, help="Horizontal overlap in source pixels")
     scan_parser.add_argument("--padding", type=int, default=6, help="Context padding in source pixels")
     scan_parser.add_argument("--scale", type=int, default=3, help="Integer nearest-neighbor enlargement")
+
+    compare_parser = subparsers.add_parser(
+        "compare-scan",
+        help="Render overlapping source/before/after triptychs for each curve",
+    )
+    compare_parser.add_argument("before_result", help="Parent or pre-edit result JSON")
+    compare_parser.add_argument("after_result", help="Candidate or accepted result JSON")
+    compare_parser.add_argument("--output-dir", required=True, help="New directory for comparison boards")
+    compare_parser.add_argument("--window-width", type=int, default=160, help="Window width in source pixels")
+    compare_parser.add_argument("--overlap", type=int, default=48, help="Horizontal overlap in source pixels")
+    compare_parser.add_argument("--padding", type=int, default=6, help="Context padding in source pixels")
+    compare_parser.add_argument("--scale", type=int, default=3, help="Integer nearest-neighbor enlargement")
 
     risk_parser = subparsers.add_parser(
         "inspect-risk",
@@ -394,6 +407,23 @@ def _run_scan(args: argparse.Namespace) -> int:
     return 0
 
 
+def _run_compare_scan(args: argparse.Namespace) -> int:
+    before = ExtractionResult.model_validate(_load_json(args.before_result))
+    after = ExtractionResult.model_validate(_load_json(args.after_result))
+    output_dir = _prepare_output_dir(args.output_dir)
+    bundle = save_scan_comparison(
+        before,
+        after,
+        str(output_dir),
+        window_width=args.window_width,
+        overlap=args.overlap,
+        padding=args.padding,
+        scale=args.scale,
+    )
+    print(json.dumps(bundle, indent=2, ensure_ascii=False))
+    return 0
+
+
 def _run_inspect(args: argparse.Namespace) -> int:
     result = ExtractionResult.model_validate(_load_json(args.result))
     output_dir = _prepare_output_dir(args.output_dir)
@@ -542,6 +572,8 @@ def main() -> int:
             return _run_inspect(args)
         if args.command == "scan":
             return _run_scan(args)
+        if args.command == "compare-scan":
+            return _run_compare_scan(args)
         if args.command == "inspect-risk":
             return _run_inspect_risk(args)
         if args.command == "inspect-risk-cell":

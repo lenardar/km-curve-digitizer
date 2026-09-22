@@ -9,10 +9,54 @@ import json
 
 import pykmextract as pkm
 from pykmextract.contracts import ValidationIssue, ValidationReport
+from pykmextract.editing import CurveEditor
+from pykmextract.review import save_scan_comparison
 from tests.test_pipeline import make_synthetic_km_image
 
 
 class ReviewBundleTests(unittest.TestCase):
+    def test_scan_comparison_exports_source_before_after_boards(self):
+        with TemporaryDirectory() as tmpdir:
+            image_path = Path(tmpdir) / "km.png"
+            semantic, bounds = make_synthetic_km_image(image_path)
+            before = pkm.extract(
+                str(image_path),
+                semantic=semantic,
+                axis_bounds={
+                    "left": bounds[0],
+                    "right": bounds[1],
+                    "top": bounds[2],
+                    "bottom": bounds[3],
+                },
+                min_curve_pixels=20,
+            )
+            after = CurveEditor().apply(
+                before,
+                [
+                    {
+                        "type": "move_point",
+                        "curve": before.curves[0].name,
+                        "point_id": before.curves[0].point_ids[20],
+                        "to": {
+                            "x_pixel": before.curves[0].x_pixels[20],
+                            "y_pixel": before.curves[0].y_pixels[20] + 1,
+                        },
+                    }
+                ],
+            )
+            bundle = save_scan_comparison(
+                before,
+                after,
+                str(Path(tmpdir) / "comparison"),
+                window_width=80,
+                overlap=24,
+            )
+            manifest = json.loads(Path(bundle["manifest"]).read_text(encoding="utf-8"))
+            self.assertNotEqual(manifest["before_signature"], manifest["after_signature"])
+            self.assertGreaterEqual(len(manifest["windows"]), 2)
+            first_board = manifest["windows"][0]["comparison_boards"]["1"]
+            self.assertTrue((Path(bundle["manifest"]).parent / first_board).exists())
+
     def test_review_bundle_exports_markdown_overlay_and_tables(self):
         with TemporaryDirectory() as tmpdir:
             image_path = Path(tmpdir) / "km.png"
