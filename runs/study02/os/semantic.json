@@ -1,0 +1,118 @@
+{
+  "n_curves": 2,
+  "x_axis": {
+    "min": 0.0,
+    "max": 54.0,
+    "unit": "months",
+    "label": "Time, mo"
+  },
+  "y_axis": {
+    "min": 0.0,
+    "max": 100.0,
+    "is_percentage": true,
+    "label": "OS, %"
+  },
+  "curves": [
+    {
+      "id": 1,
+      "legend_name": "Tislelizumab plus chemotherapy",
+      "color_description": "dark teal solid line",
+      "rgb_approx": [
+        47,
+        93,
+        108
+      ],
+      "line_style": "solid"
+    },
+    {
+      "id": 2,
+      "legend_name": "Placebo plus chemotherapy",
+      "color_description": "light taupe solid line",
+      "rgb_approx": [
+        178,
+        166,
+        141
+      ],
+      "line_style": "solid"
+    }
+  ],
+  "at_risk_table": {
+    "time_points": [
+      0.0,
+      3.0,
+      6.0,
+      9.0,
+      12.0,
+      15.0,
+      18.0,
+      21.0,
+      24.0,
+      27.0,
+      30.0,
+      33.0,
+      36.0,
+      39.0,
+      42.0,
+      45.0,
+      48.0,
+      51.0,
+      54.0
+    ],
+    "counts_by_curve": [
+      [
+        131,
+        122,
+        117,
+        116,
+        109,
+        100,
+        92,
+        87,
+        79,
+        73,
+        71,
+        64,
+        58,
+        52,
+        29,
+        18,
+        11,
+        6,
+        0
+      ],
+      [
+        132,
+        124,
+        118,
+        110,
+        99,
+        86,
+        77,
+        70,
+        66,
+        58,
+        55,
+        50,
+        47,
+        43,
+        19,
+        9,
+        5,
+        3,
+        0
+      ]
+    ]
+  },
+  "total_events_by_curve": [
+    null,
+    null
+  ],
+  "has_confidence_interval": false,
+  "has_censoring_marks": true,
+  "confidence": {
+    "overall": "high",
+    "at_risk_table": "high",
+    "color_identification": "high"
+  },
+  "notes": "Single OS panel extracted. Group names are labeled directly on the curves. X-axis unit inferred from 'Time, mo'. No total event counts are shown."
+}

@@ -1,0 +1,25 @@
+cell_id,curve_id,curve_name,time_index,time,n_risk,confidence,pixel_left,pixel_top,pixel_right,pixel_bottom
+risk-c1-t000,1,Chemoradiotherapy alone,0,0.0,250,high,170,447,214,462
+risk-c1-t001,1,Chemoradiotherapy alone,1,12.0,207,high,236,447,280,462
+risk-c1-t002,1,Chemoradiotherapy alone,2,24.0,159,high,302,447,346,462
+risk-c1-t003,1,Chemoradiotherapy alone,3,36.0,142,high,368,447,412,462
+risk-c1-t004,1,Chemoradiotherapy alone,4,48.0,116,high,434,447,478,462
+risk-c1-t005,1,Chemoradiotherapy alone,5,60.0,94,high,500,447,544,462
+risk-c1-t006,1,Chemoradiotherapy alone,6,72.0,69,high,565,447,609,462
+risk-c1-t007,1,Chemoradiotherapy alone,7,84.0,45,high,631,447,675,462
+risk-c1-t008,1,Chemoradiotherapy alone,8,96.0,21,high,697,447,741,462
+risk-c1-t009,1,Chemoradiotherapy alone,9,108.0,6,high,763,447,807,462
+risk-c1-t010,1,Chemoradiotherapy alone,10,120.0,3,high,829,447,873,462
+risk-c1-t011,1,Chemoradiotherapy alone,11,132.0,0,high,895,447,935,462
+risk-c2-t000,2,Induction chemotherapy with chemoradiotherapy,0,0.0,250,high,170,464,214,479
+risk-c2-t001,2,Induction chemotherapy with chemoradiotherapy,1,12.0,225,high,236,464,280,479
+risk-c2-t002,2,Induction chemotherapy with chemoradiotherapy,2,24.0,180,high,302,464,346,479
+risk-c2-t003,2,Induction chemotherapy with chemoradiotherapy,3,36.0,154,high,368,464,412,479
+risk-c2-t004,2,Induction chemotherapy with chemoradiotherapy,4,48.0,136,high,434,464,478,479
+risk-c2-t005,2,Induction chemotherapy with chemoradiotherapy,5,60.0,111,high,500,464,544,479
+risk-c2-t006,2,Induction chemotherapy with chemoradiotherapy,6,72.0,79,high,565,464,609,479
+risk-c2-t007,2,Induction chemotherapy with chemoradiotherapy,7,84.0,53,high,631,464,675,479
+risk-c2-t008,2,Induction chemotherapy with chemoradiotherapy,8,96.0,25,high,697,464,741,479
+risk-c2-t009,2,Induction chemotherapy with chemoradiotherapy,9,108.0,9,high,763,464,807,479
+risk-c2-t010,2,Induction chemotherapy with chemoradiotherapy,10,120.0,3,high,829,464,873,479
+risk-c2-t011,2,Induction chemotherapy with chemoradiotherapy,11,132.0,0,high,895,464,935,479

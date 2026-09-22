@@ -1,9 +1,10 @@
-# Review Bundle: study03_os
+# Review Bundle: study03 OS
 
 ## Summary
 
-- Validation score: `80`
-- Validation level: `high`
+- Visual acceptance: `pending model review`
+- Diagnostic checks: `6/6 passed` (navigation only)
+- Diagnostic issues: `0`
 - Image: `study03_os.png`
 - Notes: Focused on panel B (Duration of response), which is the only panel with y-axis labeled 'Patients, %' and an at-risk table for Maintenance group vs BSC group. Legend names inferred from the at-risk labels because no separate legend is shown in this panel. Hazard ratio text present, but total events are not reported.
 
@@ -13,27 +14,31 @@ Liu G, Li W, Wang D, et al. Effect of Capecitabine Maintenance Therapy Plus Best
 
 ## Side-by-Side Review
 
-| Original panel | KM redrawn from reconstructed IPD |
+| Original panel | Digitization overlay |
 | --- | --- |
-| ![original](original.png) | ![reconstructed-km](reconstructed_km.png) |
+| ![original](original.png) | ![overlay](overlay.png) |
 
 
-## Overlay
 
-![overlay](overlay.png)
 
-## Semantic Context Figure
 
-![semantic-context](semantic_context.png)
+## Number at Risk
+
+![number-at-risk review](risk_table_review.png)
 
 
 ## Curves
 
-- `Maintenance group`: 238 points, tolerance=18
+- `Maintenance group`: 252 points, tolerance=24
 - `BSC group`: 270 points, tolerance=52
+
+## Validation Issues
+
+- None
 
 ## Files
 
 - [digitized_curves.csv](digitized_curves.csv)
-- [ipd_maintenance_group.csv](ipd_maintenance_group.csv)
-- [ipd_bsc_group.csv](ipd_bsc_group.csv)
+- [validation_issues.csv](validation_issues.csv)
+- [risk_table.csv](risk_table.csv)
+- [risk_table.json](risk_table.json)

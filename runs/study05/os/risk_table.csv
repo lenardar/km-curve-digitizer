@@ -1,0 +1,25 @@
+cell_id,curve_id,curve_name,time_index,time,n_risk,confidence,pixel_left,pixel_top,pixel_right,pixel_bottom
+risk-c1-t000,1,Chemoradiotherapy alone,0,0.0,250,high,170,470,214,486
+risk-c1-t001,1,Chemoradiotherapy alone,1,12.0,230,high,236,470,280,486
+risk-c1-t002,1,Chemoradiotherapy alone,2,24.0,186,high,302,470,346,486
+risk-c1-t003,1,Chemoradiotherapy alone,3,36.0,157,high,367,470,411,486
+risk-c1-t004,1,Chemoradiotherapy alone,4,48.0,132,high,433,470,477,486
+risk-c1-t005,1,Chemoradiotherapy alone,5,60.0,105,high,499,470,543,486
+risk-c1-t006,1,Chemoradiotherapy alone,6,72.0,75,high,565,470,609,486
+risk-c1-t007,1,Chemoradiotherapy alone,7,84.0,48,high,631,470,675,486
+risk-c1-t008,1,Chemoradiotherapy alone,8,96.0,24,high,697,470,741,486
+risk-c1-t009,1,Chemoradiotherapy alone,9,108.0,6,high,762,470,806,486
+risk-c1-t010,1,Chemoradiotherapy alone,10,120.0,3,high,828,470,872,486
+risk-c1-t011,1,Chemoradiotherapy alone,11,132.0,0,high,894,470,935,486
+risk-c2-t000,2,Induction chemotherapy with chemoradiotherapy,0,0.0,250,high,170,488,214,503
+risk-c2-t001,2,Induction chemotherapy with chemoradiotherapy,1,12.0,240,high,236,488,280,503
+risk-c2-t002,2,Induction chemotherapy with chemoradiotherapy,2,24.0,196,high,302,488,346,503
+risk-c2-t003,2,Induction chemotherapy with chemoradiotherapy,3,36.0,169,high,367,488,411,503
+risk-c2-t004,2,Induction chemotherapy with chemoradiotherapy,4,48.0,150,high,433,488,477,503
+risk-c2-t005,2,Induction chemotherapy with chemoradiotherapy,5,60.0,118,high,499,488,543,503
+risk-c2-t006,2,Induction chemotherapy with chemoradiotherapy,6,72.0,83,high,565,488,609,503
+risk-c2-t007,2,Induction chemotherapy with chemoradiotherapy,7,84.0,55,high,631,488,675,503
+risk-c2-t008,2,Induction chemotherapy with chemoradiotherapy,8,96.0,26,high,697,488,741,503
+risk-c2-t009,2,Induction chemotherapy with chemoradiotherapy,9,108.0,9,high,762,488,806,503
+risk-c2-t010,2,Induction chemotherapy with chemoradiotherapy,10,120.0,4,high,828,488,872,503
+risk-c2-t011,2,Induction chemotherapy with chemoradiotherapy,11,132.0,0,high,894,488,935,503

@@ -1,0 +1,13 @@
+cell_id,curve_id,curve_name,time_index,time,n_risk,confidence,pixel_left,pixel_top,pixel_right,pixel_bottom
+risk-c1-t000,1,Maintenance group,0,0.0,52,high,93,270,135,281
+risk-c1-t001,1,Maintenance group,1,12.0,48,high,149,270,191,281
+risk-c1-t002,1,Maintenance group,2,24.0,28,high,204,270,247,281
+risk-c1-t003,1,Maintenance group,3,36.0,15,high,260,270,303,281
+risk-c1-t004,1,Maintenance group,4,48.0,6,high,316,270,358,281
+risk-c1-t005,1,Maintenance group,5,60.0,1,high,372,270,399,281
+risk-c2-t000,2,BSC group,0,0.0,52,high,93,283,135,294
+risk-c2-t001,2,BSC group,1,12.0,41,high,149,283,191,294
+risk-c2-t002,2,BSC group,2,24.0,26,high,204,283,247,294
+risk-c2-t003,2,BSC group,3,36.0,12,high,260,283,303,294
+risk-c2-t004,2,BSC group,4,48.0,6,high,316,283,358,294
+risk-c2-t005,2,BSC group,5,60.0,0,high,372,283,399,294

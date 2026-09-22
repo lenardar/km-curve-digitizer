@@ -1,9 +1,10 @@
-# Review Bundle: study05_pfs
+# Review Bundle: study05 PFS
 
 ## Summary
 
-- Validation score: `80`
-- Validation level: `high`
+- Visual acceptance: `pending model review`
+- Diagnostic checks: `6/6 passed` (navigation only)
+- Diagnostic issues: `0`
 - Image: `study05_pfs.png`
 - Notes: Focused on panel A (PFS). Legend mapping taken from the figure legend. At-risk table values extracted from the PFS panel; parenthetical censored counts were present but not included in counts_by_curve. Hazard ratio shown for PFS is 0.65 (95% CI 0.46-0.91), p=0.013.
 
@@ -13,27 +14,31 @@ McCormack M, Eminowicz G, Gallardo D, Diez P, Farrelly L, Kent C, Hudson E, Pana
 
 ## Side-by-Side Review
 
-| Original panel | KM redrawn from reconstructed IPD |
+| Original panel | Digitization overlay |
 | --- | --- |
-| ![original](original.png) | ![reconstructed-km](reconstructed_km.png) |
+| ![original](original.png) | ![overlay](overlay.png) |
 
 
-## Overlay
 
-![overlay](overlay.png)
 
-## Semantic Context Figure
 
-![semantic-context](semantic_context.png)
+## Number at Risk
+
+![number-at-risk review](risk_table_review.png)
 
 
 ## Curves
 
-- `Chemoradiotherapy alone`: 674 points, tolerance=32
-- `Induction chemotherapy with chemoradiotherapy`: 657 points, tolerance=24
+- `Chemoradiotherapy alone`: 676 points, tolerance=52
+- `Induction chemotherapy with chemoradiotherapy`: 715 points, tolerance=40
+
+## Validation Issues
+
+- None
 
 ## Files
 
 - [digitized_curves.csv](digitized_curves.csv)
-- [ipd_chemoradiotherapy_alone.csv](ipd_chemoradiotherapy_alone.csv)
-- [ipd_induction_chemotherapy_with_chemoradiotherapy.csv](ipd_induction_chemotherapy_with_chemoradiotherapy.csv)
+- [validation_issues.csv](validation_issues.csv)
+- [risk_table.csv](risk_table.csv)
+- [risk_table.json](risk_table.json)

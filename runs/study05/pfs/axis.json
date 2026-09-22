@@ -1,0 +1,26 @@
+{
+  "axis_bounds": {
+    "left": 192,
+    "right": 917,
+    "top": 20,
+    "bottom": 384
+  },
+  "axis_anchors": {
+    "x_min_point": {
+      "x": 192,
+      "y": 384
+    },
+    "x_max_point": {
+      "x": 917,
+      "y": 384
+    },
+    "y_min_point": {
+      "x": 192,
+      "y": 384
+    },
+    "y_max_point": {
+      "x": 192,
+      "y": 20
+    }
+  }
+}

@@ -1,9 +1,10 @@
-# Review Bundle: study03_pfs
+# Review Bundle: study03 PFS
 
 ## Summary
 
-- Validation score: `80`
-- Validation level: `high`
+- Visual acceptance: `pending model review`
+- Diagnostic checks: `6/6 passed` (navigation only)
+- Diagnostic issues: `0`
 - Image: `study03_pfs.png`
 - Notes: Focused on panel A (Progression-free survival). Legend labels taken from the PFS panel. Censoring marks are present on both curves. Hazard ratio text is visible but total events by curve are not reported.
 
@@ -13,27 +14,31 @@ Liu G, Li W, Wang D, et al. Effect of Capecitabine Maintenance Therapy Plus Best
 
 ## Side-by-Side Review
 
-| Original panel | KM redrawn from reconstructed IPD |
+| Original panel | Digitization overlay |
 | --- | --- |
-| ![original](original.png) | ![reconstructed-km](reconstructed_km.png) |
+| ![original](original.png) | ![overlay](overlay.png) |
 
 
-## Overlay
 
-![overlay](overlay.png)
 
-## Semantic Context Figure
 
-![semantic-context](semantic_context.png)
+## Number at Risk
+
+![number-at-risk review](risk_table_review.png)
 
 
 ## Curves
 
-- `Capecitabine + BSC group`: 261 points, tolerance=18
+- `Capecitabine + BSC group`: 258 points, tolerance=18
 - `BSC group`: 278 points, tolerance=64
+
+## Validation Issues
+
+- None
 
 ## Files
 
 - [digitized_curves.csv](digitized_curves.csv)
-- [ipd_capecitabine_bsc_group.csv](ipd_capecitabine_bsc_group.csv)
-- [ipd_bsc_group.csv](ipd_bsc_group.csv)
+- [validation_issues.csv](validation_issues.csv)
+- [risk_table.csv](risk_table.csv)
+- [risk_table.json](risk_table.json)

@@ -1,0 +1,356 @@
+{
+  "time_points": [
+    0.0,
+    3.0,
+    6.0,
+    9.0,
+    12.0,
+    15.0,
+    18.0,
+    21.0,
+    24.0,
+    27.0
+  ],
+  "cells": [
+    {
+      "cell_id": "risk-c1-t000",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 0,
+      "time": 0.0,
+      "n_risk": 184,
+      "raw_text": "184",
+      "confidence": "high",
+      "pixel_region": [
+        62,
+        365,
+        88,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t001",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 1,
+      "time": 3.0,
+      "n_risk": 168,
+      "raw_text": "168",
+      "confidence": "high",
+      "pixel_region": [
+        97,
+        365,
+        123,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t002",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 2,
+      "time": 6.0,
+      "n_risk": 133,
+      "raw_text": "133",
+      "confidence": "high",
+      "pixel_region": [
+        132,
+        365,
+        159,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t003",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 3,
+      "time": 9.0,
+      "n_risk": 96,
+      "raw_text": "96",
+      "confidence": "high",
+      "pixel_region": [
+        167,
+        365,
+        194,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t004",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 4,
+      "time": 12.0,
+      "n_risk": 77,
+      "raw_text": "77",
+      "confidence": "high",
+      "pixel_region": [
+        202,
+        365,
+        229,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t005",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 5,
+      "time": 15.0,
+      "n_risk": 59,
+      "raw_text": "59",
+      "confidence": "high",
+      "pixel_region": [
+        237,
+        365,
+        264,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t006",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 6,
+      "time": 18.0,
+      "n_risk": 39,
+      "raw_text": "39",
+      "confidence": "high",
+      "pixel_region": [
+        272,
+        365,
+        299,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t007",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 7,
+      "time": 21.0,
+      "n_risk": 24,
+      "raw_text": "24",
+      "confidence": "high",
+      "pixel_region": [
+        307,
+        365,
+        334,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t008",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 8,
+      "time": 24.0,
+      "n_risk": 9,
+      "raw_text": "9",
+      "confidence": "high",
+      "pixel_region": [
+        343,
+        365,
+        369,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t009",
+      "curve_id": 1,
+      "curve_name": "Nivolumab",
+      "time_index": 9,
+      "time": 27.0,
+      "n_risk": 0,
+      "raw_text": "0",
+      "confidence": "high",
+      "pixel_region": [
+        378,
+        365,
+        404,
+        376
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c2-t000",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 0,
+      "time": 0.0,
+      "n_risk": 185,
+      "raw_text": "185",
+      "confidence": "high",
+      "pixel_region": [
+        62,
+        377,
+        88,
+        388
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t001",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 1,
+      "time": 3.0,
+      "n_risk": 169,
+      "raw_text": "169",
+      "confidence": "high",
+      "pixel_region": [
+        97,
+        377,
+        123,
+        388
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t002",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 2,
+      "time": 6.0,
+      "n_risk": 135,
+      "raw_text": "135",
+      "confidence": "high",
+      "pixel_region": [
+        132,
+        377,
+        159,
+        388
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t003",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 3,
+      "time": 9.0,
+      "n_risk": 99,
+      "raw_text": "99",
+      "confidence": "high",
+      "pixel_region": [
+        167,
+        377,
+        194,
+        388
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t004",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 4,
+      "time": 12.0,
+      "n_risk": 72,
+      "raw_text": "72",
+      "confidence": "high",
+      "pixel_region": [
+        202,
+        377,
+        229,
+        388
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t005",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 5,
+      "time": 15.0,
+      "n_risk": 48,
+      "raw_text": "48",
+      "confidence": "high",
+      "pixel_region": [
+        237,
+        377,
+        264,
+        388
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t006",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 6,
+      "time": 18.0,
+      "n_risk": 37,
+      "raw_text": "37",
+      "confidence": "high",
+      "pixel_region": [
+        272,
+        377,
+        299,
+        388
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t007",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 7,
+      "time": 21.0,
+      "n_risk": 14,
+      "raw_text": "14",
+      "confidence": "high",
+      "pixel_region": [
+        307,
+        377,
+        334,
+        388
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t008",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 8,
+      "time": 24.0,
+      "n_risk": 5,
+      "raw_text": "5",
+      "confidence": "high",
+      "pixel_region": [
+        343,
+        377,
+        369,
+        388
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t009",
+      "curve_id": 2,
+      "curve_name": "Bevacizumab",
+      "time_index": 9,
+      "time": 27.0,
+      "n_risk": 0,
+      "raw_text": "0",
+      "confidence": "high",
+      "pixel_region": [
+        378,
+        377,
+        404,
+        388
+      ],
+      "row_index": 1
+    }
+  ]
+}

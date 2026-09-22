@@ -1,0 +1,79 @@
+{
+  "n_curves": 2,
+  "x_axis": {
+    "min": 0.0,
+    "max": 60.0,
+    "unit": "months",
+    "label": "Time since randomization, mo"
+  },
+  "y_axis": {
+    "min": 0.0,
+    "max": 100.0,
+    "is_percentage": true,
+    "label": "Progression-free survival, %"
+  },
+  "curves": [
+    {
+      "id": 1,
+      "legend_name": "Capecitabine + BSC group",
+      "color_description": "orange solid line",
+      "rgb_approx": [
+        242,
+        142,
+        43
+      ],
+      "line_style": "solid"
+    },
+    {
+      "id": 2,
+      "legend_name": "BSC group",
+      "color_description": "blue-gray solid line",
+      "rgb_approx": [
+        67,
+        104,
+        116
+      ],
+      "line_style": "solid"
+    }
+  ],
+  "at_risk_table": {
+    "time_points": [
+      0.0,
+      12.0,
+      24.0,
+      36.0,
+      48.0,
+      60.0
+    ],
+    "counts_by_curve": [
+      [
+        52,
+        38,
+        19,
+        6,
+        4,
+        1
+      ],
+      [
+        52,
+        20,
+        9,
+        5,
+        3,
+        0
+      ]
+    ]
+  },
+  "total_events_by_curve": [
+    null,
+    null
+  ],
+  "has_confidence_interval": false,
+  "has_censoring_marks": true,
+  "confidence": {
+    "overall": "high",
+    "at_risk_table": "high",
+    "color_identification": "medium"
+  },
+  "notes": "Focused on panel A (Progression-free survival). Legend labels taken from the PFS panel. Censoring marks are present on both curves. Hazard ratio text is visible but total events by curve are not reported."
+}

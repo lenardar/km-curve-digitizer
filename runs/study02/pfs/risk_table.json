@@ -1,0 +1,636 @@
+{
+  "time_points": [
+    0.0,
+    3.0,
+    6.0,
+    9.0,
+    12.0,
+    15.0,
+    18.0,
+    21.0,
+    24.0,
+    27.0,
+    30.0,
+    33.0,
+    36.0,
+    39.0,
+    42.0,
+    45.0,
+    48.0,
+    51.0
+  ],
+  "cells": [
+    {
+      "cell_id": "risk-c1-t000",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 0,
+      "time": 0.0,
+      "n_risk": 131,
+      "raw_text": "131",
+      "confidence": "high",
+      "pixel_region": [
+        133,
+        321,
+        163,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t001",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 1,
+      "time": 3.0,
+      "n_risk": 108,
+      "raw_text": "108",
+      "confidence": "high",
+      "pixel_region": [
+        172,
+        321,
+        201,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t002",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 2,
+      "time": 6.0,
+      "n_risk": 76,
+      "raw_text": "76",
+      "confidence": "high",
+      "pixel_region": [
+        211,
+        321,
+        240,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t003",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 3,
+      "time": 9.0,
+      "n_risk": 61,
+      "raw_text": "61",
+      "confidence": "high",
+      "pixel_region": [
+        250,
+        321,
+        279,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t004",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 4,
+      "time": 12.0,
+      "n_risk": 38,
+      "raw_text": "38",
+      "confidence": "high",
+      "pixel_region": [
+        288,
+        321,
+        318,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t005",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 5,
+      "time": 15.0,
+      "n_risk": 33,
+      "raw_text": "33",
+      "confidence": "high",
+      "pixel_region": [
+        327,
+        321,
+        357,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t006",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 6,
+      "time": 18.0,
+      "n_risk": 30,
+      "raw_text": "30",
+      "confidence": "high",
+      "pixel_region": [
+        366,
+        321,
+        395,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t007",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 7,
+      "time": 21.0,
+      "n_risk": 24,
+      "raw_text": "24",
+      "confidence": "high",
+      "pixel_region": [
+        405,
+        321,
+        434,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t008",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 8,
+      "time": 24.0,
+      "n_risk": 22,
+      "raw_text": "22",
+      "confidence": "high",
+      "pixel_region": [
+        443,
+        321,
+        473,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t009",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 9,
+      "time": 27.0,
+      "n_risk": 18,
+      "raw_text": "18",
+      "confidence": "high",
+      "pixel_region": [
+        482,
+        321,
+        512,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t010",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 10,
+      "time": 30.0,
+      "n_risk": 18,
+      "raw_text": "18",
+      "confidence": "high",
+      "pixel_region": [
+        521,
+        321,
+        550,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t011",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 11,
+      "time": 33.0,
+      "n_risk": 14,
+      "raw_text": "14",
+      "confidence": "high",
+      "pixel_region": [
+        560,
+        321,
+        589,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t012",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 12,
+      "time": 36.0,
+      "n_risk": 13,
+      "raw_text": "13",
+      "confidence": "high",
+      "pixel_region": [
+        598,
+        321,
+        628,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t013",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 13,
+      "time": 39.0,
+      "n_risk": 11,
+      "raw_text": "11",
+      "confidence": "high",
+      "pixel_region": [
+        637,
+        321,
+        667,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t014",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 14,
+      "time": 42.0,
+      "n_risk": 9,
+      "raw_text": "9",
+      "confidence": "high",
+      "pixel_region": [
+        676,
+        321,
+        705,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t015",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 15,
+      "time": 45.0,
+      "n_risk": 5,
+      "raw_text": "5",
+      "confidence": "high",
+      "pixel_region": [
+        715,
+        321,
+        744,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t016",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 16,
+      "time": 48.0,
+      "n_risk": 3,
+      "raw_text": "3",
+      "confidence": "high",
+      "pixel_region": [
+        754,
+        321,
+        783,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t017",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab plus chemotherapy",
+      "time_index": 17,
+      "time": 51.0,
+      "n_risk": 0,
+      "raw_text": "0",
+      "confidence": "high",
+      "pixel_region": [
+        792,
+        321,
+        809,
+        332
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c2-t000",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 0,
+      "time": 0.0,
+      "n_risk": 132,
+      "raw_text": "132",
+      "confidence": "high",
+      "pixel_region": [
+        133,
+        334,
+        163,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t001",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 1,
+      "time": 3.0,
+      "n_risk": 99,
+      "raw_text": "99",
+      "confidence": "high",
+      "pixel_region": [
+        172,
+        334,
+        201,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t002",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 2,
+      "time": 6.0,
+      "n_risk": 60,
+      "raw_text": "60",
+      "confidence": "high",
+      "pixel_region": [
+        211,
+        334,
+        240,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t003",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 3,
+      "time": 9.0,
+      "n_risk": 28,
+      "raw_text": "28",
+      "confidence": "high",
+      "pixel_region": [
+        250,
+        334,
+        279,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t004",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 4,
+      "time": 12.0,
+      "n_risk": 11,
+      "raw_text": "11",
+      "confidence": "high",
+      "pixel_region": [
+        288,
+        334,
+        318,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t005",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 5,
+      "time": 15.0,
+      "n_risk": 7,
+      "raw_text": "7",
+      "confidence": "high",
+      "pixel_region": [
+        327,
+        334,
+        357,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t006",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 6,
+      "time": 18.0,
+      "n_risk": 7,
+      "raw_text": "7",
+      "confidence": "high",
+      "pixel_region": [
+        366,
+        334,
+        395,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t007",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 7,
+      "time": 21.0,
+      "n_risk": 7,
+      "raw_text": "7",
+      "confidence": "high",
+      "pixel_region": [
+        405,
+        334,
+        434,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t008",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 8,
+      "time": 24.0,
+      "n_risk": 7,
+      "raw_text": "7",
+      "confidence": "high",
+      "pixel_region": [
+        443,
+        334,
+        473,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t009",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 9,
+      "time": 27.0,
+      "n_risk": 6,
+      "raw_text": "6",
+      "confidence": "high",
+      "pixel_region": [
+        482,
+        334,
+        512,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t010",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 10,
+      "time": 30.0,
+      "n_risk": 6,
+      "raw_text": "6",
+      "confidence": "high",
+      "pixel_region": [
+        521,
+        334,
+        550,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t011",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 11,
+      "time": 33.0,
+      "n_risk": 5,
+      "raw_text": "5",
+      "confidence": "high",
+      "pixel_region": [
+        560,
+        334,
+        589,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t012",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 12,
+      "time": 36.0,
+      "n_risk": 5,
+      "raw_text": "5",
+      "confidence": "high",
+      "pixel_region": [
+        598,
+        334,
+        628,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t013",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 13,
+      "time": 39.0,
+      "n_risk": 5,
+      "raw_text": "5",
+      "confidence": "high",
+      "pixel_region": [
+        637,
+        334,
+        667,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t014",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 14,
+      "time": 42.0,
+      "n_risk": 3,
+      "raw_text": "3",
+      "confidence": "high",
+      "pixel_region": [
+        676,
+        334,
+        705,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t015",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 15,
+      "time": 45.0,
+      "n_risk": 3,
+      "raw_text": "3",
+      "confidence": "high",
+      "pixel_region": [
+        715,
+        334,
+        744,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t016",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 16,
+      "time": 48.0,
+      "n_risk": 1,
+      "raw_text": "1",
+      "confidence": "high",
+      "pixel_region": [
+        754,
+        334,
+        783,
+        345
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t017",
+      "curve_id": 2,
+      "curve_name": "Placebo plus chemotherapy",
+      "time_index": 17,
+      "time": 51.0,
+      "n_risk": 0,
+      "raw_text": "0",
+      "confidence": "high",
+      "pixel_region": [
+        792,
+        334,
+        809,
+        345
+      ],
+      "row_index": 1
+    }
+  ]
+}

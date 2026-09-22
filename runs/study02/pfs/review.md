@@ -1,9 +1,10 @@
-# Review Bundle: study02_pfs
+# Review Bundle: study02 PFS
 
 ## Summary
 
-- Validation score: `80`
-- Validation level: `high`
+- Visual acceptance: `pending model review`
+- Diagnostic checks: `6/6 passed` (navigation only)
+- Diagnostic issues: `0`
 - Image: `study02_pfs.png`
 - Notes: Focused on the PFS panel only. Legend labels were read from in-plot text next to each curve. No confidence interval shading/bands are visible. Circular markers indicate censoring. X-axis label is not explicitly visible in the crop, but months are implied by the tick marks and standard KM formatting.
 
@@ -13,23 +14,31 @@ Yang Y, Yen C, Pan J, et al. First-Line Tislelizumab Plus Chemotherapy for Recur
 
 ## Side-by-Side Review
 
-| Original panel | KM redrawn from reconstructed IPD |
+| Original panel | Digitization overlay |
 | --- | --- |
-| ![original](original.png) | ![reconstructed-km](reconstructed_km.png) |
+| ![original](original.png) | ![overlay](overlay.png) |
 
 
-## Overlay
 
-![overlay](overlay.png)
+
+
+## Number at Risk
+
+![number-at-risk review](risk_table_review.png)
 
 
 ## Curves
 
-- `Tislelizumab plus chemotherapy`: 611 points, tolerance=8
+- `Tislelizumab plus chemotherapy`: 614 points, tolerance=18
 - `Placebo plus chemotherapy`: 636 points, tolerance=32
+
+## Validation Issues
+
+- None
 
 ## Files
 
 - [digitized_curves.csv](digitized_curves.csv)
-- [ipd_tislelizumab_plus_chemotherapy.csv](ipd_tislelizumab_plus_chemotherapy.csv)
-- [ipd_placebo_plus_chemotherapy.csv](ipd_placebo_plus_chemotherapy.csv)
+- [validation_issues.csv](validation_issues.csv)
+- [risk_table.csv](risk_table.csv)
+- [risk_table.json](risk_table.json)

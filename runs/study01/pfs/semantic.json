@@ -1,0 +1,109 @@
+{
+  "n_curves": 2,
+  "x_axis": {
+    "min": 0.0,
+    "max": 54.0,
+    "unit": "months",
+    "label": "Time, mo"
+  },
+  "y_axis": {
+    "min": 0.0,
+    "max": 100.0,
+    "is_percentage": true,
+    "label": "Probability, %"
+  },
+  "curves": [
+    {
+      "id": 1,
+      "legend_name": "Tislelizumab",
+      "color_description": "orange solid line",
+      "rgb_approx": [
+        242,
+        140,
+        40
+      ],
+      "line_style": "solid"
+    },
+    {
+      "id": 2,
+      "legend_name": "Sorafenib",
+      "color_description": "dark blue solid line",
+      "rgb_approx": [
+        54,
+        94,
+        110
+      ],
+      "line_style": "solid"
+    }
+  ],
+  "at_risk_table": {
+    "time_points": [
+      0.0,
+      3.0,
+      6.0,
+      9.0,
+      12.0,
+      15.0,
+      18.0,
+      21.0,
+      24.0,
+      27.0,
+      30.0,
+      33.0,
+      36.0,
+      39.0,
+      42.0,
+      45.0
+    ],
+    "counts_by_curve": [
+      [
+        342,
+        145,
+        79,
+        54,
+        47,
+        41,
+        38,
+        32,
+        30,
+        25,
+        22,
+        19,
+        16,
+        11,
+        7,
+        4
+      ],
+      [
+        332,
+        125,
+        80,
+        38,
+        26,
+        17,
+        12,
+        7,
+        6,
+        5,
+        4,
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    ]
+  },
+  "total_events_by_curve": [
+    null,
+    null
+  ],
+  "has_confidence_interval": false,
+  "has_censoring_marks": true,
+  "confidence": {
+    "overall": "high",
+    "at_risk_table": "high",
+    "color_identification": "high"
+  },
+  "notes": "Focused on panel B (Progression-free survival). Legend/color mapping taken from the figure legend shown with panel A. At-risk table for PFS appears at 3-month intervals from 0 to 45 months; no total event counts are shown for the PFS panel."
+}

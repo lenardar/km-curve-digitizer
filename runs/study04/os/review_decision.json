@@ -1,0 +1,66 @@
+{
+  "decision": "accept",
+  "verification": "After-overlay follows the dark Nivolumab staircase through 16-26 months, removes the false 0.28 plateau, and agrees with the printed 18-month OS rate of 21.7%.",
+  "revision": {
+    "revision_id": "r0001",
+    "created_at": "2026-09-22T05:10:32.543010+00:00",
+    "observation": "Nivolumab overlay falsely stayed near 0.28 from about 16.2 to 19.3 months while the dark source KM trace continued descending to about 0.18; the late tail also followed the lighter comparator instead of the dark Nivolumab trace.",
+    "reason": "Replace the visibly mis-associated segment with model-authored points following the dark source staircase.",
+    "actions": [
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          16.2,
+          27.0
+        ],
+        "points": [
+          {
+            "time": 16.2,
+            "survival": 0.28
+          },
+          {
+            "time": 16.65,
+            "survival": 0.26
+          },
+          {
+            "time": 17.2,
+            "survival": 0.245
+          },
+          {
+            "time": 17.75,
+            "survival": 0.225
+          },
+          {
+            "time": 18.3,
+            "survival": 0.205
+          },
+          {
+            "time": 18.85,
+            "survival": 0.185
+          },
+          {
+            "time": 20.9,
+            "survival": 0.175
+          },
+          {
+            "time": 22.9,
+            "survival": 0.17
+          },
+          {
+            "time": 23.45,
+            "survival": 0.12
+          },
+          {
+            "time": 26.2,
+            "survival": 0.12
+          }
+        ]
+      }
+    ],
+    "status": "accepted",
+    "verification": "After-overlay follows the dark Nivolumab staircase through 16-26 months, removes the false 0.28 plateau, and agrees with the printed 18-month OS rate of 21.7%."
+  },
+  "result": "/tmp/study04-os-accepted/result.json",
+  "overlay": "/tmp/study04-os-accepted/overlay.png"
+}

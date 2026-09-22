@@ -1,0 +1,26 @@
+{
+  "axis_bounds": {
+    "left": 75,
+    "right": 391,
+    "top": 108,
+    "bottom": 315
+  },
+  "axis_anchors": {
+    "x_min_point": {
+      "x": 75,
+      "y": 315
+    },
+    "x_max_point": {
+      "x": 391,
+      "y": 315
+    },
+    "y_min_point": {
+      "x": 75,
+      "y": 315
+    },
+    "y_max_point": {
+      "x": 75,
+      "y": 108
+    }
+  }
+}

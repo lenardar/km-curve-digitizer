@@ -1,0 +1,91 @@
+{
+  "n_curves": 2,
+  "x_axis": {
+    "min": 0.0,
+    "max": 27.0,
+    "unit": "months",
+    "label": "Months"
+  },
+  "y_axis": {
+    "min": 0.0,
+    "max": 1.0,
+    "is_percentage": false,
+    "label": "Probability of OS"
+  },
+  "curves": [
+    {
+      "id": 1,
+      "legend_name": "Nivolumab",
+      "color_description": "dark gray-blue solid line",
+      "rgb_approx": [
+        70,
+        84,
+        89
+      ],
+      "line_style": "solid"
+    },
+    {
+      "id": 2,
+      "legend_name": "Bevacizumab",
+      "color_description": "light blue-gray solid line",
+      "rgb_approx": [
+        127,
+        157,
+        163
+      ],
+      "line_style": "solid"
+    }
+  ],
+  "at_risk_table": {
+    "time_points": [
+      0.0,
+      3.0,
+      6.0,
+      9.0,
+      12.0,
+      15.0,
+      18.0,
+      21.0,
+      24.0,
+      27.0
+    ],
+    "counts_by_curve": [
+      [
+        184,
+        168,
+        133,
+        96,
+        77,
+        59,
+        39,
+        24,
+        9,
+        0
+      ],
+      [
+        185,
+        169,
+        135,
+        99,
+        72,
+        48,
+        37,
+        14,
+        5,
+        0
+      ]
+    ]
+  },
+  "total_events_by_curve": [
+    154,
+    136
+  ],
+  "has_confidence_interval": false,
+  "has_censoring_marks": true,
+  "confidence": {
+    "overall": "high",
+    "at_risk_table": "high",
+    "color_identification": "medium"
+  },
+  "notes": "Focused on panel A (OS) only. Total events and median OS were taken from the OS summary table above the plot. Legend is inside the OS panel; curve-color mapping estimated visually."
+}

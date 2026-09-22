@@ -1,9 +1,10 @@
-# Review Bundle: study04_os
+# Review Bundle: study04 OS
 
 ## Summary
 
-- Validation score: `100`
-- Validation level: `high`
+- Visual acceptance: `pending model review`
+- Diagnostic checks: `6/6 passed` (navigation only)
+- Diagnostic issues: `0`
 - Image: `study04_os.png`
 - Notes: Focused on panel A (OS) only. Total events and median OS were taken from the OS summary table above the plot. Legend is inside the OS panel; curve-color mapping estimated visually.
 
@@ -13,27 +14,31 @@ Reardon DA, Brandes AA, Omuro A, et al. Effect of Nivolumab vs Bevacizumab in Pa
 
 ## Side-by-Side Review
 
-| Original panel | KM redrawn from reconstructed IPD |
+| Original panel | Digitization overlay |
 | --- | --- |
-| ![original](original.png) | ![reconstructed-km](reconstructed_km.png) |
+| ![original](original.png) | ![overlay](overlay.png) |
 
 
-## Overlay
 
-![overlay](overlay.png)
 
-## Semantic Context Figure
 
-![semantic-context](semantic_context.png)
+## Number at Risk
+
+![number-at-risk review](risk_table_review.png)
 
 
 ## Curves
 
-- `Nivolumab`: 296 points, tolerance=18
-- `Bevacizumab`: 303 points, tolerance=12
+- `Nivolumab`: 299 points, tolerance=32
+- `Bevacizumab`: 304 points, tolerance=24
+
+## Validation Issues
+
+- None
 
 ## Files
 
 - [digitized_curves.csv](digitized_curves.csv)
-- [ipd_nivolumab.csv](ipd_nivolumab.csv)
-- [ipd_bevacizumab.csv](ipd_bevacizumab.csv)
+- [validation_issues.csv](validation_issues.csv)
+- [risk_table.csv](risk_table.csv)
+- [risk_table.json](risk_table.json)

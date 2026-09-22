@@ -1,0 +1,115 @@
+{
+  "n_curves": 2,
+  "x_axis": {
+    "min": 0.0,
+    "max": 51.0,
+    "unit": "months",
+    "label": "Time, months"
+  },
+  "y_axis": {
+    "min": 0.0,
+    "max": 100.0,
+    "is_percentage": true,
+    "label": "PFS, %"
+  },
+  "curves": [
+    {
+      "id": 1,
+      "legend_name": "Tislelizumab plus chemotherapy",
+      "color_description": "dark teal solid line",
+      "rgb_approx": [
+        52,
+        92,
+        105
+      ],
+      "line_style": "solid"
+    },
+    {
+      "id": 2,
+      "legend_name": "Placebo plus chemotherapy",
+      "color_description": "light taupe/gray solid line",
+      "rgb_approx": [
+        175,
+        165,
+        140
+      ],
+      "line_style": "solid"
+    }
+  ],
+  "at_risk_table": {
+    "time_points": [
+      0.0,
+      3.0,
+      6.0,
+      9.0,
+      12.0,
+      15.0,
+      18.0,
+      21.0,
+      24.0,
+      27.0,
+      30.0,
+      33.0,
+      36.0,
+      39.0,
+      42.0,
+      45.0,
+      48.0,
+      51.0
+    ],
+    "counts_by_curve": [
+      [
+        131,
+        108,
+        76,
+        61,
+        38,
+        33,
+        30,
+        24,
+        22,
+        18,
+        18,
+        14,
+        13,
+        11,
+        9,
+        5,
+        3,
+        0
+      ],
+      [
+        132,
+        99,
+        60,
+        28,
+        11,
+        7,
+        7,
+        7,
+        7,
+        6,
+        6,
+        5,
+        5,
+        5,
+        3,
+        3,
+        1,
+        0
+      ]
+    ]
+  },
+  "total_events_by_curve": [
+    null,
+    null
+  ],
+  "has_confidence_interval": false,
+  "has_censoring_marks": true,
+  "confidence": {
+    "overall": "high",
+    "at_risk_table": "high",
+    "color_identification": "high"
+  },
+  "notes": "Focused on the PFS panel only. Legend labels were read from in-plot text next to each curve. No confidence interval shading/bands are visible. Circular markers indicate censoring. X-axis label is not explicitly visible in the crop, but months are implied by the tick marks and standard KM formatting."
+}

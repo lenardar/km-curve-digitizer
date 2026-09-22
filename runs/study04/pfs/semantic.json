@@ -1,0 +1,91 @@
+{
+  "n_curves": 2,
+  "x_axis": {
+    "min": 0.0,
+    "max": 27.0,
+    "unit": "months",
+    "label": "Months"
+  },
+  "y_axis": {
+    "min": 0.0,
+    "max": 1.0,
+    "is_percentage": false,
+    "label": "Probability of PFS"
+  },
+  "curves": [
+    {
+      "id": 1,
+      "legend_name": "Nivolumab",
+      "color_description": "dark gray-blue solid line",
+      "rgb_approx": [
+        70,
+        85,
+        90
+      ],
+      "line_style": "solid"
+    },
+    {
+      "id": 2,
+      "legend_name": "Bevacizumab",
+      "color_description": "light blue-gray solid line",
+      "rgb_approx": [
+        140,
+        170,
+        175
+      ],
+      "line_style": "solid"
+    }
+  ],
+  "at_risk_table": {
+    "time_points": [
+      0.0,
+      3.0,
+      6.0,
+      9.0,
+      12.0,
+      15.0,
+      18.0,
+      21.0,
+      24.0,
+      27.0
+    ],
+    "counts_by_curve": [
+      [
+        184,
+        41,
+        27,
+        19,
+        18,
+        12,
+        10,
+        7,
+        1,
+        0
+      ],
+      [
+        185,
+        88,
+        46,
+        32,
+        27,
+        19,
+        12,
+        3,
+        1,
+        0
+      ]
+    ]
+  },
+  "total_events_by_curve": [
+    171,
+    146
+  ],
+  "has_confidence_interval": false,
+  "has_censoring_marks": true,
+  "confidence": {
+    "overall": "high",
+    "at_risk_table": "high",
+    "color_identification": "medium"
+  },
+  "notes": "Extracted only from panel B (progression-free survival). Curve labels were inferred using the shared legend in panel A and intervention names shown in the panel B summary table. Median PFS table in panel B lists events as 171 for Nivolumab and 146 for Bevacizumab."
+}

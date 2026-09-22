@@ -1,0 +1,671 @@
+{
+  "time_points": [
+    0.0,
+    3.0,
+    6.0,
+    9.0,
+    12.0,
+    15.0,
+    18.0,
+    21.0,
+    24.0,
+    27.0,
+    30.0,
+    33.0,
+    36.0,
+    39.0,
+    42.0,
+    45.0,
+    48.0,
+    51.0,
+    54.0
+  ],
+  "cells": [
+    {
+      "cell_id": "risk-c1-t000",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 0,
+      "time": 0.0,
+      "n_risk": 342,
+      "raw_text": "342",
+      "confidence": "high",
+      "pixel_region": [
+        108,
+        353,
+        136,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t001",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 1,
+      "time": 3.0,
+      "n_risk": 307,
+      "raw_text": "307",
+      "confidence": "high",
+      "pixel_region": [
+        145,
+        353,
+        174,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t002",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 2,
+      "time": 6.0,
+      "n_risk": 259,
+      "raw_text": "259",
+      "confidence": "high",
+      "pixel_region": [
+        183,
+        353,
+        212,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t003",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 3,
+      "time": 9.0,
+      "n_risk": 228,
+      "raw_text": "228",
+      "confidence": "high",
+      "pixel_region": [
+        221,
+        353,
+        250,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t004",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 4,
+      "time": 12.0,
+      "n_risk": 191,
+      "raw_text": "191",
+      "confidence": "high",
+      "pixel_region": [
+        259,
+        353,
+        287,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t005",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 5,
+      "time": 15.0,
+      "n_risk": 170,
+      "raw_text": "170",
+      "confidence": "high",
+      "pixel_region": [
+        296,
+        353,
+        325,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t006",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 6,
+      "time": 18.0,
+      "n_risk": 155,
+      "raw_text": "155",
+      "confidence": "high",
+      "pixel_region": [
+        334,
+        353,
+        363,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t007",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 7,
+      "time": 21.0,
+      "n_risk": 137,
+      "raw_text": "137",
+      "confidence": "high",
+      "pixel_region": [
+        372,
+        353,
+        400,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t008",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 8,
+      "time": 24.0,
+      "n_risk": 126,
+      "raw_text": "126",
+      "confidence": "high",
+      "pixel_region": [
+        409,
+        353,
+        438,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t009",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 9,
+      "time": 27.0,
+      "n_risk": 111,
+      "raw_text": "111",
+      "confidence": "high",
+      "pixel_region": [
+        447,
+        353,
+        476,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t010",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 10,
+      "time": 30.0,
+      "n_risk": 101,
+      "raw_text": "101",
+      "confidence": "high",
+      "pixel_region": [
+        485,
+        353,
+        514,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t011",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 11,
+      "time": 33.0,
+      "n_risk": 98,
+      "raw_text": "98",
+      "confidence": "high",
+      "pixel_region": [
+        523,
+        353,
+        551,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t012",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 12,
+      "time": 36.0,
+      "n_risk": 77,
+      "raw_text": "77",
+      "confidence": "high",
+      "pixel_region": [
+        560,
+        353,
+        589,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t013",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 13,
+      "time": 39.0,
+      "n_risk": 53,
+      "raw_text": "53",
+      "confidence": "high",
+      "pixel_region": [
+        598,
+        353,
+        627,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t014",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 14,
+      "time": 42.0,
+      "n_risk": 33,
+      "raw_text": "33",
+      "confidence": "high",
+      "pixel_region": [
+        636,
+        353,
+        664,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t015",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 15,
+      "time": 45.0,
+      "n_risk": 18,
+      "raw_text": "18",
+      "confidence": "high",
+      "pixel_region": [
+        673,
+        353,
+        702,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t016",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 16,
+      "time": 48.0,
+      "n_risk": 4,
+      "raw_text": "4",
+      "confidence": "high",
+      "pixel_region": [
+        711,
+        353,
+        740,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t017",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 17,
+      "time": 51.0,
+      "n_risk": 0,
+      "raw_text": "0",
+      "confidence": "high",
+      "pixel_region": [
+        749,
+        353,
+        778,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t018",
+      "curve_id": 1,
+      "curve_name": "Tislelizumab",
+      "time_index": 18,
+      "time": 54.0,
+      "n_risk": 0,
+      "raw_text": "0",
+      "confidence": "high",
+      "pixel_region": [
+        787,
+        353,
+        808,
+        367
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c2-t000",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 0,
+      "time": 0.0,
+      "n_risk": 332,
+      "raw_text": "332",
+      "confidence": "high",
+      "pixel_region": [
+        108,
+        370,
+        136,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t001",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 1,
+      "time": 3.0,
+      "n_risk": 291,
+      "raw_text": "291",
+      "confidence": "high",
+      "pixel_region": [
+        145,
+        370,
+        174,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t002",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 2,
+      "time": 6.0,
+      "n_risk": 247,
+      "raw_text": "247",
+      "confidence": "high",
+      "pixel_region": [
+        183,
+        370,
+        212,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t003",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 3,
+      "time": 9.0,
+      "n_risk": 208,
+      "raw_text": "208",
+      "confidence": "high",
+      "pixel_region": [
+        221,
+        370,
+        250,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t004",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 4,
+      "time": 12.0,
+      "n_risk": 179,
+      "raw_text": "179",
+      "confidence": "high",
+      "pixel_region": [
+        259,
+        370,
+        287,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t005",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 5,
+      "time": 15.0,
+      "n_risk": 147,
+      "raw_text": "147",
+      "confidence": "high",
+      "pixel_region": [
+        296,
+        370,
+        325,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t006",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 6,
+      "time": 18.0,
+      "n_risk": 136,
+      "raw_text": "136",
+      "confidence": "high",
+      "pixel_region": [
+        334,
+        370,
+        363,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t007",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 7,
+      "time": 21.0,
+      "n_risk": 113,
+      "raw_text": "113",
+      "confidence": "high",
+      "pixel_region": [
+        372,
+        370,
+        400,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t008",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 8,
+      "time": 24.0,
+      "n_risk": 96,
+      "raw_text": "96",
+      "confidence": "high",
+      "pixel_region": [
+        409,
+        370,
+        438,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t009",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 9,
+      "time": 27.0,
+      "n_risk": 84,
+      "raw_text": "84",
+      "confidence": "high",
+      "pixel_region": [
+        447,
+        370,
+        476,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t010",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 10,
+      "time": 30.0,
+      "n_risk": 77,
+      "raw_text": "77",
+      "confidence": "high",
+      "pixel_region": [
+        485,
+        370,
+        514,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t011",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 11,
+      "time": 33.0,
+      "n_risk": 66,
+      "raw_text": "66",
+      "confidence": "high",
+      "pixel_region": [
+        523,
+        370,
+        551,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t012",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 12,
+      "time": 36.0,
+      "n_risk": 52,
+      "raw_text": "52",
+      "confidence": "high",
+      "pixel_region": [
+        560,
+        370,
+        589,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t013",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 13,
+      "time": 39.0,
+      "n_risk": 39,
+      "raw_text": "39",
+      "confidence": "high",
+      "pixel_region": [
+        598,
+        370,
+        627,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t014",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 14,
+      "time": 42.0,
+      "n_risk": 29,
+      "raw_text": "29",
+      "confidence": "high",
+      "pixel_region": [
+        636,
+        370,
+        664,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t015",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 15,
+      "time": 45.0,
+      "n_risk": 13,
+      "raw_text": "13",
+      "confidence": "high",
+      "pixel_region": [
+        673,
+        370,
+        702,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t016",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 16,
+      "time": 48.0,
+      "n_risk": 4,
+      "raw_text": "4",
+      "confidence": "high",
+      "pixel_region": [
+        711,
+        370,
+        740,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t017",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 17,
+      "time": 51.0,
+      "n_risk": 1,
+      "raw_text": "1",
+      "confidence": "high",
+      "pixel_region": [
+        749,
+        370,
+        778,
+        384
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t018",
+      "curve_id": 2,
+      "curve_name": "Sorafenib",
+      "time_index": 18,
+      "time": 54.0,
+      "n_risk": 0,
+      "raw_text": "0",
+      "confidence": "high",
+      "pixel_region": [
+        787,
+        370,
+        808,
+        384
+      ],
+      "row_index": 1
+    }
+  ]
+}

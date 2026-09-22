@@ -1,9 +1,10 @@
-# Review Bundle: study05_os
+# Review Bundle: study05 OS
 
 ## Summary
 
-- Validation score: `80`
-- Validation level: `high`
+- Visual acceptance: `pending model review`
+- Diagnostic checks: `6/6 passed` (navigation only)
+- Diagnostic issues: `0`
 - Image: `study05_os.png`
 - Notes: Focused on panel B (OS). Legend appears shared with panel A. At-risk table reports number at risk with cumulative number censored in parentheses; total_events_by_curve taken as final parenthetical values at 132 months.
 
@@ -13,27 +14,31 @@ McCormack M, Eminowicz G, Gallardo D, Diez P, Farrelly L, Kent C, Hudson E, Pana
 
 ## Side-by-Side Review
 
-| Original panel | KM redrawn from reconstructed IPD |
+| Original panel | Digitization overlay |
 | --- | --- |
-| ![original](original.png) | ![reconstructed-km](reconstructed_km.png) |
+| ![original](original.png) | ![overlay](overlay.png) |
 
 
-## Overlay
 
-![overlay](overlay.png)
 
-## Semantic Context Figure
 
-![semantic-context](semantic_context.png)
+## Number at Risk
+
+![number-at-risk review](risk_table_review.png)
 
 
 ## Curves
 
-- `Chemoradiotherapy alone`: 661 points, tolerance=32
-- `Induction chemotherapy with chemoradiotherapy`: 716 points, tolerance=32
+- `Chemoradiotherapy alone`: 664 points, tolerance=40
+- `Induction chemotherapy with chemoradiotherapy`: 716 points, tolerance=40
+
+## Validation Issues
+
+- None
 
 ## Files
 
 - [digitized_curves.csv](digitized_curves.csv)
-- [ipd_chemoradiotherapy_alone.csv](ipd_chemoradiotherapy_alone.csv)
-- [ipd_induction_chemotherapy_with_chemoradiotherapy.csv](ipd_induction_chemotherapy_with_chemoradiotherapy.csv)
+- [validation_issues.csv](validation_issues.csv)
+- [risk_table.csv](risk_table.csv)
+- [risk_table.json](risk_table.json)

@@ -1,9 +1,10 @@
-# Review Bundle: study01_pfs
+# Review Bundle: study01 PFS
 
 ## Summary
 
-- Validation score: `85`
-- Validation level: `high`
+- Visual acceptance: `pending model review`
+- Diagnostic checks: `5/6 passed` (navigation only)
+- Diagnostic issues: `1`
 - Image: `study01_pfs.png`
 - Notes: Focused on panel B (Progression-free survival). Legend/color mapping taken from the figure legend shown with panel A. At-risk table for PFS appears at 3-month intervals from 0 to 45 months; no total event counts are shown for the PFS panel.
 
@@ -13,27 +14,31 @@ Qin S, Kudo M, Meyer T, et al. Tislelizumab vs Sorafenib as First-Line Treatment
 
 ## Side-by-Side Review
 
-| Original panel | KM redrawn from reconstructed IPD |
+| Original panel | Digitization overlay |
 | --- | --- |
-| ![original](original.png) | ![reconstructed-km](reconstructed_km.png) |
+| ![original](original.png) | ![overlay](overlay.png) |
 
 
-## Overlay
 
-![overlay](overlay.png)
 
-## Semantic Context Figure
 
-![semantic-context](semantic_context.png)
+## Number at Risk
+
+![number-at-risk review](risk_table_review.png)
 
 
 ## Curves
 
-- `Tislelizumab`: 549 points, tolerance=24
+- `Tislelizumab`: 549 points, tolerance=40
 - `Sorafenib`: 438 points, tolerance=64
+
+## Validation Issues
+
+- `coverage`: curve 'Sorafenib' covers too little of the x-axis
 
 ## Files
 
 - [digitized_curves.csv](digitized_curves.csv)
-- [ipd_tislelizumab.csv](ipd_tislelizumab.csv)
-- [ipd_sorafenib.csv](ipd_sorafenib.csv)
+- [validation_issues.csv](validation_issues.csv)
+- [risk_table.csv](risk_table.csv)
+- [risk_table.json](risk_table.json)

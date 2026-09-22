@@ -1,0 +1,426 @@
+{
+  "time_points": [
+    0.0,
+    12.0,
+    24.0,
+    36.0,
+    48.0,
+    60.0,
+    72.0,
+    84.0,
+    96.0,
+    108.0,
+    120.0,
+    132.0
+  ],
+  "cells": [
+    {
+      "cell_id": "risk-c1-t000",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 0,
+      "time": 0.0,
+      "n_risk": 250,
+      "raw_text": "250",
+      "confidence": "high",
+      "pixel_region": [
+        170,
+        447,
+        214,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t001",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 1,
+      "time": 12.0,
+      "n_risk": 207,
+      "raw_text": "207",
+      "confidence": "high",
+      "pixel_region": [
+        236,
+        447,
+        280,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t002",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 2,
+      "time": 24.0,
+      "n_risk": 159,
+      "raw_text": "159",
+      "confidence": "high",
+      "pixel_region": [
+        302,
+        447,
+        346,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t003",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 3,
+      "time": 36.0,
+      "n_risk": 142,
+      "raw_text": "142",
+      "confidence": "high",
+      "pixel_region": [
+        368,
+        447,
+        412,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t004",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 4,
+      "time": 48.0,
+      "n_risk": 116,
+      "raw_text": "116",
+      "confidence": "high",
+      "pixel_region": [
+        434,
+        447,
+        478,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t005",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 5,
+      "time": 60.0,
+      "n_risk": 94,
+      "raw_text": "94",
+      "confidence": "high",
+      "pixel_region": [
+        500,
+        447,
+        544,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t006",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 6,
+      "time": 72.0,
+      "n_risk": 69,
+      "raw_text": "69",
+      "confidence": "high",
+      "pixel_region": [
+        565,
+        447,
+        609,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t007",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 7,
+      "time": 84.0,
+      "n_risk": 45,
+      "raw_text": "45",
+      "confidence": "high",
+      "pixel_region": [
+        631,
+        447,
+        675,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t008",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 8,
+      "time": 96.0,
+      "n_risk": 21,
+      "raw_text": "21",
+      "confidence": "high",
+      "pixel_region": [
+        697,
+        447,
+        741,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t009",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 9,
+      "time": 108.0,
+      "n_risk": 6,
+      "raw_text": "6",
+      "confidence": "high",
+      "pixel_region": [
+        763,
+        447,
+        807,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t010",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 10,
+      "time": 120.0,
+      "n_risk": 3,
+      "raw_text": "3",
+      "confidence": "high",
+      "pixel_region": [
+        829,
+        447,
+        873,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c1-t011",
+      "curve_id": 1,
+      "curve_name": "Chemoradiotherapy alone",
+      "time_index": 11,
+      "time": 132.0,
+      "n_risk": 0,
+      "raw_text": "0",
+      "confidence": "high",
+      "pixel_region": [
+        895,
+        447,
+        935,
+        462
+      ],
+      "row_index": 0
+    },
+    {
+      "cell_id": "risk-c2-t000",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 0,
+      "time": 0.0,
+      "n_risk": 250,
+      "raw_text": "250",
+      "confidence": "high",
+      "pixel_region": [
+        170,
+        464,
+        214,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t001",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 1,
+      "time": 12.0,
+      "n_risk": 225,
+      "raw_text": "225",
+      "confidence": "high",
+      "pixel_region": [
+        236,
+        464,
+        280,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t002",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 2,
+      "time": 24.0,
+      "n_risk": 180,
+      "raw_text": "180",
+      "confidence": "high",
+      "pixel_region": [
+        302,
+        464,
+        346,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t003",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 3,
+      "time": 36.0,
+      "n_risk": 154,
+      "raw_text": "154",
+      "confidence": "high",
+      "pixel_region": [
+        368,
+        464,
+        412,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t004",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 4,
+      "time": 48.0,
+      "n_risk": 136,
+      "raw_text": "136",
+      "confidence": "high",
+      "pixel_region": [
+        434,
+        464,
+        478,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t005",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 5,
+      "time": 60.0,
+      "n_risk": 111,
+      "raw_text": "111",
+      "confidence": "high",
+      "pixel_region": [
+        500,
+        464,
+        544,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t006",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 6,
+      "time": 72.0,
+      "n_risk": 79,
+      "raw_text": "79",
+      "confidence": "high",
+      "pixel_region": [
+        565,
+        464,
+        609,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t007",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 7,
+      "time": 84.0,
+      "n_risk": 53,
+      "raw_text": "53",
+      "confidence": "high",
+      "pixel_region": [
+        631,
+        464,
+        675,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t008",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 8,
+      "time": 96.0,
+      "n_risk": 25,
+      "raw_text": "25",
+      "confidence": "high",
+      "pixel_region": [
+        697,
+        464,
+        741,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t009",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 9,
+      "time": 108.0,
+      "n_risk": 9,
+      "raw_text": "9",
+      "confidence": "high",
+      "pixel_region": [
+        763,
+        464,
+        807,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t010",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 10,
+      "time": 120.0,
+      "n_risk": 3,
+      "raw_text": "3",
+      "confidence": "high",
+      "pixel_region": [
+        829,
+        464,
+        873,
+        479
+      ],
+      "row_index": 1
+    },
+    {
+      "cell_id": "risk-c2-t011",
+      "curve_id": 2,
+      "curve_name": "Induction chemotherapy with chemoradiotherapy",
+      "time_index": 11,
+      "time": 132.0,
+      "n_risk": 0,
+      "raw_text": "0",
+      "confidence": "high",
+      "pixel_region": [
+        895,
+        464,
+        935,
+        479
+      ],
+      "row_index": 1
+    }
+  ]
+}

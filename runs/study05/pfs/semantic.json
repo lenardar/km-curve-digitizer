@@ -1,0 +1,97 @@
+{
+  "n_curves": 2,
+  "x_axis": {
+    "min": 0.0,
+    "max": 132.0,
+    "unit": "months",
+    "label": "Time since randomisation (months)"
+  },
+  "y_axis": {
+    "min": 0.0,
+    "max": 100.0,
+    "is_percentage": true,
+    "label": "Progression-free survival (%)"
+  },
+  "curves": [
+    {
+      "id": 1,
+      "legend_name": "Chemoradiotherapy alone",
+      "color_description": "cyan/blue solid line",
+      "rgb_approx": [
+        0,
+        170,
+        220
+      ],
+      "line_style": "solid"
+    },
+    {
+      "id": 2,
+      "legend_name": "Induction chemotherapy with chemoradiotherapy",
+      "color_description": "red solid line",
+      "rgb_approx": [
+        200,
+        30,
+        70
+      ],
+      "line_style": "solid"
+    }
+  ],
+  "at_risk_table": {
+    "time_points": [
+      0.0,
+      12.0,
+      24.0,
+      36.0,
+      48.0,
+      60.0,
+      72.0,
+      84.0,
+      96.0,
+      108.0,
+      120.0,
+      132.0
+    ],
+    "counts_by_curve": [
+      [
+        250,
+        207,
+        159,
+        142,
+        116,
+        94,
+        69,
+        45,
+        21,
+        6,
+        3,
+        0
+      ],
+      [
+        250,
+        225,
+        180,
+        154,
+        136,
+        111,
+        79,
+        53,
+        25,
+        9,
+        3,
+        0
+      ]
+    ]
+  },
+  "total_events_by_curve": [
+    null,
+    null
+  ],
+  "has_confidence_interval": false,
+  "has_censoring_marks": true,
+  "confidence": {
+    "overall": "high",
+    "at_risk_table": "high",
+    "color_identification": "high"
+  },
+  "notes": "Focused on panel A (PFS). Legend mapping taken from the figure legend. At-risk table values extracted from the PFS panel; parenthetical censored counts were present but not included in counts_by_curve. Hazard ratio shown for PFS is 0.65 (95% CI 0.46-0.91), p=0.013."
+}
