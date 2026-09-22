@@ -49,24 +49,14 @@ class ExtractionPipeline:
         image_path: str,
         *,
         semantic: Optional[Dict[str, Any] | SemanticExtraction] = None,
-        vision_provider: Any = None,
-        llm: Optional[str] = None,
-        api_key: Optional[str] = None,
         axis_bounds: Optional[AxisBounds | Dict[str, int]] = None,
         axis_anchors: Optional[AxisAnchors | Dict[str, Any]] = None,
         min_curve_pixels: int = 30,
-        semantic_image: Optional[str] = None,
-        semantic_focus_hint: Optional[str] = None,
     ) -> ExtractionResult:
         """Execute semantic resolution, pixel extraction, and validation."""
         parsed_semantic = self.semantic_extractor.extract(
             image_path,
             semantic=semantic,
-            provider=vision_provider,
-            model=llm,
-            api_key=api_key,
-            semantic_image_path=semantic_image,
-            focus_hint=semantic_focus_hint,
         )
         image_pixels = load_image_array(image_path)
         parsed_bounds, _ = self._resolve_axis_bounds(image_pixels, axis_bounds)
@@ -220,25 +210,15 @@ def extract(
     image: str,
     *,
     semantic: Optional[Dict[str, Any] | SemanticExtraction] = None,
-    vision_provider: Any = None,
-    llm: Optional[str] = None,
-    api_key: Optional[str] = None,
     axis_bounds: Optional[AxisBounds | Dict[str, int]] = None,
     axis_anchors: Optional[AxisAnchors | Dict[str, Any]] = None,
     min_curve_pixels: int = 30,
-    semantic_image: Optional[str] = None,
-    semantic_focus_hint: Optional[str] = None,
 ) -> ExtractionResult:
     """Convenience wrapper around :class:`ExtractionPipeline`."""
     return ExtractionPipeline().run(
         image,
         semantic=semantic,
-        vision_provider=vision_provider,
-        llm=llm,
-        api_key=api_key,
         axis_bounds=axis_bounds,
         axis_anchors=axis_anchors,
         min_curve_pixels=min_curve_pixels,
-        semantic_image=semantic_image,
-        semantic_focus_hint=semantic_focus_hint,
     )

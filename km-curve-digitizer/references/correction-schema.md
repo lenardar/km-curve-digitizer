@@ -11,6 +11,8 @@ python3 <skill-dir>/scripts/refine_km.py inspect result.json \
 
 Read `inspection/points.json` and view `inspection/point_review.png`. Then create an actions file:
 
+When labels obscure the trace, first use the same command with `--source-only` and a separate output directory. That view deliberately contains no extracted overlay or point labels.
+
 ```json
 {
   "observation": "One isolated extracted point sits below the visible source trace",

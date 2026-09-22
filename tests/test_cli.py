@@ -92,39 +92,6 @@ class CLITests(unittest.TestCase):
             self.assertTrue((review_dir / "review.md").exists())
             self.assertTrue((review_dir / "digitized_curves.csv").exists())
 
-    def test_cli_requires_provider_for_axis_refine(self):
-        with TemporaryDirectory() as tmpdir:
-            image_path = Path(tmpdir) / "km.png"
-            semantic_path = Path(tmpdir) / "semantic.json"
-            output_path = Path(tmpdir) / "result.json"
-
-            semantic, _ = make_synthetic_km_image(image_path)
-            semantic_path.write_text(json.dumps(semantic), encoding="utf-8")
-
-            env = os.environ.copy()
-            env.setdefault("MPLCONFIGDIR", str(Path(tmpdir) / ".mplconfig"))
-            script = Path(__file__).resolve().parents[1] / "km-curve-digitizer" / "scripts" / "extract_km.py"
-
-            completed = subprocess.run(
-                [
-                    sys.executable,
-                    str(script),
-                    str(image_path),
-                    "--semantic-json",
-                    str(semantic_path),
-                    "--output-json",
-                    str(output_path),
-                    "--axis-refine",
-                ],
-                env=env,
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-
-            self.assertNotEqual(completed.returncode, 0)
-            self.assertIn("--axis-refine requires an online --provider configuration", completed.stderr)
-
     def test_cli_reads_axis_json_and_exports_final_axis_json(self):
         with TemporaryDirectory() as tmpdir:
             image_path = Path(tmpdir) / "km.png"

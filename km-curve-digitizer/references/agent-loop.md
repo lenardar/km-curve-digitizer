@@ -10,7 +10,7 @@ The calling model owns the review. Scripts provide perception and action primiti
 
 ## Inspect
 
-- For a curve segment, run `refine_km.py inspect` with a narrow time range or pixel region and view the labelled point board.
+- For a curve segment, run `refine_km.py inspect --source-only` first to view unobscured pixels, then run it again without that flag to obtain stable point IDs for editing.
 - For the table, run `refine_km.py inspect-risk`; use `inspect-risk-cell` for a crowded or ambiguous cell.
 - Inspect neighboring points or cells before deciding. Context distinguishes a real step from noise and a target value from an adjacent row.
 

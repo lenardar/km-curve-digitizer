@@ -71,10 +71,41 @@ def extract_curve_pixels(
     if coords.size == 0:
         return coords.reshape(0, 2)
 
+    coords = _prefer_closest_color_per_column(
+        cropped,
+        coords,
+        rgb_target,
+    )
+
     coords = coords.astype(int)
     coords[:, 0] += y_offset
     coords[:, 1] += x_offset
     return coords
+
+
+def _prefer_closest_color_per_column(
+    pixels: np.ndarray,
+    coords: np.ndarray,
+    rgb_target: Sequence[int],
+    *,
+    distance_slack: float = 8.0,
+) -> np.ndarray:
+    """Reject another curve's antialias pixels when colors overlap.
+
+    Blending a dark curve with a white background can produce pixels close to
+    a lighter curve's target color. Within each x-column, retain the pixels
+    closest to the requested color plus a small allowance for line thickness.
+    """
+    if len(coords) == 0:
+        return coords
+
+    target = np.asarray(rgb_target, dtype=float)
+    matched_pixels = pixels[coords[:, 0], coords[:, 1]].astype(float)
+    distances = np.linalg.norm(matched_pixels - target, axis=1)
+    column_minimum = np.full(pixels.shape[1], np.inf, dtype=float)
+    np.minimum.at(column_minimum, coords[:, 1], distances)
+    keep = distances <= column_minimum[coords[:, 1]] + distance_slack
+    return coords[keep]
 
 
 def adaptive_color_extraction(
@@ -85,7 +116,7 @@ def adaptive_color_extraction(
     plot_bounds: AxisBounds | None = None,
     min_pixels: int = 50,
     min_x_span_ratio: float = 0.75,
-    min_unique_x_ratio: float = 0.3,
+    min_unique_x_ratio: float = 0.65,
     tolerance_steps: Iterable[int] = (8, 12, 18, 24, 32, 40, 52, 64),
 ) -> Tuple[np.ndarray, int]:
     """Increase color tolerance until enough pixels and x coverage are captured."""
@@ -200,7 +231,7 @@ def pixels_to_curve(
     if len(coords) == 0:
         raise PixelExtractionError("No curve pixels were found")
 
-    x_series, y_values = _collapse_columns_to_lower_envelope(coords)
+    x_series, y_values = _trace_columns_by_continuity(coords)
 
     if averaging_window > 0:
         y_values = _apply_step_averaging_window(y_values, averaging_window=averaging_window)
@@ -213,18 +244,33 @@ def pixels_to_curve(
     return x_samples, y_step
 
 
-def _collapse_columns_to_lower_envelope(coords: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
-    """Reduce raw matching pixels to one KM-consistent y value per observed x column."""
+def _trace_columns_by_continuity(coords: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+    """Trace one curve through each observed column using local continuity.
+
+    Similar grayscale curves can share antialias colors. Choosing the lowest
+    pixel in every column can therefore jump onto a neighboring curve and
+    create a false long plateau. Follow the candidate nearest the preceding
+    column instead. On a true vertical KM edge this keeps the upper value for
+    that column and reaches the lower plateau on the next observed column.
+    """
     order = np.argsort(coords[:, 1], kind="stable")
     ordered = coords[order]
     unique_x = np.unique(ordered[:, 1])
     y_values = np.empty(len(unique_x), dtype=float)
+    previous_y: float | None = None
 
     for index, x_value in enumerate(unique_x):
-        column_pixels = ordered[ordered[:, 1] == x_value, 0]
-        # KM curves are right-continuous step functions. Taking the lower
-        # pixel in each column is more robust on vertical drops than median.
-        y_values[index] = float(column_pixels.max())
+        column_pixels = np.sort(ordered[ordered[:, 1] == x_value, 0].astype(float))
+        if index == len(unique_x) - 1:
+            # Preserve a terminal vertical drop when there is no following
+            # column available to confirm its lower plateau.
+            selected_y = float(column_pixels.max())
+        elif previous_y is None:
+            selected_y = float(column_pixels.min())
+        else:
+            selected_y = float(column_pixels[np.abs(column_pixels - previous_y).argmin()])
+        y_values[index] = selected_y
+        previous_y = selected_y
     return unique_x.astype(float), y_values
 
 

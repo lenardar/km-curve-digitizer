@@ -10,7 +10,6 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 import pykmextract as pkm
-from pykmextract.providers import StaticVisionProvider
 
 
 def _step_points(series):
@@ -134,27 +133,6 @@ class ExtractionPipelineTests(unittest.TestCase):
                 )
                 for value, target in zip(observed, expected[curve.name].values()):
                     self.assertLess(abs(value - target), 0.08)
-
-    def test_extract_via_provider(self):
-        with TemporaryDirectory() as tmpdir:
-            image_path = Path(tmpdir) / "km.png"
-            semantic, bounds = make_synthetic_km_image(image_path)
-            provider = StaticVisionProvider(semantic)
-
-            result = pkm.extract(
-                str(image_path),
-                vision_provider=provider,
-                axis_bounds={
-                    "left": bounds[0],
-                    "right": bounds[1],
-                    "top": bounds[2],
-                    "bottom": bounds[3],
-                },
-                min_curve_pixels=20,
-            )
-
-            self.assertEqual(result.semantic.n_curves, 2)
-            self.assertEqual({curve.name for curve in result.curves}, {"Treatment", "Control"})
 
     def test_auto_axis_detection_without_override(self):
         with TemporaryDirectory() as tmpdir:

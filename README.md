@@ -19,12 +19,11 @@ km-curve-digitizer/
     ├── extract_km.py
     ├── refine_km.py
     ├── build_manifest.py
-    ├── run_batch.py
     ├── requirements.txt
     └── pykmextract/          # internal implementation, not a public package
 ```
 
-The repository-level `tests/`, `images/`, and `runs/` directories are development fixtures and historical review outputs. They are not required when installing the skill folder. The installed skill can extract both curve coordinates and long-format number-at-risk tables, with auditable edits for either output.
+The repository-level `tests/`, `images/`, and `runs/` directories are development fixtures and historical review outputs. They are not required when installing the skill folder. The installed skill can extract both curve coordinates and long-format number-at-risk tables, with auditable edits for either output. Codex supplies semantic JSON from its own image inspection; the skill does not call an external model.
 
 ## Development checks
 

@@ -72,6 +72,11 @@ def build_parser() -> argparse.ArgumentParser:
     inspect_parser.add_argument("--time-range", help="Optional start,end data range")
     inspect_parser.add_argument("--pixel-region", help="Optional left,top,right,bottom pixel box")
     inspect_parser.add_argument("--max-labels", type=int, default=60)
+    inspect_parser.add_argument(
+        "--source-only",
+        action="store_true",
+        help="Show an enlarged source crop without overlays or point labels",
+    )
 
     risk_parser = subparsers.add_parser(
         "inspect-risk",
@@ -239,6 +244,7 @@ def _run_inspect(args: argparse.Namespace) -> int:
         time_range=time_range,
         pixel_region=pixel_region,
         max_labels=args.max_labels,
+        annotate=not args.source_only,
     )
     payload = {
         "curve": args.curve,

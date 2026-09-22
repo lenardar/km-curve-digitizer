@@ -197,35 +197,6 @@ class AxisAnchors(BaseModel):
         )
 
 
-class AxisAnchorCandidate(BaseModel):
-    """One candidate point shown to the reviewing VLM."""
-
-    id: str
-    point: PixelPoint
-
-
-class AxisAnchorSelection(BaseModel):
-    """Model-selected candidate plus a small offset adjustment."""
-
-    candidate_id: str
-    dx: int = 0
-    dy: int = 0
-    confidence: ConfidenceLevel = ConfidenceLevel.MEDIUM
-
-
-class AxisReviewResult(BaseModel):
-    """Structured review output returned by the VLM axis refiner."""
-
-    model_config = ConfigDict(use_enum_values=True)
-
-    decision: str = "accept"
-    x_min_point: AxisAnchorSelection
-    x_max_point: AxisAnchorSelection
-    y_min_point: AxisAnchorSelection
-    y_max_point: AxisAnchorSelection
-    issues: List[str] = Field(default_factory=list)
-
-
 class CurveData(BaseModel):
     """Extracted pixel and data-space representation of one curve."""
 

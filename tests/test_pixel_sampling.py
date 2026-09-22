@@ -114,7 +114,7 @@ class PixelSamplingTests(unittest.TestCase):
         self.assertEqual(x_pixels.tolist(), [0.0, 2.0, 4.0, 6.0, 7.0])
         self.assertEqual(y_pixels.tolist(), [10.0, 10.0, 20.0, 20.0, 20.0])
 
-    def test_pixels_to_curve_tracks_plateau_across_vertical_drop_column(self):
+    def test_pixels_to_curve_confirms_drop_on_following_plateau_column(self):
         coords = np.array(
             [
                 [10, 0],
@@ -139,7 +139,7 @@ class PixelSamplingTests(unittest.TestCase):
         x_pixels, y_pixels = pixels_to_curve(coords)
 
         self.assertEqual(x_pixels.tolist(), [0.0, 1.0, 2.0, 3.0, 4.0])
-        self.assertEqual(y_pixels.tolist(), [10.0, 10.0, 20.0, 20.0, 20.0])
+        self.assertEqual(y_pixels.tolist(), [10.0, 10.0, 10.0, 20.0, 20.0])
 
 
 if __name__ == "__main__":

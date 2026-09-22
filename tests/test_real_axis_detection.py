@@ -20,6 +20,15 @@ class RealAxisDetectionTests(unittest.TestCase):
         self.assertLessEqual(abs(bounds.top - 35), 4)
         self.assertLessEqual(abs(bounds.bottom - 286), 2)
 
+    def test_detect_axis_bounds_on_study04_os(self):
+        image_path = Path(ROOT) / "images" / "study04_os.png"
+        bounds = detect_axis_bounds(str(image_path))
+
+        self.assertLessEqual(abs(bounds.left - 75), 2)
+        self.assertLessEqual(abs(bounds.right - 391), 2)
+        self.assertLessEqual(abs(bounds.top - 108), 2)
+        self.assertLessEqual(abs(bounds.bottom - 315), 2)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -2,11 +2,8 @@
 
 from .contracts import (
     AtRiskTable,
-    AxisAnchorCandidate,
     AxisAnchors,
-    AxisAnchorSelection,
     AxisBounds,
-    AxisReviewResult,
     CurveData,
     CurveRevision,
     CurveSemanticSpec,
@@ -19,31 +16,20 @@ from .contracts import (
     YAxisSpec,
 )
 from .datasets import build_real_km_manifest, discover_real_km_studies
-from .enhancements import AIEnhancementOptions, apply_ai_enhancements
-from .extractor import AxisRefiner, generate_axis_anchor_candidates, render_axis_review_board
-from .microtune import CurveMicroTuneToolkit, OverlapWindow, SegmentSample
 from .pipeline import ExtractionPipeline, extract
 from .review import save_overlay
 
 __all__ = [
     "AtRiskTable",
-    "AxisAnchorCandidate",
     "AxisAnchors",
-    "AxisAnchorSelection",
     "AxisBounds",
-    "AxisReviewResult",
     "CurveData",
     "CurveRevision",
-    "CurveMicroTuneToolkit",
     "CurveSemanticSpec",
-    "AxisRefiner",
-    "AIEnhancementOptions",
     "ExtractionPipeline",
     "ExtractionResult",
     "PixelPoint",
-    "OverlapWindow",
     "SemanticExtraction",
-    "SegmentSample",
     "ValidationIssue",
     "ValidationReport",
     "XAxisSpec",
@@ -51,8 +37,5 @@ __all__ = [
     "build_real_km_manifest",
     "discover_real_km_studies",
     "extract",
-    "apply_ai_enhancements",
-    "generate_axis_anchor_candidates",
-    "render_axis_review_board",
     "save_overlay",
 ]

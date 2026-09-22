@@ -69,6 +69,7 @@ def save_point_review(
     time_range: tuple[float, float] | None = None,
     pixel_region: tuple[float, float, float, float] | None = None,
     max_labels: int = 60,
+    annotate: bool = True,
 ) -> tuple[str, list[dict[str, float | str]]]:
     """Render a local review board with stable point identifiers."""
     import matplotlib
@@ -120,43 +121,44 @@ def save_point_review(
     image = np.array(Image.open(result.image_path).convert("RGB"))
     fig, ax = plt.subplots(figsize=(12, 8))
     ax.imshow(image)
-    for other in result.curves:
-        color = "#777777" if other.name != curve_name else "#0066cc"
-        width = 1.0 if other.name != curve_name else 1.8
-        alpha = 0.45 if other.name != curve_name else 0.9
-        if other.name == curve_name:
-            plot_x = display_x[selected_indices]
-            plot_y = display_y[selected_indices]
-        else:
-            plot_x, plot_y = _curve_data_to_pixel_trace(result, other)
-        ax.plot(
-            plot_x,
-            plot_y,
-            color=color,
-            linewidth=width,
-            alpha=alpha,
-            drawstyle="steps-post",
-        )
+    if annotate:
+        for other in result.curves:
+            color = "#777777" if other.name != curve_name else "#0066cc"
+            width = 1.0 if other.name != curve_name else 1.8
+            alpha = 0.45 if other.name != curve_name else 0.9
+            if other.name == curve_name:
+                plot_x = display_x[selected_indices]
+                plot_y = display_y[selected_indices]
+            else:
+                plot_x, plot_y = _curve_data_to_pixel_trace(result, other)
+            ax.plot(
+                plot_x,
+                plot_y,
+                color=color,
+                linewidth=width,
+                alpha=alpha,
+                drawstyle="steps-post",
+            )
 
-    ax.scatter(
-        display_x[selected_indices],
-        display_y[selected_indices],
-        s=22,
-        facecolors="none",
-        edgecolors="#ff3300",
-        linewidths=0.9,
-        zorder=4,
-    )
-    for index in label_indices:
-        ax.annotate(
-            curve.point_ids[index],
-            (display_x[index], display_y[index]),
-            xytext=(3, -6),
-            textcoords="offset points",
-            fontsize=6,
-            color="#aa0000",
-            zorder=5,
+        ax.scatter(
+            display_x[selected_indices],
+            display_y[selected_indices],
+            s=22,
+            facecolors="none",
+            edgecolors="#ff3300",
+            linewidths=0.9,
+            zorder=4,
         )
+        for index in label_indices:
+            ax.annotate(
+                curve.point_ids[index],
+                (display_x[index], display_y[index]),
+                xytext=(3, -6),
+                textcoords="offset points",
+                fontsize=6,
+                color="#aa0000",
+                zorder=5,
+            )
 
     if pixel_region is not None:
         left, top, right, bottom = pixel_region
@@ -168,7 +170,8 @@ def save_point_review(
         bottom = min(float(image.shape[0]), float(display_y[selected_indices].max() + margin))
     ax.set_xlim(left, right)
     ax.set_ylim(bottom, top)
-    ax.set_title(f"Point review: {curve.name} | {len(points)} selected")
+    title_prefix = "Point review" if annotate else "Source-only review"
+    ax.set_title(f"{title_prefix}: {curve.name} | {len(points)} selected")
     ax.set_axis_off()
     fig.tight_layout()
 

@@ -197,11 +197,17 @@ def clean_curve_points(
 def _suppress_isolated_drop_outliers(
     survival: np.ndarray,
     *,
-    max_run: int = 2,
+    max_run: int = 8,
     min_drop: float = 0.08,
     rebound_tolerance: float = 0.03,
 ) -> np.ndarray:
-    """Remove short downward spikes that immediately rebound on the next columns."""
+    """Remove short downward spikes that visibly rebound in later columns.
+
+    A true KM trace cannot rise. When a candidate suddenly drops and then
+    returns upward, the low pixels came from noise or a neighboring curve.
+    Repair only the contradicted low run and retain any genuine net decline
+    between the preceding and rebounded levels.
+    """
     if len(survival) < 4:
         return survival
 
@@ -213,20 +219,23 @@ def _suppress_isolated_drop_outliers(
             index += 1
             continue
 
-        end = index
-        while end + 1 < len(repaired) and repaired[end + 1] < previous - min_drop:
-            end += 1
-
-        run_len = end - index + 1
-        if run_len > max_run or end + 1 >= len(repaired):
-            index = end + 1
+        search_end = min(len(repaired), index + max_run + 1)
+        rebound_index = next(
+            (
+                candidate
+                for candidate in range(index + 1, search_end)
+                if repaired[candidate] >= repaired[index] + min_drop
+            ),
+            None,
+        )
+        if rebound_index is None:
+            index += 1
             continue
 
-        rebound = repaired[end + 1]
-        if rebound >= previous - rebound_tolerance:
-            repaired[index : end + 1] = previous
-
-        index = end + 1
+        rebound = repaired[rebound_index]
+        replacement = previous if rebound >= previous - rebound_tolerance else rebound
+        repaired[index:rebound_index] = replacement
+        index = rebound_index
 
     return repaired
 

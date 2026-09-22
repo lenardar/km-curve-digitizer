@@ -12,8 +12,8 @@ Turn one or more Kaplan-Meier figure images into inspectable curve and number-at
 1. Inspect the source image and determine whether it contains one panel or several. For a multi-panel figure, prefer a cropped panel for measurement and retain the full figure as semantic context.
 2. Resolve semantic metadata before measuring pixels:
    - Use a supplied semantic JSON when available.
-   - Otherwise inspect the figure and create JSON matching [references/semantic-schema.md](references/semantic-schema.md).
-   - Use an OpenAI-compatible vision endpoint only when the user has configured and authorized one.
+   - Otherwise inspect the figure yourself and create JSON matching [references/semantic-schema.md](references/semantic-schema.md).
+   - Do not call or configure another vision model. The Codex instance using this Skill is the visual reasoner.
 3. Create a dedicated output directory. Do not overwrite the source image.
 4. Run the deterministic extractor:
 
@@ -36,7 +36,7 @@ Turn one or more Kaplan-Meier figure images into inspectable curve and number-at
 - The calling model chooses what to inspect and whether to add, delete, move, replace, correct, clear, accept, or reject.
 - Geometry detection and diagnostic checks may direct attention but must not autonomously change extracted evidence.
 - Keep edits narrow and evidence-backed. A related cluster may be edited together, but do not bundle unrelated guesses into one revision.
-- The optional internal provider passes `--axis-refine` and `--segment-micro-tune` are not the primary Skill workflow. Do not invoke them as a substitute for the calling model's own inspection unless the user explicitly requests those automatic passes.
+- Do not delegate semantic reading, axis choice, point correction, or acceptance to an internal or external model. Use the deterministic tools directly.
 
 ## Visual Point Editing
 
@@ -61,16 +61,7 @@ python3 <skill-dir>/scripts/build_manifest.py \
   --output-json output/manifest.json
 ```
 
-Run the online batch workflow only when an OpenAI-compatible vision endpoint and API-key environment variable are already configured:
-
-```bash
-python3 <skill-dir>/scripts/run_batch.py \
-  --image-dir images \
-  --base-url <base-url> \
-  --model <vision-model> \
-  --api-key-env <key-variable> \
-  --output-dir output/batch
-```
+For several panels, create one semantic JSON per panel from your own inspection and invoke `extract_km.py` for each manifest entry. Batch orchestration belongs to the calling Codex workflow; this Skill does not call another model or require an API key.
 
 ## Review Rules
 

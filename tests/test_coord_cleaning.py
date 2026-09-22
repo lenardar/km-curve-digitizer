@@ -24,6 +24,13 @@ class CoordCleaningTests(unittest.TestCase):
 
         np.testing.assert_allclose(repaired, survival)
 
+    def test_repairs_spike_even_when_rebound_contains_real_decline(self):
+        survival = np.array([1.0, 0.95, 0.30, 0.72, 0.70], dtype=float)
+
+        repaired = _suppress_isolated_drop_outliers(survival)
+
+        np.testing.assert_allclose(repaired, [1.0, 0.95, 0.72, 0.72, 0.70])
+
     def test_inserted_origin_uses_axis_pixel_not_first_detected_pixel(self):
         x_pixels, y_pixels, time, survival = clean_curve_points(
             np.array([97.0, 98.0]),
