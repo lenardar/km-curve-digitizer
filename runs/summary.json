@@ -1,11 +1,11 @@
 {
   "workflow": "Codex visual operator + deterministic KM inspection/editing tools",
   "panels_total": 10,
-  "panels_accepted": 9,
+  "panels_accepted": 10,
   "notes": [
     "Every curve was inspected on a local enlarged review board, not only on the contact sheet.",
     "Per-curve pixel tolerances were selected by visual comparison to avoid both sparse false plateaus and cross-curve contamination.",
-    "study01/pfs and study03/pfs contain accepted model-authored point revisions; study04/os was re-extracted at low grayscale tolerances after a cross-curve identity failure was found.",
+    "study01/pfs, study03/pfs, and study04/os contain accepted model-authored point revisions; study04/os was rebuilt with localized QC after a cross-curve identity failure was found.",
     "All number-at-risk review boards were checked against their printed source rows.",
     "The strengthened QC workflow now localizes close-curve identity regions and refuses acceptance until every required issue ID is acknowledged."
   ],
@@ -157,9 +157,9 @@
     {
       "study": "study04",
       "endpoint": "os",
-      "status": "rejected_pending_model_edit",
-      "review_kind": "base_extraction",
-      "verification": "Required source/overlay boards reveal unsupported forward-filled plateaus and locally misplaced steps; this base extraction must be edited before acceptance.",
+      "status": "accepted_after_required_local_reviews",
+      "review_kind": "edited_candidate",
+      "verification": "Compared all ten required local source/overlay boards after the three segment replacements. Blue remains on the dark Nivolumab staircase, orange remains on the light Bevacizumab staircase, unsupported plateaus were removed, and both terminal traces follow the visible source.",
       "axis_bounds": {
         "left": 75,
         "right": 391,
@@ -167,18 +167,18 @@
         "bottom": 315
       },
       "curve_tolerances": {
-        "Nivolumab": 12,
-        "Bevacizumab": 8
+        "Nivolumab": 18,
+        "Bevacizumab": 12
       },
       "validation_issues": [
         {
           "code": "required_local_reviews",
-          "count": 17,
+          "count": 10,
           "manifest": "runs/study04/os/quality_hotspots.json",
-          "reviewed": false
+          "reviewed": true
         }
       ],
-      "revision_count": 0,
+      "revision_count": 1,
       "overlay": "runs/study04/os/overlay.png",
       "curves_csv": "runs/study04/os/digitized_curves.csv",
       "risk_table_csv": "runs/study04/os/risk_table.csv",

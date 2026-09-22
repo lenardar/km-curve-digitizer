@@ -415,7 +415,7 @@ def save_quality_hotspots(
             previous = (float(x_pixels[index - 1]), float(y_pixels[index - 1]))
             corner = (float(x_pixels[index]), float(y_pixels[index - 1]))
             current = (float(x_pixels[index]), float(y_pixels[index]))
-            overlay_draw.line([previous, corner, current], fill=color, width=2)
+            overlay_draw.line([previous, corner, current], fill=color, width=1)
     output_root = Path(output_dir)
     records: list[dict] = []
 

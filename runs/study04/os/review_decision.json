@@ -1,9 +1,119 @@
 {
-  "decision": "reject",
-  "verification": "Required source/overlay boards reveal unsupported forward-filled plateaus and locally misplaced steps; this base extraction must be edited before acceptance.",
-  "review_kind": "base_extraction",
-  "reviewed_issue_ids": [],
-  "revision": null,
-  "result": "/tmp/pykm-qc3-rejected.4T4KtF/final/result.json",
-  "overlay": "/tmp/pykm-qc3-rejected.4T4KtF/final/overlay.png"
+  "decision": "accept",
+  "verification": "Compared all ten required local source/overlay boards after the three segment replacements. Blue remains on the dark Nivolumab staircase, orange remains on the light Bevacizumab staircase, unsupported plateaus were removed, and both terminal traces follow the visible source.",
+  "review_kind": "edited_candidate",
+  "reviewed_issue_ids": [
+    "q001-source_gap_review",
+    "q002-source_gap_review",
+    "q003-source_gap_review",
+    "q004-source_gap_review",
+    "q005-source_gap_review",
+    "q006-curve_identity_review",
+    "q007-curve_identity_review",
+    "q008-curve_identity_review",
+    "q009-curve_identity_review",
+    "q010-curve_identity_review"
+  ],
+  "revision": {
+    "revision_id": "r0001",
+    "created_at": "2026-09-22T13:52:51.037931+00:00",
+    "observation": "Localized QC boards show one unsupported Nivolumab decline, one unsupported Bevacizumab decline, and a high Nivolumab terminal plateau; the remaining close-trace boards preserve curve identity.",
+    "reason": "Replace only the three visibly unsupported segments using the source staircase and printed 18-month landmarks.",
+    "actions": [
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          6.15,
+          7.44
+        ],
+        "points": [
+          {
+            "time": 6.15,
+            "survival": 0.705
+          },
+          {
+            "time": 6.35,
+            "survival": 0.685
+          },
+          {
+            "time": 6.65,
+            "survival": 0.67
+          },
+          {
+            "time": 6.95,
+            "survival": 0.65
+          },
+          {
+            "time": 7.25,
+            "survival": 0.63
+          },
+          {
+            "time": 7.44,
+            "survival": 0.61
+          }
+        ]
+      },
+      {
+        "type": "replace_segment",
+        "curve": "Bevacizumab",
+        "time_range": [
+          17.34,
+          18.72
+        ],
+        "points": [
+          {
+            "time": 17.34,
+            "survival": 0.245
+          },
+          {
+            "time": 17.65,
+            "survival": 0.235
+          },
+          {
+            "time": 17.95,
+            "survival": 0.22
+          },
+          {
+            "time": 18.3,
+            "survival": 0.21
+          },
+          {
+            "time": 18.72,
+            "survival": 0.195
+          }
+        ]
+      },
+      {
+        "type": "replace_segment",
+        "curve": "Nivolumab",
+        "time_range": [
+          23.4,
+          27.0
+        ],
+        "points": [
+          {
+            "time": 23.4,
+            "survival": 0.17
+          },
+          {
+            "time": 23.75,
+            "survival": 0.145
+          },
+          {
+            "time": 24.05,
+            "survival": 0.13
+          },
+          {
+            "time": 26.2,
+            "survival": 0.12
+          }
+        ]
+      }
+    ],
+    "status": "accepted",
+    "verification": "Compared all ten required local source/overlay boards after the three segment replacements. Blue remains on the dark Nivolumab staircase, orange remains on the light Bevacizumab staircase, unsupported plateaus were removed, and both terminal traces follow the visible source."
+  },
+  "result": "/tmp/pykm-study04-accepted-final.rvbt4Z/final/result.json",
+  "overlay": "/tmp/pykm-study04-accepted-final.rvbt4Z/final/overlay.png"
 }

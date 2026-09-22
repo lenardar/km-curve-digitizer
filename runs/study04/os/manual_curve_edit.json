@@ -1,0 +1,42 @@
+{
+  "observation": "Localized QC boards show one unsupported Nivolumab decline, one unsupported Bevacizumab decline, and a high Nivolumab terminal plateau; the remaining close-trace boards preserve curve identity.",
+  "reason": "Replace only the three visibly unsupported segments using the source staircase and printed 18-month landmarks.",
+  "actions": [
+    {
+      "type": "replace_segment",
+      "curve": "Nivolumab",
+      "time_range": [6.15, 7.44],
+      "points": [
+        {"time": 6.15, "survival": 0.705},
+        {"time": 6.35, "survival": 0.685},
+        {"time": 6.65, "survival": 0.670},
+        {"time": 6.95, "survival": 0.650},
+        {"time": 7.25, "survival": 0.630},
+        {"time": 7.44, "survival": 0.610}
+      ]
+    },
+    {
+      "type": "replace_segment",
+      "curve": "Bevacizumab",
+      "time_range": [17.34, 18.72],
+      "points": [
+        {"time": 17.34, "survival": 0.245},
+        {"time": 17.65, "survival": 0.235},
+        {"time": 17.95, "survival": 0.220},
+        {"time": 18.30, "survival": 0.210},
+        {"time": 18.72, "survival": 0.195}
+      ]
+    },
+    {
+      "type": "replace_segment",
+      "curve": "Nivolumab",
+      "time_range": [23.40, 27.00],
+      "points": [
+        {"time": 23.40, "survival": 0.170},
+        {"time": 23.75, "survival": 0.145},
+        {"time": 24.05, "survival": 0.130},
+        {"time": 26.20, "survival": 0.120}
+      ]
+    }
+  ]
+}
