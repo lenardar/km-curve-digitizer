@@ -65,7 +65,7 @@ For several panels, create one semantic JSON per panel from your own inspection 
 
 ## Review Rules
 
-- Give grayscale curves, similar colors, confidence ribbons, dense censoring marks, and overlapping curves closer model inspection.
+- For grayscale or similarly colored curves, compare a low-tolerance extraction against a source-only board before acceptance. Follow each curve through crossings; reject any trace that switches to its neighbor, even if the overall trend and landmark values look plausible.
 - Preserve KM curves as right-continuous steps; do not smooth them into continuous trajectories.
 - Reject any overlay that visually connects KM plateaus with diagonal interpolation; inspect or edit the underlying segment and render it as `steps-post`.
 - Treat every number-at-risk correction as a visible transcription claim. Prefer `null` to a guessed count.

@@ -1,10 +1,10 @@
-# Review Bundle: study04 os detailed review
+# Review Bundle: review
 
 ## Summary
 
-- Visual acceptance: `accepted after detailed local model review`; see `review_decision.json`
-- Diagnostic checks: `6/6 passed` (navigation only)
-- Diagnostic issues: `0`
+- Visual acceptance: `accepted after source-only grayscale identity review; see review_decision.json`
+- Diagnostic checks: `5/6 passed` (navigation only)
+- Diagnostic issues: `1`
 - Image: `study04_os.png`
 - Notes: Focused on panel A (OS) only. Total events and median OS were taken from the OS summary table above the plot. Legend is inside the OS panel; curve-color mapping estimated visually.
 
@@ -29,12 +29,12 @@ Not provided
 
 ## Curves
 
-- `Nivolumab`: 299 points, tolerance=32
-- `Bevacizumab`: 304 points, tolerance=24
+- `Nivolumab`: 269 points, tolerance=12
+- `Bevacizumab`: 303 points, tolerance=8
 
 ## Validation Issues
 
-- None
+- `overlap_ambiguity`: curves 'Nivolumab' and 'Bevacizumab' share a long overlapping segment; closer model inspection is recommended
 
 ## Files
 
