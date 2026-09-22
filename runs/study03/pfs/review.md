@@ -1,8 +1,8 @@
-# Review Bundle: study03 PFS
+# Review Bundle: study03 pfs detailed review
 
 ## Summary
 
-- Visual acceptance: `pending model review`
+- Visual acceptance: `accepted after detailed local model review`; see `review_decision.json`
 - Diagnostic checks: `6/6 passed` (navigation only)
 - Diagnostic issues: `0`
 - Image: `study03_pfs.png`
@@ -10,7 +10,7 @@
 
 ## Citation
 
-Liu G, Li W, Wang D, et al. Effect of Capecitabine Maintenance Therapy Plus Best Supportive Care vs Best Supportive Care Alone on Progression-Free Survival Among Patients With Newly Diagnosed Metastatic Nasopharyngeal Carcinoma Who Had Received Induction Chemotherapy: A Phase 3 Randomized Clinical Trial. JAMA Oncol. 2022;8(4):553–561. doi:10.1001/jamaoncol.2021.7366
+Not provided
 
 ## Side-by-Side Review
 

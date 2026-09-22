@@ -1,38 +1,52 @@
 {
-  "workflow": "Codex visual operator + deterministic KM tools",
+  "workflow": "Codex visual operator + deterministic KM inspection/editing tools",
   "panels_total": 10,
   "panels_accepted": 10,
   "notes": [
-    "All panels were regenerated from source images with automatic pixel-axis detection.",
-    "study04/os required and received an accepted model-authored curve edit.",
-    "study01/pfs coverage diagnostic reflects natural curve termination before the x-axis maximum."
+    "Every curve was inspected on a local enlarged review board, not only on the contact sheet.",
+    "Per-curve pixel tolerances were selected by visual comparison to avoid both sparse false plateaus and cross-curve contamination.",
+    "study01/pfs, study03/pfs, and study04/os contain accepted model-authored point revisions.",
+    "All number-at-risk review boards were checked against their printed source rows."
   ],
   "panels": [
     {
       "study": "study01",
       "endpoint": "os",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "base_extraction",
+      "verification": "Both curves were inspected in 0-15 and 15-54 month local boards; sampled traces follow their orange and dark source lines through crossings and tails. Risk cells match the printed table.",
       "axis_bounds": {
         "left": 122,
         "right": 801,
         "top": 35,
         "bottom": 287
       },
+      "curve_tolerances": {
+        "Tislelizumab": 32,
+        "Sorafenib": 52
+      },
       "validation_issues": [],
       "revision_count": 0,
       "overlay": "runs/study01/os/overlay.png",
       "curves_csv": "runs/study01/os/digitized_curves.csv",
-      "risk_table_csv": "runs/study01/os/risk_table.csv"
+      "risk_table_csv": "runs/study01/os/risk_table.csv",
+      "review_decision": "runs/study01/os/review_decision.json"
     },
     {
       "study": "study01",
       "endpoint": "pfs",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "edited_candidate",
+      "verification": "Early orange and dark staircases now follow their separate source traces; false shared 100% plateau removed, later auto-extracted segments unchanged.",
       "axis_bounds": {
         "left": 120,
         "right": 797,
         "top": 40,
         "bottom": 291
+      },
+      "curve_tolerances": {
+        "Tislelizumab": 40,
+        "Sorafenib": 64
       },
       "validation_issues": [
         {
@@ -41,138 +55,195 @@
           "curve_id": 2
         }
       ],
-      "revision_count": 0,
+      "revision_count": 1,
       "overlay": "runs/study01/pfs/overlay.png",
       "curves_csv": "runs/study01/pfs/digitized_curves.csv",
-      "risk_table_csv": "runs/study01/pfs/risk_table.csv"
+      "risk_table_csv": "runs/study01/pfs/risk_table.csv",
+      "review_decision": "runs/study01/pfs/review_decision.json"
     },
     {
       "study": "study02",
       "endpoint": "os",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "base_extraction",
+      "verification": "Full local boards for both arms follow the dark-teal and taupe source staircases from origin to 54 months, including late plateaus. Risk cells match the source rows.",
       "axis_bounds": {
         "left": 143,
         "right": 807,
         "top": 5,
         "bottom": 281
       },
+      "curve_tolerances": {
+        "Tislelizumab plus chemotherapy": 12,
+        "Placebo plus chemotherapy": 8
+      },
       "validation_issues": [],
       "revision_count": 0,
       "overlay": "runs/study02/os/overlay.png",
       "curves_csv": "runs/study02/os/digitized_curves.csv",
-      "risk_table_csv": "runs/study02/os/risk_table.csv"
+      "risk_table_csv": "runs/study02/os/risk_table.csv",
+      "review_decision": "runs/study02/os/review_decision.json"
     },
     {
       "study": "study02",
       "endpoint": "pfs",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "base_extraction",
+      "verification": "Full local boards for both arms follow the source drops and long late plateaus without cross-curve switching. Risk cells match the source rows.",
       "axis_bounds": {
         "left": 148,
         "right": 807,
         "top": 6,
         "bottom": 280
       },
+      "curve_tolerances": {
+        "Tislelizumab plus chemotherapy": 8,
+        "Placebo plus chemotherapy": 8
+      },
       "validation_issues": [],
       "revision_count": 0,
       "overlay": "runs/study02/pfs/overlay.png",
       "curves_csv": "runs/study02/pfs/digitized_curves.csv",
-      "risk_table_csv": "runs/study02/pfs/risk_table.csv"
+      "risk_table_csv": "runs/study02/pfs/risk_table.csv",
+      "review_decision": "runs/study02/pfs/review_decision.json"
     },
     {
       "study": "study03",
       "endpoint": "os",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "base_extraction",
+      "verification": "Full local boards show the maintenance trace following the orange staircase and the BSC trace following the dark staircase, including distinct late plateaus. Risk cells match all six time columns.",
       "axis_bounds": {
         "left": 114,
         "right": 393,
         "top": 28,
         "bottom": 221
       },
+      "curve_tolerances": {
+        "Maintenance group": 24,
+        "BSC group": 52
+      },
       "validation_issues": [],
       "revision_count": 0,
       "overlay": "runs/study03/os/overlay.png",
       "curves_csv": "runs/study03/os/digitized_curves.csv",
-      "risk_table_csv": "runs/study03/os/risk_table.csv"
+      "risk_table_csv": "runs/study03/os/risk_table.csv",
+      "review_decision": "runs/study03/os/review_decision.json"
     },
     {
       "study": "study03",
       "endpoint": "pfs",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "edited_candidate",
+      "verification": "Both model-authored breakpoint sequences follow the visible orange and dark source staircases across the full axis; sparse false plateaus removed.",
       "axis_bounds": {
         "left": 96,
         "right": 376,
         "top": 27,
         "bottom": 220
       },
+      "curve_tolerances": {
+        "Capecitabine + BSC group": 18,
+        "BSC group": 64
+      },
       "validation_issues": [],
-      "revision_count": 0,
+      "revision_count": 1,
       "overlay": "runs/study03/pfs/overlay.png",
       "curves_csv": "runs/study03/pfs/digitized_curves.csv",
-      "risk_table_csv": "runs/study03/pfs/risk_table.csv"
+      "risk_table_csv": "runs/study03/pfs/risk_table.csv",
+      "review_decision": "runs/study03/pfs/review_decision.json"
     },
     {
       "study": "study04",
       "endpoint": "os",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "edited_candidate",
+      "verification": "High-tolerance trace follows the dense early Nivolumab staircase; model replacement removes only the false 16-19 month plateau and follows the dark late tail, including the printed 18-month OS landmark.",
       "axis_bounds": {
         "left": 75,
         "right": 391,
         "top": 108,
         "bottom": 315
       },
+      "curve_tolerances": {
+        "Nivolumab": 32,
+        "Bevacizumab": 24
+      },
       "validation_issues": [],
       "revision_count": 1,
       "overlay": "runs/study04/os/overlay.png",
       "curves_csv": "runs/study04/os/digitized_curves.csv",
-      "risk_table_csv": "runs/study04/os/risk_table.csv"
+      "risk_table_csv": "runs/study04/os/risk_table.csv",
+      "review_decision": "runs/study04/os/review_decision.json"
     },
     {
       "study": "study04",
       "endpoint": "pfs",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "base_extraction",
+      "verification": "The 32/24px model-selected tolerances follow both dense antialiased staircases through the early drops and late tail; values align with printed 6, 12, and 18 month PFS landmarks. Risk cells match the source.",
       "axis_bounds": {
         "left": 76,
         "right": 386,
         "top": 105,
         "bottom": 314
       },
+      "curve_tolerances": {
+        "Nivolumab": 32,
+        "Bevacizumab": 24
+      },
       "validation_issues": [],
       "revision_count": 0,
       "overlay": "runs/study04/pfs/overlay.png",
       "curves_csv": "runs/study04/pfs/digitized_curves.csv",
-      "risk_table_csv": "runs/study04/pfs/risk_table.csv"
+      "risk_table_csv": "runs/study04/pfs/risk_table.csv",
+      "review_decision": "runs/study04/pfs/review_decision.json"
     },
     {
       "study": "study05",
       "endpoint": "os",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "base_extraction",
+      "verification": "Full local boards show both colored traces following the source through dense censor marks and the late blue drop, with no switch to the other arm. Risk counts and censor counts match the printed rows.",
       "axis_bounds": {
         "left": 192,
         "right": 916,
         "top": 36,
         "bottom": 398
       },
+      "curve_tolerances": {
+        "Chemoradiotherapy alone": 40,
+        "Induction chemotherapy with chemoradiotherapy": 40
+      },
       "validation_issues": [],
       "revision_count": 0,
       "overlay": "runs/study05/os/overlay.png",
       "curves_csv": "runs/study05/os/digitized_curves.csv",
-      "risk_table_csv": "runs/study05/os/risk_table.csv"
+      "risk_table_csv": "runs/study05/os/risk_table.csv",
+      "review_decision": "runs/study05/os/review_decision.json"
     },
     {
       "study": "study05",
       "endpoint": "pfs",
-      "status": "accepted_after_model_visual_review",
+      "status": "accepted_after_detailed_local_visual_review",
+      "review_kind": "base_extraction",
+      "verification": "Full local boards show both colored traces following the source from origin through late plateaus and the late blue drop. Risk counts and censor counts match the printed rows.",
       "axis_bounds": {
         "left": 192,
         "right": 917,
         "top": 20,
         "bottom": 384
       },
+      "curve_tolerances": {
+        "Chemoradiotherapy alone": 40,
+        "Induction chemotherapy with chemoradiotherapy": 40
+      },
       "validation_issues": [],
       "revision_count": 0,
       "overlay": "runs/study05/pfs/overlay.png",
       "curves_csv": "runs/study05/pfs/digitized_curves.csv",
-      "risk_table_csv": "runs/study05/pfs/risk_table.csv"
+      "risk_table_csv": "runs/study05/pfs/risk_table.csv",
+      "review_decision": "runs/study05/pfs/review_decision.json"
     }
   ]
 }

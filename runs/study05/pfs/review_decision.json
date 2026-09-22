@@ -1,0 +1,8 @@
+{
+  "decision": "accept",
+  "verification": "Full local boards show both colored traces following the source from origin through late plateaus and the late blue drop. Risk counts and censor counts match the printed rows.",
+  "review_kind": "base_extraction",
+  "revision": null,
+  "result": "/tmp/base-accept-s05pfs/result.json",
+  "overlay": "/tmp/base-accept-s05pfs/overlay.png"
+}

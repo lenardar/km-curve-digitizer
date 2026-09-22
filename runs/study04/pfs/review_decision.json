@@ -1,0 +1,8 @@
+{
+  "decision": "accept",
+  "verification": "The 32/24px model-selected tolerances follow both dense antialiased staircases through the early drops and late tail; values align with printed 6, 12, and 18 month PFS landmarks. Risk cells match the source.",
+  "review_kind": "base_extraction",
+  "revision": null,
+  "result": "/tmp/base-accept-s04pfs/result.json",
+  "overlay": "/tmp/base-accept-s04pfs/overlay.png"
+}

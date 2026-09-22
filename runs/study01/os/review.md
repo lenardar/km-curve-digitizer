@@ -1,8 +1,8 @@
-# Review Bundle: study01 OS
+# Review Bundle: study01 os detailed review
 
 ## Summary
 
-- Visual acceptance: `pending model review`
+- Visual acceptance: `accepted after detailed local model review`; see `review_decision.json`
 - Diagnostic checks: `6/6 passed` (navigation only)
 - Diagnostic issues: `0`
 - Image: `study01_os.png`
@@ -10,7 +10,7 @@
 
 ## Citation
 
-Qin S, Kudo M, Meyer T, et al. Tislelizumab vs Sorafenib as First-Line Treatment for Unresectable Hepatocellular Carcinoma: A Phase 3 Randomized Clinical Trial. JAMA Oncol. 2023;9(12):1651–1659. doi:10.1001/jamaoncol.2023.4003
+Not provided
 
 ## Side-by-Side Review
 

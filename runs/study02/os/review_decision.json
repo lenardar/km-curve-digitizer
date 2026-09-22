@@ -1,0 +1,8 @@
+{
+  "decision": "accept",
+  "verification": "Full local boards for both arms follow the dark-teal and taupe source staircases from origin to 54 months, including late plateaus. Risk cells match the source rows.",
+  "review_kind": "base_extraction",
+  "revision": null,
+  "result": "/tmp/base-accept-s02os/result.json",
+  "overlay": "/tmp/base-accept-s02os/overlay.png"
+}

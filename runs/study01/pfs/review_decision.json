@@ -1,0 +1,112 @@
+{
+  "decision": "accept",
+  "verification": "Early orange and dark staircases now follow their separate source traces; false shared 100% plateau removed, later auto-extracted segments unchanged.",
+  "revision": {
+    "revision_id": "r0001",
+    "created_at": "2026-09-22T05:27:47.457434+00:00",
+    "observation": "Both first-pass overlays created a false 100% plateau followed by a single late vertical drop. The source shows distinct early staircases: the orange Tislelizumab trace drops earlier, while the dark Sorafenib trace drops slightly later.",
+    "reason": "Retrace the overlapping 0-3 month region from the enlarged source before keeping the otherwise well-aligned later segments.",
+    "actions": [
+      {
+        "type": "replace_segment",
+        "curve": "Tislelizumab",
+        "time_range": [
+          0.0,
+          3.0
+        ],
+        "points": [
+          {
+            "time": 0.0,
+            "survival": 1.0
+          },
+          {
+            "time": 0.55,
+            "survival": 0.99
+          },
+          {
+            "time": 0.9,
+            "survival": 0.965
+          },
+          {
+            "time": 1.2,
+            "survival": 0.925
+          },
+          {
+            "time": 1.45,
+            "survival": 0.875
+          },
+          {
+            "time": 1.65,
+            "survival": 0.805
+          },
+          {
+            "time": 1.82,
+            "survival": 0.63
+          },
+          {
+            "time": 1.95,
+            "survival": 0.535
+          },
+          {
+            "time": 2.08,
+            "survival": 0.455
+          },
+          {
+            "time": 2.75,
+            "survival": 0.445
+          }
+        ]
+      },
+      {
+        "type": "replace_segment",
+        "curve": "Sorafenib",
+        "time_range": [
+          0.0,
+          3.0
+        ],
+        "points": [
+          {
+            "time": 0.0,
+            "survival": 1.0
+          },
+          {
+            "time": 0.7,
+            "survival": 0.99
+          },
+          {
+            "time": 1.1,
+            "survival": 0.975
+          },
+          {
+            "time": 1.45,
+            "survival": 0.95
+          },
+          {
+            "time": 1.75,
+            "survival": 0.92
+          },
+          {
+            "time": 2.05,
+            "survival": 0.885
+          },
+          {
+            "time": 2.22,
+            "survival": 0.815
+          },
+          {
+            "time": 2.3,
+            "survival": 0.525
+          },
+          {
+            "time": 2.75,
+            "survival": 0.495
+          }
+        ]
+      }
+    ],
+    "status": "accepted",
+    "verification": "Early orange and dark staircases now follow their separate source traces; false shared 100% plateau removed, later auto-extracted segments unchanged."
+  },
+  "result": "/tmp/accepted-s01pfs/result.json",
+  "overlay": "/tmp/accepted-s01pfs/overlay.png"
+}

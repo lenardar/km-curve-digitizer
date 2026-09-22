@@ -23,6 +23,7 @@ Use this schema to describe what is printed in the Kaplan-Meier figure before pi
       "legend_name": "Treatment",
       "color_description": "blue solid line",
       "rgb_approx": [31, 119, 180],
+      "pixel_tolerance": 18,
       "line_style": "solid"
     },
     {
@@ -30,6 +31,7 @@ Use this schema to describe what is printed in the Kaplan-Meier figure before pi
       "legend_name": "Control",
       "color_description": "red solid line",
       "rgb_approx": [214, 39, 40],
+      "pixel_tolerance": 12,
       "line_style": "solid"
     }
   ],
@@ -58,6 +60,7 @@ Requirements:
 - Axis maxima and minima describe the focused plot panel, not a neighboring panel.
 - Use the treatment or group name for `legend_name`.
 - `rgb_approx` is always three integers from 0 to 255. Sample the visible curve color, not the legend text or confidence ribbon.
+- `pixel_tolerance` is optional. Leave it out for adaptive extraction. Set it only after comparing overlays at different tolerances; smaller values reduce cross-curve contamination, while larger values recover faint antialiased traces.
 - Every at-risk row must correspond to the curves in the same order and contain one cell per time point.
 - Use `null` for an unreadable cell. Use empty arrays when no at-risk table is visible. Do not invent missing counts.
 - Preserve the value as printed or observed, even when a row is unexpectedly non-monotonic. Validation will flag the sequence for visual review instead of silently changing it.

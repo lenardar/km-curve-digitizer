@@ -22,6 +22,7 @@
         170,
         220
       ],
+      "pixel_tolerance": 40,
       "line_style": "solid"
     },
     {
@@ -33,6 +34,7 @@
         30,
         70
       ],
+      "pixel_tolerance": 40,
       "line_style": "solid"
     }
   ],

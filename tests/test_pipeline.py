@@ -150,6 +150,26 @@ class ExtractionPipelineTests(unittest.TestCase):
             self.assertLessEqual(abs(result.axis_bounds.top - bounds[2]), 2)
             self.assertLessEqual(abs(result.axis_bounds.bottom - bounds[3]), 2)
 
+    def test_semantic_pixel_tolerance_overrides_adaptive_choice(self):
+        with TemporaryDirectory() as tmpdir:
+            image_path = Path(tmpdir) / "km.png"
+            semantic, bounds = make_synthetic_km_image(image_path)
+            semantic["curves"][0]["pixel_tolerance"] = 7
+
+            result = pkm.extract(
+                str(image_path),
+                semantic=semantic,
+                axis_bounds={
+                    "left": bounds[0],
+                    "right": bounds[1],
+                    "top": bounds[2],
+                    "bottom": bounds[3],
+                },
+                min_curve_pixels=20,
+            )
+
+            self.assertEqual(result.curves[0].extraction_tolerance, 7)
+
     def test_overlay_export(self):
         with TemporaryDirectory() as tmpdir:
             image_path = Path(tmpdir) / "km.png"

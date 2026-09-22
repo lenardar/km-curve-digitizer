@@ -1,0 +1,39 @@
+{
+  "observation": "Both first-pass overlays created a false 100% plateau followed by a single late vertical drop. The source shows distinct early staircases: the orange Tislelizumab trace drops earlier, while the dark Sorafenib trace drops slightly later.",
+  "reason": "Retrace the overlapping 0-3 month region from the enlarged source before keeping the otherwise well-aligned later segments.",
+  "actions": [
+    {
+      "type": "replace_segment",
+      "curve": "Tislelizumab",
+      "time_range": [0.0, 3.0],
+      "points": [
+        {"time": 0.00, "survival": 1.000},
+        {"time": 0.55, "survival": 0.990},
+        {"time": 0.90, "survival": 0.965},
+        {"time": 1.20, "survival": 0.925},
+        {"time": 1.45, "survival": 0.875},
+        {"time": 1.65, "survival": 0.805},
+        {"time": 1.82, "survival": 0.630},
+        {"time": 1.95, "survival": 0.535},
+        {"time": 2.08, "survival": 0.455},
+        {"time": 2.75, "survival": 0.445}
+      ]
+    },
+    {
+      "type": "replace_segment",
+      "curve": "Sorafenib",
+      "time_range": [0.0, 3.0],
+      "points": [
+        {"time": 0.00, "survival": 1.000},
+        {"time": 0.70, "survival": 0.990},
+        {"time": 1.10, "survival": 0.975},
+        {"time": 1.45, "survival": 0.950},
+        {"time": 1.75, "survival": 0.920},
+        {"time": 2.05, "survival": 0.885},
+        {"time": 2.22, "survival": 0.815},
+        {"time": 2.30, "survival": 0.525},
+        {"time": 2.75, "survival": 0.495}
+      ]
+    }
+  ]
+}

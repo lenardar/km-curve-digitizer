@@ -38,9 +38,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     verify_parser = subparsers.add_parser(
         "verify",
-        help="Accept or reject a candidate after visual before/after comparison",
+        help="Accept or reject a base extraction or edited candidate after visual review",
     )
-    verify_parser.add_argument("result", help="Candidate extraction result JSON")
+    verify_parser.add_argument("result", help="Extraction or candidate result JSON")
     verify_parser.add_argument(
         "--decision",
         required=True,
@@ -179,32 +179,35 @@ def _run_apply(args: argparse.Namespace) -> int:
 def _run_verify(args: argparse.Namespace) -> int:
     candidate_path = Path(args.result)
     candidate = ExtractionResult.model_validate(_load_json(str(candidate_path)))
-    if not candidate.revisions:
-        raise ValueError("Candidate result has no revision to verify")
-    if candidate.revisions[-1].status != "candidate":
-        raise ValueError("The latest revision has already been verified")
-
     output_dir = _prepare_output_dir(args.output_dir)
-    reviewed_revision = candidate.revisions[-1].model_copy(deep=True)
-    reviewed_revision.status = "accepted" if args.decision == "accept" else "rejected"
-    reviewed_revision.verification = args.verification
-
-    if args.decision == "accept":
+    reviewed_revision = None
+    if not candidate.revisions:
+        # A clean first-pass extraction still needs an auditable model decision,
+        # even when no point edit was necessary.
         verified = candidate.model_copy(deep=True)
-        verified.revisions[-1] = reviewed_revision
     else:
-        parent_path = (
-            Path(args.parent_result)
-            if args.parent_result
-            else candidate_path.with_name("parent_result.json")
-        )
-        if not parent_path.exists():
-            raise ValueError(
-                "Rejected candidates require --parent-result or parent_result.json beside the candidate"
+        if candidate.revisions[-1].status != "candidate":
+            raise ValueError("The latest revision has already been verified")
+        reviewed_revision = candidate.revisions[-1].model_copy(deep=True)
+        reviewed_revision.status = "accepted" if args.decision == "accept" else "rejected"
+        reviewed_revision.verification = args.verification
+
+        if args.decision == "accept":
+            verified = candidate.model_copy(deep=True)
+            verified.revisions[-1] = reviewed_revision
+        else:
+            parent_path = (
+                Path(args.parent_result)
+                if args.parent_result
+                else candidate_path.with_name("parent_result.json")
             )
-        verified = ExtractionResult.model_validate(_load_json(str(parent_path)))
-        verified.revisions.append(reviewed_revision)
-        shutil.copy2(candidate_path, output_dir / "rejected_candidate.json")
+            if not parent_path.exists():
+                raise ValueError(
+                    "Rejected candidates require --parent-result or parent_result.json beside the candidate"
+                )
+            verified = ExtractionResult.model_validate(_load_json(str(parent_path)))
+            verified.revisions.append(reviewed_revision)
+            shutil.copy2(candidate_path, output_dir / "rejected_candidate.json")
 
     output_result = output_dir / "result.json"
     save_result_json(verified, str(output_result))
@@ -212,7 +215,8 @@ def _run_verify(args: argparse.Namespace) -> int:
     decision_payload = {
         "decision": args.decision,
         "verification": args.verification,
-        "revision": reviewed_revision.model_dump(mode="json"),
+        "review_kind": "edited_candidate" if reviewed_revision else "base_extraction",
+        "revision": reviewed_revision.model_dump(mode="json") if reviewed_revision else None,
         "result": str(output_result),
         "overlay": overlay_path,
     }

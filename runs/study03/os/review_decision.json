@@ -1,0 +1,8 @@
+{
+  "decision": "accept",
+  "verification": "Full local boards show the maintenance trace following the orange staircase and the BSC trace following the dark staircase, including distinct late plateaus. Risk cells match all six time columns.",
+  "review_kind": "base_extraction",
+  "revision": null,
+  "result": "/tmp/base-accept-s03os/result.json",
+  "overlay": "/tmp/base-accept-s03os/overlay.png"
+}

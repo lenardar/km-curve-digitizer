@@ -11,6 +11,7 @@ from .contracts import AxisAnchors, AxisBounds, CurveData, CurveSemanticSpec, Ex
 from .extractor.coord import clean_curve_points, detect_axis_bounds_from_array, pixel_to_data
 from .extractor.pixel import (
     adaptive_color_extraction,
+    extract_curve_pixels,
     load_image_array,
     pixels_to_curve,
     remove_ci_band,
@@ -144,13 +145,23 @@ class ExtractionPipeline:
         image_width: int,
         min_curve_pixels: int,
     ) -> CurveTrace:
-        coords, tolerance = adaptive_color_extraction(
-            image_path,
-            curve_spec.rgb_approx,
-            pixels=image_pixels,
-            plot_bounds=axis_bounds,
-            min_pixels=min_curve_pixels,
-        )
+        if curve_spec.pixel_tolerance is None:
+            coords, tolerance = adaptive_color_extraction(
+                image_path,
+                curve_spec.rgb_approx,
+                pixels=image_pixels,
+                plot_bounds=axis_bounds,
+                min_pixels=min_curve_pixels,
+            )
+        else:
+            tolerance = curve_spec.pixel_tolerance
+            coords = extract_curve_pixels(
+                image_path,
+                curve_spec.rgb_approx,
+                tolerance=tolerance,
+                plot_bounds=axis_bounds,
+                pixels=image_pixels,
+            )
         if has_confidence_interval:
             coords = remove_ci_band(coords, image_width=image_width)
 

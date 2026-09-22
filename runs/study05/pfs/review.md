@@ -1,8 +1,8 @@
-# Review Bundle: study05 PFS
+# Review Bundle: study05 pfs detailed review
 
 ## Summary
 
-- Visual acceptance: `pending model review`
+- Visual acceptance: `accepted after detailed local model review`; see `review_decision.json`
 - Diagnostic checks: `6/6 passed` (navigation only)
 - Diagnostic issues: `0`
 - Image: `study05_pfs.png`
@@ -10,7 +10,7 @@
 
 ## Citation
 
-McCormack M, Eminowicz G, Gallardo D, Diez P, Farrelly L, Kent C, Hudson E, Panades M, Mathew T, Anand A, Persic M, Forrest J, Bhana R, Reed N, Drake A, Adusumalli M, Mukhopadhyay A, King M, Whitmarsh K, McGrane J, Colombo N, Mak C, Mandal R, Chowdhury RR, Alamilla-Garcia G, Chávez-Blanco A, Stobart H, Feeney A, Vaja S, Hacker AM, Hackshaw A, Ledermann JA; INTERLACE investigators. Induction chemotherapy followed by standard chemoradiotherapy versus standard chemoradiotherapy alone in patients with locally advanced cervical cancer (GCIG INTERLACE): an international, multicentre, randomised phase 3 trial. Lancet. 2024 Oct 19;404(10462):1525-1535.
+Not provided
 
 ## Side-by-Side Review
 
@@ -29,7 +29,7 @@ McCormack M, Eminowicz G, Gallardo D, Diez P, Farrelly L, Kent C, Hudson E, Pana
 
 ## Curves
 
-- `Chemoradiotherapy alone`: 676 points, tolerance=52
+- `Chemoradiotherapy alone`: 676 points, tolerance=40
 - `Induction chemotherapy with chemoradiotherapy`: 715 points, tolerance=40
 
 ## Validation Issues

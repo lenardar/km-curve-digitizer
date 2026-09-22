@@ -29,6 +29,8 @@ Do not translate a validation warning directly into an action. For example, a no
 1. Run `apply` into a new directory; this creates a `candidate` revision.
 2. View both before and after overlays and any relevant focused inspection.
 3. Run `verify --decision accept|reject --verification "..."` into another new directory. Acceptance keeps the edited data; rejection restores the parent data and retains the rejected candidate for audit.
+
+When the base extraction already follows the source and no edit is necessary, run `verify` directly on that base result. The command records a `base_extraction` decision without inventing a point revision.
 4. Continue only from the verified `result.json`, and repeat only while a visible, resolvable discrepancy remains.
 
 Stop with an explicit uncertainty note when the pixels cannot distinguish the alternatives. Do not guess merely to make validation pass, and do not hand an executable edit back to the user when the model can perform it itself.

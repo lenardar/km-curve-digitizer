@@ -49,7 +49,10 @@ def save_overlay(result: ExtractionResult, output_path: str) -> str:
         facecolor="none",
     )
     ax.add_patch(rect)
-    ax.set_title("KM Curve Digitizer review | model verification required")
+    # Acceptance is recorded separately by the model-authored review decision.
+    # Keep the overlay itself status-neutral so an accepted artifact does not
+    # continue to claim that verification is outstanding.
+    ax.set_title("KM Curve Digitizer | digitization overlay")
     ax.legend(loc="upper right")
     ax.set_axis_off()
     fig.tight_layout()

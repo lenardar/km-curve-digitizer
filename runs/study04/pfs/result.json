@@ -24,7 +24,8 @@
           85,
           90
         ],
-        "line_style": "solid"
+        "line_style": "solid",
+        "pixel_tolerance": 32
       },
       {
         "id": 2,
@@ -35,7 +36,8 @@
           170,
           175
         ],
-        "line_style": "solid"
+        "line_style": "solid",
+        "pixel_tolerance": 24
       }
     ],
     "at_risk_table": {

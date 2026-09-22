@@ -60,6 +60,7 @@ class CurveSemanticSpec(BaseModel):
     color_description: str = ""
     rgb_approx: Tuple[int, int, int]
     line_style: str = "solid"
+    pixel_tolerance: Optional[int] = None
 
     @field_validator("rgb_approx")
     @classmethod
@@ -69,6 +70,13 @@ class CurveSemanticSpec(BaseModel):
         for channel in value:
             if not 0 <= channel <= 255:
                 raise ValueError("RGB channels must be between 0 and 255")
+        return value
+
+    @field_validator("pixel_tolerance")
+    @classmethod
+    def validate_pixel_tolerance(cls, value: Optional[int]) -> Optional[int]:
+        if value is not None and not 1 <= value <= 128:
+            raise ValueError("pixel_tolerance must be between 1 and 128")
         return value
 
 

@@ -1,8 +1,8 @@
-# Review Bundle: study04 PFS
+# Review Bundle: study04 pfs detailed review
 
 ## Summary
 
-- Visual acceptance: `pending model review`
+- Visual acceptance: `accepted after detailed local model review`; see `review_decision.json`
 - Diagnostic checks: `6/6 passed` (navigation only)
 - Diagnostic issues: `0`
 - Image: `study04_pfs.png`
@@ -10,7 +10,7 @@
 
 ## Citation
 
-Reardon DA, Brandes AA, Omuro A, et al. Effect of Nivolumab vs Bevacizumab in Patients With Recurrent Glioblastoma: The CheckMate 143 Phase 3 Randomized Clinical Trial. JAMA Oncol. 2020;6(7):1003–1010. doi:10.1001/jamaoncol.2020.1024
+Not provided
 
 ## Side-by-Side Review
 

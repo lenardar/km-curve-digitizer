@@ -26,7 +26,7 @@ Turn one or more Kaplan-Meier figure images into inspectable curve and number-at
 
 5. Read [references/agent-loop.md](references/agent-loop.md), then personally inspect `review/overlay.png`, `result.json`, `review/validation_issues.csv`, and—when present—`review/risk_table_review.png`. Treat validation as a navigation hint, never as edit authority.
 6. Use the inspection tools to gather focused evidence, record the visible observation, decide the edit, and apply it as a candidate revision.
-7. Compare the before/after artifacts, then run `refine_km.py verify` to explicitly accept or reject the candidate. Continue from an accepted result only when the visible source supports it; rejection restores the parent data while preserving the rejected revision in the audit trail.
+7. Compare the before/after artifacts, then run `refine_km.py verify` to explicitly accept or reject the candidate. If no edit was needed, run `verify` on the base extraction so the visual acceptance is still recorded. Continue from an accepted result only when the visible source supports it; rejection restores the parent data while preserving the rejected revision in the audit trail.
 8. Repeat until no visible defect remains that the available evidence can resolve. Do not stop at recommending that a human perform an edit the skill already exposes.
 9. If the overlay shows incorrect plot bounds, write a reviewed `--axis-json`, rerun, and inspect the new overlay. Use `--axis-export-json` to preserve accepted calibration.
 10. Report the accepted output paths, revisions, unresolved ambiguity, and diagnostic findings. The Skill intentionally has no aggregate quality score; visual agreement with the source is the acceptance criterion.

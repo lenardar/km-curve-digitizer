@@ -115,11 +115,19 @@ def adaptive_color_extraction(
     pixels: np.ndarray | None = None,
     plot_bounds: AxisBounds | None = None,
     min_pixels: int = 50,
-    min_x_span_ratio: float = 0.75,
-    min_unique_x_ratio: float = 0.65,
+    min_x_span_ratio: float = 0.45,
+    min_unique_x_ratio: float = 0.08,
     tolerance_steps: Iterable[int] = (8, 12, 18, 24, 32, 40, 52, 64),
 ) -> Tuple[np.ndarray, int]:
-    """Increase color tolerance until enough pixels and x coverage are captured."""
+    """Increase color tolerance until enough pixels and plausible coverage are captured.
+
+    KM traces commonly terminate well before the x-axis maximum.  Requiring
+    near-full-width coverage in that situation forces the tolerance upward and
+    can absorb censor marks, labels, or a neighbouring curve.  The conservative
+    defaults therefore require a meaningful span plus a modest number of
+    observed columns; callers with known full-width traces can still request
+    stricter ratios explicitly.
+    """
     image_pixels = pixels if pixels is not None else load_image_array(image_path)
     best_coords = np.empty((0, 2), dtype=int)
     best_tolerance = 0

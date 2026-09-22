@@ -315,6 +315,47 @@ class CurveEditorTests(unittest.TestCase):
             )
             self.assertTrue((output_dir / "review_decision.json").exists())
 
+    def test_refine_cli_accepts_unedited_base_after_visual_verification(self):
+        with TemporaryDirectory() as tmpdir:
+            result = make_result(tmpdir)
+            result_path = Path(tmpdir) / "result.json"
+            output_dir = Path(tmpdir) / "accepted-base"
+            result_path.write_text(json.dumps(result.to_jsonable()), encoding="utf-8")
+            script = (
+                Path(__file__).resolve().parents[1]
+                / "km-curve-digitizer"
+                / "scripts"
+                / "refine_km.py"
+            )
+            env = os.environ.copy()
+            env.setdefault("MPLCONFIGDIR", str(Path(tmpdir) / ".mplconfig"))
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "verify",
+                    str(result_path),
+                    "--decision",
+                    "accept",
+                    "--verification",
+                    "Local review boards follow both visible source traces",
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                env=env,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            decision = json.loads(
+                (output_dir / "review_decision.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(decision["review_kind"], "base_extraction")
+            self.assertIsNone(decision["revision"])
+
     def test_refine_cli_rejects_candidate_and_restores_parent(self):
         with TemporaryDirectory() as tmpdir:
             result = make_result(tmpdir)

@@ -1,8 +1,8 @@
-# Review Bundle: study02 PFS
+# Review Bundle: study02 pfs detailed review
 
 ## Summary
 
-- Visual acceptance: `pending model review`
+- Visual acceptance: `accepted after detailed local model review`; see `review_decision.json`
 - Diagnostic checks: `6/6 passed` (navigation only)
 - Diagnostic issues: `0`
 - Image: `study02_pfs.png`
@@ -10,7 +10,7 @@
 
 ## Citation
 
-Yang Y, Yen C, Pan J, et al. First-Line Tislelizumab Plus Chemotherapy for Recurrent or Metastatic Nasopharyngeal Cancer: Three-Year Follow-Up of the Phase 3 RATIONALE-309 Randomized Clinical Trial. JAMA Oncol. Published online February 26, 2026. doi:10.1001/jamaoncol.2026.0020
+Not provided
 
 ## Side-by-Side Review
 
@@ -29,8 +29,8 @@ Yang Y, Yen C, Pan J, et al. First-Line Tislelizumab Plus Chemotherapy for Recur
 
 ## Curves
 
-- `Tislelizumab plus chemotherapy`: 614 points, tolerance=18
-- `Placebo plus chemotherapy`: 636 points, tolerance=32
+- `Tislelizumab plus chemotherapy`: 611 points, tolerance=8
+- `Placebo plus chemotherapy`: 636 points, tolerance=8
 
 ## Validation Issues
 

@@ -42,6 +42,8 @@ class PixelSamplingTests(unittest.TestCase):
                 (30, 90, 200),
                 plot_bounds=AxisBounds(left=10, right=90, top=10, bottom=30),
                 min_pixels=20,
+                min_x_span_ratio=0.75,
+                min_unique_x_ratio=0.65,
                 tolerance_steps=(8, 18, 32),
             )
 
@@ -63,11 +65,35 @@ class PixelSamplingTests(unittest.TestCase):
                 pixels=pixels,
                 plot_bounds=AxisBounds(left=8, right=56, top=8, bottom=20),
                 min_pixels=20,
+                min_x_span_ratio=0.75,
+                min_unique_x_ratio=0.65,
                 tolerance_steps=(8, 18, 32),
             )
 
         self.assertEqual(tolerance, 32)
         self.assertGreater(len(coords), 0)
+
+    def test_adaptive_color_extraction_keeps_low_tolerance_for_short_curve(self):
+        with TemporaryDirectory() as tmpdir:
+            image_path = Path(tmpdir) / "short-curve.png"
+            image = Image.new("RGB", (140, 60), (255, 255, 255))
+            draw = ImageDraw.Draw(image)
+            draw.line([(10, 20), (70, 20)], fill=(30, 90, 200), width=2)
+            # A different trace continues across the rest of the plot and only
+            # becomes reachable when tolerance is widened.
+            draw.line([(70, 30), (130, 30)], fill=(45, 105, 215), width=2)
+            image.save(image_path)
+
+            coords, tolerance = adaptive_color_extraction(
+                str(image_path),
+                (30, 90, 200),
+                plot_bounds=AxisBounds(left=10, right=130, top=10, bottom=40),
+                min_pixels=20,
+                tolerance_steps=(8, 18, 32),
+            )
+
+        self.assertEqual(tolerance, 8)
+        self.assertLessEqual(int(coords[:, 1].max()), 70)
 
     def test_pixels_to_curve_forward_fills_missing_columns(self):
         coords = np.array(
