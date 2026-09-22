@@ -36,9 +36,9 @@ Always compare the generated before/after overlays. Accept an edit only when it 
 
 ## Number-at-Risk Table Editing
 
-When a number-at-risk table is visible, read [references/risk-table.md](references/risk-table.md). The review bundle exports long-format `risk_table.csv`, structured `risk_table.json`, and a board that places the source table beside stable cell IDs.
+When a number-at-risk table is visible, read [references/risk-table.md](references/risk-table.md). The review bundle exports long-format `risk_table.csv`, structured `risk_table.json`, and a board that places the source table beside stable cell IDs and localized source boxes when geometry is reliable.
 
-Use `scripts/refine_km.py inspect-risk` before editing. The model may correct or clear individual cells and adjust a time column through narrow, auditable actions. Never invent a value for an unreadable cell, and never silently force the row to decrease; preserve the observed value and let validation flag implausible sequences.
+Use `scripts/refine_km.py inspect-risk` before editing, and `inspect-risk-cell` when a single value needs a larger source crop. The model may correct or clear individual cells and adjust a time column through narrow, auditable actions. Never invent a value for an unreadable cell, and never silently force the row to decrease; preserve the observed value and let validation flag implausible sequences.
 
 ## Multiple Studies
 

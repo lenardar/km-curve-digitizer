@@ -8,6 +8,8 @@ from pathlib import Path
 import shutil
 from typing import Any
 
+from PIL import Image, ImageDraw
+
 from .contracts import ExtractionResult
 from .editing import CurveEditor
 from .review import save_point_review, save_risk_table_review
@@ -46,6 +48,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     risk_parser.add_argument("result", help="Existing extraction result JSON")
     risk_parser.add_argument("--output-dir", required=True, help="New directory for risk-table outputs")
+
+    risk_cell_parser = subparsers.add_parser(
+        "inspect-risk-cell",
+        help="Render an enlarged source crop for one stable number-at-risk cell",
+    )
+    risk_cell_parser.add_argument("result", help="Existing extraction result JSON")
+    risk_cell_parser.add_argument("--cell-id", required=True, help="Stable cell ID such as risk-c1-t002")
+    risk_cell_parser.add_argument("--output-dir", required=True, help="New directory for cell inspection")
+    risk_cell_parser.add_argument("--padding", type=int, default=8, help="Source-pixel context padding")
+    risk_cell_parser.add_argument("--scale", type=int, default=4, help="Integer output enlargement")
     return parser
 
 
@@ -157,11 +169,11 @@ def _run_inspect(args: argparse.Namespace) -> int:
 def _run_inspect_risk(args: argparse.Namespace) -> int:
     result = ExtractionResult.model_validate(_load_json(args.result))
     output_dir = _prepare_output_dir(args.output_dir)
+    review_path = save_risk_table_review(result, str(output_dir / "risk_table_review.png"))
     records = result.risk_table_records()
     if not records:
         raise ValueError("No number-at-risk table is available for inspection")
 
-    review_path = save_risk_table_review(result, str(output_dir / "risk_table_review.png"))
     csv_path = output_dir / "risk_table.csv"
     result.risk_table_frame().to_csv(csv_path, index=False)
     json_path = output_dir / "risk_table.json"
@@ -185,6 +197,74 @@ def _run_inspect_risk(args: argparse.Namespace) -> int:
     return 0
 
 
+def _run_inspect_risk_cell(args: argparse.Namespace) -> int:
+    from .extractor.risk_table import ensure_risk_table_cell_regions
+
+    if args.padding < 0:
+        raise ValueError("padding must be non-negative")
+    if not 1 <= args.scale <= 12:
+        raise ValueError("scale must be between 1 and 12")
+
+    result = ExtractionResult.model_validate(_load_json(args.result))
+    if not ensure_risk_table_cell_regions(result):
+        raise ValueError("Risk-table cells could not be localized in the source image")
+    record = next(
+        (item for item in result.risk_table_records() if item["cell_id"] == args.cell_id),
+        None,
+    )
+    if record is None:
+        raise ValueError(f"Risk-table cell not found: {args.cell_id}")
+    region = record["pixel_region"]
+    if region is None:
+        raise ValueError(f"Risk-table cell has no localized source box: {args.cell_id}")
+
+    output_dir = _prepare_output_dir(args.output_dir)
+    source = Image.open(result.image_path).convert("RGB")
+    left, top, right, bottom = (int(value) for value in region)
+    crop_box = (
+        max(0, left - args.padding),
+        max(0, top - args.padding),
+        min(source.width, right + args.padding),
+        min(source.height, bottom + args.padding),
+    )
+    crop = source.crop(crop_box)
+    draw = ImageDraw.Draw(crop)
+    draw.rectangle(
+        (
+            left - crop_box[0],
+            top - crop_box[1],
+            right - crop_box[0],
+            bottom - crop_box[1],
+        ),
+        outline=(255, 96, 0),
+        width=1,
+    )
+    resampling = getattr(Image, "Resampling", Image).NEAREST
+    enlarged = crop.resize(
+        (crop.width * args.scale, crop.height * args.scale),
+        resample=resampling,
+    )
+    image_path = output_dir / "risk_cell_review.png"
+    enlarged.save(image_path)
+
+    payload = {
+        "cell": record,
+        "crop_region": crop_box,
+        "scale": args.scale,
+        "review_image": str(image_path),
+    }
+    json_path = output_dir / "risk_cell.json"
+    json_path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(
+        json.dumps(
+            {"review_image": str(image_path), "cell_json": str(json_path)},
+            indent=2,
+            ensure_ascii=False,
+        )
+    )
+    return 0
+
+
 def main() -> int:
     parser = build_parser()
     args = parser.parse_args()
@@ -195,6 +275,8 @@ def main() -> int:
             return _run_inspect(args)
         if args.command == "inspect-risk":
             return _run_inspect_risk(args)
+        if args.command == "inspect-risk-cell":
+            return _run_inspect_risk_cell(args)
     except (OSError, ValueError, json.JSONDecodeError) as exc:
         parser.error(str(exc))
     parser.error(f"Unsupported command: {args.command}")

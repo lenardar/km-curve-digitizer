@@ -314,6 +314,19 @@ class ExtractionResult(BaseModel):
     curves: List[CurveData]
     validation: ValidationReport
     revisions: List[CurveRevision] = Field(default_factory=list)
+    risk_cell_regions: List[List[Optional[Tuple[int, int, int, int]]]] = Field(
+        default_factory=list
+    )
+
+    @model_validator(mode="after")
+    def validate_risk_cell_regions(self) -> "ExtractionResult":
+        if self.risk_cell_regions:
+            table = self.semantic.at_risk_table
+            if len(self.risk_cell_regions) != len(table.counts_by_curve):
+                raise ValueError("Risk-cell region rows must match at-risk count rows")
+            if any(len(row) != len(table.time_points) for row in self.risk_cell_regions):
+                raise ValueError("Each risk-cell region row must match at-risk time points")
+        return self
 
     def curve_frame(self) -> pd.DataFrame:
         """Flatten all curve outputs into a single dataframe."""
@@ -358,6 +371,11 @@ class ExtractionResult(BaseModel):
         for curve_index, (curve_spec, counts) in enumerate(
             zip(self.semantic.curves, table.counts_by_curve)
         ):
+            regions = (
+                self.risk_cell_regions[curve_index]
+                if self.risk_cell_regions
+                else [None] * len(counts)
+            )
             for time_index, (time_value, count) in enumerate(zip(table.time_points, counts)):
                 records.append(
                     {
@@ -369,7 +387,7 @@ class ExtractionResult(BaseModel):
                         "n_risk": count,
                         "raw_text": "" if count is None else str(count),
                         "confidence": confidence,
-                        "pixel_region": None,
+                        "pixel_region": regions[time_index],
                         "row_index": curve_index,
                     }
                 )
@@ -385,10 +403,26 @@ class ExtractionResult(BaseModel):
             "time",
             "n_risk",
             "confidence",
+            "pixel_left",
+            "pixel_top",
+            "pixel_right",
+            "pixel_bottom",
         ]
         records = self.risk_table_records()
+        rows = []
+        for record in records:
+            region = record["pixel_region"]
+            rows.append(
+                {
+                    **{key: record[key] for key in columns[:7]},
+                    "pixel_left": region[0] if region else None,
+                    "pixel_top": region[1] if region else None,
+                    "pixel_right": region[2] if region else None,
+                    "pixel_bottom": region[3] if region else None,
+                }
+            )
         return pd.DataFrame(
-            [{key: record[key] for key in columns} for record in records],
+            rows,
             columns=columns,
         )
 

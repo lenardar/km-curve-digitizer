@@ -17,6 +17,7 @@ from .extractor.pixel import (
     trim_curve_edge_outliers,
 )
 from .extractor.semantic import SemanticExtractor
+from .extractor.risk_table import locate_risk_table_cells
 from .extractor.validator import ExtractionValidator
 
 
@@ -83,6 +84,13 @@ class ExtractionPipeline:
         parsed_anchors = self._resolve_axis_anchors(parsed_bounds, axis_anchors)
         curves = [self._build_curve_data(trace, parsed_bounds, parsed_anchors, parsed_semantic) for trace in traces]
 
+        risk_cell_regions = locate_risk_table_cells(
+            image_pixels,
+            parsed_semantic,
+            parsed_bounds,
+            parsed_anchors,
+        )
+
         validation = self.validator.validate(parsed_semantic, curves)
         return ExtractionResult(
             image_path=image_path,
@@ -91,6 +99,7 @@ class ExtractionPipeline:
             axis_anchors=parsed_anchors,
             curves=curves,
             validation=validation,
+            risk_cell_regions=risk_cell_regions,
         )
 
     def _resolve_axis_bounds(

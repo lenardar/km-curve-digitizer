@@ -177,8 +177,12 @@ def save_risk_table_review(result: ExtractionResult, output_path: str) -> str:
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
+    from matplotlib.patches import Rectangle
+
+    from .extractor.risk_table import ensure_risk_table_cell_regions
 
     table = result.semantic.at_risk_table
+    ensure_risk_table_cell_regions(result)
     records = result.risk_table_records()
     if not records:
         raise ValueError("No number-at-risk table is available for review")
@@ -196,6 +200,29 @@ def save_risk_table_review(result: ExtractionResult, output_path: str) -> str:
     )
     axes[0].imshow(source_crop)
     axes[0].set_title("Source context below the plotting area")
+    for record in records:
+        region = record["pixel_region"]
+        if not region:
+            continue
+        left, top, right, bottom = region
+        axes[0].add_patch(
+            Rectangle(
+                (left, top - crop_top),
+                right - left,
+                bottom - top,
+                fill=False,
+                edgecolor="#ff7f0e",
+                linewidth=0.8,
+            )
+        )
+        axes[0].text(
+            left + 1,
+            top - crop_top - 1,
+            record["cell_id"],
+            color="#b23b00",
+            fontsize=4,
+            va="bottom",
+        )
     axes[0].set_axis_off()
 
     cell_text = []
@@ -284,6 +311,9 @@ def save_review_bundle(
     validation_csv = output_root / "validation_issues.csv"
     result.validation_frame().to_csv(validation_csv, index=False)
 
+    from .extractor.risk_table import ensure_risk_table_cell_regions
+
+    ensure_risk_table_cell_regions(result)
     risk_table_csv = output_root / "risk_table.csv"
     result.risk_table_frame().to_csv(risk_table_csv, index=False)
     risk_table_json = output_root / "risk_table.json"
