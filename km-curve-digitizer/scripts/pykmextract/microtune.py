@@ -310,12 +310,10 @@ class SegmentMicroTuner:
         toolkit: CurveMicroTuneToolkit | None = None,
         validator: ExtractionValidator | None = None,
         max_delta: float = 0.04,
-        max_score_drop: int = 5,
     ):
         self.toolkit = toolkit or CurveMicroTuneToolkit(validator=validator)
         self.validator = validator or ExtractionValidator()
         self.max_delta = max_delta
-        self.max_score_drop = max_score_drop
 
     def refine(
         self,
@@ -368,15 +366,12 @@ class SegmentMicroTuner:
         if suggestion.action != "adjust" or not suggestion.targets or suggestion.curve_name is None:
             return result
 
-        tuned = self.toolkit.apply_step_targets(
+        return self.toolkit.apply_step_targets(
             result,
             curve_name=suggestion.curve_name,
             targets=suggestion.targets,
             max_delta=self.max_delta,
         )
-        if tuned.validation.score < result.validation.score - self.max_score_drop:
-            return result
-        return tuned
 
     def _select_candidate_segment(self, result: ExtractionResult) -> tuple[str, float, float] | None:
         coverage_curves = {
@@ -490,6 +485,7 @@ def render_segment_review_board(
             alpha=alpha,
             color=palette[index % len(palette)],
             label=curve.name,
+            drawstyle="steps-post",
         )
 
     ax.set_title(f"Micro-tune review | {curve_name} | {time_start:.1f}-{time_end:.1f}")

@@ -21,7 +21,7 @@ from pykmextract.extractor.validator import ExtractionValidator
 
 
 class ValidatorTests(unittest.TestCase):
-    def test_bad_curve_is_downgraded(self):
+    def test_bad_curve_emits_diagnostics_without_aggregate_verdict(self):
         semantic = SemanticExtraction(
             n_curves=1,
             x_axis=XAxisSpec(min=0, max=24, unit="months", label="Time"),
@@ -56,8 +56,10 @@ class ValidatorTests(unittest.TestCase):
 
         report = ExtractionValidator().validate(semantic, [curve])
         self.assertIsInstance(report, ValidationReport)
-        self.assertLess(report.score, 60)
-        self.assertEqual(report.level, "low")
+        self.assertFalse(report.checks["range"])
+        self.assertFalse(report.checks["monotonicity"])
+        self.assertFalse(hasattr(report, "score"))
+        self.assertFalse(hasattr(report, "level"))
         self.assertGreaterEqual(len(report.issues), 2)
 
     def test_overlapping_curves_are_flagged_for_manual_review(self):
@@ -118,7 +120,6 @@ class ValidatorTests(unittest.TestCase):
 
         report = ExtractionValidator().validate(semantic, [curve_a, curve_b])
 
-        self.assertEqual(report.level, "medium")
         self.assertFalse(report.checks["overlap_ambiguity"])
         self.assertTrue(any(issue.code == "overlap_ambiguity" for issue in report.issues))
 

@@ -6,6 +6,7 @@ import unittest
 
 import numpy as np
 
+from pykmextract.contracts import AxisBounds
 from pykmextract.extractor.pixel import trim_curve_edge_outliers
 
 
@@ -26,6 +27,19 @@ class PixelEdgeTrimTests(unittest.TestCase):
         x_trimmed, y_trimmed = trim_curve_edge_outliers(x, y)
         self.assertEqual(len(x_trimmed), len(x))
         self.assertEqual(len(y_trimmed), len(y))
+
+    def test_preserve_real_steep_drop_from_calibrated_origin(self):
+        x = np.arange(82, 102, dtype=float)
+        y = np.array(
+            [109, 109, 110, 110, 114, 117, 119, 119, 119, 119, 129, 139, 182, 211, 214, 232, 232, 232, 236, 236],
+            dtype=float,
+        )
+        bounds = AxisBounds(left=76, right=386, top=105, bottom=314)
+
+        x_trimmed, y_trimmed = trim_curve_edge_outliers(x, y, plot_bounds=bounds)
+
+        np.testing.assert_array_equal(x_trimmed, x)
+        np.testing.assert_array_equal(y_trimmed, y)
 
 
 if __name__ == "__main__":

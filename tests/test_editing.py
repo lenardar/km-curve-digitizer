@@ -70,6 +70,7 @@ class CurveEditorTests(unittest.TestCase):
                         "points": [{"time": 10.25, "survival": 0.65}],
                     },
                 ],
+                observation="One isolated point is visibly below the source trace",
                 reason="model visual review",
             )
 
@@ -78,7 +79,12 @@ class CurveEditorTests(unittest.TestCase):
             self.assertIn(moved_id, edited_curve.point_ids)
             self.assertTrue(any("-r0001-" in point_id for point_id in edited_curve.point_ids))
             self.assertEqual(len(edited.revisions), 1)
+            self.assertEqual(
+                edited.revisions[0].observation,
+                "One isolated point is visibly below the source trace",
+            )
             self.assertEqual(edited.revisions[0].reason, "model visual review")
+            self.assertEqual(edited.revisions[0].status, "candidate")
             self.assertIn(deleted_id, parent.curves[0].point_ids)
             self.assertEqual(result.to_jsonable(), parent.to_jsonable())
 
@@ -203,6 +209,7 @@ class CurveEditorTests(unittest.TestCase):
             actions_path.write_text(
                 json.dumps(
                     {
+                        "observation": "One extracted point is a visible outlier",
                         "reason": "remove visual outlier",
                         "actions": [
                             {
@@ -246,7 +253,122 @@ class CurveEditorTests(unittest.TestCase):
             self.assertTrue((output_dir / "result.json").exists())
             self.assertTrue((output_dir / "review" / "overlay.png").exists())
             payload = json.loads((output_dir / "result.json").read_text(encoding="utf-8"))
+            self.assertEqual(
+                payload["revisions"][0]["observation"],
+                "One extracted point is a visible outlier",
+            )
             self.assertEqual(payload["revisions"][0]["reason"], "remove visual outlier")
+            self.assertEqual(payload["revisions"][0]["status"], "candidate")
+
+    def test_refine_cli_accepts_candidate_after_visual_verification(self):
+        with TemporaryDirectory() as tmpdir:
+            result = make_result(tmpdir)
+            candidate = CurveEditor().apply(
+                result,
+                [
+                    {
+                        "type": "delete_points",
+                        "curve": "Treatment",
+                        "point_ids": [result.curves[0].point_ids[20]],
+                    }
+                ],
+                observation="The point is not on the visible curve",
+                reason="remove visual outlier",
+            )
+            candidate_path = Path(tmpdir) / "candidate.json"
+            output_dir = Path(tmpdir) / "accepted"
+            candidate_path.write_text(json.dumps(candidate.to_jsonable()), encoding="utf-8")
+            script = (
+                Path(__file__).resolve().parents[1]
+                / "km-curve-digitizer"
+                / "scripts"
+                / "refine_km.py"
+            )
+            env = os.environ.copy()
+            env.setdefault("MPLCONFIGDIR", str(Path(tmpdir) / ".mplconfig"))
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "verify",
+                    str(candidate_path),
+                    "--decision",
+                    "accept",
+                    "--verification",
+                    "The edited overlay follows the source and its neighbors",
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                env=env,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            payload = json.loads((output_dir / "result.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["revisions"][-1]["status"], "accepted")
+            self.assertEqual(
+                payload["revisions"][-1]["verification"],
+                "The edited overlay follows the source and its neighbors",
+            )
+            self.assertTrue((output_dir / "review_decision.json").exists())
+
+    def test_refine_cli_rejects_candidate_and_restores_parent(self):
+        with TemporaryDirectory() as tmpdir:
+            result = make_result(tmpdir)
+            candidate = CurveEditor().apply(
+                result,
+                [
+                    {
+                        "type": "delete_points",
+                        "curve": "Treatment",
+                        "point_ids": [result.curves[0].point_ids[20]],
+                    }
+                ],
+                reason="candidate edit",
+            )
+            edit_dir = Path(tmpdir) / "candidate"
+            edit_dir.mkdir()
+            candidate_path = edit_dir / "result.json"
+            parent_path = edit_dir / "parent_result.json"
+            candidate_path.write_text(json.dumps(candidate.to_jsonable()), encoding="utf-8")
+            parent_path.write_text(json.dumps(result.to_jsonable()), encoding="utf-8")
+            output_dir = Path(tmpdir) / "rejected"
+            script = (
+                Path(__file__).resolve().parents[1]
+                / "km-curve-digitizer"
+                / "scripts"
+                / "refine_km.py"
+            )
+            env = os.environ.copy()
+            env.setdefault("MPLCONFIGDIR", str(Path(tmpdir) / ".mplconfig"))
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "verify",
+                    str(candidate_path),
+                    "--decision",
+                    "reject",
+                    "--verification",
+                    "The edit removes a genuine visible step",
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                env=env,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            payload = json.loads((output_dir / "result.json").read_text(encoding="utf-8"))
+            self.assertEqual(payload["curves"], result.to_jsonable()["curves"])
+            self.assertEqual(payload["revisions"][-1]["status"], "rejected")
+            self.assertTrue((output_dir / "rejected_candidate.json").exists())
 
     def test_refine_cli_inspect_exports_point_ids(self):
         with TemporaryDirectory() as tmpdir:

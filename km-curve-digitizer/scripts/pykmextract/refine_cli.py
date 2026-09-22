@@ -29,7 +29,38 @@ def build_parser() -> argparse.ArgumentParser:
     apply_parser.add_argument("result", help="Existing extraction result JSON")
     apply_parser.add_argument("--actions", required=True, help="Curve edit actions JSON")
     apply_parser.add_argument("--output-dir", required=True, help="New directory for edited outputs")
+    apply_parser.add_argument(
+        "--observation",
+        default="",
+        help="Visible source discrepancy that motivated the edit",
+    )
     apply_parser.add_argument("--reason", default="", help="Optional revision reason override")
+
+    verify_parser = subparsers.add_parser(
+        "verify",
+        help="Accept or reject a candidate after visual before/after comparison",
+    )
+    verify_parser.add_argument("result", help="Candidate extraction result JSON")
+    verify_parser.add_argument(
+        "--decision",
+        required=True,
+        choices=["accept", "reject"],
+        help="Model decision after visual verification",
+    )
+    verify_parser.add_argument(
+        "--verification",
+        required=True,
+        help="Visible evidence supporting acceptance or rejection",
+    )
+    verify_parser.add_argument(
+        "--parent-result",
+        help="Parent JSON used on rejection; defaults to parent_result.json beside the candidate",
+    )
+    verify_parser.add_argument(
+        "--output-dir",
+        required=True,
+        help="New directory for verified outputs",
+    )
 
     inspect_parser = subparsers.add_parser(
         "inspect",
@@ -65,12 +96,16 @@ def _load_json(path: str) -> Any:
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
-def _load_actions(path: str) -> tuple[list[dict[str, Any]], str]:
+def _load_actions(path: str) -> tuple[list[dict[str, Any]], str, str]:
     payload = _load_json(path)
     if isinstance(payload, list):
-        return payload, ""
+        return payload, "", ""
     if isinstance(payload, dict) and isinstance(payload.get("actions"), list):
-        return payload["actions"], str(payload.get("reason", ""))
+        return (
+            payload["actions"],
+            str(payload.get("observation", "")),
+            str(payload.get("reason", "")),
+        )
     raise ValueError("Actions JSON must be a list or an object containing an actions list")
 
 
@@ -97,14 +132,20 @@ def _parse_numbers(value: str | None, *, count: int, label: str) -> tuple[float,
 def _run_apply(args: argparse.Namespace) -> int:
     result_path = Path(args.result)
     result = ExtractionResult.model_validate(_load_json(str(result_path)))
-    actions, payload_reason = _load_actions(args.actions)
+    actions, payload_observation, payload_reason = _load_actions(args.actions)
+    observation = args.observation or payload_observation
     reason = args.reason or payload_reason
     output_dir = _prepare_output_dir(args.output_dir)
     output_result = output_dir / "result.json"
     if result_path.resolve() == output_result.resolve():
         raise ValueError("Edited output must not overwrite the source result")
 
-    edited = CurveEditor().apply(result, actions, reason=reason)
+    edited = CurveEditor().apply(
+        result,
+        actions,
+        observation=observation,
+        reason=reason,
+    )
 
     shutil.copy2(result_path, output_dir / "parent_result.json")
     result.save_overlay(str(output_dir / "before_overlay.png"))
@@ -127,6 +168,55 @@ def _run_apply(args: argparse.Namespace) -> int:
         encoding="utf-8",
     )
     print(json.dumps(summary, indent=2, ensure_ascii=False))
+    return 0
+
+
+def _run_verify(args: argparse.Namespace) -> int:
+    candidate_path = Path(args.result)
+    candidate = ExtractionResult.model_validate(_load_json(str(candidate_path)))
+    if not candidate.revisions:
+        raise ValueError("Candidate result has no revision to verify")
+    if candidate.revisions[-1].status != "candidate":
+        raise ValueError("The latest revision has already been verified")
+
+    output_dir = _prepare_output_dir(args.output_dir)
+    reviewed_revision = candidate.revisions[-1].model_copy(deep=True)
+    reviewed_revision.status = "accepted" if args.decision == "accept" else "rejected"
+    reviewed_revision.verification = args.verification
+
+    if args.decision == "accept":
+        verified = candidate.model_copy(deep=True)
+        verified.revisions[-1] = reviewed_revision
+    else:
+        parent_path = (
+            Path(args.parent_result)
+            if args.parent_result
+            else candidate_path.with_name("parent_result.json")
+        )
+        if not parent_path.exists():
+            raise ValueError(
+                "Rejected candidates require --parent-result or parent_result.json beside the candidate"
+            )
+        verified = ExtractionResult.model_validate(_load_json(str(parent_path)))
+        verified.revisions.append(reviewed_revision)
+        shutil.copy2(candidate_path, output_dir / "rejected_candidate.json")
+
+    output_result = output_dir / "result.json"
+    save_result_json(verified, str(output_result))
+    overlay_path = verified.save_overlay(str(output_dir / "overlay.png"))
+    decision_payload = {
+        "decision": args.decision,
+        "verification": args.verification,
+        "revision": reviewed_revision.model_dump(mode="json"),
+        "result": str(output_result),
+        "overlay": overlay_path,
+    }
+    decision_path = output_dir / "review_decision.json"
+    decision_path.write_text(
+        json.dumps(decision_payload, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    print(json.dumps(decision_payload, indent=2, ensure_ascii=False))
     return 0
 
 
@@ -271,6 +361,8 @@ def main() -> int:
     try:
         if args.command == "apply":
             return _run_apply(args)
+        if args.command == "verify":
+            return _run_verify(args)
         if args.command == "inspect":
             return _run_inspect(args)
         if args.command == "inspect-risk":

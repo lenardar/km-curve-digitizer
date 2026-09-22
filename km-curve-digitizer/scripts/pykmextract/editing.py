@@ -23,6 +23,7 @@ class CurveEditor:
         result: ExtractionResult,
         actions: Iterable[dict[str, Any]],
         *,
+        observation: str = "",
         reason: str = "",
     ) -> ExtractionResult:
         actions = [dict(action) for action in actions]
@@ -69,8 +70,10 @@ class CurveEditor:
             CurveRevision(
                 revision_id=revision_id,
                 created_at=datetime.now(timezone.utc).isoformat(),
+                observation=observation,
                 reason=reason,
                 actions=recorded_actions,
+                status="candidate",
             )
         )
         return ExtractionResult.model_validate(edited.model_dump())
@@ -374,6 +377,10 @@ class CurveEditor:
             ordered_y[keep],
             ordered_time[keep],
             ordered_survival[keep],
+            origin_pixel=(
+                float(result.axis_anchors.x_min_point.x),
+                float(result.axis_anchors.y_max_point.y),
+            ),
         )
         if len(time_clean) == len(normalized_ids) + 1 and time_clean[0] == 0:
             normalized_ids.insert(0, f"c{curve.id}-{revision_id}-origin")

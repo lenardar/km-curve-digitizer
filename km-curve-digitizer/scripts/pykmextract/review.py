@@ -33,6 +33,7 @@ def save_overlay(result: ExtractionResult, output_path: str) -> str:
             x_pixels,
             y_pixels,
             linestyle="--",
+            drawstyle="steps-post",
             linewidth=1.5,
             color=color,
             label=f"{curve.name} ({curve.extraction_tolerance}px tol)",
@@ -48,7 +49,7 @@ def save_overlay(result: ExtractionResult, output_path: str) -> str:
         facecolor="none",
     )
     ax.add_patch(rect)
-    ax.set_title(f"KM Curve Digitizer review | score={result.validation.score}")
+    ax.set_title("KM Curve Digitizer review | model verification required")
     ax.legend(loc="upper right")
     ax.set_axis_off()
     fig.tight_layout()
@@ -81,6 +82,7 @@ def save_point_review(
 
     x_pixels = np.asarray(curve.x_pixels, dtype=float)
     y_pixels = np.asarray(curve.y_pixels, dtype=float)
+    display_x, display_y = _curve_data_to_pixel_trace(result, curve)
     times = np.asarray(curve.time, dtype=float)
     survival = np.asarray(curve.survival, dtype=float)
     selected = np.ones(len(times), dtype=bool)
@@ -123,16 +125,22 @@ def save_point_review(
         width = 1.0 if other.name != curve_name else 1.8
         alpha = 0.45 if other.name != curve_name else 0.9
         if other.name == curve_name:
-            plot_x = x_pixels[selected_indices]
-            plot_y = y_pixels[selected_indices]
+            plot_x = display_x[selected_indices]
+            plot_y = display_y[selected_indices]
         else:
-            plot_x = other.x_pixels
-            plot_y = other.y_pixels
-        ax.plot(plot_x, plot_y, color=color, linewidth=width, alpha=alpha)
+            plot_x, plot_y = _curve_data_to_pixel_trace(result, other)
+        ax.plot(
+            plot_x,
+            plot_y,
+            color=color,
+            linewidth=width,
+            alpha=alpha,
+            drawstyle="steps-post",
+        )
 
     ax.scatter(
-        x_pixels[selected_indices],
-        y_pixels[selected_indices],
+        display_x[selected_indices],
+        display_y[selected_indices],
         s=22,
         facecolors="none",
         edgecolors="#ff3300",
@@ -142,7 +150,7 @@ def save_point_review(
     for index in label_indices:
         ax.annotate(
             curve.point_ids[index],
-            (x_pixels[index], y_pixels[index]),
+            (display_x[index], display_y[index]),
             xytext=(3, -6),
             textcoords="offset points",
             fontsize=6,
@@ -154,10 +162,10 @@ def save_point_review(
         left, top, right, bottom = pixel_region
     else:
         margin = 20.0
-        left = max(0.0, float(x_pixels[selected_indices].min() - margin))
-        right = min(float(image.shape[1]), float(x_pixels[selected_indices].max() + margin))
-        top = max(0.0, float(y_pixels[selected_indices].min() - margin))
-        bottom = min(float(image.shape[0]), float(y_pixels[selected_indices].max() + margin))
+        left = max(0.0, float(display_x[selected_indices].min() - margin))
+        right = min(float(image.shape[1]), float(display_x[selected_indices].max() + margin))
+        top = max(0.0, float(display_y[selected_indices].min() - margin))
+        bottom = min(float(image.shape[0]), float(display_y[selected_indices].max() + margin))
     ax.set_xlim(left, right)
     ax.set_ylim(bottom, top)
     ax.set_title(f"Point review: {curve.name} | {len(points)} selected")
@@ -415,8 +423,9 @@ def _build_review_markdown(
 
 ## Summary
 
-- Validation score: `{result.validation.score}`
-- Validation level: `{result.validation.level}`
+- Visual acceptance: `pending model review`
+- Diagnostic checks: `{sum(result.validation.checks.values())}/{len(result.validation.checks)} passed` (navigation only)
+- Diagnostic issues: `{len(result.validation.issues)}`
 - Image: `{Path(result.image_path).name}`
 - Notes: {result.semantic.notes or "None"}
 

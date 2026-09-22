@@ -87,8 +87,6 @@ def _build_result() -> ExtractionResult:
         axis_anchors=AxisAnchors.from_bounds(AxisBounds(left=0, right=240, top=0, bottom=100)),
         curves=[curve_a, curve_b],
         validation=ValidationReport(
-            score=100,
-            level="high",
             checks={
                 "monotonicity": True,
                 "range": True,
@@ -169,7 +167,7 @@ class MicroTuneTests(unittest.TestCase):
             tuned_curve = next(curve for curve in tuned.curves if curve.name == "Arm B")
             self.assertNotEqual(tuned_curve.survival, original_curve.survival)
 
-    def test_segment_micro_tuner_rejects_large_score_drop(self):
+    def test_segment_micro_tuner_does_not_use_an_aggregate_score_gate(self):
         with TemporaryDirectory() as tmpdir:
             image_path = Path(tmpdir) / "dummy.png"
             Image.new("RGB", (260, 120), (255, 255, 255)).save(image_path)
@@ -186,7 +184,7 @@ class MicroTuneTests(unittest.TestCase):
                 }
             )
 
-            tuned = SegmentMicroTuner(max_delta=0.50, max_score_drop=0).refine(
+            tuned = SegmentMicroTuner(max_delta=0.50).refine(
                 result,
                 provider=provider,
                 model="fake-model",
@@ -194,13 +192,11 @@ class MicroTuneTests(unittest.TestCase):
                 review_image_path=str(Path(tmpdir) / "micro_review.png"),
             )
 
-            self.assertEqual(tuned.model_dump(mode="json"), result.model_dump(mode="json"))
+            self.assertNotEqual(tuned.model_dump(mode="json"), result.model_dump(mode="json"))
 
     def test_segment_micro_tuner_prioritizes_issue_curve_tail_before_overlap_window(self):
         result = _build_result()
         result.validation = ValidationReport(
-            score=80,
-            level="high",
             checks={
                 "monotonicity": True,
                 "range": True,

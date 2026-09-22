@@ -1,6 +1,6 @@
 # Model-operated review loop
 
-The calling model owns the review. Scripts provide perception and action primitives; validation output does not authorize edits.
+The calling model owns the review. Scripts provide perception and action primitives; diagnostic output does not authorize edits. There is intentionally no aggregate quality score.
 
 ## Observe
 
@@ -26,9 +26,9 @@ Do not translate a validation warning directly into an action. For example, a no
 
 ## Verify
 
-1. Run `apply` into a new directory.
+1. Run `apply` into a new directory; this creates a `candidate` revision.
 2. View both before and after overlays and any relevant focused inspection.
-3. Accept by continuing from the new `result.json`; reject by retaining `parent_result.json`.
-4. Repeat only while a visible, resolvable discrepancy remains.
+3. Run `verify --decision accept|reject --verification "..."` into another new directory. Acceptance keeps the edited data; rejection restores the parent data and retains the rejected candidate for audit.
+4. Continue only from the verified `result.json`, and repeat only while a visible, resolvable discrepancy remains.
 
 Stop with an explicit uncertainty note when the pixels cannot distinguish the alternatives. Do not guess merely to make validation pass, and do not hand an executable edit back to the user when the model can perform it itself.

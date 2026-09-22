@@ -84,11 +84,9 @@ class ExtractionValidator:
         return ambiguous_pairs
 
     def validate(self, semantic: SemanticExtraction, curves: List[CurveData]) -> ValidationReport:
-        """Return an aggregate validation report across all curves."""
+        """Return diagnostic checks and findings across all curves."""
         if not curves:
             return ValidationReport(
-                score=0,
-                level="low",
                 checks={
                     "monotonicity": False,
                     "range": False,
@@ -105,13 +103,6 @@ class ExtractionValidator:
                 ],
             )
 
-        weights = {
-            "monotonicity": 30,
-            "range": 20,
-            "start": 15,
-            "coverage": 15,
-            "risk_table": 20,
-        }
         checks: Dict[str, bool] = {}
         issues: List[ValidationIssue] = []
 
@@ -181,15 +172,4 @@ class ExtractionValidator:
                 )
             )
 
-        score = int(sum(weight for key, weight in weights.items() if checks.get(key, False)))
-        if score >= 80:
-            level = "high"
-        elif score >= 60:
-            level = "medium"
-        else:
-            level = "low"
-
-        if overlap_pairs and level == "high":
-            level = "medium"
-
-        return ValidationReport(score=score, level=level, checks=checks, issues=issues)
+        return ValidationReport(checks=checks, issues=issues)

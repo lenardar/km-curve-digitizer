@@ -272,6 +272,7 @@ def trim_curve_edge_outliers(
     x_pixels: np.ndarray,
     y_pixels: np.ndarray,
     *,
+    plot_bounds: AxisBounds | None = None,
     window: int = 8,
     stable_span: float = 8.0,
     stable_step: float = 4.0,
@@ -279,6 +280,15 @@ def trim_curve_edge_outliers(
     """Trim unstable leading segments caused by labels, axes, or dark annotations."""
     if len(x_pixels) <= window * 2:
         return x_pixels, y_pixels
+
+    if plot_bounds is not None:
+        near_left = x_pixels[0] <= plot_bounds.left + max(8, int(plot_bounds.width * 0.04))
+        near_top = y_pixels[0] <= plot_bounds.top + max(8, int(plot_bounds.height * 0.04))
+        if near_left and near_top:
+            # A KM trace that begins near the calibrated (t=0, S=1) corner may
+            # legitimately fall steeply. Do not mistake that evidence for a
+            # noisy prefix merely because it is not locally flat.
+            return x_pixels, y_pixels
 
     start_index = _find_stable_start_index(
         y_pixels,

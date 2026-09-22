@@ -13,6 +13,7 @@ Read `inspection/points.json` and view `inspection/point_review.png`. Then creat
 
 ```json
 {
+  "observation": "One isolated extracted point sits below the visible source trace",
   "reason": "Visual review of the 10-16 month segment",
   "actions": []
 }
@@ -27,6 +28,17 @@ python3 <skill-dir>/scripts/refine_km.py apply result.json \
 ```
 
 The command preserves `parent_result.json`, writes the new `result.json`, records a revision, and generates before/after overlays. It refuses to write into a non-empty output directory.
+
+The applied result is a candidate, not an accepted result. After viewing both overlays, record the model's decision:
+
+```bash
+python3 <skill-dir>/scripts/refine_km.py verify refined/result.json \
+  --decision accept \
+  --verification "The replacement follows the visible step and preserves both neighbors" \
+  --output-dir accepted
+```
+
+Use `--decision reject` when the candidate damages the trace. The command restores `parent_result.json` as the active result, retains the rejected candidate, and records why it was rejected.
 
 ## Delete points
 
@@ -118,3 +130,4 @@ Replacement removes the existing points in the inclusive time range and inserts 
 - Survival remains within 0-1 and is normalized to a non-increasing KM curve.
 - Unedited curves retain their point IDs and values.
 - Every applied action is stored in `revisions` in the edited result.
+- Every candidate must be visually accepted or rejected; diagnostic checks do not make that decision.

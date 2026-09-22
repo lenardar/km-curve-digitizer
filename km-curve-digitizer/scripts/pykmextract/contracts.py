@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Literal, Optional, Tuple
 
 import pandas as pd
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
@@ -283,12 +283,10 @@ class ValidationIssue(BaseModel):
 
 
 class ValidationReport(BaseModel):
-    """Aggregate validation summary."""
+    """Diagnostic signals for model inspection, without an aggregate verdict."""
 
     model_config = ConfigDict(use_enum_values=True)
 
-    score: int
-    level: ConfidenceLevel
     checks: Dict[str, bool]
     issues: List[ValidationIssue] = Field(default_factory=list)
 
@@ -298,8 +296,11 @@ class CurveRevision(BaseModel):
 
     revision_id: str
     created_at: str
+    observation: str = ""
     reason: str = ""
     actions: List[Dict[str, Any]] = Field(default_factory=list)
+    status: Literal["candidate", "accepted", "rejected"] = "candidate"
+    verification: str = ""
 
 
 class ExtractionResult(BaseModel):

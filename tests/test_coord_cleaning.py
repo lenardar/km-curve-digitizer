@@ -6,7 +6,7 @@ import unittest
 
 import numpy as np
 
-from pykmextract.extractor.coord import _suppress_isolated_drop_outliers
+from pykmextract.extractor.coord import _suppress_isolated_drop_outliers, clean_curve_points
 
 
 class CoordCleaningTests(unittest.TestCase):
@@ -23,6 +23,18 @@ class CoordCleaningTests(unittest.TestCase):
         repaired = _suppress_isolated_drop_outliers(survival)
 
         np.testing.assert_allclose(repaired, survival)
+
+    def test_inserted_origin_uses_axis_pixel_not_first_detected_pixel(self):
+        x_pixels, y_pixels, time, survival = clean_curve_points(
+            np.array([97.0, 98.0]),
+            np.array([232.0, 232.0]),
+            np.array([1.8, 1.9]),
+            np.array([0.4, 0.4]),
+            origin_pixel=(76.0, 108.0),
+        )
+
+        self.assertEqual((time[0], survival[0]), (0.0, 1.0))
+        self.assertEqual((x_pixels[0], y_pixels[0]), (76.0, 108.0))
 
 
 if __name__ == "__main__":

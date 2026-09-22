@@ -165,7 +165,11 @@ class ExtractionPipeline:
             coords = remove_ci_band(coords, image_width=image_width)
 
         x_pixels, y_pixels = pixels_to_curve(coords)
-        x_pixels, y_pixels = trim_curve_edge_outliers(x_pixels, y_pixels)
+        x_pixels, y_pixels = trim_curve_edge_outliers(
+            x_pixels,
+            y_pixels,
+            plot_bounds=axis_bounds,
+        )
         return CurveTrace(
             spec=curve_spec,
             tolerance=tolerance,
@@ -194,6 +198,10 @@ class ExtractionPipeline:
             trace.y_pixels,
             time,
             survival,
+            origin_pixel=(
+                float(axis_anchors.x_min_point.x),
+                float(axis_anchors.y_max_point.y),
+            ),
         )
         return CurveData(
             id=trace.spec.id,

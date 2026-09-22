@@ -25,15 +25,16 @@ Turn one or more Kaplan-Meier figure images into inspectable curve and number-at
    ```
 
 5. Read [references/agent-loop.md](references/agent-loop.md), then personally inspect `review/overlay.png`, `result.json`, `review/validation_issues.csv`, and—when present—`review/risk_table_review.png`. Treat validation as a navigation hint, never as edit authority.
-6. Use the inspection tools to gather focused evidence, decide the edit, apply it, and compare before/after artifacts. Continue from the edited result only when the visible source supports the change; otherwise retain the parent result.
-7. Repeat until no visible defect remains that the available evidence can resolve. Do not stop at recommending that a human perform an edit the skill already exposes.
-8. If the overlay shows incorrect plot bounds, write a reviewed `--axis-json`, rerun, and inspect the new overlay. Use `--axis-export-json` to preserve accepted calibration.
-9. Report the accepted output paths, revisions, unresolved ambiguity, and validation findings. A high score is not proof of scientific accuracy.
+6. Use the inspection tools to gather focused evidence, record the visible observation, decide the edit, and apply it as a candidate revision.
+7. Compare the before/after artifacts, then run `refine_km.py verify` to explicitly accept or reject the candidate. Continue from an accepted result only when the visible source supports it; rejection restores the parent data while preserving the rejected revision in the audit trail.
+8. Repeat until no visible defect remains that the available evidence can resolve. Do not stop at recommending that a human perform an edit the skill already exposes.
+9. If the overlay shows incorrect plot bounds, write a reviewed `--axis-json`, rerun, and inspect the new overlay. Use `--axis-export-json` to preserve accepted calibration.
+10. Report the accepted output paths, revisions, unresolved ambiguity, and diagnostic findings. The Skill intentionally has no aggregate quality score; visual agreement with the source is the acceptance criterion.
 
 ## Agent Authority
 
 - The calling model chooses what to inspect and whether to add, delete, move, replace, correct, clear, accept, or reject.
-- Geometry detection, validation checks, and scores may direct attention but must not autonomously change extracted evidence.
+- Geometry detection and diagnostic checks may direct attention but must not autonomously change extracted evidence.
 - Keep edits narrow and evidence-backed. A related cluster may be edited together, but do not bundle unrelated guesses into one revision.
 - The optional internal provider passes `--axis-refine` and `--segment-micro-tune` are not the primary Skill workflow. Do not invoke them as a substitute for the calling model's own inspection unless the user explicitly requests those automatic passes.
 
@@ -41,7 +42,7 @@ Turn one or more Kaplan-Meier figure images into inspectable curve and number-at
 
 When the overlay contains missing, misplaced, or extraneous points, read [references/correction-schema.md](references/correction-schema.md). Inspect the affected segment to obtain stable point IDs, then apply the model's narrow add, delete, move, or replace decision through `scripts/refine_km.py`.
 
-Always compare the generated before/after overlays. Accept an edit only when it follows visible source evidence and does not damage neighboring segments. The editor preserves the parent result and records every action in the new result's `revisions` list.
+Always compare the generated before/after overlays. Accept an edit only when it follows visible source evidence and does not damage neighboring segments. The editor preserves the parent result and records observation, actions, status, and verification in the new result's `revisions` list.
 
 ## Number-at-Risk Table Editing
 
@@ -75,6 +76,7 @@ python3 <skill-dir>/scripts/run_batch.py \
 
 - Give grayscale curves, similar colors, confidence ribbons, dense censoring marks, and overlapping curves closer model inspection.
 - Preserve KM curves as right-continuous steps; do not smooth them into continuous trajectories.
+- Reject any overlay that visually connects KM plateaus with diagonal interpolation; inspect or edit the underlying segment and render it as `steps-post`.
 - Treat every number-at-risk correction as a visible transcription claim. Prefer `null` to a guessed count.
 - Do not infer hazard ratios, medians, patient-level events, or treatment effects unless they are independently visible or supplied.
 - Keep credentials out of semantic JSON, result files, and review bundles.

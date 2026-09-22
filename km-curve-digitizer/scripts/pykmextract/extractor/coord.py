@@ -166,6 +166,8 @@ def clean_curve_points(
     y_pixels: np.ndarray,
     time: np.ndarray,
     survival: np.ndarray,
+    *,
+    origin_pixel: tuple[float, float] | None = None,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Clean curve arrays while preserving alignment between pixels and data."""
     order = np.argsort(time)
@@ -183,8 +185,13 @@ def clean_curve_points(
     survival = np.clip(survival, 0.0, 1.0)
     survival = _suppress_isolated_drop_outliers(survival)
     survival = np.minimum.accumulate(survival)
-    survival = _collapse_short_drop_runs(survival)
-    return _ensure_curve_origin(x_pixels, y_pixels, time, survival)
+    return _ensure_curve_origin(
+        x_pixels,
+        y_pixels,
+        time,
+        survival,
+        origin_pixel=origin_pixel,
+    )
 
 
 def _suppress_isolated_drop_outliers(
@@ -224,27 +231,6 @@ def _suppress_isolated_drop_outliers(
     return repaired
 
 
-def _collapse_short_drop_runs(survival: np.ndarray, *, max_run: int = 8) -> np.ndarray:
-    """Flatten short descending ramps created by thick plotted step edges."""
-    if len(survival) < 3:
-        return survival
-
-    collapsed = survival.copy()
-    index = 1
-    while index < len(collapsed):
-        if collapsed[index] < collapsed[index - 1] - 1e-9:
-            start = index - 1
-            end = index
-            while end + 1 < len(collapsed) and collapsed[end + 1] < collapsed[end] - 1e-9:
-                end += 1
-            if end - start <= max_run:
-                collapsed[start : end + 1] = collapsed[end]
-            index = end + 1
-        else:
-            index += 1
-    return collapsed
-
-
 def _drop_duplicate_time_points(
     x_pixels: np.ndarray,
     y_pixels: np.ndarray,
@@ -261,12 +247,15 @@ def _ensure_curve_origin(
     y_pixels: np.ndarray,
     time: np.ndarray,
     survival: np.ndarray,
+    *,
+    origin_pixel: tuple[float, float] | None = None,
 ) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     if len(time) == 0:
         return x_pixels, y_pixels, time, survival
     if time[0] > 0:
-        x_pixels = np.concatenate([[x_pixels[0]], x_pixels])
-        y_pixels = np.concatenate([[y_pixels[0]], y_pixels])
+        origin_x, origin_y = origin_pixel or (x_pixels[0], y_pixels[0])
+        x_pixels = np.concatenate([[origin_x], x_pixels])
+        y_pixels = np.concatenate([[origin_y], y_pixels])
         time = np.concatenate([[0.0], time])
         survival = np.concatenate([[1.0], survival])
         return x_pixels, y_pixels, time, survival
