@@ -8,7 +8,7 @@ import shutil
 from typing import Dict, Optional
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from .contracts import ExtractionResult
 
@@ -325,6 +325,16 @@ def save_review_bundle(
     validation_csv = output_root / "validation_issues.csv"
     result.validation_frame().to_csv(validation_csv, index=False)
 
+    quality_hotspots = save_quality_hotspots(
+        result,
+        str(output_root / "quality_hotspots"),
+    )
+    quality_hotspots_json = output_root / "quality_hotspots.json"
+    quality_hotspots_json.write_text(
+        json.dumps(quality_hotspots, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+
     from .extractor.risk_table import ensure_risk_table_cell_regions
 
     ensure_risk_table_cell_regions(result)
@@ -359,6 +369,8 @@ def save_review_bundle(
             overlay_image=overlay_path,
             digitized_csv=digitized_csv,
             validation_csv=validation_csv,
+            quality_hotspots=quality_hotspots,
+            quality_hotspots_json=quality_hotspots_json,
             risk_table_csv=risk_table_csv,
             risk_table_json=risk_table_json,
             risk_table_review=risk_table_review,
@@ -372,6 +384,7 @@ def save_review_bundle(
         "overlay": str(overlay_path),
         "digitized_csv": str(digitized_csv),
         "validation_csv": str(validation_csv),
+        "quality_hotspots_json": str(quality_hotspots_json),
         "risk_table_csv": str(risk_table_csv),
         "risk_table_json": str(risk_table_json),
         "review_md": str(review_md),
@@ -383,6 +396,81 @@ def save_review_bundle(
     return bundle
 
 
+def save_quality_hotspots(
+    result: ExtractionResult,
+    output_dir: str,
+    *,
+    padding: int = 6,
+    scale: int = 4,
+) -> list[dict]:
+    """Export enlarged source/overlay boards for findings requiring visual review."""
+    source = Image.open(result.image_path).convert("RGB")
+    overlay = source.copy()
+    overlay_draw = ImageDraw.Draw(overlay)
+    palette = ["#0072B2", "#D55E00", "#009E73", "#CC79A7", "#E69F00"]
+    for curve_index, curve in enumerate(result.curves):
+        x_pixels, y_pixels = _curve_data_to_pixel_trace(result, curve)
+        color = palette[curve_index % len(palette)]
+        for index in range(1, len(x_pixels)):
+            previous = (float(x_pixels[index - 1]), float(y_pixels[index - 1]))
+            corner = (float(x_pixels[index]), float(y_pixels[index - 1]))
+            current = (float(x_pixels[index]), float(y_pixels[index]))
+            overlay_draw.line([previous, corner, current], fill=color, width=2)
+    output_root = Path(output_dir)
+    records: list[dict] = []
+
+    for issue in result.validation.issues:
+        if not issue.requires_visual_review or issue.pixel_region is None:
+            continue
+        left, top, right, bottom = issue.pixel_region
+        left = max(0, int(left) - padding)
+        top = max(0, int(top) - padding)
+        right = min(source.width, int(right) + padding + 1)
+        bottom = min(source.height, int(bottom) + padding + 1)
+        if right <= left or bottom <= top:
+            continue
+
+        output_root.mkdir(parents=True, exist_ok=True)
+        source_crop = source.crop((left, top, right, bottom))
+        overlay_crop = overlay.crop((left, top, right, bottom))
+        scaled_size = (
+            max(1, source_crop.width * scale),
+            max(1, source_crop.height * scale),
+        )
+        source_crop = source_crop.resize(
+            scaled_size,
+            Image.Resampling.NEAREST,
+        )
+        overlay_crop = overlay_crop.resize(scaled_size, Image.Resampling.NEAREST)
+        label_height = 34
+        gap = 12
+        board = Image.new(
+            "RGB",
+            (max(960, source_crop.width * 2 + gap), source_crop.height + label_height),
+            "white",
+        )
+        board.paste(source_crop, (0, label_height))
+        board.paste(overlay_crop, (source_crop.width + gap, label_height))
+        board_draw = ImageDraw.Draw(board)
+        board_draw.text((8, 8), f"{issue.issue_id}: {issue.code}", fill="black")
+        board_draw.text((source_crop.width + gap + 8, 8), "extraction overlay", fill="black")
+        filename = f"{issue.issue_id}.png"
+        output_path = output_root / filename
+        board.save(output_path)
+        records.append(
+            {
+                "issue_id": issue.issue_id,
+                "code": issue.code,
+                "message": issue.message,
+                "curve_ids": issue.curve_ids,
+                "time_range": issue.time_range,
+                "pixel_region": [left, top, right - 1, bottom - 1],
+                "image": str(Path(output_root.name) / filename),
+            }
+        )
+    return records
+
+
 def _build_review_markdown(
     *,
     result: ExtractionResult,
@@ -392,6 +480,8 @@ def _build_review_markdown(
     overlay_image: Path,
     digitized_csv: Path,
     validation_csv: Path,
+    quality_hotspots: list[dict],
+    quality_hotspots_json: Path,
     risk_table_csv: Path,
     risk_table_json: Path,
     risk_table_review: Optional[Path],
@@ -425,6 +515,17 @@ def _build_review_markdown(
         f"| ![original]({original_image.name}) | ![overlay]({overlay_image.name}) |\n"
     )
 
+    hotspot_block = "\n## Required Local Reviews\n\n"
+    if quality_hotspots:
+        hotspot_block += "Acceptance requires comparing the source-only and overlay panes for every issue ID below.\n\n"
+        hotspot_block += "\n".join(
+            f"- `{item['issue_id']}`: [{item['code']}]({item['image']}) — {item['message']}"
+            for item in quality_hotspots
+        )
+        hotspot_block += "\n"
+    else:
+        hotspot_block += "No automatically localized high-risk regions.\n"
+
     return f"""# Review Bundle: {title}
 
 ## Summary
@@ -440,6 +541,8 @@ def _build_review_markdown(
 {citation or "Not provided"}
 
 {review_block}
+
+{hotspot_block}
 
 {context_block}
 
@@ -457,6 +560,7 @@ def _build_review_markdown(
 
 - [digitized_curves.csv]({digitized_csv.name})
 - [validation_issues.csv]({validation_csv.name})
+- [quality_hotspots.json]({quality_hotspots_json.name})
 - [risk_table.csv]({risk_table_csv.name})
 - [risk_table.json]({risk_table_json.name})
 """

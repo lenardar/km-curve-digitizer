@@ -57,6 +57,15 @@ def build_parser() -> argparse.ArgumentParser:
         help="Parent JSON used on rejection; defaults to parent_result.json beside the candidate",
     )
     verify_parser.add_argument(
+        "--reviewed-issue",
+        action="append",
+        default=[],
+        help=(
+            "Issue ID from quality_hotspots.json that the model inspected; repeat for every "
+            "required local review before acceptance"
+        ),
+    )
+    verify_parser.add_argument(
         "--output-dir",
         required=True,
         help="New directory for verified outputs",
@@ -179,6 +188,25 @@ def _run_apply(args: argparse.Namespace) -> int:
 def _run_verify(args: argparse.Namespace) -> int:
     candidate_path = Path(args.result)
     candidate = ExtractionResult.model_validate(_load_json(str(candidate_path)))
+    required_issue_ids = {
+        issue.issue_id
+        for issue in candidate.validation.issues
+        if issue.requires_visual_review
+    }
+    reviewed_issue_ids = set(args.reviewed_issue)
+    unknown_issue_ids = reviewed_issue_ids - {
+        issue.issue_id for issue in candidate.validation.issues
+    }
+    if unknown_issue_ids:
+        raise ValueError(
+            "Unknown reviewed issue IDs: " + ", ".join(sorted(unknown_issue_ids))
+        )
+    missing_issue_ids = required_issue_ids - reviewed_issue_ids
+    if args.decision == "accept" and missing_issue_ids:
+        raise ValueError(
+            "Acceptance requires local visual review of issue IDs: "
+            + ", ".join(sorted(missing_issue_ids))
+        )
     output_dir = _prepare_output_dir(args.output_dir)
     reviewed_revision = None
     if not candidate.revisions:
@@ -216,6 +244,7 @@ def _run_verify(args: argparse.Namespace) -> int:
         "decision": args.decision,
         "verification": args.verification,
         "review_kind": "edited_candidate" if reviewed_revision else "base_extraction",
+        "reviewed_issue_ids": sorted(reviewed_issue_ids),
         "revision": reviewed_revision.model_dump(mode="json") if reviewed_revision else None,
         "result": str(output_result),
         "overlay": overlay_path,

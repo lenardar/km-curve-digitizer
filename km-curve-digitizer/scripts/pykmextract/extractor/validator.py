@@ -37,51 +37,130 @@ class ExtractionValidator:
         observed = [count for count in counts if count is not None]
         return not any(left < right for left, right in zip(observed, observed[1:]))
 
-    def detect_overlap_ambiguity(self, curves: List[CurveData]) -> List[tuple[CurveData, CurveData]]:
-        """Flag long nearly coincident segments between different extracted curves."""
-        ambiguous_pairs: List[tuple[CurveData, CurveData]] = []
+    def detect_source_gap_regions(
+        self,
+        curves: List[CurveData],
+        *,
+        min_missing_columns: int = 10,
+    ) -> List[dict]:
+        """Locate long resampled spans unsupported by observed source-color columns."""
+        regions: List[dict] = []
+        for curve in curves:
+            observed_x = np.unique(np.asarray(curve.source_x_pixels, dtype=float))
+            if len(observed_x) < 2:
+                continue
+            curve_x = np.asarray(curve.x_pixels, dtype=float)
+            curve_y = np.asarray(curve.y_pixels, dtype=float)
+            curve_time = np.asarray(curve.time, dtype=float)
+            for left_x, right_x in zip(observed_x, observed_x[1:]):
+                missing_columns = int(round(right_x - left_x)) - 1
+                if missing_columns < min_missing_columns:
+                    continue
+                endpoint_y = np.interp([left_x, right_x], curve_x, curve_y)
+                endpoint_time = np.interp([left_x, right_x], curve_x, curve_time)
+                regions.append(
+                    {
+                        "curve": curve,
+                        "missing_columns": missing_columns,
+                        "time_range": (float(endpoint_time[0]), float(endpoint_time[1])),
+                        "pixel_region": (
+                            max(0, int(left_x) - 8),
+                            max(0, int(endpoint_y.min()) - 16),
+                            int(right_x) + 8,
+                            int(endpoint_y.max()) + 16,
+                        ),
+                    }
+                )
+                if sum(item["curve"].id == curve.id for item in regions) >= 12:
+                    break
+        return regions
+
+    def detect_curve_identity_regions(
+        self,
+        curves: List[CurveData],
+        *,
+        distance_pixels: float = 4.0,
+        min_run_pixels: int = 6,
+    ) -> List[dict]:
+        """Locate close runs where independently extracted traces may switch identity."""
+        regions: List[dict] = []
         if len(curves) < 2:
-            return ambiguous_pairs
+            return regions
 
         for left_index, left_curve in enumerate(curves):
             left_trace = {
-                int(round(x_pixel)): float(y_pixel)
-                for x_pixel, y_pixel in zip(left_curve.x_pixels, left_curve.y_pixels)
+                int(round(x_pixel)): (float(y_pixel), float(time_value))
+                for x_pixel, y_pixel, time_value in zip(
+                    left_curve.x_pixels,
+                    left_curve.y_pixels,
+                    left_curve.time,
+                )
             }
             if not left_trace:
                 continue
 
             for right_curve in curves[left_index + 1 :]:
                 right_trace = {
-                    int(round(x_pixel)): float(y_pixel)
-                    for x_pixel, y_pixel in zip(right_curve.x_pixels, right_curve.y_pixels)
+                    int(round(x_pixel)): (float(y_pixel), float(time_value))
+                    for x_pixel, y_pixel, time_value in zip(
+                        right_curve.x_pixels,
+                        right_curve.y_pixels,
+                        right_curve.time,
+                    )
                 }
                 common_x = sorted(set(left_trace).intersection(right_trace))
-                if len(common_x) < 24:
+                if len(common_x) < min_run_pixels:
                     continue
 
                 close_x = [
                     x_value
                     for x_value in common_x
-                    if abs(left_trace[x_value] - right_trace[x_value]) <= 3.0
+                    if abs(left_trace[x_value][0] - right_trace[x_value][0])
+                    <= distance_pixels
                 ]
-                if len(close_x) < max(20, int(len(common_x) * 0.18)):
+                if len(close_x) < min_run_pixels:
                     continue
 
-                longest_run = 1
-                run = 1
+                runs: List[List[int]] = []
+                current_run = [close_x[0]]
                 for previous, current in zip(close_x, close_x[1:]):
                     if current - previous <= 1:
-                        run += 1
+                        current_run.append(current)
                     else:
-                        longest_run = max(longest_run, run)
-                        run = 1
-                longest_run = max(longest_run, run)
+                        if len(current_run) >= min_run_pixels:
+                            runs.append(current_run)
+                        current_run = [current]
+                if len(current_run) >= min_run_pixels:
+                    runs.append(current_run)
 
-                if longest_run >= 20:
-                    ambiguous_pairs.append((left_curve, right_curve))
+                for run in runs[:12]:
+                    start_x, end_x = run[0], run[-1]
+                    y_values = [
+                        left_trace[x_value][0]
+                        for x_value in run
+                    ] + [
+                        right_trace[x_value][0]
+                        for x_value in run
+                    ]
+                    regions.append(
+                        {
+                            "left": left_curve,
+                            "right": right_curve,
+                            "run_length": len(run),
+                            "time_range": (
+                                min(left_trace[start_x][1], right_trace[start_x][1]),
+                                max(left_trace[end_x][1], right_trace[end_x][1]),
+                            ),
+                            "pixel_region": (
+                                max(0, start_x - 10),
+                                max(0, int(min(y_values)) - 14),
+                                end_x + 10,
+                                int(max(y_values)) + 14,
+                            ),
+                        }
+                    )
 
-        return ambiguous_pairs
+        return regions
 
     def validate(self, semantic: SemanticExtraction, curves: List[CurveData]) -> ValidationReport:
         """Return diagnostic checks and findings across all curves."""
@@ -94,6 +173,8 @@ class ExtractionValidator:
                     "coverage": False,
                     "risk_table": False,
                     "overlap_ambiguity": False,
+                    "curve_identity_review": False,
+                    "source_gap_review": False,
                 },
                 issues=[
                     ValidationIssue(
@@ -159,15 +240,45 @@ class ExtractionValidator:
                         )
                     )
 
-        overlap_pairs = self.detect_overlap_ambiguity(curves)
-        checks["overlap_ambiguity"] = not overlap_pairs
-        for left_curve, right_curve in overlap_pairs:
+        source_gap_regions = self.detect_source_gap_regions(curves)
+        checks["source_gap_review"] = not source_gap_regions
+        for region in source_gap_regions:
+            curve = region["curve"]
             issues.append(
                 ValidationIssue(
-                    code="overlap_ambiguity",
+                    code="source_gap_review",
+                    curve_id=curve.id,
+                    curve_ids=[curve.id],
+                    time_range=region["time_range"],
+                    pixel_region=region["pixel_region"],
+                    requires_visual_review=True,
                     message=(
-                        f"curves '{left_curve.name}' and '{right_curve.name}' share a long overlapping segment; "
-                        "closer model inspection is recommended"
+                        f"curve '{curve.name}' is forward-filled across "
+                        f"{region['missing_columns']} columns without matching source-color pixels; "
+                        "inspect the source crop for a missed drop or trace switch"
+                    ),
+                )
+            )
+
+        identity_regions = self.detect_curve_identity_regions(curves)
+        long_regions = [region for region in identity_regions if region["run_length"] >= 20]
+        checks["overlap_ambiguity"] = not long_regions
+        checks["curve_identity_review"] = not identity_regions
+        for region in identity_regions:
+            left_curve = region["left"]
+            right_curve = region["right"]
+            is_long = region["run_length"] >= 20
+            issues.append(
+                ValidationIssue(
+                    code="overlap_ambiguity" if is_long else "curve_identity_review",
+                    curve_ids=[left_curve.id, right_curve.id],
+                    time_range=region["time_range"],
+                    pixel_region=region["pixel_region"],
+                    requires_visual_review=True,
+                    message=(
+                        f"curves '{left_curve.name}' and '{right_curve.name}' are within 4 pixels "
+                        f"for {region['run_length']} consecutive columns; inspect the source crop "
+                        "to confirm that neither trace changes identity"
                     ),
                 )
             )

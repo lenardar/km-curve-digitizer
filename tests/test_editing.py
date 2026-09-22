@@ -11,6 +11,7 @@ import unittest
 from tempfile import TemporaryDirectory
 
 import pykmextract as pkm
+from pykmextract.contracts import ValidationIssue, ValidationReport
 from pykmextract.editing import CurveEditor
 from tests.test_pipeline import make_synthetic_km_image
 
@@ -355,6 +356,82 @@ class CurveEditorTests(unittest.TestCase):
             )
             self.assertEqual(decision["review_kind"], "base_extraction")
             self.assertIsNone(decision["revision"])
+
+    def test_refine_cli_requires_acknowledgement_of_local_review_issue(self):
+        with TemporaryDirectory() as tmpdir:
+            result = make_result(tmpdir)
+            issue = ValidationIssue(
+                issue_id="q001-curve_identity_review",
+                code="curve_identity_review",
+                message="Two traces are locally close",
+                curve_ids=[1, 2],
+                time_range=(4.0, 6.0),
+                pixel_region=(25, 20, 55, 60),
+                requires_visual_review=True,
+            )
+            result.validation = ValidationReport(
+                checks={"curve_identity_review": False},
+                issues=[issue],
+            )
+            result_path = Path(tmpdir) / "result.json"
+            result_path.write_text(json.dumps(result.to_jsonable()), encoding="utf-8")
+            script = (
+                Path(__file__).resolve().parents[1]
+                / "km-curve-digitizer"
+                / "scripts"
+                / "refine_km.py"
+            )
+            env = os.environ.copy()
+            env.setdefault("MPLCONFIGDIR", str(Path(tmpdir) / ".mplconfig"))
+
+            missing = subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "verify",
+                    str(result_path),
+                    "--decision",
+                    "accept",
+                    "--verification",
+                    "The local crop follows the source",
+                    "--output-dir",
+                    str(Path(tmpdir) / "missing"),
+                ],
+                env=env,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertNotEqual(missing.returncode, 0)
+            self.assertIn(issue.issue_id, missing.stderr)
+
+            accepted = subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "verify",
+                    str(result_path),
+                    "--decision",
+                    "accept",
+                    "--verification",
+                    "The local crop follows the source",
+                    "--reviewed-issue",
+                    issue.issue_id,
+                    "--output-dir",
+                    str(Path(tmpdir) / "accepted-with-review"),
+                ],
+                env=env,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(accepted.returncode, 0, accepted.stderr)
+            decision = json.loads(
+                (Path(tmpdir) / "accepted-with-review" / "review_decision.json").read_text(
+                    encoding="utf-8"
+                )
+            )
+            self.assertEqual(decision["reviewed_issue_ids"], [issue.issue_id])
 
     def test_refine_cli_rejects_candidate_and_restores_parent(self):
         with TemporaryDirectory() as tmpdir:

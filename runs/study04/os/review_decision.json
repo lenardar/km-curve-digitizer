@@ -1,8 +1,9 @@
 {
-  "decision": "accept",
-  "verification": "Full enlarged source comparison confirms the 12px dark-trace and 8px light-trace extractions remain on their respective grayscale KM staircases from origin through both tails; the former cross-curve contamination and false plateau are absent.",
+  "decision": "reject",
+  "verification": "Required source/overlay boards reveal unsupported forward-filled plateaus and locally misplaced steps; this base extraction must be edited before acceptance.",
   "review_kind": "base_extraction",
+  "reviewed_issue_ids": [],
   "revision": null,
-  "result": "/tmp/pykm-study04-os-accepted.UzW00F/final/result.json",
-  "overlay": "/tmp/pykm-study04-os-accepted.UzW00F/final/overlay.png"
+  "result": "/tmp/pykm-qc3-rejected.4T4KtF/final/result.json",
+  "overlay": "/tmp/pykm-qc3-rejected.4T4KtF/final/overlay.png"
 }

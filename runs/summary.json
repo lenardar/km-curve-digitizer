@@ -1,12 +1,13 @@
 {
   "workflow": "Codex visual operator + deterministic KM inspection/editing tools",
   "panels_total": 10,
-  "panels_accepted": 10,
+  "panels_accepted": 9,
   "notes": [
     "Every curve was inspected on a local enlarged review board, not only on the contact sheet.",
     "Per-curve pixel tolerances were selected by visual comparison to avoid both sparse false plateaus and cross-curve contamination.",
     "study01/pfs and study03/pfs contain accepted model-authored point revisions; study04/os was re-extracted at low grayscale tolerances after a cross-curve identity failure was found.",
-    "All number-at-risk review boards were checked against their printed source rows."
+    "All number-at-risk review boards were checked against their printed source rows.",
+    "The strengthened QC workflow now localizes close-curve identity regions and refuses acceptance until every required issue ID is acknowledged."
   ],
   "panels": [
     {
@@ -156,9 +157,9 @@
     {
       "study": "study04",
       "endpoint": "os",
-      "status": "accepted_after_detailed_local_visual_review",
+      "status": "rejected_pending_model_edit",
       "review_kind": "base_extraction",
-      "verification": "Full enlarged source comparison confirms the 12px dark-trace and 8px light-trace extractions remain on their respective grayscale KM staircases from origin through both tails; the former cross-curve contamination and false plateau are absent.",
+      "verification": "Required source/overlay boards reveal unsupported forward-filled plateaus and locally misplaced steps; this base extraction must be edited before acceptance.",
       "axis_bounds": {
         "left": 75,
         "right": 391,
@@ -169,7 +170,14 @@
         "Nivolumab": 12,
         "Bevacizumab": 8
       },
-      "validation_issues": [],
+      "validation_issues": [
+        {
+          "code": "required_local_reviews",
+          "count": 17,
+          "manifest": "runs/study04/os/quality_hotspots.json",
+          "reviewed": false
+        }
+      ],
       "revision_count": 0,
       "overlay": "runs/study04/os/overlay.png",
       "curves_csv": "runs/study04/os/digitized_curves.csv",

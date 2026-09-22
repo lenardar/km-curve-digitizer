@@ -31,6 +31,7 @@ class CurveTrace:
     point_count: int
     x_pixels: np.ndarray
     y_pixels: np.ndarray
+    source_x_pixels: np.ndarray
 
 
 class ExtractionPipeline:
@@ -177,6 +178,7 @@ class ExtractionPipeline:
             point_count=len(coords),
             x_pixels=x_pixels,
             y_pixels=y_pixels,
+            source_x_pixels=np.unique(coords[:, 1]).astype(float),
         )
 
     def _build_curve_data(
@@ -214,6 +216,7 @@ class ExtractionPipeline:
             y_pixels=y_pixels.tolist(),
             time=time.tolist(),
             survival=survival.tolist(),
+            source_x_pixels=trace.source_x_pixels.tolist(),
         )
 
 

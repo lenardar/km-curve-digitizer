@@ -218,6 +218,7 @@ class CurveData(BaseModel):
     time: List[float]
     survival: List[float]
     point_ids: List[str] = Field(default_factory=list)
+    source_x_pixels: List[float] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def validate_lengths(self) -> "CurveData":
@@ -256,9 +257,14 @@ class CurveData(BaseModel):
 class ValidationIssue(BaseModel):
     """One validation finding emitted by the validator."""
 
+    issue_id: str = ""
     code: str
     message: str
     curve_id: Optional[int] = None
+    curve_ids: List[int] = Field(default_factory=list)
+    time_range: Optional[Tuple[float, float]] = None
+    pixel_region: Optional[Tuple[int, int, int, int]] = None
+    requires_visual_review: bool = False
 
 
 class ValidationReport(BaseModel):
@@ -268,6 +274,14 @@ class ValidationReport(BaseModel):
 
     checks: Dict[str, bool]
     issues: List[ValidationIssue] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def assign_issue_ids(self) -> "ValidationReport":
+        """Give every finding a stable handle for explicit review acknowledgement."""
+        for index, issue in enumerate(self.issues, start=1):
+            if not issue.issue_id:
+                issue.issue_id = f"q{index:03d}-{issue.code}"
+        return self
 
 
 class CurveRevision(BaseModel):
@@ -332,7 +346,16 @@ class ExtractionResult(BaseModel):
         """Return validation issues as a dataframe."""
         return pd.DataFrame(
             [issue.model_dump() for issue in self.validation.issues],
-            columns=["code", "message", "curve_id"],
+            columns=[
+                "issue_id",
+                "code",
+                "message",
+                "curve_id",
+                "curve_ids",
+                "time_range",
+                "pixel_region",
+                "requires_visual_review",
+            ],
         )
 
     def risk_table_records(self) -> List[Dict[str, Any]]:

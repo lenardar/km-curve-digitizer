@@ -21,6 +21,28 @@ from pykmextract.extractor.validator import ExtractionValidator
 
 
 class ValidatorTests(unittest.TestCase):
+    def test_long_forward_fill_gap_is_localized_for_visual_review(self):
+        x_pixels = list(range(22))
+        curve = CurveData(
+            id=1,
+            name="Arm A",
+            color_description="blue",
+            extraction_tolerance=8,
+            point_count=8,
+            x_pixels=x_pixels,
+            y_pixels=[20.0] * len(x_pixels),
+            time=[float(value) for value in x_pixels],
+            survival=[0.8] * len(x_pixels),
+            source_x_pixels=[0.0, 1.0, 20.0, 21.0],
+        )
+
+        regions = ExtractionValidator().detect_source_gap_regions([curve])
+
+        self.assertEqual(len(regions), 1)
+        self.assertEqual(regions[0]["missing_columns"], 18)
+        self.assertEqual(regions[0]["time_range"], (1.0, 20.0))
+        self.assertEqual(regions[0]["curve"].id, curve.id)
+
     def test_bad_curve_emits_diagnostics_without_aggregate_verdict(self):
         semantic = SemanticExtraction(
             n_curves=1,
@@ -121,7 +143,12 @@ class ValidatorTests(unittest.TestCase):
         report = ExtractionValidator().validate(semantic, [curve_a, curve_b])
 
         self.assertFalse(report.checks["overlap_ambiguity"])
-        self.assertTrue(any(issue.code == "overlap_ambiguity" for issue in report.issues))
+        issue = next(issue for issue in report.issues if issue.code == "overlap_ambiguity")
+        self.assertTrue(issue.requires_visual_review)
+        self.assertEqual(issue.curve_ids, [1, 2])
+        self.assertIsNotNone(issue.time_range)
+        self.assertIsNotNone(issue.pixel_region)
+        self.assertTrue(issue.issue_id.startswith("q"))
 
     def test_extraction_result_validation_frame_exports_issue_rows(self):
         semantic = SemanticExtraction(
@@ -167,7 +194,19 @@ class ValidatorTests(unittest.TestCase):
 
         frame = result.validation_frame()
 
-        self.assertEqual(list(frame.columns), ["code", "message", "curve_id"])
+        self.assertEqual(
+            list(frame.columns),
+            [
+                "issue_id",
+                "code",
+                "message",
+                "curve_id",
+                "curve_ids",
+                "time_range",
+                "pixel_region",
+                "requires_visual_review",
+            ],
+        )
         self.assertGreaterEqual(len(frame), 1)
         self.assertIn("range", set(frame["code"]))
 
