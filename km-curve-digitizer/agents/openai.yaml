@@ -1,7 +1,7 @@
 interface:
   display_name: "KM Curve Digitizer"
-  short_description: "Digitize KM curves and number-at-risk tables"
-  default_prompt: "Use $km-curve-digitizer to extract and visually review the curves and number-at-risk table in this Kaplan-Meier figure."
+  short_description: "Agent-operated KM curve and risk-table digitization"
+  default_prompt: "Use $km-curve-digitizer to inspect this Kaplan-Meier figure, operate the editing tools yourself, and return the visually verified curves and number-at-risk table."
 
 policy:
   allow_implicit_invocation: true

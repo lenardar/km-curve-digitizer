@@ -1,11 +1,11 @@
 ---
 name: km-curve-digitizer
-description: Digitize and visually refine Kaplan-Meier survival curves and number-at-risk tables from figure images into inspectable CSV and JSON outputs, with controlled point and cell editing, axis calibration, validation signals, and review overlays. Use when extracting or correcting KM figures from papers or screenshots; do not use for fitting survival models or reconstructing individual patient data.
+description: Autonomously inspect, digitize, and refine Kaplan-Meier curves and number-at-risk tables from figure images, using agent-controlled point and cell edits with reviewable CSV, JSON, and overlays. Use when extracting or correcting KM figures from papers or screenshots; do not use for fitting survival models or reconstructing individual patient data.
 ---
 
 # KM Curve Digitizer
 
-Turn one or more Kaplan-Meier figure images into inspectable curve and number-at-risk data. Keep measurement and interpretation separate: this skill digitizes visible evidence but does not reconstruct patient-level data or fit survival models.
+Turn one or more Kaplan-Meier figure images into inspectable curve and number-at-risk data. The model is the operator: deterministic scripts expose evidence and execute precise edits, but they do not decide what the figure means or which visible value should replace another. Keep measurement and interpretation separate; do not reconstruct patient-level data or fit survival models.
 
 ## Workflow
 
@@ -24,13 +24,22 @@ Turn one or more Kaplan-Meier figure images into inspectable curve and number-at
      --review-dir output/review
    ```
 
-5. Inspect `review/overlay.png`, `result.json`, `review/validation_issues.csv`, and—when present—`review/risk_table_review.png`. A high score is a heuristic signal, not proof that the extraction is scientifically accurate.
-6. If the overlay shows incorrect plot bounds, provide a reviewed `--axis-json`, rerun, and inspect the new overlay. Use `--axis-export-json` to preserve accepted calibration.
-7. Report the output paths, validation findings, and any visible uncertainty. Explicitly flag weak cases rather than forcing a clean-looking result.
+5. Read [references/agent-loop.md](references/agent-loop.md), then personally inspect `review/overlay.png`, `result.json`, `review/validation_issues.csv`, and—when present—`review/risk_table_review.png`. Treat validation as a navigation hint, never as edit authority.
+6. Use the inspection tools to gather focused evidence, decide the edit, apply it, and compare before/after artifacts. Continue from the edited result only when the visible source supports the change; otherwise retain the parent result.
+7. Repeat until no visible defect remains that the available evidence can resolve. Do not stop at recommending that a human perform an edit the skill already exposes.
+8. If the overlay shows incorrect plot bounds, write a reviewed `--axis-json`, rerun, and inspect the new overlay. Use `--axis-export-json` to preserve accepted calibration.
+9. Report the accepted output paths, revisions, unresolved ambiguity, and validation findings. A high score is not proof of scientific accuracy.
+
+## Agent Authority
+
+- The calling model chooses what to inspect and whether to add, delete, move, replace, correct, clear, accept, or reject.
+- Geometry detection, validation checks, and scores may direct attention but must not autonomously change extracted evidence.
+- Keep edits narrow and evidence-backed. A related cluster may be edited together, but do not bundle unrelated guesses into one revision.
+- The optional internal provider passes `--axis-refine` and `--segment-micro-tune` are not the primary Skill workflow. Do not invoke them as a substitute for the calling model's own inspection unless the user explicitly requests those automatic passes.
 
 ## Visual Point Editing
 
-When the overlay contains missing, misplaced, or extraneous points, read [references/correction-schema.md](references/correction-schema.md). Inspect the affected segment to obtain stable point IDs, then let the model apply narrow add, delete, move, or replace actions through `scripts/refine_km.py`.
+When the overlay contains missing, misplaced, or extraneous points, read [references/correction-schema.md](references/correction-schema.md). Inspect the affected segment to obtain stable point IDs, then apply the model's narrow add, delete, move, or replace decision through `scripts/refine_km.py`.
 
 Always compare the generated before/after overlays. Accept an edit only when it follows visible source evidence and does not damage neighboring segments. The editor preserves the parent result and records every action in the new result's `revisions` list.
 
@@ -64,7 +73,7 @@ python3 <skill-dir>/scripts/run_batch.py \
 
 ## Review Rules
 
-- Treat grayscale curves, similar colors, confidence ribbons, dense censoring marks, and overlapping curves as manual-review cases.
+- Give grayscale curves, similar colors, confidence ribbons, dense censoring marks, and overlapping curves closer model inspection.
 - Preserve KM curves as right-continuous steps; do not smooth them into continuous trajectories.
 - Treat every number-at-risk correction as a visible transcription claim. Prefer `null` to a guessed count.
 - Do not infer hazard ratios, medians, patient-level events, or treatment effects unless they are independently visible or supplied.

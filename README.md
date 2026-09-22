@@ -2,7 +2,7 @@
 
 This repository contains the installable Codex skill in [`km-curve-digitizer/`](km-curve-digitizer/).
 
-The skill digitizes Kaplan-Meier figure images into structured time-survival data and produces visual review artifacts. It intentionally does not reconstruct individual patient data or fit survival models.
+The skill lets the calling model inspect Kaplan-Meier figures, operate focused editing tools, and verify structured curve and number-at-risk outputs. Deterministic code handles measurement and auditable mutations; the model retains review and editing authority. It intentionally does not reconstruct individual patient data or fit survival models.
 
 ## Skill layout
 
@@ -11,6 +11,7 @@ km-curve-digitizer/
 ├── SKILL.md
 ├── agents/openai.yaml
 ├── references/
+│   ├── agent-loop.md
 │   ├── correction-schema.md
 │   ├── risk-table.md
 │   └── semantic-schema.md

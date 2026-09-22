@@ -47,7 +47,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--axis-json",
-        help="Optional JSON file containing axis_bounds and optionally axis_anchors for manual calibration",
+        help="Optional JSON file containing model-reviewed axis_bounds and optionally axis_anchors",
     )
     parser.add_argument(
         "--axis-export-json",
@@ -74,7 +74,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--axis-refine",
         action="store_true",
-        help="Run one extra VLM review pass to refine four axis anchors",
+        help="Opt in to one internal-provider VLM pass for axis anchors; the agent-operated skill normally reviews axes itself",
     )
     parser.add_argument(
         "--axis-review-image",
@@ -83,7 +83,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--segment-micro-tune",
         action="store_true",
-        help="Run one extra VLM pass to propose bounded local step targets after extraction",
+        help="Opt in to one internal-provider VLM micro-tune pass; not part of the primary agent-operated review loop",
     )
     parser.add_argument(
         "--micro-tune-review-image",

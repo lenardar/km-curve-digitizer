@@ -1,6 +1,6 @@
 # Curve correction actions
 
-Use `scripts/refine_km.py` when visual comparison shows missing, misplaced, or extraneous points. Inspect a focused segment first:
+Use `scripts/refine_km.py` when the model's visual comparison shows missing, misplaced, or extraneous points. Inspect a focused segment first; issue an edit only after viewing that evidence:
 
 ```bash
 python3 <skill-dir>/scripts/refine_km.py inspect result.json \
@@ -112,6 +112,7 @@ Replacement removes the existing points in the inclusive time range and inserts 
 
 ## Invariants
 
+- The model selects actions from source evidence; validators never select or apply them.
 - Edits never overwrite the parent result.
 - Pixel and data coordinates are recalculated together after editing.
 - Survival remains within 0-1 and is normalized to a non-increasing KM curve.

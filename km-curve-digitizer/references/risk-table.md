@@ -1,6 +1,6 @@
 # Number-at-risk review and correction
 
-Number-at-risk values are evidence copied from the figure, not values inferred from the extracted curves. Inspect the table before changing it:
+Number-at-risk values are evidence copied from the figure, not values inferred from the extracted curves. The model must inspect the table before choosing any change:
 
 ```bash
 python3 <skill-dir>/scripts/refine_km.py inspect-risk result.json \
@@ -70,6 +70,7 @@ Time points must remain strictly increasing. A time edit applies to every curve 
 
 ## Review rules
 
+- Validation issues identify cells to inspect but do not determine the replacement value or authorize deletion.
 - Do not derive counts from curve height or repair them through interpolation.
 - Do not silently sort or monotonize a row. A count increase may indicate OCR error, a table layout issue, or unusual reporting; preserve it and inspect the validation issue.
 - Use `delete_risk_cell` when the source is occluded or genuinely unreadable.

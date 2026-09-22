@@ -63,12 +63,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--axis-refine",
         action="store_true",
-        help="Run one additional VLM review pass to refine four axis anchors per panel",
+        help="Opt in to one internal-provider VLM axis pass per panel",
     )
     parser.add_argument(
         "--segment-micro-tune",
         action="store_true",
-        help="Run one additional VLM pass to propose bounded local curve adjustments after extraction",
+        help="Opt in to one internal-provider VLM curve-adjustment pass per panel",
     )
     return parser
 

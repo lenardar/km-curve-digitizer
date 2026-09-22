@@ -176,7 +176,7 @@ class ExtractionValidator:
                     code="overlap_ambiguity",
                     message=(
                         f"curves '{left_curve.name}' and '{right_curve.name}' share a long overlapping segment; "
-                        "manual review is recommended"
+                        "closer model inspection is recommended"
                     ),
                 )
             )
