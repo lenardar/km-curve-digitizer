@@ -1,20 +1,20 @@
 {
   "workflow": "Codex visual operator + deterministic KM inspection/editing tools",
   "panels_total": 10,
-  "panels_accepted": 0,
-  "panels_pending_scan_review": 10,
+  "panels_accepted": 10,
+  "panels_pending_scan_review": 0,
   "notes": [
-    "Previous acceptance decisions are retained in each panel directory as historical audit records but are superseded by the overlapping-window review requirement.",
-    "No panel is currently accepted under the new workflow; each must be scanned left-to-right and re-verified with result-bound scan evidence.",
-    "A real scan of study04/os exposed visible trace mismatches missed by the former issue-acknowledgement workflow."
+    "All ten panels were inspected left-to-right with overlapping source-only and per-curve windows.",
+    "Acceptance is tied to the exact result signature and a completed scan review for every window and curve.",
+    "The full pass retained eight reviewed results and corrected unsupported or displaced trace segments in study03/pfs, study04/os, and study04/pfs."
   ],
   "panels": [
     {
       "study": "study01",
       "endpoint": "os",
-      "status": "pending_overlapping_window_review",
+      "status": "accepted_after_overlapping_window_review",
       "review_kind": "base_extraction",
-      "verification": "Both curves were inspected in 0-15 and 15-54 month local boards; sampled traces follow their orange and dark source lines through crossings and tails. Risk cells match the printed table.",
+      "verification": "Seven overlapping windows confirm both curves follow the colored source through crossings, censor marks, and terminal tails; all 38 risk cells match the visible table.",
       "axis_bounds": {
         "left": 122,
         "right": 801,
@@ -27,17 +27,19 @@
       },
       "validation_issues": [],
       "revision_count": 0,
-      "overlay": "runs/study01/os/overlay.png",
+      "overlay": "runs/trials/full-review/study01-os/accepted/overlay.png",
       "curves_csv": "runs/study01/os/digitized_curves.csv",
       "risk_table_csv": "runs/study01/os/risk_table.csv",
-      "review_decision": "runs/study01/os/review_decision.json"
+      "review_decision": "runs/trials/full-review/study01-os/accepted/review_decision.json",
+      "result": "runs/trials/full-review/study01-os/accepted/result.json",
+      "scan_review": "runs/trials/full-review/study01-os/accepted/scan_review.json"
     },
     {
       "study": "study01",
       "endpoint": "pfs",
-      "status": "pending_overlapping_window_review",
-      "review_kind": "edited_candidate",
-      "verification": "Early orange and dark staircases now follow their separate source traces; false shared 100% plateau removed, later auto-extracted segments unchanged.",
+      "status": "accepted_after_overlapping_window_review",
+      "review_kind": "reverified_result",
+      "verification": "Seven overlapping windows confirm both curves follow the dense early descent and their separate visible endpoints; all 32 risk cells match the visible table.",
       "axis_bounds": {
         "left": 120,
         "right": 797,
@@ -50,23 +52,30 @@
       },
       "validation_issues": [
         {
+          "issue_id": "q001-coverage",
           "code": "coverage",
           "message": "curve 'Sorafenib' covers too little of the x-axis",
-          "curve_id": 2
+          "curve_id": 2,
+          "curve_ids": [],
+          "time_range": null,
+          "pixel_region": null,
+          "requires_visual_review": false
         }
       ],
       "revision_count": 1,
-      "overlay": "runs/study01/pfs/overlay.png",
+      "overlay": "runs/trials/full-review/study01-pfs/accepted/overlay.png",
       "curves_csv": "runs/study01/pfs/digitized_curves.csv",
       "risk_table_csv": "runs/study01/pfs/risk_table.csv",
-      "review_decision": "runs/study01/pfs/review_decision.json"
+      "review_decision": "runs/trials/full-review/study01-pfs/accepted/review_decision.json",
+      "result": "runs/trials/full-review/study01-pfs/accepted/result.json",
+      "scan_review": "runs/trials/full-review/study01-pfs/accepted/scan_review.json"
     },
     {
       "study": "study02",
       "endpoint": "os",
-      "status": "pending_overlapping_window_review",
+      "status": "accepted_after_overlapping_window_review",
       "review_kind": "base_extraction",
-      "verification": "Full local boards for both arms follow the dark-teal and taupe source staircases from origin to 54 months, including late plateaus. Risk cells match the source rows.",
+      "verification": "Seven overlapping windows confirm both curves retain identity through labels, large censor dots, and terminal plateaus; all 38 risk cells match the visible table.",
       "axis_bounds": {
         "left": 143,
         "right": 807,
@@ -79,17 +88,19 @@
       },
       "validation_issues": [],
       "revision_count": 0,
-      "overlay": "runs/study02/os/overlay.png",
+      "overlay": "runs/trials/full-review/study02-os/accepted/overlay.png",
       "curves_csv": "runs/study02/os/digitized_curves.csv",
       "risk_table_csv": "runs/study02/os/risk_table.csv",
-      "review_decision": "runs/study02/os/review_decision.json"
+      "review_decision": "runs/trials/full-review/study02-os/accepted/review_decision.json",
+      "result": "runs/trials/full-review/study02-os/accepted/result.json",
+      "scan_review": "runs/trials/full-review/study02-os/accepted/scan_review.json"
     },
     {
       "study": "study02",
       "endpoint": "pfs",
-      "status": "pending_overlapping_window_review",
+      "status": "accepted_after_overlapping_window_review",
       "review_kind": "base_extraction",
-      "verification": "Full local boards for both arms follow the source drops and long late plateaus without cross-curve switching. Risk cells match the source rows.",
+      "verification": "Seven overlapping windows confirm both curves follow the visible steps through large censor dots and separate terminal plateaus; all 36 risk cells match the visible table.",
       "axis_bounds": {
         "left": 148,
         "right": 807,
@@ -102,17 +113,19 @@
       },
       "validation_issues": [],
       "revision_count": 0,
-      "overlay": "runs/study02/pfs/overlay.png",
+      "overlay": "runs/trials/full-review/study02-pfs/accepted/overlay.png",
       "curves_csv": "runs/study02/pfs/digitized_curves.csv",
       "risk_table_csv": "runs/study02/pfs/risk_table.csv",
-      "review_decision": "runs/study02/pfs/review_decision.json"
+      "review_decision": "runs/trials/full-review/study02-pfs/accepted/review_decision.json",
+      "result": "runs/trials/full-review/study02-pfs/accepted/result.json",
+      "scan_review": "runs/trials/full-review/study02-pfs/accepted/scan_review.json"
     },
     {
       "study": "study03",
       "endpoint": "os",
-      "status": "pending_overlapping_window_review",
+      "status": "accepted_after_overlapping_window_review",
       "review_kind": "base_extraction",
-      "verification": "Full local boards show the maintenance trace following the orange staircase and the BSC trace following the dark staircase, including distinct late plateaus. Risk cells match all six time columns.",
+      "verification": "Five overlapping windows confirm the orange and blue-gray traces follow their fine source staircases through all drops and plateaus; all 12 risk cells match the visible table.",
       "axis_bounds": {
         "left": 114,
         "right": 393,
@@ -125,17 +138,19 @@
       },
       "validation_issues": [],
       "revision_count": 0,
-      "overlay": "runs/study03/os/overlay.png",
+      "overlay": "runs/trials/full-review/study03-os/accepted/overlay.png",
       "curves_csv": "runs/study03/os/digitized_curves.csv",
       "risk_table_csv": "runs/study03/os/risk_table.csv",
-      "review_decision": "runs/study03/os/review_decision.json"
+      "review_decision": "runs/trials/full-review/study03-os/accepted/review_decision.json",
+      "result": "runs/trials/full-review/study03-os/accepted/result.json",
+      "scan_review": "runs/trials/full-review/study03-os/accepted/scan_review.json"
     },
     {
       "study": "study03",
       "endpoint": "pfs",
-      "status": "pending_overlapping_window_review",
+      "status": "accepted_after_overlapping_window_review",
       "review_kind": "edited_candidate",
-      "verification": "Both model-authored breakpoint sequences follow the visible orange and dark source staircases across the full axis; sparse false plateaus removed.",
+      "verification": "Five overlapping source-first windows confirm both pixel-coordinate reconstructions follow every visible step through the dense early decline and remain aligned across the middle and terminal plateaus; all 12 risk-table cells match the source.",
       "axis_bounds": {
         "left": 96,
         "right": 376,
@@ -147,18 +162,20 @@
         "BSC group": 64
       },
       "validation_issues": [],
-      "revision_count": 1,
-      "overlay": "runs/study03/pfs/overlay.png",
+      "revision_count": 2,
+      "overlay": "runs/trials/study03-pfs-scan/accepted/overlay.png",
       "curves_csv": "runs/study03/pfs/digitized_curves.csv",
       "risk_table_csv": "runs/study03/pfs/risk_table.csv",
-      "review_decision": "runs/study03/pfs/review_decision.json"
+      "review_decision": "runs/trials/study03-pfs-scan/accepted/review_decision.json",
+      "result": "runs/trials/study03-pfs-scan/accepted/result.json",
+      "scan_review": "runs/trials/study03-pfs-scan/accepted/scan_review.json"
     },
     {
       "study": "study04",
       "endpoint": "os",
-      "status": "pending_overlapping_window_review",
+      "status": "accepted_after_overlapping_window_review",
       "review_kind": "edited_candidate",
-      "verification": "Compared all ten required local source/overlay boards after the three segment replacements. Blue remains on the dark Nivolumab staircase, orange remains on the light Bevacizumab staircase, unsupported plateaus were removed, and both terminal traces follow the visible source.",
+      "verification": "Five overlapping source-first windows confirm the repaired Nivolumab trace follows the dark staircase through early drops, annotation interference, crossings, and the terminal plateau; the unchanged Bevacizumab trace and all risk-table cells remain aligned with the source.",
       "axis_bounds": {
         "left": 75,
         "right": 391,
@@ -171,24 +188,204 @@
       },
       "validation_issues": [
         {
-          "code": "required_local_reviews",
-          "count": 10,
-          "manifest": "runs/study04/os/quality_hotspots.json",
-          "reviewed": true
+          "issue_id": "q001-source_gap_review",
+          "code": "source_gap_review",
+          "message": "curve 'Nivolumab' is forward-filled across 10 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+          "curve_id": 1,
+          "curve_ids": [
+            1
+          ],
+          "time_range": [
+            4.443037974683544,
+            5.382911392405063
+          ],
+          "pixel_region": [
+            119,
+            126,
+            146,
+            165
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q002-source_gap_review",
+          "code": "source_gap_review",
+          "message": "curve 'Nivolumab' is forward-filled across 14 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+          "curve_id": 1,
+          "curve_ids": [
+            1
+          ],
+          "time_range": [
+            6.151898734177215,
+            7.433544303797469
+          ],
+          "pixel_region": [
+            139,
+            151,
+            170,
+            200
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q003-source_gap_review",
+          "code": "source_gap_review",
+          "message": "curve 'Bevacizumab' is forward-filled across 19 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+          "curve_id": 2,
+          "curve_ids": [
+            2
+          ],
+          "time_range": [
+            0.34177215189873417,
+            2.0506329113924053
+          ],
+          "pixel_region": [
+            71,
+            92,
+            107,
+            129
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q004-source_gap_review",
+          "code": "source_gap_review",
+          "message": "curve 'Bevacizumab' is forward-filled across 10 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+          "curve_id": 2,
+          "curve_ids": [
+            2
+          ],
+          "time_range": [
+            13.670886075949369,
+            14.610759493670885
+          ],
+          "pixel_region": [
+            227,
+            235,
+            254,
+            269
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q005-source_gap_review",
+          "code": "source_gap_review",
+          "message": "curve 'Bevacizumab' is forward-filled across 15 columns without matching source-color pixels; inspect the source crop for a missed drop or trace switch",
+          "curve_id": 2,
+          "curve_ids": [
+            2
+          ],
+          "time_range": [
+            17.344936708860757,
+            18.712025316455698
+          ],
+          "pixel_region": [
+            270,
+            248,
+            302,
+            290
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q006-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 13 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            1.7943037974683542,
+            2.819620253164557
+          ],
+          "pixel_region": [
+            86,
+            94,
+            118,
+            131
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q007-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 14 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            9.825949367088608,
+            10.936708860759493
+          ],
+          "pixel_region": [
+            180,
+            196,
+            213,
+            235
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q008-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 13 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            12.218354430379748,
+            13.24367088607595
+          ],
+          "pixel_region": [
+            208,
+            218,
+            240,
+            253
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q009-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 7 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            15.721518987341772,
+            16.234177215189874
+          ],
+          "pixel_region": [
+            249,
+            240,
+            275,
+            272
+          ],
+          "requires_visual_review": true
         }
       ],
-      "revision_count": 1,
-      "overlay": "runs/study04/os/overlay.png",
+      "revision_count": 2,
+      "overlay": "runs/trials/study04-os-scan/accepted/overlay.png",
       "curves_csv": "runs/study04/os/digitized_curves.csv",
       "risk_table_csv": "runs/study04/os/risk_table.csv",
-      "review_decision": "runs/study04/os/review_decision.json"
+      "review_decision": "runs/trials/study04-os-scan/accepted/review_decision.json",
+      "result": "runs/trials/study04-os-scan/accepted/result.json",
+      "scan_review": "runs/trials/study04-os-scan/accepted/scan_review.json"
     },
     {
       "study": "study04",
       "endpoint": "pfs",
-      "status": "pending_overlapping_window_review",
-      "review_kind": "base_extraction",
-      "verification": "The 32/24px model-selected tolerances follow both dense antialiased staircases through the early drops and late tail; values align with printed 6, 12, and 18 month PFS landmarks. Risk cells match the source.",
+      "status": "accepted_after_overlapping_window_review",
+      "review_kind": "edited_candidate",
+      "verification": "Six overlapping windows confirm both curves retain identity and the repaired Nivolumab tail stops at its last visible x=362 endpoint; all 20 risk cells match the visible table.",
       "axis_bounds": {
         "left": 76,
         "right": 386,
@@ -199,19 +396,106 @@
         "Nivolumab": 32,
         "Bevacizumab": 24
       },
-      "validation_issues": [],
-      "revision_count": 0,
-      "overlay": "runs/study04/pfs/overlay.png",
+      "validation_issues": [
+        {
+          "issue_id": "q001-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 6 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            0.34838709677419355,
+            0.7838709677419355
+          ],
+          "pixel_region": [
+            70,
+            93,
+            95,
+            124
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q002-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 7 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            21.07741935483871,
+            21.6
+          ],
+          "pixel_region": [
+            308,
+            288,
+            334,
+            321
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q003-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 19 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            22.03548387096774,
+            23.60322580645161
+          ],
+          "pixel_region": [
+            319,
+            288,
+            357,
+            320
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q004-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 6 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            24.4741935483871,
+            24.90967741935484
+          ],
+          "pixel_region": [
+            347,
+            291,
+            372,
+            321
+          ],
+          "requires_visual_review": true
+        }
+      ],
+      "revision_count": 1,
+      "overlay": "runs/trials/full-review/study04-pfs/accepted/overlay.png",
       "curves_csv": "runs/study04/pfs/digitized_curves.csv",
       "risk_table_csv": "runs/study04/pfs/risk_table.csv",
-      "review_decision": "runs/study04/pfs/review_decision.json"
+      "review_decision": "runs/trials/full-review/study04-pfs/accepted/review_decision.json",
+      "result": "runs/trials/full-review/study04-pfs/accepted/result.json",
+      "scan_review": "runs/trials/full-review/study04-pfs/accepted/scan_review.json"
     },
     {
       "study": "study05",
       "endpoint": "os",
-      "status": "pending_overlapping_window_review",
+      "status": "accepted_after_overlapping_window_review",
       "review_kind": "base_extraction",
-      "verification": "Full local boards show both colored traces following the source through dense censor marks and the late blue drop, with no switch to the other arm. Risk counts and censor counts match the printed rows.",
+      "verification": "Seven overlapping windows confirm the cyan and red traces follow the source through dense censor marks and late drops; all 24 risk cells match the visible table.",
       "axis_bounds": {
         "left": 192,
         "right": 916,
@@ -224,17 +508,19 @@
       },
       "validation_issues": [],
       "revision_count": 0,
-      "overlay": "runs/study05/os/overlay.png",
+      "overlay": "runs/trials/full-review/study05-os/accepted/overlay.png",
       "curves_csv": "runs/study05/os/digitized_curves.csv",
       "risk_table_csv": "runs/study05/os/risk_table.csv",
-      "review_decision": "runs/study05/os/review_decision.json"
+      "review_decision": "runs/trials/full-review/study05-os/accepted/review_decision.json",
+      "result": "runs/trials/full-review/study05-os/accepted/result.json",
+      "scan_review": "runs/trials/full-review/study05-os/accepted/scan_review.json"
     },
     {
       "study": "study05",
       "endpoint": "pfs",
-      "status": "pending_overlapping_window_review",
+      "status": "accepted_after_overlapping_window_review",
       "review_kind": "base_extraction",
-      "verification": "Full local boards show both colored traces following the source from origin through late plateaus and the late blue drop. Risk counts and censor counts match the printed rows.",
+      "verification": "Seven overlapping windows confirm the cyan and red traces follow the source through early decline, long plateaus, and late drops; all 24 risk cells match the visible table.",
       "axis_bounds": {
         "left": 192,
         "right": 917,
@@ -247,10 +533,12 @@
       },
       "validation_issues": [],
       "revision_count": 0,
-      "overlay": "runs/study05/pfs/overlay.png",
+      "overlay": "runs/trials/full-review/study05-pfs/accepted/overlay.png",
       "curves_csv": "runs/study05/pfs/digitized_curves.csv",
       "risk_table_csv": "runs/study05/pfs/risk_table.csv",
-      "review_decision": "runs/study05/pfs/review_decision.json"
+      "review_decision": "runs/trials/full-review/study05-pfs/accepted/review_decision.json",
+      "result": "runs/trials/full-review/study05-pfs/accepted/result.json",
+      "scan_review": "runs/trials/full-review/study05-pfs/accepted/scan_review.json"
     }
   ]
 }

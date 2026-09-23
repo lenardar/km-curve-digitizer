@@ -1,0 +1,137 @@
+{
+  "revision": {
+    "revision_id": "r0001",
+    "created_at": "2026-09-23T02:08:25.025460+00:00",
+    "observation": "The source-only 20-27 month crop shows the dark Nivolumab trace ending at pixel x=362, while the extracted trace is forward-filled without source support to x=385.",
+    "reason": "Remove only the unsupported terminal extension and retain the final visible plateau endpoint.",
+    "actions": [
+      {
+        "type": "delete_points",
+        "curve": "Nivolumab",
+        "pixel_region": [
+          363,
+          105,
+          385,
+          314
+        ]
+      }
+    ],
+    "status": "candidate",
+    "verification": ""
+  },
+  "parent_result": "runs/trials/full-review/study04-pfs/candidate/parent_result.json",
+  "result": "runs/trials/full-review/study04-pfs/candidate/result.json",
+  "before_overlay": "runs/trials/full-review/study04-pfs/candidate/before_overlay.png",
+  "after_overlay": "runs/trials/full-review/study04-pfs/candidate/review/overlay.png",
+  "review": {
+    "original_image": "runs/trials/full-review/study04-pfs/candidate/review/original.png",
+    "overlay": "runs/trials/full-review/study04-pfs/candidate/review/overlay.png",
+    "digitized_csv": "runs/trials/full-review/study04-pfs/candidate/review/digitized_curves.csv",
+    "validation_csv": "runs/trials/full-review/study04-pfs/candidate/review/validation_issues.csv",
+    "quality_hotspots_json": "runs/trials/full-review/study04-pfs/candidate/review/quality_hotspots.json",
+    "scan_windows_json": "runs/trials/full-review/study04-pfs/candidate/review/scan_windows/scan_windows.json",
+    "scan_review_json": "runs/trials/full-review/study04-pfs/candidate/review/scan_windows/scan_review.json",
+    "risk_table_csv": "runs/trials/full-review/study04-pfs/candidate/review/risk_table.csv",
+    "risk_table_json": "runs/trials/full-review/study04-pfs/candidate/review/risk_table.json",
+    "review_md": "runs/trials/full-review/study04-pfs/candidate/review/review.md",
+    "risk_table_review": "runs/trials/full-review/study04-pfs/candidate/review/risk_table_review.png"
+  },
+  "validation": {
+    "checks": {
+      "monotonicity": true,
+      "range": true,
+      "start": true,
+      "coverage": true,
+      "risk_table": true,
+      "source_gap_review": true,
+      "overlap_ambiguity": true,
+      "curve_identity_review": false
+    },
+    "issues": [
+      {
+        "issue_id": "q001-curve_identity_review",
+        "code": "curve_identity_review",
+        "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 6 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+        "curve_id": null,
+        "curve_ids": [
+          1,
+          2
+        ],
+        "time_range": [
+          0.34838709677419355,
+          0.7838709677419355
+        ],
+        "pixel_region": [
+          70,
+          93,
+          95,
+          124
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q002-curve_identity_review",
+        "code": "curve_identity_review",
+        "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 7 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+        "curve_id": null,
+        "curve_ids": [
+          1,
+          2
+        ],
+        "time_range": [
+          21.07741935483871,
+          21.6
+        ],
+        "pixel_region": [
+          308,
+          288,
+          334,
+          321
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q003-curve_identity_review",
+        "code": "curve_identity_review",
+        "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 19 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+        "curve_id": null,
+        "curve_ids": [
+          1,
+          2
+        ],
+        "time_range": [
+          22.03548387096774,
+          23.60322580645161
+        ],
+        "pixel_region": [
+          319,
+          288,
+          357,
+          320
+        ],
+        "requires_visual_review": true
+      },
+      {
+        "issue_id": "q004-curve_identity_review",
+        "code": "curve_identity_review",
+        "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 6 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+        "curve_id": null,
+        "curve_ids": [
+          1,
+          2
+        ],
+        "time_range": [
+          24.4741935483871,
+          24.90967741935484
+        ],
+        "pixel_region": [
+          347,
+          291,
+          372,
+          321
+        ],
+        "requires_visual_review": true
+      }
+    ]
+  }
+}

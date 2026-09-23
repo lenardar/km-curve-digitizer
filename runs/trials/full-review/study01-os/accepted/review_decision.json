@@ -1,0 +1,10 @@
+{
+  "decision": "accept",
+  "verification": "Seven overlapping windows confirm both curves follow the colored source through crossings, censor marks, and terminal tails; all 38 risk cells match the visible table.",
+  "review_kind": "base_extraction",
+  "reviewed_issue_ids": [],
+  "scan_review": "scan_review.json",
+  "revision": null,
+  "result": "runs/trials/full-review/study01-os/accepted/result.json",
+  "overlay": "runs/trials/full-review/study01-os/accepted/overlay.png"
+}

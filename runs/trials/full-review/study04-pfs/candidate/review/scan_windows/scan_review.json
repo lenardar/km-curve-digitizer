@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "result_signature": "4cbc2bd1ac1031e7bf5954cc889042dde79f54eb7610b8762101bc02d9d2ae71",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        70,
+        99,
+        242,
+        320
+      ],
+      "time_range": [
+        0.0,
+        13.935484
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        182,
+        99,
+        354,
+        320
+      ],
+      "time_range": [
+        9.754839,
+        23.690323
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        220,
+        99,
+        392,
+        320
+      ],
+      "time_range": [
+        13.064516,
+        27.0
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    }
+  ],
+  "issue_reviews": [
+    {
+      "issue_id": "q001-curve_identity_review",
+      "status": "unreviewed",
+      "observation": "",
+      "window_ids": [
+        "w001"
+      ]
+    },
+    {
+      "issue_id": "q002-curve_identity_review",
+      "status": "unreviewed",
+      "observation": "",
+      "window_ids": [
+        "w002",
+        "w003"
+      ]
+    },
+    {
+      "issue_id": "q003-curve_identity_review",
+      "status": "unreviewed",
+      "observation": "",
+      "window_ids": [
+        "w002",
+        "w003"
+      ]
+    },
+    {
+      "issue_id": "q004-curve_identity_review",
+      "status": "unreviewed",
+      "observation": "",
+      "window_ids": [
+        "w002",
+        "w003"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "result_signature": "c4bd880490aa8cc5910a767f2ac8c333b0044a4cc3c0c4665addbb90ac893eb5",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        186,
+        14,
+        358,
+        390
+      ],
+      "time_range": [
+        0.0,
+        29.131034
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 0-29.131; step continuity agrees across both overlap boundaries. The cyan and red traces follow the source through the early decline, long plateaus, and late cyan drops.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Chemoradiotherapy alone",
+          "status": "clear",
+          "observation": "Chemoradiotherapy alone follows the visible source steps in w001 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Induction chemotherapy with chemoradiotherapy",
+          "status": "clear",
+          "observation": "Induction chemotherapy with chemoradiotherapy follows the visible source steps in w001 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        282,
+        14,
+        454,
+        390
+      ],
+      "time_range": [
+        17.478621,
+        46.609655
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 17.4786-46.6097; step continuity agrees across both overlap boundaries. The cyan and red traces follow the source through the early decline, long plateaus, and late cyan drops.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Chemoradiotherapy alone",
+          "status": "clear",
+          "observation": "Chemoradiotherapy alone follows the visible source steps in w002 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Induction chemotherapy with chemoradiotherapy",
+          "status": "clear",
+          "observation": "Induction chemotherapy with chemoradiotherapy follows the visible source steps in w002 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        378,
+        14,
+        550,
+        390
+      ],
+      "time_range": [
+        34.957241,
+        64.088276
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 34.9572-64.0883; step continuity agrees across both overlap boundaries. The cyan and red traces follow the source through the early decline, long plateaus, and late cyan drops.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Chemoradiotherapy alone",
+          "status": "clear",
+          "observation": "Chemoradiotherapy alone follows the visible source steps in w003 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Induction chemotherapy with chemoradiotherapy",
+          "status": "clear",
+          "observation": "Induction chemotherapy with chemoradiotherapy follows the visible source steps in w003 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w004",
+      "pixel_region": [
+        474,
+        14,
+        646,
+        390
+      ],
+      "time_range": [
+        52.435862,
+        81.566897
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 52.4359-81.5669; step continuity agrees across both overlap boundaries. The cyan and red traces follow the source through the early decline, long plateaus, and late cyan drops.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Chemoradiotherapy alone",
+          "status": "clear",
+          "observation": "Chemoradiotherapy alone follows the visible source steps in w004 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Induction chemotherapy with chemoradiotherapy",
+          "status": "clear",
+          "observation": "Induction chemotherapy with chemoradiotherapy follows the visible source steps in w004 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w005",
+      "pixel_region": [
+        570,
+        14,
+        742,
+        390
+      ],
+      "time_range": [
+        69.914483,
+        99.045517
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 69.9145-99.0455; step continuity agrees across both overlap boundaries. The cyan and red traces follow the source through the early decline, long plateaus, and late cyan drops.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Chemoradiotherapy alone",
+          "status": "clear",
+          "observation": "Chemoradiotherapy alone follows the visible source steps in w005 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Induction chemotherapy with chemoradiotherapy",
+          "status": "clear",
+          "observation": "Induction chemotherapy with chemoradiotherapy follows the visible source steps in w005 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w006",
+      "pixel_region": [
+        666,
+        14,
+        838,
+        390
+      ],
+      "time_range": [
+        87.393103,
+        116.524138
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 87.3931-116.524; step continuity agrees across both overlap boundaries. The cyan and red traces follow the source through the early decline, long plateaus, and late cyan drops.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Chemoradiotherapy alone",
+          "status": "clear",
+          "observation": "Chemoradiotherapy alone follows the visible source steps in w006 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Induction chemotherapy with chemoradiotherapy",
+          "status": "clear",
+          "observation": "Induction chemotherapy with chemoradiotherapy follows the visible source steps in w006 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w007",
+      "pixel_region": [
+        751,
+        14,
+        923,
+        390
+      ],
+      "time_range": [
+        102.868966,
+        132.0
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 102.869-132; step continuity agrees across both overlap boundaries. The cyan and red traces follow the source through the early decline, long plateaus, and late cyan drops.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Chemoradiotherapy alone",
+          "status": "clear",
+          "observation": "Chemoradiotherapy alone follows the visible source steps in w007 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Induction chemotherapy with chemoradiotherapy",
+          "status": "clear",
+          "observation": "Induction chemotherapy with chemoradiotherapy follows the visible source steps in w007 without an unsupported jump or identity switch."
+        }
+      ]
+    }
+  ],
+  "issue_reviews": []
+}

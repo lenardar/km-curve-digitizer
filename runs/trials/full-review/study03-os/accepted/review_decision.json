@@ -1,0 +1,10 @@
+{
+  "decision": "accept",
+  "verification": "Five overlapping windows confirm the orange and blue-gray traces follow their fine source staircases through all drops and plateaus; all 12 risk cells match the visible table.",
+  "review_kind": "base_extraction",
+  "reviewed_issue_ids": [],
+  "scan_review": "scan_review.json",
+  "revision": null,
+  "result": "runs/trials/full-review/study03-os/accepted/result.json",
+  "overlay": "runs/trials/full-review/study03-os/accepted/overlay.png"
+}

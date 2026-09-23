@@ -427,6 +427,69 @@ class CurveEditorTests(unittest.TestCase):
             self.assertEqual(decision["review_kind"], "base_extraction")
             self.assertIsNone(decision["revision"])
 
+    def test_refine_cli_reverifies_accepted_result_with_new_scan_evidence(self):
+        with TemporaryDirectory() as tmpdir:
+            result = make_result(tmpdir)
+            edited = CurveEditor().apply(
+                result,
+                [
+                    {
+                        "type": "move_point",
+                        "curve": result.curves[0].name,
+                        "point_id": result.curves[0].point_ids[20],
+                        "to": {
+                            "time": result.curves[0].time[20],
+                            "survival": result.curves[0].survival[20],
+                        },
+                    }
+                ],
+                observation="Previously reviewed visible point",
+                reason="Create a historical accepted revision fixture",
+            )
+            edited.revisions[-1].status = "accepted"
+            edited.revisions[-1].verification = "Earlier local review"
+            result_path = Path(tmpdir) / "accepted-result.json"
+            result_path.write_text(json.dumps(edited.to_jsonable()), encoding="utf-8")
+            scan_review = make_completed_scan_review(edited, tmpdir, "new-scan")
+            output_dir = Path(tmpdir) / "reverified"
+            script = (
+                Path(__file__).resolve().parents[1]
+                / "km-curve-digitizer"
+                / "scripts"
+                / "refine_km.py"
+            )
+
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(script),
+                    "verify",
+                    str(result_path),
+                    "--decision",
+                    "accept",
+                    "--verification",
+                    "New complete overlapping-window review",
+                    "--scan-review",
+                    str(scan_review),
+                    "--output-dir",
+                    str(output_dir),
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            decision = json.loads(
+                (output_dir / "review_decision.json").read_text(encoding="utf-8")
+            )
+            reverified = json.loads(
+                (output_dir / "result.json").read_text(encoding="utf-8")
+            )
+            self.assertEqual(decision["review_kind"], "reverified_result")
+            self.assertEqual(decision["revision"]["status"], "accepted")
+            self.assertEqual(reverified, edited.to_jsonable())
+
     def test_refine_cli_requires_resolved_local_review_issue_in_scan_evidence(self):
         with TemporaryDirectory() as tmpdir:
             result = make_result(tmpdir)

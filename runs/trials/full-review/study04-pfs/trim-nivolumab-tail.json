@@ -1,0 +1,11 @@
+{
+  "observation": "The source-only 20-27 month crop shows the dark Nivolumab trace ending at pixel x=362, while the extracted trace is forward-filled without source support to x=385.",
+  "reason": "Remove only the unsupported terminal extension and retain the final visible plateau endpoint.",
+  "actions": [
+    {
+      "type": "delete_points",
+      "curve": "Nivolumab",
+      "pixel_region": [363, 105, 385, 314]
+    }
+  ]
+}

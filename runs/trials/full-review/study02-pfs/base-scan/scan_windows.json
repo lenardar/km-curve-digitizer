@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "result_signature": "25635935dcf48058a24d439d055e64e765fd07460a55ee5eed535b606caa6f8d",
+  "direction": "left_to_right",
+  "window_width": 160,
+  "overlap": 64,
+  "curves": [
+    {
+      "id": 1,
+      "name": "Tislelizumab plus chemotherapy"
+    },
+    {
+      "id": 2,
+      "name": "Placebo plus chemotherapy"
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "w001",
+      "time_range": [
+        0.0,
+        12.382398
+      ],
+      "pixel_region": [
+        142,
+        0,
+        314,
+        286
+      ],
+      "source_image": "w001_source.png",
+      "all_curves_image": "w001_all_curves.png",
+      "curve_images": {
+        "1": "w001_curve_1.png",
+        "2": "w001_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w002",
+      "time_range": [
+        7.429439,
+        19.811836
+      ],
+      "pixel_region": [
+        238,
+        0,
+        410,
+        286
+      ],
+      "source_image": "w002_source.png",
+      "all_curves_image": "w002_all_curves.png",
+      "curve_images": {
+        "1": "w002_curve_1.png",
+        "2": "w002_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w003",
+      "time_range": [
+        14.858877,
+        27.241275
+      ],
+      "pixel_region": [
+        334,
+        0,
+        506,
+        286
+      ],
+      "source_image": "w003_source.png",
+      "all_curves_image": "w003_all_curves.png",
+      "curve_images": {
+        "1": "w003_curve_1.png",
+        "2": "w003_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w004",
+      "time_range": [
+        22.288316,
+        34.670713
+      ],
+      "pixel_region": [
+        430,
+        0,
+        602,
+        286
+      ],
+      "source_image": "w004_source.png",
+      "all_curves_image": "w004_all_curves.png",
+      "curve_images": {
+        "1": "w004_curve_1.png",
+        "2": "w004_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w005",
+      "time_range": [
+        29.717754,
+        42.100152
+      ],
+      "pixel_region": [
+        526,
+        0,
+        698,
+        286
+      ],
+      "source_image": "w005_source.png",
+      "all_curves_image": "w005_all_curves.png",
+      "curve_images": {
+        "1": "w005_curve_1.png",
+        "2": "w005_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w006",
+      "time_range": [
+        37.147193,
+        49.52959
+      ],
+      "pixel_region": [
+        622,
+        0,
+        794,
+        286
+      ],
+      "source_image": "w006_source.png",
+      "all_curves_image": "w006_all_curves.png",
+      "curve_images": {
+        "1": "w006_curve_1.png",
+        "2": "w006_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w007",
+      "time_range": [
+        38.617602,
+        51.0
+      ],
+      "pixel_region": [
+        641,
+        0,
+        813,
+        286
+      ],
+      "source_image": "w007_source.png",
+      "all_curves_image": "w007_all_curves.png",
+      "curve_images": {
+        "1": "w007_curve_1.png",
+        "2": "w007_curve_2.png"
+      }
+    }
+  ]
+}

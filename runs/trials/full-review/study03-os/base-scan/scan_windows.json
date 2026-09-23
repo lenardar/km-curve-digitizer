@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "result_signature": "1cc55ef5867c3b0e34d4809ad0ce130f5a446a31a3d9e6e29318ac2c033db69f",
+  "direction": "left_to_right",
+  "window_width": 90,
+  "overlap": 36,
+  "curves": [
+    {
+      "id": 1,
+      "name": "Maintenance group"
+    },
+    {
+      "id": 2,
+      "name": "BSC group"
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "w001",
+      "time_range": [
+        0.0,
+        19.354839
+      ],
+      "pixel_region": [
+        108,
+        22,
+        210,
+        227
+      ],
+      "source_image": "w001_source.png",
+      "all_curves_image": "w001_all_curves.png",
+      "curve_images": {
+        "1": "w001_curve_1.png",
+        "2": "w001_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w002",
+      "time_range": [
+        11.612903,
+        30.967742
+      ],
+      "pixel_region": [
+        162,
+        22,
+        264,
+        227
+      ],
+      "source_image": "w002_source.png",
+      "all_curves_image": "w002_all_curves.png",
+      "curve_images": {
+        "1": "w002_curve_1.png",
+        "2": "w002_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w003",
+      "time_range": [
+        23.225806,
+        42.580645
+      ],
+      "pixel_region": [
+        216,
+        22,
+        318,
+        227
+      ],
+      "source_image": "w003_source.png",
+      "all_curves_image": "w003_all_curves.png",
+      "curve_images": {
+        "1": "w003_curve_1.png",
+        "2": "w003_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w004",
+      "time_range": [
+        34.83871,
+        54.193548
+      ],
+      "pixel_region": [
+        270,
+        22,
+        372,
+        227
+      ],
+      "source_image": "w004_source.png",
+      "all_curves_image": "w004_all_curves.png",
+      "curve_images": {
+        "1": "w004_curve_1.png",
+        "2": "w004_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w005",
+      "time_range": [
+        40.645161,
+        60.0
+      ],
+      "pixel_region": [
+        297,
+        22,
+        399,
+        227
+      ],
+      "source_image": "w005_source.png",
+      "all_curves_image": "w005_all_curves.png",
+      "curve_images": {
+        "1": "w005_curve_1.png",
+        "2": "w005_curve_2.png"
+      }
+    }
+  ]
+}

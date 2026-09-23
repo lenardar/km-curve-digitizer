@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "result_signature": "c4bd880490aa8cc5910a767f2ac8c333b0044a4cc3c0c4665addbb90ac893eb5",
+  "direction": "left_to_right",
+  "window_width": 160,
+  "overlap": 64,
+  "curves": [
+    {
+      "id": 1,
+      "name": "Chemoradiotherapy alone"
+    },
+    {
+      "id": 2,
+      "name": "Induction chemotherapy with chemoradiotherapy"
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "w001",
+      "time_range": [
+        0.0,
+        29.131034
+      ],
+      "pixel_region": [
+        186,
+        14,
+        358,
+        390
+      ],
+      "source_image": "w001_source.png",
+      "all_curves_image": "w001_all_curves.png",
+      "curve_images": {
+        "1": "w001_curve_1.png",
+        "2": "w001_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w002",
+      "time_range": [
+        17.478621,
+        46.609655
+      ],
+      "pixel_region": [
+        282,
+        14,
+        454,
+        390
+      ],
+      "source_image": "w002_source.png",
+      "all_curves_image": "w002_all_curves.png",
+      "curve_images": {
+        "1": "w002_curve_1.png",
+        "2": "w002_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w003",
+      "time_range": [
+        34.957241,
+        64.088276
+      ],
+      "pixel_region": [
+        378,
+        14,
+        550,
+        390
+      ],
+      "source_image": "w003_source.png",
+      "all_curves_image": "w003_all_curves.png",
+      "curve_images": {
+        "1": "w003_curve_1.png",
+        "2": "w003_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w004",
+      "time_range": [
+        52.435862,
+        81.566897
+      ],
+      "pixel_region": [
+        474,
+        14,
+        646,
+        390
+      ],
+      "source_image": "w004_source.png",
+      "all_curves_image": "w004_all_curves.png",
+      "curve_images": {
+        "1": "w004_curve_1.png",
+        "2": "w004_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w005",
+      "time_range": [
+        69.914483,
+        99.045517
+      ],
+      "pixel_region": [
+        570,
+        14,
+        742,
+        390
+      ],
+      "source_image": "w005_source.png",
+      "all_curves_image": "w005_all_curves.png",
+      "curve_images": {
+        "1": "w005_curve_1.png",
+        "2": "w005_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w006",
+      "time_range": [
+        87.393103,
+        116.524138
+      ],
+      "pixel_region": [
+        666,
+        14,
+        838,
+        390
+      ],
+      "source_image": "w006_source.png",
+      "all_curves_image": "w006_all_curves.png",
+      "curve_images": {
+        "1": "w006_curve_1.png",
+        "2": "w006_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w007",
+      "time_range": [
+        102.868966,
+        132.0
+      ],
+      "pixel_region": [
+        751,
+        14,
+        923,
+        390
+      ],
+      "source_image": "w007_source.png",
+      "all_curves_image": "w007_all_curves.png",
+      "curve_images": {
+        "1": "w007_curve_1.png",
+        "2": "w007_curve_2.png"
+      }
+    }
+  ]
+}

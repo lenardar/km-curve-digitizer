@@ -1,0 +1,82 @@
+[
+  {
+    "issue_id": "q001-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 6 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      0.34838709677419355,
+      0.7838709677419355
+    ],
+    "pixel_region": [
+      64,
+      87,
+      101,
+      130
+    ],
+    "image": "quality_hotspots/q001-curve_identity_review.png"
+  },
+  {
+    "issue_id": "q002-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 7 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      21.07741935483871,
+      21.6
+    ],
+    "pixel_region": [
+      302,
+      282,
+      340,
+      327
+    ],
+    "image": "quality_hotspots/q002-curve_identity_review.png"
+  },
+  {
+    "issue_id": "q003-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 19 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      22.03548387096774,
+      23.60322580645161
+    ],
+    "pixel_region": [
+      313,
+      282,
+      363,
+      326
+    ],
+    "image": "quality_hotspots/q003-curve_identity_review.png"
+  },
+  {
+    "issue_id": "q004-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Nivolumab' and 'Bevacizumab' are within 4 pixels for 6 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      24.4741935483871,
+      24.90967741935484
+    ],
+    "pixel_region": [
+      341,
+      285,
+      378,
+      327
+    ],
+    "image": "quality_hotspots/q004-curve_identity_review.png"
+  }
+]

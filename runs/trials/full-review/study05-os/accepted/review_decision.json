@@ -1,0 +1,10 @@
+{
+  "decision": "accept",
+  "verification": "Seven overlapping windows confirm the cyan and red traces follow the source through dense censor marks and late drops; all 24 risk cells match the visible table.",
+  "review_kind": "base_extraction",
+  "reviewed_issue_ids": [],
+  "scan_review": "scan_review.json",
+  "revision": null,
+  "result": "runs/trials/full-review/study05-os/accepted/result.json",
+  "overlay": "runs/trials/full-review/study05-os/accepted/overlay.png"
+}

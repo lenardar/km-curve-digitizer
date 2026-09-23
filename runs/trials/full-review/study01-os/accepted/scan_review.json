@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "result_signature": "f17b45f80129b033a3e278f3246a32910224f38f40fc94bcc8cacb77bb3aea2e",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        116,
+        29,
+        288,
+        293
+      ],
+      "time_range": [
+        0.0,
+        12.724595
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 0-12.7246; step continuity agrees across both overlap boundaries. Both colored traces remain distinct through crossings, dense censor marks, and the late tail.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source steps in w001 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source steps in w001 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        212,
+        29,
+        384,
+        293
+      ],
+      "time_range": [
+        7.634757,
+        20.359352
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 7.63476-20.3594; step continuity agrees across both overlap boundaries. Both colored traces remain distinct through crossings, dense censor marks, and the late tail.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source steps in w002 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source steps in w002 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        308,
+        29,
+        480,
+        293
+      ],
+      "time_range": [
+        15.269514,
+        27.994109
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 15.2695-27.9941; step continuity agrees across both overlap boundaries. Both colored traces remain distinct through crossings, dense censor marks, and the late tail.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source steps in w003 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source steps in w003 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w004",
+      "pixel_region": [
+        404,
+        29,
+        576,
+        293
+      ],
+      "time_range": [
+        22.904271,
+        35.628866
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 22.9043-35.6289; step continuity agrees across both overlap boundaries. Both colored traces remain distinct through crossings, dense censor marks, and the late tail.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source steps in w004 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source steps in w004 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w005",
+      "pixel_region": [
+        500,
+        29,
+        672,
+        293
+      ],
+      "time_range": [
+        30.539028,
+        43.263623
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 30.539-43.2636; step continuity agrees across both overlap boundaries. Both colored traces remain distinct through crossings, dense censor marks, and the late tail.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source steps in w005 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source steps in w005 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w006",
+      "pixel_region": [
+        596,
+        29,
+        768,
+        293
+      ],
+      "time_range": [
+        38.173785,
+        50.89838
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 38.1738-50.8984; step continuity agrees across both overlap boundaries. Both colored traces remain distinct through crossings, dense censor marks, and the late tail.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source steps in w006 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source steps in w006 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w007",
+      "pixel_region": [
+        635,
+        29,
+        807,
+        293
+      ],
+      "time_range": [
+        41.275405,
+        54.0
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 41.2754-54; step continuity agrees across both overlap boundaries. Both colored traces remain distinct through crossings, dense censor marks, and the late tail.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source steps in w007 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source steps in w007 without an unsupported jump or identity switch."
+        }
+      ]
+    }
+  ],
+  "issue_reviews": []
+}

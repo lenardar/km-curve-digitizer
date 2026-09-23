@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "result_signature": "25635935dcf48058a24d439d055e64e765fd07460a55ee5eed535b606caa6f8d",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        142,
+        0,
+        314,
+        286
+      ],
+      "time_range": [
+        0.0,
+        12.382398
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 0-12.3824; step continuity agrees across both overlap boundaries. Both traces follow the visible source steps through large censor dots and separate terminal plateaus.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab plus chemotherapy",
+          "status": "clear",
+          "observation": "Tislelizumab plus chemotherapy follows the visible source steps in w001 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Placebo plus chemotherapy",
+          "status": "clear",
+          "observation": "Placebo plus chemotherapy follows the visible source steps in w001 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        238,
+        0,
+        410,
+        286
+      ],
+      "time_range": [
+        7.429439,
+        19.811836
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 7.42944-19.8118; step continuity agrees across both overlap boundaries. Both traces follow the visible source steps through large censor dots and separate terminal plateaus.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab plus chemotherapy",
+          "status": "clear",
+          "observation": "Tislelizumab plus chemotherapy follows the visible source steps in w002 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Placebo plus chemotherapy",
+          "status": "clear",
+          "observation": "Placebo plus chemotherapy follows the visible source steps in w002 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        334,
+        0,
+        506,
+        286
+      ],
+      "time_range": [
+        14.858877,
+        27.241275
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 14.8589-27.2413; step continuity agrees across both overlap boundaries. Both traces follow the visible source steps through large censor dots and separate terminal plateaus.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab plus chemotherapy",
+          "status": "clear",
+          "observation": "Tislelizumab plus chemotherapy follows the visible source steps in w003 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Placebo plus chemotherapy",
+          "status": "clear",
+          "observation": "Placebo plus chemotherapy follows the visible source steps in w003 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w004",
+      "pixel_region": [
+        430,
+        0,
+        602,
+        286
+      ],
+      "time_range": [
+        22.288316,
+        34.670713
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 22.2883-34.6707; step continuity agrees across both overlap boundaries. Both traces follow the visible source steps through large censor dots and separate terminal plateaus.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab plus chemotherapy",
+          "status": "clear",
+          "observation": "Tislelizumab plus chemotherapy follows the visible source steps in w004 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Placebo plus chemotherapy",
+          "status": "clear",
+          "observation": "Placebo plus chemotherapy follows the visible source steps in w004 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w005",
+      "pixel_region": [
+        526,
+        0,
+        698,
+        286
+      ],
+      "time_range": [
+        29.717754,
+        42.100152
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 29.7178-42.1002; step continuity agrees across both overlap boundaries. Both traces follow the visible source steps through large censor dots and separate terminal plateaus.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab plus chemotherapy",
+          "status": "clear",
+          "observation": "Tislelizumab plus chemotherapy follows the visible source steps in w005 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Placebo plus chemotherapy",
+          "status": "clear",
+          "observation": "Placebo plus chemotherapy follows the visible source steps in w005 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w006",
+      "pixel_region": [
+        622,
+        0,
+        794,
+        286
+      ],
+      "time_range": [
+        37.147193,
+        49.52959
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 37.1472-49.5296; step continuity agrees across both overlap boundaries. Both traces follow the visible source steps through large censor dots and separate terminal plateaus.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab plus chemotherapy",
+          "status": "clear",
+          "observation": "Tislelizumab plus chemotherapy follows the visible source steps in w006 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Placebo plus chemotherapy",
+          "status": "clear",
+          "observation": "Placebo plus chemotherapy follows the visible source steps in w006 without an unsupported jump or identity switch."
+        }
+      ]
+    },
+    {
+      "window_id": "w007",
+      "pixel_region": [
+        641,
+        0,
+        813,
+        286
+      ],
+      "time_range": [
+        38.617602,
+        51.0
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays were inspected from 38.6176-51; step continuity agrees across both overlap boundaries. Both traces follow the visible source steps through large censor dots and separate terminal plateaus.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab plus chemotherapy",
+          "status": "clear",
+          "observation": "Tislelizumab plus chemotherapy follows the visible source steps in w007 without an unsupported jump or identity switch."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Placebo plus chemotherapy",
+          "status": "clear",
+          "observation": "Placebo plus chemotherapy follows the visible source steps in w007 without an unsupported jump or identity switch."
+        }
+      ]
+    }
+  ],
+  "issue_reviews": []
+}

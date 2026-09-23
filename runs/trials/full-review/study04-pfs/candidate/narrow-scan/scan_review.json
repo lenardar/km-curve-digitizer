@@ -1,0 +1,233 @@
+{
+  "schema_version": 1,
+  "result_signature": "4cbc2bd1ac1031e7bf5954cc889042dde79f54eb7610b8762101bc02d9d2ae71",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        70,
+        99,
+        172,
+        320
+      ],
+      "time_range": [
+        0.0,
+        7.83871
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree; curve identities remain continuous through the overlap.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "clear",
+          "observation": "Nivolumab follows the visible source in w001 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "Bevacizumab follows the visible source in w001 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        124,
+        99,
+        226,
+        320
+      ],
+      "time_range": [
+        4.703226,
+        12.541935
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree; curve identities remain continuous through the overlap.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "clear",
+          "observation": "Nivolumab follows the visible source in w002 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "Bevacizumab follows the visible source in w002 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        178,
+        99,
+        280,
+        320
+      ],
+      "time_range": [
+        9.406452,
+        17.245161
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree; curve identities remain continuous through the overlap.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "clear",
+          "observation": "Nivolumab follows the visible source in w003 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "Bevacizumab follows the visible source in w003 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w004",
+      "pixel_region": [
+        232,
+        99,
+        334,
+        320
+      ],
+      "time_range": [
+        14.109677,
+        21.948387
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree; curve identities remain continuous through the overlap.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "clear",
+          "observation": "Nivolumab follows the visible source in w004 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "Bevacizumab follows the visible source in w004 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w005",
+      "pixel_region": [
+        286,
+        99,
+        388,
+        320
+      ],
+      "time_range": [
+        18.812903,
+        26.651613
+      ],
+      "status": "resolved",
+      "observation": "The edited Nivolumab trace now stops at the last visible dark endpoint while Bevacizumab retains its longer light-gray tail.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "resolved",
+          "observation": "The unsupported x=363-385 extension is absent and the trace ends at the visible x=362 endpoint."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "Bevacizumab follows the visible source in w005 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w006",
+      "pixel_region": [
+        290,
+        99,
+        392,
+        320
+      ],
+      "time_range": [
+        19.16129,
+        27.0
+      ],
+      "status": "resolved",
+      "observation": "The edited Nivolumab trace now stops at the last visible dark endpoint while Bevacizumab retains its longer light-gray tail.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Nivolumab",
+          "status": "resolved",
+          "observation": "The unsupported x=363-385 extension is absent and the trace ends at the visible x=362 endpoint."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Bevacizumab",
+          "status": "clear",
+          "observation": "Bevacizumab follows the visible source in w006 without switching identity."
+        }
+      ]
+    }
+  ],
+  "issue_reviews": [
+    {
+      "issue_id": "q001-curve_identity_review",
+      "status": "false_positive",
+      "observation": "The curves are close near the origin, but the dark and light source pixels remain separately traceable and neither extraction switches identity.",
+      "window_ids": [
+        "w001"
+      ]
+    },
+    {
+      "issue_id": "q002-curve_identity_review",
+      "status": "false_positive",
+      "observation": "The local approach near 21 months is present in the source; overlapping windows show each trace continuing on its own color afterward.",
+      "window_ids": [
+        "w004",
+        "w005",
+        "w006"
+      ]
+    },
+    {
+      "issue_id": "q003-curve_identity_review",
+      "status": "false_positive",
+      "observation": "The long close run from 22-24 months is a real source configuration, with distinct dark and light endpoints visible in the source-only windows.",
+      "window_ids": [
+        "w004",
+        "w005",
+        "w006"
+      ]
+    },
+    {
+      "issue_id": "q004-curve_identity_review",
+      "status": "false_positive",
+      "observation": "The terminal approach is genuine; the dark trace ends at x=362 while the light trace continues farther right, confirming identity.",
+      "window_ids": [
+        "w005",
+        "w006"
+      ]
+    }
+  ]
+}

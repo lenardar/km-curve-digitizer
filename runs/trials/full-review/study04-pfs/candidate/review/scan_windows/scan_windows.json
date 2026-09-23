@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "result_signature": "4cbc2bd1ac1031e7bf5954cc889042dde79f54eb7610b8762101bc02d9d2ae71",
+  "direction": "left_to_right",
+  "window_width": 160,
+  "overlap": 48,
+  "curves": [
+    {
+      "id": 1,
+      "name": "Nivolumab"
+    },
+    {
+      "id": 2,
+      "name": "Bevacizumab"
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "w001",
+      "time_range": [
+        0.0,
+        13.935484
+      ],
+      "pixel_region": [
+        70,
+        99,
+        242,
+        320
+      ],
+      "source_image": "w001_source.png",
+      "all_curves_image": "w001_all_curves.png",
+      "curve_images": {
+        "1": "w001_curve_1.png",
+        "2": "w001_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w002",
+      "time_range": [
+        9.754839,
+        23.690323
+      ],
+      "pixel_region": [
+        182,
+        99,
+        354,
+        320
+      ],
+      "source_image": "w002_source.png",
+      "all_curves_image": "w002_all_curves.png",
+      "curve_images": {
+        "1": "w002_curve_1.png",
+        "2": "w002_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w003",
+      "time_range": [
+        13.064516,
+        27.0
+      ],
+      "pixel_region": [
+        220,
+        99,
+        392,
+        320
+      ],
+      "source_image": "w003_source.png",
+      "all_curves_image": "w003_all_curves.png",
+      "curve_images": {
+        "1": "w003_curve_1.png",
+        "2": "w003_curve_2.png"
+      }
+    }
+  ]
+}

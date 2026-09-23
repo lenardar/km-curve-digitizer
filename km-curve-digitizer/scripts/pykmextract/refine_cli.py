@@ -239,13 +239,22 @@ def _run_verify(args: argparse.Namespace) -> int:
         _validate_scan_review(candidate, scan_review_payload)
     output_dir = _prepare_output_dir(args.output_dir)
     reviewed_revision = None
+    reverified_revision = None
     if not candidate.revisions:
         # A clean first-pass extraction still needs an auditable model decision,
         # even when no point edit was necessary.
         verified = candidate.model_copy(deep=True)
+    elif candidate.revisions[-1].status == "accepted" and args.decision == "accept":
+        # A result can acquire stronger review evidence after its point revision was
+        # accepted. The signature-bound scan proves the curve data are unchanged,
+        # so record a fresh decision without inventing another edit revision.
+        verified = candidate.model_copy(deep=True)
+        reverified_revision = candidate.revisions[-1].model_copy(deep=True)
     else:
         if candidate.revisions[-1].status != "candidate":
-            raise ValueError("The latest revision has already been verified")
+            raise ValueError(
+                "Only an accepted result can be reverified, and only with an accept decision"
+            )
         reviewed_revision = candidate.revisions[-1].model_copy(deep=True)
         reviewed_revision.status = "accepted" if args.decision == "accept" else "rejected"
         reviewed_revision.verification = args.verification
@@ -273,10 +282,20 @@ def _run_verify(args: argparse.Namespace) -> int:
     decision_payload = {
         "decision": args.decision,
         "verification": args.verification,
-        "review_kind": "edited_candidate" if reviewed_revision else "base_extraction",
+        "review_kind": (
+            "edited_candidate"
+            if reviewed_revision
+            else "reverified_result"
+            if reverified_revision
+            else "base_extraction"
+        ),
         "reviewed_issue_ids": sorted(reviewed_issue_ids),
         "scan_review": "scan_review.json" if scan_review_payload is not None else None,
-        "revision": reviewed_revision.model_dump(mode="json") if reviewed_revision else None,
+        "revision": (
+            (reviewed_revision or reverified_revision).model_dump(mode="json")
+            if reviewed_revision or reverified_revision
+            else None
+        ),
         "result": str(output_result),
         "overlay": overlay_path,
     }

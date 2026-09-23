@@ -1,0 +1,10 @@
+{
+  "decision": "accept",
+  "verification": "Seven overlapping windows confirm both curves retain identity through labels, large censor dots, and terminal plateaus; all 38 risk cells match the visible table.",
+  "review_kind": "base_extraction",
+  "reviewed_issue_ids": [],
+  "scan_review": "scan_review.json",
+  "revision": null,
+  "result": "runs/trials/full-review/study02-os/accepted/result.json",
+  "overlay": "runs/trials/full-review/study02-os/accepted/overlay.png"
+}
