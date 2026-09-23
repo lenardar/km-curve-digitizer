@@ -18,6 +18,22 @@ These ten overlays are the current accepted OS and PFS results for the five bund
 
 The corresponding structured outputs and signature-bound review decisions are indexed in [`runs/summary.json`](runs/summary.json).
 
+## Number-at-risk tables
+
+The skill extracts the printed number-at-risk table independently from the survival curves. Each cell retains a stable ID, curve and time-column identity, confidence, and—when localization is reliable—its source-image pixel bounds. Results are available as long-format CSV and structured JSON for direct use in downstream reconstruction workflows.
+
+For example, the reviewed `study01` PFS table begins:
+
+| Curve | 0 mo | 3 mo | 6 mo | 9 mo | 12 mo |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Tislelizumab | 342 | 145 | 79 | 54 | 47 |
+| Sorafenib | 332 | 125 | 80 | 38 | 26 |
+
+Codex can inspect the full table or enlarge one ambiguous cell, then set or clear that cell without shifting neighboring columns. It can also correct a shared time column. Every change preserves the parent result and records the previous value in revision history; counts are never inferred from curve height or silently interpolated.
+
+- [Example risk-table CSV](runs/study01/pfs/risk_table.csv)
+- [Risk-table inspection and correction workflow](km-curve-digitizer/references/risk-table.md)
+
 ## Skill layout
 
 ```text
