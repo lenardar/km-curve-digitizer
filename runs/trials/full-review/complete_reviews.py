@@ -7,7 +7,6 @@ ROOT = Path(__file__).resolve().parent
 
 BASE_PANELS = {
     "study01-os": "Both colored traces remain distinct through crossings, dense censor marks, and the late tail.",
-    "study01-pfs": "Both traces follow the dense early descent and their separate late endpoints; the shorter Sorafenib tail is visible in the source.",
     "study02-os": "The dark-teal and taupe traces retain identity through labels, large censor dots, and late plateaus.",
     "study02-pfs": "Both traces follow the visible source steps through large censor dots and separate terminal plateaus.",
     "study03-os": "The orange and blue-gray traces follow the visible fine staircase and remain separate across the full axis.",
@@ -37,6 +36,52 @@ def complete_clear_review(panel: str, panel_observation: str) -> None:
 
 for panel, observation in BASE_PANELS.items():
     complete_clear_review(panel, observation)
+
+
+study01_base_path = ROOT / "study01-pfs" / "base-scan" / "scan_review.json"
+study01_base = json.loads(study01_base_path.read_text())
+for window in study01_base["window_reviews"]:
+    is_early = window["window_id"] == "w001"
+    window["status"] = "confirmed_defect" if is_early else "clear"
+    window["observation"] = (
+        "The historical 0-4 month data-coordinate reconstruction is visibly shifted and coarser than both dense source staircases."
+        if is_early
+        else "Both traces follow the visible source steps and retain identity through this overlap."
+    )
+    for curve in window["curve_reviews"]:
+        curve["status"] = "confirmed_defect" if is_early else "clear"
+        curve["observation"] = (
+            f"{curve['curve_name']} has displaced early drops and misses visible small steps."
+            if is_early
+            else f"{curve['curve_name']} follows the visible source in {window['window_id']}."
+        )
+study01_base_path.write_text(json.dumps(study01_base, indent=2) + "\n")
+
+
+study01_candidate_path = ROOT / "study01-pfs" / "recheck" / "candidate" / "narrow-scan" / "scan_review.json"
+if study01_candidate_path.exists():
+    study01_candidate = json.loads(study01_candidate_path.read_text())
+    for window in study01_candidate["window_reviews"]:
+        is_early = window["window_id"] == "w001"
+        window["status"] = "resolved" if is_early else "clear"
+        window["observation"] = (
+            "Both pixel-coordinate reconstructions now follow the dense 0-4 month source staircases and connect continuously to the unchanged later traces."
+            if is_early
+            else "Source-only and both focused overlays agree throughout this overlapping window."
+        )
+        for curve in window["curve_reviews"]:
+            curve["status"] = "resolved" if is_early else "clear"
+            curve["observation"] = (
+                f"{curve['curve_name']} now follows each visible early drop at its source pixel position."
+                if is_early
+                else f"{curve['curve_name']} follows the visible source in {window['window_id']} without switching identity."
+            )
+    for issue in study01_candidate["issue_reviews"]:
+        issue["status"] = "false_positive"
+        issue["observation"] = (
+            "The curves genuinely approach and cross in the source; the orange and dark pixels remain separately traceable through all overlapping windows."
+        )
+    study01_candidate_path.write_text(json.dumps(study01_candidate, indent=2) + "\n")
 
 
 base_path = ROOT / "study04-pfs" / "base-scan" / "scan_review.json"
@@ -93,7 +138,7 @@ candidate_path.write_text(json.dumps(candidate, indent=2) + "\n")
 
 accepted_dirs = {
     "study01-os": ROOT / "study01-os" / "accepted",
-    "study01-pfs": ROOT / "study01-pfs" / "accepted",
+    "study01-pfs": ROOT / "study01-pfs" / "recheck" / "accepted",
     "study02-os": ROOT / "study02-os" / "accepted",
     "study02-pfs": ROOT / "study02-pfs" / "accepted",
     "study03-os": ROOT / "study03-os" / "accepted",
@@ -111,7 +156,7 @@ summary["panels_pending_scan_review"] = 0
 summary["notes"] = [
     "All ten panels were inspected left-to-right with overlapping source-only and per-curve windows.",
     "Acceptance is tied to the exact result signature and a completed scan review for every window and curve.",
-    "The full pass retained eight reviewed results and corrected unsupported or displaced trace segments in study03/pfs, study04/os, and study04/pfs.",
+    "The full pass retained six reviewed results and corrected unsupported or displaced trace segments in study01/pfs, study03/pfs, study04/os, and study04/pfs.",
 ]
 for panel in summary["panels"]:
     key = f"{panel['study']}-{panel['endpoint']}"

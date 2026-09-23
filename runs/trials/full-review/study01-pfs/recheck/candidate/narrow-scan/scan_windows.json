@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "result_signature": "6725ea7b3f40e452130dda5af6520110440523ed957f628981b8af4abfa3dde9",
+  "direction": "left_to_right",
+  "window_width": 120,
+  "overlap": 48,
+  "curves": [
+    {
+      "id": 1,
+      "name": "Tislelizumab"
+    },
+    {
+      "id": 2,
+      "name": "Sorafenib"
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "w001",
+      "time_range": [
+        0.0,
+        9.57164
+      ],
+      "pixel_region": [
+        114,
+        34,
+        246,
+        297
+      ],
+      "source_image": "w001_source.png",
+      "all_curves_image": "w001_all_curves.png",
+      "curve_images": {
+        "1": "w001_curve_1.png",
+        "2": "w001_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w002",
+      "time_range": [
+        5.742984,
+        15.314623
+      ],
+      "pixel_region": [
+        186,
+        34,
+        318,
+        297
+      ],
+      "source_image": "w002_source.png",
+      "all_curves_image": "w002_all_curves.png",
+      "curve_images": {
+        "1": "w002_curve_1.png",
+        "2": "w002_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w003",
+      "time_range": [
+        11.485968,
+        21.057607
+      ],
+      "pixel_region": [
+        258,
+        34,
+        390,
+        297
+      ],
+      "source_image": "w003_source.png",
+      "all_curves_image": "w003_all_curves.png",
+      "curve_images": {
+        "1": "w003_curve_1.png",
+        "2": "w003_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w004",
+      "time_range": [
+        17.228951,
+        26.800591
+      ],
+      "pixel_region": [
+        330,
+        34,
+        462,
+        297
+      ],
+      "source_image": "w004_source.png",
+      "all_curves_image": "w004_all_curves.png",
+      "curve_images": {
+        "1": "w004_curve_1.png",
+        "2": "w004_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w005",
+      "time_range": [
+        22.971935,
+        32.543575
+      ],
+      "pixel_region": [
+        402,
+        34,
+        534,
+        297
+      ],
+      "source_image": "w005_source.png",
+      "all_curves_image": "w005_all_curves.png",
+      "curve_images": {
+        "1": "w005_curve_1.png",
+        "2": "w005_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w006",
+      "time_range": [
+        28.714919,
+        38.286558
+      ],
+      "pixel_region": [
+        474,
+        34,
+        606,
+        297
+      ],
+      "source_image": "w006_source.png",
+      "all_curves_image": "w006_all_curves.png",
+      "curve_images": {
+        "1": "w006_curve_1.png",
+        "2": "w006_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w007",
+      "time_range": [
+        34.457903,
+        44.029542
+      ],
+      "pixel_region": [
+        546,
+        34,
+        678,
+        297
+      ],
+      "source_image": "w007_source.png",
+      "all_curves_image": "w007_all_curves.png",
+      "curve_images": {
+        "1": "w007_curve_1.png",
+        "2": "w007_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w008",
+      "time_range": [
+        40.200886,
+        49.772526
+      ],
+      "pixel_region": [
+        618,
+        34,
+        750,
+        297
+      ],
+      "source_image": "w008_source.png",
+      "all_curves_image": "w008_all_curves.png",
+      "curve_images": {
+        "1": "w008_curve_1.png",
+        "2": "w008_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w009",
+      "time_range": [
+        44.42836,
+        54.0
+      ],
+      "pixel_region": [
+        671,
+        34,
+        803,
+        297
+      ],
+      "source_image": "w009_source.png",
+      "all_curves_image": "w009_all_curves.png",
+      "curve_images": {
+        "1": "w009_curve_1.png",
+        "2": "w009_curve_2.png"
+      }
+    }
+  ]
+}

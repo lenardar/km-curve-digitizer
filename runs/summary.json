@@ -6,7 +6,7 @@
   "notes": [
     "All ten panels were inspected left-to-right with overlapping source-only and per-curve windows.",
     "Acceptance is tied to the exact result signature and a completed scan review for every window and curve.",
-    "The full pass retained eight reviewed results and corrected unsupported or displaced trace segments in study03/pfs, study04/os, and study04/pfs."
+    "The full pass retained six reviewed results and corrected unsupported or displaced trace segments in study01/pfs, study03/pfs, study04/os, and study04/pfs."
   ],
   "panels": [
     {
@@ -38,8 +38,8 @@
       "study": "study01",
       "endpoint": "pfs",
       "status": "accepted_after_overlapping_window_review",
-      "review_kind": "reverified_result",
-      "verification": "Seven overlapping windows confirm both curves follow the dense early descent and their separate visible endpoints; all 32 risk cells match the visible table.",
+      "review_kind": "edited_candidate",
+      "verification": "Nine overlapping source-first windows confirm the pixel-coordinate 0-4 month reconstructions follow both dense source staircases, preserve curve identity through later crossings, and leave all 32 risk cells unchanged.",
       "axis_bounds": {
         "left": 120,
         "right": 797,
@@ -60,15 +60,57 @@
           "time_range": null,
           "pixel_region": null,
           "requires_visual_review": false
+        },
+        {
+          "issue_id": "q002-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Tislelizumab' and 'Sorafenib' are within 4 pixels for 16 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            10.5288035450517,
+            11.725258493353028
+          ],
+          "pixel_region": [
+            242,
+            214,
+            277,
+            246
+          ],
+          "requires_visual_review": true
+        },
+        {
+          "issue_id": "q003-curve_identity_review",
+          "code": "curve_identity_review",
+          "message": "curves 'Tislelizumab' and 'Sorafenib' are within 4 pixels for 13 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+          "curve_id": null,
+          "curve_ids": [
+            1,
+            2
+          ],
+          "time_range": [
+            11.964549483013295,
+            12.921713441654358
+          ],
+          "pixel_region": [
+            260,
+            218,
+            292,
+            252
+          ],
+          "requires_visual_review": true
         }
       ],
-      "revision_count": 1,
-      "overlay": "runs/trials/full-review/study01-pfs/accepted/overlay.png",
+      "revision_count": 2,
+      "overlay": "runs/trials/full-review/study01-pfs/recheck/accepted/overlay.png",
       "curves_csv": "runs/study01/pfs/digitized_curves.csv",
       "risk_table_csv": "runs/study01/pfs/risk_table.csv",
-      "review_decision": "runs/trials/full-review/study01-pfs/accepted/review_decision.json",
-      "result": "runs/trials/full-review/study01-pfs/accepted/result.json",
-      "scan_review": "runs/trials/full-review/study01-pfs/accepted/scan_review.json"
+      "review_decision": "runs/trials/full-review/study01-pfs/recheck/accepted/review_decision.json",
+      "result": "runs/trials/full-review/study01-pfs/recheck/accepted/result.json",
+      "scan_review": "runs/trials/full-review/study01-pfs/recheck/accepted/scan_review.json"
     },
     {
       "study": "study02",

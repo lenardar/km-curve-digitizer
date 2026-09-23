@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "result_signature": "6725ea7b3f40e452130dda5af6520110440523ed957f628981b8af4abfa3dde9",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        114,
+        34,
+        246,
+        297
+      ],
+      "time_range": [
+        0.0,
+        9.57164
+      ],
+      "status": "resolved",
+      "observation": "Both pixel-coordinate reconstructions now follow the dense 0-4 month source staircases and connect continuously to the unchanged later traces.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "resolved",
+          "observation": "Tislelizumab now follows each visible early drop at its source pixel position."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "resolved",
+          "observation": "Sorafenib now follows each visible early drop at its source pixel position."
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        186,
+        34,
+        318,
+        297
+      ],
+      "time_range": [
+        5.742984,
+        15.314623
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree throughout this overlapping window.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source in w002 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source in w002 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        258,
+        34,
+        390,
+        297
+      ],
+      "time_range": [
+        11.485968,
+        21.057607
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree throughout this overlapping window.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source in w003 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source in w003 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w004",
+      "pixel_region": [
+        330,
+        34,
+        462,
+        297
+      ],
+      "time_range": [
+        17.228951,
+        26.800591
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree throughout this overlapping window.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source in w004 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source in w004 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w005",
+      "pixel_region": [
+        402,
+        34,
+        534,
+        297
+      ],
+      "time_range": [
+        22.971935,
+        32.543575
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree throughout this overlapping window.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source in w005 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source in w005 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w006",
+      "pixel_region": [
+        474,
+        34,
+        606,
+        297
+      ],
+      "time_range": [
+        28.714919,
+        38.286558
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree throughout this overlapping window.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source in w006 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source in w006 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w007",
+      "pixel_region": [
+        546,
+        34,
+        678,
+        297
+      ],
+      "time_range": [
+        34.457903,
+        44.029542
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree throughout this overlapping window.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source in w007 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source in w007 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w008",
+      "pixel_region": [
+        618,
+        34,
+        750,
+        297
+      ],
+      "time_range": [
+        40.200886,
+        49.772526
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree throughout this overlapping window.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source in w008 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source in w008 without switching identity."
+        }
+      ]
+    },
+    {
+      "window_id": "w009",
+      "pixel_region": [
+        671,
+        34,
+        803,
+        297
+      ],
+      "time_range": [
+        44.42836,
+        54.0
+      ],
+      "status": "clear",
+      "observation": "Source-only and both focused overlays agree throughout this overlapping window.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "clear",
+          "observation": "Tislelizumab follows the visible source in w009 without switching identity."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "clear",
+          "observation": "Sorafenib follows the visible source in w009 without switching identity."
+        }
+      ]
+    }
+  ],
+  "issue_reviews": [
+    {
+      "issue_id": "q002-curve_identity_review",
+      "status": "false_positive",
+      "observation": "The curves genuinely approach and cross in the source; the orange and dark pixels remain separately traceable through all overlapping windows.",
+      "window_ids": [
+        "w001",
+        "w002",
+        "w003"
+      ]
+    },
+    {
+      "issue_id": "q003-curve_identity_review",
+      "status": "false_positive",
+      "observation": "The curves genuinely approach and cross in the source; the orange and dark pixels remain separately traceable through all overlapping windows.",
+      "window_ids": [
+        "w002",
+        "w003"
+      ]
+    }
+  ]
+}

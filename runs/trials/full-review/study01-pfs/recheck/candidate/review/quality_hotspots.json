@@ -1,0 +1,42 @@
+[
+  {
+    "issue_id": "q002-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Tislelizumab' and 'Sorafenib' are within 4 pixels for 16 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      10.5288035450517,
+      11.725258493353028
+    ],
+    "pixel_region": [
+      236,
+      208,
+      283,
+      252
+    ],
+    "image": "quality_hotspots/q002-curve_identity_review.png"
+  },
+  {
+    "issue_id": "q003-curve_identity_review",
+    "code": "curve_identity_review",
+    "message": "curves 'Tislelizumab' and 'Sorafenib' are within 4 pixels for 13 consecutive columns; inspect the source crop to confirm that neither trace changes identity",
+    "curve_ids": [
+      1,
+      2
+    ],
+    "time_range": [
+      11.964549483013295,
+      12.921713441654358
+    ],
+    "pixel_region": [
+      254,
+      212,
+      298,
+      258
+    ],
+    "image": "quality_hotspots/q003-curve_identity_review.png"
+  }
+]

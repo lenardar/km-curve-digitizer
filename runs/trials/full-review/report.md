@@ -7,7 +7,7 @@ All 10 KM panels are accepted with result-signature-bound scan evidence. Each so
 | Panel | Windows | Decision | Material action |
 | --- | ---: | --- | --- |
 | study01/os | 7 | accepted base | none |
-| study01/pfs | 7 | reverified accepted result | prior early-curve repair retained |
+| study01/pfs | 9 | accepted revision `r0002` | both displaced 0-4 month approximations rebuilt from source pixels |
 | study02/os | 7 | accepted base | none |
 | study02/pfs | 7 | accepted base | none |
 | study03/os | 5 | accepted base | none |
@@ -21,12 +21,15 @@ All 10 KM panels are accepted with result-signature-bound scan evidence. Each so
 
 - [All 10 accepted overlays](accepted-overlays-contact-sheet.png)
 - [Machine-readable summary](../../summary.json)
+- [study01/pfs Tislelizumab before/after](study01-pfs/recheck/comparison/w001_curve_1_comparison.png)
+- [study01/pfs Sorafenib before/after](study01-pfs/recheck/comparison/w001_curve_2_comparison.png)
+- [study01/pfs corrected overlay](study01-pfs/recheck/accepted/overlay.png)
 - [study03/pfs difficult-panel report](../study03-pfs-scan/report.md)
 - [study04/os difficult-panel report](../study04-os-scan/report.md)
 - [study04/pfs before/after terminal comparison](study04-pfs/comparison/w006_curve_1_comparison.png)
 - [study04/pfs accepted overlay](study04-pfs/accepted/overlay.png)
 - [study01/os accepted decision](study01-os/accepted/review_decision.json)
-- [study01/pfs reverified decision](study01-pfs/accepted/review_decision.json)
+- [study01/pfs corrected decision](study01-pfs/recheck/accepted/review_decision.json)
 - [study02/os accepted decision](study02-os/accepted/review_decision.json)
 - [study02/pfs accepted decision](study02-pfs/accepted/review_decision.json)
 - [study03/os accepted decision](study03-os/accepted/review_decision.json)

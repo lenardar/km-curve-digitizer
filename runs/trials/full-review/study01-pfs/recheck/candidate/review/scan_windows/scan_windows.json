@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "result_signature": "6725ea7b3f40e452130dda5af6520110440523ed957f628981b8af4abfa3dde9",
+  "direction": "left_to_right",
+  "window_width": 160,
+  "overlap": 48,
+  "curves": [
+    {
+      "id": 1,
+      "name": "Tislelizumab"
+    },
+    {
+      "id": 2,
+      "name": "Sorafenib"
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "w001",
+      "time_range": [
+        0.0,
+        12.762186
+      ],
+      "pixel_region": [
+        114,
+        34,
+        286,
+        297
+      ],
+      "source_image": "w001_source.png",
+      "all_curves_image": "w001_all_curves.png",
+      "curve_images": {
+        "1": "w001_curve_1.png",
+        "2": "w001_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w002",
+      "time_range": [
+        8.93353,
+        21.695716
+      ],
+      "pixel_region": [
+        226,
+        34,
+        398,
+        297
+      ],
+      "source_image": "w002_source.png",
+      "all_curves_image": "w002_all_curves.png",
+      "curve_images": {
+        "1": "w002_curve_1.png",
+        "2": "w002_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w003",
+      "time_range": [
+        17.867061,
+        30.629247
+      ],
+      "pixel_region": [
+        338,
+        34,
+        510,
+        297
+      ],
+      "source_image": "w003_source.png",
+      "all_curves_image": "w003_all_curves.png",
+      "curve_images": {
+        "1": "w003_curve_1.png",
+        "2": "w003_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w004",
+      "time_range": [
+        26.800591,
+        39.562777
+      ],
+      "pixel_region": [
+        450,
+        34,
+        622,
+        297
+      ],
+      "source_image": "w004_source.png",
+      "all_curves_image": "w004_all_curves.png",
+      "curve_images": {
+        "1": "w004_curve_1.png",
+        "2": "w004_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w005",
+      "time_range": [
+        35.734121,
+        48.496307
+      ],
+      "pixel_region": [
+        562,
+        34,
+        734,
+        297
+      ],
+      "source_image": "w005_source.png",
+      "all_curves_image": "w005_all_curves.png",
+      "curve_images": {
+        "1": "w005_curve_1.png",
+        "2": "w005_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w006",
+      "time_range": [
+        41.237814,
+        54.0
+      ],
+      "pixel_region": [
+        631,
+        34,
+        803,
+        297
+      ],
+      "source_image": "w006_source.png",
+      "all_curves_image": "w006_all_curves.png",
+      "curve_images": {
+        "1": "w006_curve_1.png",
+        "2": "w006_curve_2.png"
+      }
+    }
+  ]
+}

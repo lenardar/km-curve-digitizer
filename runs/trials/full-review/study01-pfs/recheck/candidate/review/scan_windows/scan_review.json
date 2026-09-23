@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "result_signature": "6725ea7b3f40e452130dda5af6520110440523ed957f628981b8af4abfa3dde9",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        114,
+        34,
+        286,
+        297
+      ],
+      "time_range": [
+        0.0,
+        12.762186
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        226,
+        34,
+        398,
+        297
+      ],
+      "time_range": [
+        8.93353,
+        21.695716
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        338,
+        34,
+        510,
+        297
+      ],
+      "time_range": [
+        17.867061,
+        30.629247
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    },
+    {
+      "window_id": "w004",
+      "pixel_region": [
+        450,
+        34,
+        622,
+        297
+      ],
+      "time_range": [
+        26.800591,
+        39.562777
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    },
+    {
+      "window_id": "w005",
+      "pixel_region": [
+        562,
+        34,
+        734,
+        297
+      ],
+      "time_range": [
+        35.734121,
+        48.496307
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    },
+    {
+      "window_id": "w006",
+      "pixel_region": [
+        631,
+        34,
+        803,
+        297
+      ],
+      "time_range": [
+        41.237814,
+        54.0
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Tislelizumab",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "Sorafenib",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    }
+  ],
+  "issue_reviews": [
+    {
+      "issue_id": "q002-curve_identity_review",
+      "status": "unreviewed",
+      "observation": "",
+      "window_ids": [
+        "w001",
+        "w002"
+      ]
+    },
+    {
+      "issue_id": "q003-curve_identity_review",
+      "status": "unreviewed",
+      "observation": "",
+      "window_ids": [
+        "w001",
+        "w002"
+      ]
+    }
+  ]
+}

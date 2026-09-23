@@ -1,0 +1,55 @@
+{
+  "observation": "The source-only 0-4 month crop shows both historical data-coordinate reconstructions shifted left and coarsened across the dense initial decline.",
+  "reason": "Replace the two early approximations with right-continuous breakpoints read directly from the visible orange and dark source pixels.",
+  "actions": [
+    {
+      "type": "replace_segment",
+      "curve": "Tislelizumab",
+      "time_range": [0.0, 4.0],
+      "points": [
+        {"x_pixel": 120, "y_pixel": 40},
+        {"x_pixel": 128, "y_pixel": 43},
+        {"x_pixel": 132, "y_pixel": 47},
+        {"x_pixel": 135, "y_pixel": 53},
+        {"x_pixel": 138, "y_pixel": 58},
+        {"x_pixel": 141, "y_pixel": 67},
+        {"x_pixel": 143, "y_pixel": 70},
+        {"x_pixel": 144, "y_pixel": 89},
+        {"x_pixel": 145, "y_pixel": 101},
+        {"x_pixel": 146, "y_pixel": 153},
+        {"x_pixel": 148, "y_pixel": 158},
+        {"x_pixel": 149, "y_pixel": 165},
+        {"x_pixel": 151, "y_pixel": 170},
+        {"x_pixel": 160, "y_pixel": 170},
+        {"x_pixel": 164, "y_pixel": 173},
+        {"x_pixel": 167, "y_pixel": 176},
+        {"x_pixel": 170, "y_pixel": 179}
+      ]
+    },
+    {
+      "type": "replace_segment",
+      "curve": "Sorafenib",
+      "time_range": [0.0, 4.0],
+      "points": [
+        {"x_pixel": 120, "y_pixel": 40},
+        {"x_pixel": 125, "y_pixel": 43},
+        {"x_pixel": 129, "y_pixel": 44},
+        {"x_pixel": 132, "y_pixel": 46},
+        {"x_pixel": 135, "y_pixel": 49},
+        {"x_pixel": 139, "y_pixel": 54},
+        {"x_pixel": 141, "y_pixel": 57},
+        {"x_pixel": 144, "y_pixel": 63},
+        {"x_pixel": 145, "y_pixel": 76},
+        {"x_pixel": 146, "y_pixel": 92},
+        {"x_pixel": 147, "y_pixel": 147},
+        {"x_pixel": 150, "y_pixel": 148},
+        {"x_pixel": 151, "y_pixel": 153},
+        {"x_pixel": 155, "y_pixel": 156},
+        {"x_pixel": 157, "y_pixel": 159},
+        {"x_pixel": 164, "y_pixel": 160},
+        {"x_pixel": 168, "y_pixel": 165},
+        {"x_pixel": 170, "y_pixel": 165}
+      ]
+    }
+  ]
+}

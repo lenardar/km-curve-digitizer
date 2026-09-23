@@ -1,0 +1,4 @@
+issue_id,code,message,curve_id,curve_ids,time_range,pixel_region,requires_visual_review
+q001-coverage,coverage,curve 'Sorafenib' covers too little of the x-axis,2.0,[],,,False
+q002-curve_identity_review,curve_identity_review,curves 'Tislelizumab' and 'Sorafenib' are within 4 pixels for 16 consecutive columns; inspect the source crop to confirm that neither trace changes identity,,"[1, 2]","(10.5288035450517, 11.725258493353028)","(242, 214, 277, 246)",True
+q003-curve_identity_review,curve_identity_review,curves 'Tislelizumab' and 'Sorafenib' are within 4 pixels for 13 consecutive columns; inspect the source crop to confirm that neither trace changes identity,,"[1, 2]","(11.964549483013295, 12.921713441654358)","(260, 218, 292, 252)",True
