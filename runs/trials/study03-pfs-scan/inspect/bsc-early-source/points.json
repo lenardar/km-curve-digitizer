@@ -1,0 +1,81 @@
+{
+  "curve": "BSC group",
+  "time_range": [
+    0.0,
+    12.0
+  ],
+  "pixel_region": null,
+  "review_image": "runs/trials/study03-pfs-scan/inspect/bsc-early-source/point_review.png",
+  "points": [
+    {
+      "point_id": "c2-r0001-a01p0000",
+      "x_pixel": 96.0,
+      "y_pixel": 27.0,
+      "time": 0.0,
+      "survival": 1.0
+    },
+    {
+      "point_id": "c2-r0001-a01p0001",
+      "x_pixel": 105.33333333333333,
+      "y_pixel": 28.93,
+      "time": 1.9999999999999991,
+      "survival": 0.99
+    },
+    {
+      "point_id": "c2-r0001-a01p0002",
+      "x_pixel": 108.6,
+      "y_pixel": 61.74,
+      "time": 2.699999999999999,
+      "survival": 0.82
+    },
+    {
+      "point_id": "c2-r0001-a01p0003",
+      "x_pixel": 112.8,
+      "y_pixel": 90.69,
+      "time": 3.5999999999999996,
+      "survival": 0.67
+    },
+    {
+      "point_id": "c2-r0001-a01p0004",
+      "x_pixel": 119.33333333333333,
+      "y_pixel": 96.48,
+      "time": 4.999999999999999,
+      "survival": 0.6399999999999999
+    },
+    {
+      "point_id": "c2-r0001-a01p0005",
+      "x_pixel": 124.93333333333334,
+      "y_pixel": 104.2,
+      "time": 6.200000000000001,
+      "survival": 0.6
+    },
+    {
+      "point_id": "c2-r0001-a01p0006",
+      "x_pixel": 129.6,
+      "y_pixel": 113.85,
+      "time": 7.199999999999999,
+      "survival": 0.55
+    },
+    {
+      "point_id": "c2-r0001-a01p0007",
+      "x_pixel": 134.26666666666665,
+      "y_pixel": 123.5,
+      "time": 8.199999999999996,
+      "survival": 0.5
+    },
+    {
+      "point_id": "c2-r0001-a01p0008",
+      "x_pixel": 138.93333333333334,
+      "y_pixel": 137.01,
+      "time": 9.200000000000001,
+      "survival": 0.43000000000000005
+    },
+    {
+      "point_id": "c2-r0001-a01p0009",
+      "x_pixel": 148.73333333333335,
+      "y_pixel": 140.87,
+      "time": 11.300000000000002,
+      "survival": 0.41
+    }
+  ]
+}

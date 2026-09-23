@@ -1,0 +1,544 @@
+{
+  "image_path": "/Users/xuzhiyuan/code/code4work/PyKMExtract/images/study03_pfs.png",
+  "semantic": {
+    "n_curves": 2,
+    "x_axis": {
+      "min": 0.0,
+      "max": 60.0,
+      "unit": "months",
+      "label": "Time since randomization, mo"
+    },
+    "y_axis": {
+      "min": 0.0,
+      "max": 100.0,
+      "is_percentage": true,
+      "label": "Progression-free survival, %"
+    },
+    "curves": [
+      {
+        "id": 1,
+        "legend_name": "Capecitabine + BSC group",
+        "color_description": "orange solid line",
+        "rgb_approx": [
+          242,
+          142,
+          43
+        ],
+        "line_style": "solid",
+        "pixel_tolerance": 18
+      },
+      {
+        "id": 2,
+        "legend_name": "BSC group",
+        "color_description": "blue-gray solid line",
+        "rgb_approx": [
+          67,
+          104,
+          116
+        ],
+        "line_style": "solid",
+        "pixel_tolerance": 64
+      }
+    ],
+    "at_risk_table": {
+      "time_points": [
+        0.0,
+        12.0,
+        24.0,
+        36.0,
+        48.0,
+        60.0
+      ],
+      "counts_by_curve": [
+        [
+          52,
+          38,
+          19,
+          6,
+          4,
+          1
+        ],
+        [
+          52,
+          20,
+          9,
+          5,
+          3,
+          0
+        ]
+      ]
+    },
+    "total_events_by_curve": [
+      null,
+      null
+    ],
+    "has_confidence_interval": false,
+    "has_censoring_marks": true,
+    "confidence": {
+      "overall": "high",
+      "at_risk_table": "high",
+      "color_identification": "medium"
+    },
+    "notes": "Focused on panel A (Progression-free survival). Legend labels taken from the PFS panel. Censoring marks are present on both curves. Hazard ratio text is visible but total events by curve are not reported."
+  },
+  "axis_bounds": {
+    "left": 96,
+    "right": 376,
+    "top": 27,
+    "bottom": 220
+  },
+  "axis_anchors": {
+    "x_min_point": {
+      "x": 96,
+      "y": 220
+    },
+    "x_max_point": {
+      "x": 376,
+      "y": 220
+    },
+    "y_min_point": {
+      "x": 96,
+      "y": 220
+    },
+    "y_max_point": {
+      "x": 96,
+      "y": 27
+    }
+  },
+  "curves": [
+    {
+      "id": 1,
+      "name": "Capecitabine + BSC group",
+      "color_description": "orange solid line",
+      "extraction_tolerance": 18,
+      "point_count": 16,
+      "x_pixels": [
+        96.0,
+        105.8,
+        108.6,
+        111.86666666666666,
+        116.53333333333333,
+        121.2,
+        134.26666666666665,
+        139.4,
+        143.6,
+        148.26666666666665,
+        152.93333333333334,
+        159.93333333333334,
+        192.6,
+        217.8,
+        264.0,
+        376.0
+      ],
+      "y_pixels": [
+        27.0,
+        28.93,
+        38.58,
+        46.3,
+        54.02,
+        57.879999999999995,
+        61.74,
+        67.53,
+        71.39,
+        77.18,
+        86.83,
+        96.48,
+        102.27,
+        117.71,
+        131.22000000000003,
+        131.22000000000003
+      ],
+      "time": [
+        0.0,
+        2.099999999999999,
+        2.699999999999999,
+        3.3999999999999986,
+        4.3999999999999995,
+        5.4,
+        8.199999999999996,
+        9.3,
+        10.2,
+        11.199999999999998,
+        12.200000000000001,
+        13.700000000000001,
+        20.7,
+        26.1,
+        36.0,
+        60.0
+      ],
+      "survival": [
+        1.0,
+        0.99,
+        0.94,
+        0.9,
+        0.86,
+        0.84,
+        0.82,
+        0.79,
+        0.77,
+        0.74,
+        0.69,
+        0.6399999999999999,
+        0.6100000000000001,
+        0.53,
+        0.45999999999999985,
+        0.45999999999999985
+      ],
+      "point_ids": [
+        "c1-r0001-a00p0000",
+        "c1-r0001-a00p0001",
+        "c1-r0001-a00p0002",
+        "c1-r0001-a00p0003",
+        "c1-r0001-a00p0004",
+        "c1-r0001-a00p0005",
+        "c1-r0001-a00p0006",
+        "c1-r0001-a00p0007",
+        "c1-r0001-a00p0008",
+        "c1-r0001-a00p0009",
+        "c1-r0001-a00p0010",
+        "c1-r0001-a00p0011",
+        "c1-r0001-a00p0012",
+        "c1-r0001-a00p0013",
+        "c1-r0001-a00p0014",
+        "c1-r0001-a00p0015"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "BSC group",
+      "color_description": "blue-gray solid line",
+      "extraction_tolerance": 64,
+      "point_count": 15,
+      "x_pixels": [
+        96.0,
+        105.33333333333333,
+        108.6,
+        112.8,
+        119.33333333333333,
+        124.93333333333334,
+        129.6,
+        134.26666666666665,
+        138.93333333333334,
+        148.73333333333335,
+        166.93333333333334,
+        176.26666666666665,
+        191.2,
+        200.5333333333333,
+        376.0
+      ],
+      "y_pixels": [
+        27.0,
+        28.93,
+        61.74,
+        90.69,
+        96.48,
+        104.2,
+        113.85,
+        123.5,
+        137.01,
+        140.87,
+        148.59,
+        152.45,
+        160.17,
+        169.82,
+        169.82
+      ],
+      "time": [
+        0.0,
+        1.9999999999999991,
+        2.699999999999999,
+        3.5999999999999996,
+        4.999999999999999,
+        6.200000000000001,
+        7.199999999999999,
+        8.199999999999996,
+        9.200000000000001,
+        11.300000000000002,
+        15.200000000000001,
+        17.199999999999996,
+        20.4,
+        22.399999999999995,
+        60.0
+      ],
+      "survival": [
+        1.0,
+        0.99,
+        0.82,
+        0.67,
+        0.6399999999999999,
+        0.6,
+        0.55,
+        0.5,
+        0.43000000000000005,
+        0.41,
+        0.37,
+        0.35000000000000014,
+        0.31,
+        0.26,
+        0.26
+      ],
+      "point_ids": [
+        "c2-r0001-a01p0000",
+        "c2-r0001-a01p0001",
+        "c2-r0001-a01p0002",
+        "c2-r0001-a01p0003",
+        "c2-r0001-a01p0004",
+        "c2-r0001-a01p0005",
+        "c2-r0001-a01p0006",
+        "c2-r0001-a01p0007",
+        "c2-r0001-a01p0008",
+        "c2-r0001-a01p0009",
+        "c2-r0001-a01p0010",
+        "c2-r0001-a01p0011",
+        "c2-r0001-a01p0012",
+        "c2-r0001-a01p0013",
+        "c2-r0001-a01p0014"
+      ]
+    }
+  ],
+  "validation": {
+    "checks": {
+      "monotonicity": true,
+      "range": true,
+      "start": true,
+      "coverage": true,
+      "risk_table": true,
+      "overlap_ambiguity": true
+    },
+    "issues": []
+  },
+  "revisions": [
+    {
+      "revision_id": "r0001",
+      "created_at": "2026-09-22T05:27:48.989542+00:00",
+      "observation": "The orange curve was represented by several false long plateaus because sparse exact-color columns were forward-filled. The dark curve also had delayed early drops. Both source staircases are clearly visible in the enlarged panel.",
+      "reason": "Replace both traces with model-authored KM breakpoints read from the source staircase instead of accepting forward-filled sparse pixels.",
+      "actions": [
+        {
+          "type": "replace_segment",
+          "curve": "Capecitabine + BSC group",
+          "time_range": [
+            0.0,
+            60.0
+          ],
+          "points": [
+            {
+              "time": 0.0,
+              "survival": 1.0
+            },
+            {
+              "time": 2.1,
+              "survival": 0.99
+            },
+            {
+              "time": 2.7,
+              "survival": 0.94
+            },
+            {
+              "time": 3.4,
+              "survival": 0.9
+            },
+            {
+              "time": 4.4,
+              "survival": 0.86
+            },
+            {
+              "time": 5.4,
+              "survival": 0.84
+            },
+            {
+              "time": 8.2,
+              "survival": 0.82
+            },
+            {
+              "time": 9.3,
+              "survival": 0.79
+            },
+            {
+              "time": 10.2,
+              "survival": 0.77
+            },
+            {
+              "time": 11.2,
+              "survival": 0.74
+            },
+            {
+              "time": 12.2,
+              "survival": 0.69
+            },
+            {
+              "time": 13.7,
+              "survival": 0.64
+            },
+            {
+              "time": 20.7,
+              "survival": 0.61
+            },
+            {
+              "time": 26.1,
+              "survival": 0.53
+            },
+            {
+              "time": 36.0,
+              "survival": 0.46
+            },
+            {
+              "time": 60.0,
+              "survival": 0.46
+            }
+          ]
+        },
+        {
+          "type": "replace_segment",
+          "curve": "BSC group",
+          "time_range": [
+            0.0,
+            60.0
+          ],
+          "points": [
+            {
+              "time": 0.0,
+              "survival": 1.0
+            },
+            {
+              "time": 2.0,
+              "survival": 0.99
+            },
+            {
+              "time": 2.7,
+              "survival": 0.82
+            },
+            {
+              "time": 3.6,
+              "survival": 0.67
+            },
+            {
+              "time": 5.0,
+              "survival": 0.64
+            },
+            {
+              "time": 6.2,
+              "survival": 0.6
+            },
+            {
+              "time": 7.2,
+              "survival": 0.55
+            },
+            {
+              "time": 8.2,
+              "survival": 0.5
+            },
+            {
+              "time": 9.2,
+              "survival": 0.43
+            },
+            {
+              "time": 11.3,
+              "survival": 0.41
+            },
+            {
+              "time": 15.2,
+              "survival": 0.37
+            },
+            {
+              "time": 17.2,
+              "survival": 0.35
+            },
+            {
+              "time": 20.4,
+              "survival": 0.31
+            },
+            {
+              "time": 22.4,
+              "survival": 0.26
+            },
+            {
+              "time": 60.0,
+              "survival": 0.26
+            }
+          ]
+        }
+      ],
+      "status": "accepted",
+      "verification": "Both model-authored breakpoint sequences follow the visible orange and dark source staircases across the full axis; sparse false plateaus removed."
+    }
+  ],
+  "risk_cell_regions": [
+    [
+      [
+        75,
+        269,
+        117,
+        280
+      ],
+      [
+        131,
+        269,
+        173,
+        280
+      ],
+      [
+        187,
+        269,
+        229,
+        280
+      ],
+      [
+        243,
+        269,
+        285,
+        280
+      ],
+      [
+        299,
+        269,
+        341,
+        280
+      ],
+      [
+        355,
+        269,
+        397,
+        280
+      ]
+    ],
+    [
+      [
+        75,
+        282,
+        117,
+        293
+      ],
+      [
+        131,
+        282,
+        173,
+        293
+      ],
+      [
+        187,
+        282,
+        229,
+        293
+      ],
+      [
+        243,
+        282,
+        285,
+        293
+      ],
+      [
+        299,
+        282,
+        341,
+        293
+      ],
+      [
+        355,
+        282,
+        397,
+        293
+      ]
+    ]
+  ]
+}

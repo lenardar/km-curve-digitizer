@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "before_signature": "5c831d8bb5900eb3b97790e35d2c81c287424b01447466e8893ddf5927dece61",
+  "after_signature": "4f1646f13ae2f829f106889b2c1b731f51c6a1b131b9882a90dc2eadb8aae14f",
+  "direction": "left_to_right",
+  "window_width": 90,
+  "overlap": 36,
+  "curves": [
+    {
+      "id": 1,
+      "name": "Capecitabine + BSC group"
+    },
+    {
+      "id": 2,
+      "name": "BSC group"
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "w001",
+      "time_range": [
+        0.0,
+        19.285714
+      ],
+      "pixel_region": [
+        90,
+        21,
+        192,
+        226
+      ],
+      "comparison_boards": {
+        "1": "w001_curve_1_comparison.png",
+        "2": "w001_curve_2_comparison.png"
+      }
+    },
+    {
+      "window_id": "w002",
+      "time_range": [
+        11.571429,
+        30.857143
+      ],
+      "pixel_region": [
+        144,
+        21,
+        246,
+        226
+      ],
+      "comparison_boards": {
+        "1": "w002_curve_1_comparison.png",
+        "2": "w002_curve_2_comparison.png"
+      }
+    },
+    {
+      "window_id": "w003",
+      "time_range": [
+        23.142857,
+        42.428571
+      ],
+      "pixel_region": [
+        198,
+        21,
+        300,
+        226
+      ],
+      "comparison_boards": {
+        "1": "w003_curve_1_comparison.png",
+        "2": "w003_curve_2_comparison.png"
+      }
+    },
+    {
+      "window_id": "w004",
+      "time_range": [
+        34.714286,
+        54.0
+      ],
+      "pixel_region": [
+        252,
+        21,
+        354,
+        226
+      ],
+      "comparison_boards": {
+        "1": "w004_curve_1_comparison.png",
+        "2": "w004_curve_2_comparison.png"
+      }
+    },
+    {
+      "window_id": "w005",
+      "time_range": [
+        40.714286,
+        60.0
+      ],
+      "pixel_region": [
+        280,
+        21,
+        382,
+        226
+      ],
+      "comparison_boards": {
+        "1": "w005_curve_1_comparison.png",
+        "2": "w005_curve_2_comparison.png"
+      }
+    }
+  ]
+}

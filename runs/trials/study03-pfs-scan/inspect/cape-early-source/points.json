@@ -1,0 +1,95 @@
+{
+  "curve": "Capecitabine + BSC group",
+  "time_range": [
+    0.0,
+    16.0
+  ],
+  "pixel_region": null,
+  "review_image": "runs/trials/study03-pfs-scan/inspect/cape-early-source/point_review.png",
+  "points": [
+    {
+      "point_id": "c1-r0001-a00p0000",
+      "x_pixel": 96.0,
+      "y_pixel": 27.0,
+      "time": 0.0,
+      "survival": 1.0
+    },
+    {
+      "point_id": "c1-r0001-a00p0001",
+      "x_pixel": 105.8,
+      "y_pixel": 28.93,
+      "time": 2.099999999999999,
+      "survival": 0.99
+    },
+    {
+      "point_id": "c1-r0001-a00p0002",
+      "x_pixel": 108.6,
+      "y_pixel": 38.58,
+      "time": 2.699999999999999,
+      "survival": 0.94
+    },
+    {
+      "point_id": "c1-r0001-a00p0003",
+      "x_pixel": 111.86666666666666,
+      "y_pixel": 46.3,
+      "time": 3.3999999999999986,
+      "survival": 0.9
+    },
+    {
+      "point_id": "c1-r0001-a00p0004",
+      "x_pixel": 116.53333333333333,
+      "y_pixel": 54.02,
+      "time": 4.3999999999999995,
+      "survival": 0.86
+    },
+    {
+      "point_id": "c1-r0001-a00p0005",
+      "x_pixel": 121.2,
+      "y_pixel": 57.879999999999995,
+      "time": 5.4,
+      "survival": 0.84
+    },
+    {
+      "point_id": "c1-r0001-a00p0006",
+      "x_pixel": 134.26666666666665,
+      "y_pixel": 61.74,
+      "time": 8.199999999999996,
+      "survival": 0.82
+    },
+    {
+      "point_id": "c1-r0001-a00p0007",
+      "x_pixel": 139.4,
+      "y_pixel": 67.53,
+      "time": 9.3,
+      "survival": 0.79
+    },
+    {
+      "point_id": "c1-r0001-a00p0008",
+      "x_pixel": 143.6,
+      "y_pixel": 71.39,
+      "time": 10.2,
+      "survival": 0.77
+    },
+    {
+      "point_id": "c1-r0001-a00p0009",
+      "x_pixel": 148.26666666666665,
+      "y_pixel": 77.18,
+      "time": 11.199999999999998,
+      "survival": 0.74
+    },
+    {
+      "point_id": "c1-r0001-a00p0010",
+      "x_pixel": 152.93333333333334,
+      "y_pixel": 86.83,
+      "time": 12.200000000000001,
+      "survival": 0.69
+    },
+    {
+      "point_id": "c1-r0001-a00p0011",
+      "x_pixel": 159.93333333333334,
+      "y_pixel": 96.48,
+      "time": 13.700000000000001,
+      "survival": 0.6399999999999999
+    }
+  ]
+}

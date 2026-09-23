@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "result_signature": "4f1646f13ae2f829f106889b2c1b731f51c6a1b131b9882a90dc2eadb8aae14f",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        90,
+        21,
+        192,
+        226
+      ],
+      "time_range": [
+        0.0,
+        19.285714
+      ],
+      "status": "resolved",
+      "observation": "Pixel-coordinate reconstruction now follows the dense source staircases throughout 0-19 months; overlap boundaries remain continuous.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Capecitabine + BSC group",
+          "status": "resolved",
+          "observation": "All visible orange drops and intervening plateaus are aligned to the source pixels, including the two formerly shifted transitions."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "BSC group",
+          "status": "resolved",
+          "observation": "The reconstructed blue-gray staircase now traces the dense sequence of visible drops instead of the prior coarse approximation."
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        144,
+        21,
+        246,
+        226
+      ],
+      "time_range": [
+        11.571429,
+        30.857143
+      ],
+      "status": "resolved",
+      "observation": "The overlapping 12-31 month view confirms repaired transition positions and continuity into the middle plateaus.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Capecitabine + BSC group",
+          "status": "resolved",
+          "observation": "Orange steps at the overlap entrance and later drops align with the source."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "BSC group",
+          "status": "resolved",
+          "observation": "Blue-gray transitions and the following plateau align with the source."
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        198,
+        21,
+        300,
+        226
+      ],
+      "time_range": [
+        23.142857,
+        42.428571
+      ],
+      "status": "clear",
+      "observation": "Both curves remain aligned through the middle-late region, including orange drops and the blue-gray plateau.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Capecitabine + BSC group",
+          "status": "clear",
+          "observation": "Orange plateaus and transitions are visually aligned."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "BSC group",
+          "status": "clear",
+          "observation": "Blue-gray plateau is visually aligned."
+        }
+      ]
+    },
+    {
+      "window_id": "w004",
+      "pixel_region": [
+        252,
+        21,
+        354,
+        226
+      ],
+      "time_range": [
+        34.714286,
+        54.0
+      ],
+      "status": "clear",
+      "observation": "No drift or artificial transitions are visible in either late plateau.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Capecitabine + BSC group",
+          "status": "clear",
+          "observation": "Orange late plateau follows the source."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "BSC group",
+          "status": "clear",
+          "observation": "Blue-gray late plateau follows the source."
+        }
+      ]
+    },
+    {
+      "window_id": "w005",
+      "pixel_region": [
+        280,
+        21,
+        382,
+        226
+      ],
+      "time_range": [
+        40.714286,
+        60.0
+      ],
+      "status": "clear",
+      "observation": "Terminal plateaus are continuous, level, and aligned to their visible endpoints at 60 months.",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Capecitabine + BSC group",
+          "status": "clear",
+          "observation": "Orange terminal segment is aligned."
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "BSC group",
+          "status": "clear",
+          "observation": "Blue-gray terminal segment is aligned."
+        }
+      ]
+    }
+  ],
+  "issue_reviews": []
+}

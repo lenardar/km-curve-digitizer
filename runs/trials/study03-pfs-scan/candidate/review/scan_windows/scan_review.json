@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "result_signature": "4f1646f13ae2f829f106889b2c1b731f51c6a1b131b9882a90dc2eadb8aae14f",
+  "allowed_statuses": {
+    "window_and_curve": [
+      "clear",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ],
+    "diagnostic_issue": [
+      "false_positive",
+      "confirmed_defect",
+      "resolved",
+      "ambiguous"
+    ]
+  },
+  "window_reviews": [
+    {
+      "window_id": "w001",
+      "pixel_region": [
+        90,
+        21,
+        262,
+        226
+      ],
+      "time_range": [
+        0.0,
+        34.285714
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Capecitabine + BSC group",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "BSC group",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    },
+    {
+      "window_id": "w002",
+      "pixel_region": [
+        202,
+        21,
+        374,
+        226
+      ],
+      "time_range": [
+        24.0,
+        58.285714
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Capecitabine + BSC group",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "BSC group",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    },
+    {
+      "window_id": "w003",
+      "pixel_region": [
+        210,
+        21,
+        382,
+        226
+      ],
+      "time_range": [
+        25.714286,
+        60.0
+      ],
+      "status": "unreviewed",
+      "observation": "",
+      "curve_reviews": [
+        {
+          "curve_id": 1,
+          "curve_name": "Capecitabine + BSC group",
+          "status": "unreviewed",
+          "observation": ""
+        },
+        {
+          "curve_id": 2,
+          "curve_name": "BSC group",
+          "status": "unreviewed",
+          "observation": ""
+        }
+      ]
+    }
+  ],
+  "issue_reviews": []
+}

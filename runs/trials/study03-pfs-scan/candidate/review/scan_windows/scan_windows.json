@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "result_signature": "4f1646f13ae2f829f106889b2c1b731f51c6a1b131b9882a90dc2eadb8aae14f",
+  "direction": "left_to_right",
+  "window_width": 160,
+  "overlap": 48,
+  "curves": [
+    {
+      "id": 1,
+      "name": "Capecitabine + BSC group"
+    },
+    {
+      "id": 2,
+      "name": "BSC group"
+    }
+  ],
+  "windows": [
+    {
+      "window_id": "w001",
+      "time_range": [
+        0.0,
+        34.285714
+      ],
+      "pixel_region": [
+        90,
+        21,
+        262,
+        226
+      ],
+      "source_image": "w001_source.png",
+      "all_curves_image": "w001_all_curves.png",
+      "curve_images": {
+        "1": "w001_curve_1.png",
+        "2": "w001_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w002",
+      "time_range": [
+        24.0,
+        58.285714
+      ],
+      "pixel_region": [
+        202,
+        21,
+        374,
+        226
+      ],
+      "source_image": "w002_source.png",
+      "all_curves_image": "w002_all_curves.png",
+      "curve_images": {
+        "1": "w002_curve_1.png",
+        "2": "w002_curve_2.png"
+      }
+    },
+    {
+      "window_id": "w003",
+      "time_range": [
+        25.714286,
+        60.0
+      ],
+      "pixel_region": [
+        210,
+        21,
+        382,
+        226
+      ],
+      "source_image": "w003_source.png",
+      "all_curves_image": "w003_all_curves.png",
+      "curve_images": {
+        "1": "w003_curve_1.png",
+        "2": "w003_curve_2.png"
+      }
+    }
+  ]
+}

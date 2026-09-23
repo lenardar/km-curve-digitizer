@@ -1,0 +1,13 @@
+cell_id,curve_id,curve_name,time_index,time,n_risk,confidence,pixel_left,pixel_top,pixel_right,pixel_bottom
+risk-c1-t000,1,Capecitabine + BSC group,0,0.0,52,high,75,269,117,280
+risk-c1-t001,1,Capecitabine + BSC group,1,12.0,38,high,131,269,173,280
+risk-c1-t002,1,Capecitabine + BSC group,2,24.0,19,high,187,269,229,280
+risk-c1-t003,1,Capecitabine + BSC group,3,36.0,6,high,243,269,285,280
+risk-c1-t004,1,Capecitabine + BSC group,4,48.0,4,high,299,269,341,280
+risk-c1-t005,1,Capecitabine + BSC group,5,60.0,1,high,355,269,397,280
+risk-c2-t000,2,BSC group,0,0.0,52,high,75,282,117,293
+risk-c2-t001,2,BSC group,1,12.0,20,high,131,282,173,293
+risk-c2-t002,2,BSC group,2,24.0,9,high,187,282,229,293
+risk-c2-t003,2,BSC group,3,36.0,5,high,243,282,285,293
+risk-c2-t004,2,BSC group,4,48.0,3,high,299,282,341,293
+risk-c2-t005,2,BSC group,5,60.0,0,high,355,282,397,293
