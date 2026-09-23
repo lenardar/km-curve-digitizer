@@ -7,7 +7,7 @@ from pathlib import Path
 
 from tests import ROOT
 
-from pykmextract.extractor.coord import detect_axis_bounds
+from km_digitizer.extractor.coord import detect_axis_bounds
 
 
 class RealAxisDetectionTests(unittest.TestCase):

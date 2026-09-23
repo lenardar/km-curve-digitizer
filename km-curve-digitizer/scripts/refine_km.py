@@ -10,7 +10,7 @@ os.environ.setdefault(
     str(Path(tempfile.gettempdir()) / "km-curve-digitizer-matplotlib"),
 )
 
-from pykmextract.refine_cli import main
+from km_digitizer.refine_cli import main
 
 
 if __name__ == "__main__":

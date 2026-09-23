@@ -1,13 +1,13 @@
 """Project-specific exceptions."""
 
 
-class PyKMExtractError(Exception):
+class KMDigitizerError(Exception):
     """Base error for the package."""
 
 
-class SemanticExtractionError(PyKMExtractError):
+class SemanticExtractionError(KMDigitizerError):
     """Semantic extraction failed or returned invalid payload."""
 
 
-class PixelExtractionError(PyKMExtractError):
+class PixelExtractionError(KMDigitizerError):
     """Pixel extraction failed for one or more curves."""

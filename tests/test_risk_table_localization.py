@@ -13,8 +13,8 @@ import unittest
 import numpy as np
 from PIL import Image, ImageDraw
 
-from pykmextract.contracts import AxisAnchors, AxisBounds, SemanticExtraction
-from pykmextract.extractor.risk_table import locate_risk_table_cells
+from km_digitizer.contracts import AxisAnchors, AxisBounds, SemanticExtraction
+from km_digitizer.extractor.risk_table import locate_risk_table_cells
 
 
 class RiskTableLocalizationTests(unittest.TestCase):

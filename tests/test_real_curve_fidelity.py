@@ -8,7 +8,7 @@ import unittest
 
 import numpy as np
 
-import pykmextract as pkm
+import km_digitizer as pkm
 from tests import ROOT
 
 

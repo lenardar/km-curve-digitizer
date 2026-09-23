@@ -9,7 +9,7 @@ from tempfile import TemporaryDirectory
 import numpy as np
 from PIL import Image, ImageDraw
 
-import pykmextract as pkm
+import km_digitizer as pkm
 
 
 def _step_points(series):

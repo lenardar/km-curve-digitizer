@@ -6,8 +6,8 @@ import unittest
 
 import numpy as np
 
-from pykmextract.contracts import AxisBounds
-from pykmextract.extractor.coord import recalibrate_axis_bounds_from_curves
+from km_digitizer.contracts import AxisBounds
+from km_digitizer.extractor.coord import recalibrate_axis_bounds_from_curves
 
 
 class AxisRecalibrationTests(unittest.TestCase):

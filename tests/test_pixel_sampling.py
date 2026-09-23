@@ -10,8 +10,8 @@ from unittest.mock import patch
 import numpy as np
 from PIL import Image, ImageDraw
 
-from pykmextract.contracts import AxisBounds
-from pykmextract.extractor.pixel import adaptive_color_extraction, color_distance_mask, pixels_to_curve
+from km_digitizer.contracts import AxisBounds
+from km_digitizer.extractor.pixel import adaptive_color_extraction, color_distance_mask, pixels_to_curve
 
 
 class PixelSamplingTests(unittest.TestCase):
@@ -56,7 +56,7 @@ class PixelSamplingTests(unittest.TestCase):
         pixels[12:14, 24:56] = (45, 105, 215)
 
         with patch(
-            "pykmextract.extractor.pixel.load_image_array",
+            "km_digitizer.extractor.pixel.load_image_array",
             side_effect=AssertionError("image should not be reloaded when pixels are provided"),
         ):
             coords, tolerance = adaptive_color_extraction(

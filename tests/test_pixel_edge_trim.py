@@ -6,8 +6,8 @@ import unittest
 
 import numpy as np
 
-from pykmextract.contracts import AxisBounds
-from pykmextract.extractor.pixel import trim_curve_edge_outliers
+from km_digitizer.contracts import AxisBounds
+from km_digitizer.extractor.pixel import trim_curve_edge_outliers
 
 
 class PixelEdgeTrimTests(unittest.TestCase):

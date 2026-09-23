@@ -10,10 +10,10 @@ import sys
 import unittest
 from tempfile import TemporaryDirectory
 
-import pykmextract as pkm
-from pykmextract.contracts import ValidationIssue, ValidationReport
-from pykmextract.editing import CurveEditor
-from pykmextract.review import save_scan_windows
+import km_digitizer as pkm
+from km_digitizer.contracts import ValidationIssue, ValidationReport
+from km_digitizer.editing import CurveEditor
+from km_digitizer.review import save_scan_windows
 from tests.test_pipeline import make_synthetic_km_image
 
 

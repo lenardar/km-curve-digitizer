@@ -7,10 +7,10 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import json
 
-import pykmextract as pkm
-from pykmextract.contracts import ValidationIssue, ValidationReport
-from pykmextract.editing import CurveEditor
-from pykmextract.review import save_scan_comparison
+import km_digitizer as pkm
+from km_digitizer.contracts import ValidationIssue, ValidationReport
+from km_digitizer.editing import CurveEditor
+from km_digitizer.review import save_scan_comparison
 from tests.test_pipeline import make_synthetic_km_image
 
 

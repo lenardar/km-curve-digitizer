@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import unittest
 
-from pykmextract.contracts import (
+from km_digitizer.contracts import (
     AtRiskTable,
     AxisAnchors,
     AxisBounds,
@@ -17,7 +17,7 @@ from pykmextract.contracts import (
     XAxisSpec,
     YAxisSpec,
 )
-from pykmextract.extractor.validator import ExtractionValidator
+from km_digitizer.extractor.validator import ExtractionValidator
 
 
 class ValidatorTests(unittest.TestCase):

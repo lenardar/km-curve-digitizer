@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from pykmextract.datasets import build_real_km_manifest, discover_real_km_studies, parse_literature_notes
+from km_digitizer.datasets import build_real_km_manifest, discover_real_km_studies, parse_literature_notes
 
 
 class DatasetTests(unittest.TestCase):

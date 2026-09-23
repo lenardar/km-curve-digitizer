@@ -6,7 +6,7 @@ import unittest
 
 import numpy as np
 
-from pykmextract.extractor.coord import _suppress_isolated_drop_outliers, clean_curve_points
+from km_digitizer.extractor.coord import _suppress_isolated_drop_outliers, clean_curve_points
 
 
 class CoordCleaningTests(unittest.TestCase):
